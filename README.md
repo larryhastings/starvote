@@ -4,11 +4,11 @@
 
 ## Copyright 2023 by Larry Hastings
 
-[STAR voting](https://en.wikipedia.org/wiki/STAR_voting) is a
+[STAR voting](https://www.starvoting.org/) is a
 relatively-new [electoral system](https://en.wikipedia.org/wiki/Electoral_system).
 It's simple to vote and simple to tabulate.  While a completely fair and perfect
-electoral system is impossible, STAR voting's approach avoids the worst pitfalls
-and
+electoral system is impossible, STAR voting's approach makes reasonable tradeoffs
+and avoids the worst electoral system pitfalls.  It's really great!
 
 This module, **starvote**, implements a simple STAR vote tabulator.
 To use, `import starvote`, then instantiate a `starvote.Poll` object.
@@ -58,13 +58,29 @@ Chuck
 If the module is executed as a script, it will read a single
 [CSV file](https://en.wikipedia.org/wiki/Comma-separated_values)
 in [*star.vote*](https://star.vote/) format, tabulate, and print
-the result.
+the result.  For example, you can run this from the root of the
+source-code repository:
+
+```
+% python3 -m starvote sample_votes/sample_vote_automatic_runoff_breakable_tie.csv
+```
+
+to see how **starvote** handles a tie during the automatic runoff round.
+
+## Limitations
 
 Currently this module only supports single-winner STAR voting;
-"Bloc STAR" and "Proportional STAR" variants are not yet
-supported.
+variants such as
+(Bloc STAR)[https://www.starvoting.org/multi_winner] and
+(Proportional STAR)[https://www.starvoting.org/star-pr] (aka (Allocated Score)[https://electowiki.org/wiki/Allocated_Score])
+are not yet supported.
 
 ## License
 
-`starvote` is licensed using the (MIT license.)[https://opensource.org/license/mit/]
+**starvote** is licensed using the (MIT license.)[https://opensource.org/license/mit/]
 See the `LICENSE` file.
+
+The source code repository includes sample ballots downloaded from
+(https://star.vote/)[https://star.vote/].  The licensing of these
+sample ballots is unclear, but they're assumed to be public-domain
+or otherwise freely redistributable.
