@@ -1,0 +1,16 @@
+[Score round]
+  Chuck -- 12 (average 4.00)
+  Brian -- 12 (average 4.00)
+  Amy   --  3 (average 1.00)
+[Automatic runoff round]
+  Chuck         -- 1
+  Brian         -- 1
+  No preference -- 1
+[Resolving two-way tie in automatic runoff round]
+  Chuck -- 12 (average 4.00)
+  Brian -- 12 (average 4.00)
+
+Unbreakable tie between Brian and Chuck in automatic runoff round!
+
+[Winner]
+  None

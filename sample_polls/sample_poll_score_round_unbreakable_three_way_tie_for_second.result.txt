@@ -1,0 +1,10 @@
+[Score round]
+  Darcy -- 20 (average 5.00)
+  Chuck -- 12 (average 3.00)
+  Brian -- 12 (average 3.00)
+  Amy   -- 12 (average 3.00)
+
+Unbreakable three-way tie for second in score round between Amy, Brian, and Chuck!
+
+[Winner]
+  None

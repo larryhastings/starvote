@@ -1,0 +1,26 @@
+[Score round]
+  Vermin Supreme    -- 4653 (average 3.03)
+  Judge Jim Gray    -- 3008 (average 1.96)
+  Jo Jorgensen      -- 2012 (average 1.31)
+  Jacob Hornberger  -- 2011 (average 1.31)
+  Adam Kokesh       -- 1403 (average 0.91)
+  John Monds        -- 1132 (average 0.74)
+  Dan Behrman       -- 1050 (average 0.68)
+  Sam Robb          --  596 (average 0.39)
+  Sorinne Ardeleanu --  483 (average 0.31)
+  Arvin Vohra       --  477 (average 0.31)
+  Brian Ellison     --  450 (average 0.29)
+  Kenneth Blevins   --  390 (average 0.25)
+  Phil Gray         --  383 (average 0.25)
+  Souraya Faas      --  376 (average 0.25)
+  Erik Gerhardt     --  299 (average 0.19)
+  Steve Richey      --  296 (average 0.19)
+  Keenan Dunham     --  293 (average 0.19)
+  Jedidiah Hill     --  292 (average 0.19)
+  Louis Vanacore    --  263 (average 0.17)
+[Automatic runoff round]
+  Vermin Supreme -- 830
+  Judge Jim Gray -- 519
+  No preference  -- 185
+[Winner]
+  Vermin Supreme

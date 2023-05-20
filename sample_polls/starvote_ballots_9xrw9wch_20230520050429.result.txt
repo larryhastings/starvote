@@ -1,0 +1,26 @@
+[Score round]
+  Vermin Supreme    -- 2865 (average 3.99)
+  Dan Behrman       --  708 (average 0.99)
+  Jacob Hornberger  --  703 (average 0.98)
+  John McAfee       --  584 (average 0.81)
+  Lincoln Chafee    --  340 (average 0.47)
+  Jo Jorgensen      --  333 (average 0.46)
+  John Monds        --  299 (average 0.42)
+  Ken Armstrong     --  263 (average 0.37)
+  Mark Whitney      --  259 (average 0.36)
+  Arvin Vohra       --  186 (average 0.26)
+  Max Abramson      --  184 (average 0.26)
+  Sam Robb          --  170 (average 0.24)
+  Jedi Hill         --  136 (average 0.19)
+  Souraya Fass      --  128 (average 0.18)
+  Sorinne Ardeleanu --  112 (average 0.16)
+  Ben Leder         --   97 (average 0.14)
+  Keenan Dunham     --   96 (average 0.13)
+  Erik Gerhardt     --   95 (average 0.13)
+  James Ogle        --   86 (average 0.12)
+[Automatic runoff round]
+  Vermin Supreme -- 541
+  Dan Behrman    --  77
+  No preference  -- 100
+[Winner]
+  Vermin Supreme

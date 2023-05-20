@@ -1,0 +1,13 @@
+[Score round]
+  Loren Culp     -- 4054 (average 4.15)
+  Joshua Freed   --  979 (average 1.00)
+  Tim Eyman      --  812 (average 0.83)
+  Phil Fortunato --  450 (average 0.46)
+  Raul Garcia    --  342 (average 0.35)
+  Anton Sakharov --  282 (average 0.29)
+[Automatic runoff round]
+  Loren Culp    -- 772
+  Joshua Freed  -- 115
+  No preference --  90
+[Winner]
+  Loren Culp

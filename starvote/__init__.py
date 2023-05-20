@@ -2,7 +2,7 @@
 
 __doc__ = "A simple STAR vote tabulator"
 
-__version__ = "1.0"
+__version__ = "1.1"
 
 import math
 
@@ -103,12 +103,17 @@ class Poll:
 
         top_two = rankings[-2:]
         if candidates_count > 2:
-            if rankings[-3][0] == rankings[-2][0]:
+            if (rankings[-3][0] == rankings[-2][0]):
                 if rankings[-2][0] == rankings[-1][0]:
                     candidates = ", ".join(r[1] for r in rankings[-3:])
                     first_two, comma, last_one = candidates.rpartition(",")
                     candidates = f"{first_two}{comma} and{last_one}"
-                    raise UnbreakableTieError("unbreakable three-way tie in score round between " + candidates)
+                    raise UnbreakableTieError("unbreakable three-way tie for first in score round between " + candidates)
+                if (candidates_count > 3) and (rankings[-4][0] == rankings[-3][0]):
+                    candidates = ", ".join(r[1] for r in rankings[-4:-1])
+                    first_two, comma, last_one = candidates.rpartition(",")
+                    candidates = f"{first_two}{comma} and{last_one}"
+                    raise UnbreakableTieError("unbreakable three-way tie for second in score round between " + candidates)
                 if print:
                     print("[Resolving two-way tie between second and third in score round]")
                 preferred = self.preference(rankings[-3][1], rankings[-2][1], print=print, when="preference runoff between second and third in score round")

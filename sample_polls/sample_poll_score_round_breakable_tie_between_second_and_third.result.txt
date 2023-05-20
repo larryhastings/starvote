@@ -1,0 +1,14 @@
+[Score round]
+  Chuck -- 15 (average 5.00)
+  Brian --  7 (average 2.33)
+  Amy   --  7 (average 2.33)
+[Resolving two-way tie between second and third in score round]
+  Brian         -- 2
+  Amy           -- 1
+  No preference -- 0
+[Automatic runoff round]
+  Chuck         -- 3
+  Brian         -- 0
+  No preference -- 0
+[Winner]
+  Chuck

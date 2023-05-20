@@ -1,0 +1,14 @@
+[Score round]
+  Jo Jorgensen   -- 3385 (average 3.92)
+  Andrew Yang    -- 1018 (average 1.18)
+  Bernie Sanders --  970 (average 1.12)
+  Howie Hawkins  --  719 (average 0.83)
+  Joe Biden      --  593 (average 0.69)
+  Donald Trump   --  554 (average 0.64)
+  Kanye West     --  363 (average 0.42)
+[Automatic runoff round]
+  Jo Jorgensen  -- 645
+  Andrew Yang   -- 153
+  No preference --  65
+[Winner]
+  Jo Jorgensen

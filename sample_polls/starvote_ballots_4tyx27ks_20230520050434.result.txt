@@ -1,0 +1,23 @@
+[Score round]
+  Star Guardian        -- 2930 (average 4.38)
+  Prestige K/DA        -- 2458 (average 3.67)
+  True Damage          -- 2379 (average 3.56)
+  K/DA All Out         -- 2371 (average 3.54)
+  K/DA                 -- 2325 (average 3.48)
+  Original             -- 2175 (average 3.25)
+  Blood Moon           -- 2175 (average 3.25)
+  Infernal             -- 2092 (average 3.13)
+  Project              -- 1955 (average 2.92)
+  Crime City Nightmare -- 1952 (average 2.92)
+  Silverfang           -- 1754 (average 2.62)
+  Headhunter           -- 1735 (average 2.59)
+  Nurse                -- 1731 (average 2.59)
+  Sashimi              -- 1440 (average 2.15)
+  Stinger              -- 1293 (average 1.93)
+  All-Star             -- 1287 (average 1.92)
+[Automatic runoff round]
+  Star Guardian -- 288
+  Prestige K/DA --  80
+  No preference -- 301
+[Winner]
+  Star Guardian

@@ -1,0 +1,42 @@
+[Score round]
+  Andrew Yang - D                               -- 3226 (average 3.16)
+  Bernie Sanders - D                            -- 2020 (average 1.98)
+  Tulsi Gabbard - D                             -- 1372 (average 1.34)
+  Elizabeth Warren - D                          -- 1258 (average 1.23)
+  Pete Buttigieg - D                            --  979 (average 0.96)
+  Beto O&#039;Rourke - D                        --  791 (average 0.77)
+  Joe Biden - D                                 --  720 (average 0.71)
+  Kamala Harris - D                             --  694 (average 0.68)
+  Justin Amash - L                              --  691 (average 0.68)
+  Vermin Supreme - L                            --  672 (average 0.66)
+  Cory Booker - D                               --  654 (average 0.64)
+  Jesse Ventura - G                             --  617 (average 0.60)
+  Donald Trump - R                              --  579 (average 0.57)
+  Larry Sharpe - L                              --  569 (average 0.56)
+  Howie Hawkins - G                             --  547 (average 0.54)
+  Bill Weld - R                                 --  546 (average 0.53)
+  Marianne Williamson - D                       --  543 (average 0.53)
+  Amy Klobuchar - D                             --  537 (average 0.53)
+  Julian Castro - D                             --  524 (average 0.51)
+  Jay Inslee - D                                --  495 (average 0.48)
+  Kirsten Gillibrand - D                        --  477 (average 0.47)
+  Austin Petersen - L                           --  434 (average 0.43)
+  John Kasich - R                               --  433 (average 0.42)
+  John McAfee - L                               --  414 (average 0.41)
+  Ajamu Baraka - G                              --  391 (average 0.38)
+  John Hickenlooper - D                         --  342 (average 0.33)
+  Sam Seder - L                                 --  337 (average 0.33)
+  Dario Hunter - G                              --  315 (average 0.31)
+  Adam Kokesh - L                               --  314 (average 0.31)
+  Howard Schultz - unaffiliated                 --  313 (average 0.31)
+  Sedinam Kinamo Christin Moyowasifza-Curry - G --  296 (average 0.29)
+  John Delaney - D                              --  289 (average 0.28)
+  Arvin Vohra - L                               --  271 (average 0.27)
+  Ian Schlakman - G                             --  270 (average 0.26)
+  Larry Hogan - R                               --  226 (average 0.22)
+[Automatic runoff round]
+  Andrew Yang - D    -- 550
+  Bernie Sanders - D -- 271
+  No preference      -- 200
+[Winner]
+  Andrew Yang - D

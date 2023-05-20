@@ -1,0 +1,29 @@
+[Score round]
+  Justin Amash      -- 8018 (average 2.76)
+  Vermin Supreme    -- 7200 (average 2.48)
+  Judge Jim Gray    -- 3826 (average 1.32)
+  Jacob Hornberger  -- 3193 (average 1.10)
+  Jo Jorgensen      -- 2625 (average 0.90)
+  Adam Kokesh       -- 2324 (average 0.80)
+  Daniel Behrman    -- 1941 (average 0.67)
+  John Monds        -- 1707 (average 0.59)
+  Sam Robb          -- 1315 (average 0.45)
+  Sorinne Ardeleanu --  929 (average 0.32)
+  Arvin Vohra       --  919 (average 0.32)
+  Brian Ellison     --  830 (average 0.29)
+  Mark Whitney      --  807 (average 0.28)
+  Phil Gray         --  687 (average 0.24)
+  Kenneth Blevins   --  660 (average 0.23)
+  Jedidiah Hill     --  613 (average 0.21)
+  Steve Richey      --  572 (average 0.20)
+  Keenan Dunham     --  559 (average 0.19)
+  James Ogle        --  557 (average 0.19)
+  Erik Gerhardt     --  557 (average 0.19)
+  Rhett Smith       --  546 (average 0.19)
+  Louis Vanacore    --  519 (average 0.18)
+[Automatic runoff round]
+  Justin Amash   -- 1404
+  Vermin Supreme -- 1138
+  No preference  --  367
+[Winner]
+  Justin Amash

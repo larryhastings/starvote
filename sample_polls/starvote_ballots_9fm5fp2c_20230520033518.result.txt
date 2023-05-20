@@ -1,0 +1,38 @@
+[Score round]
+  Finland - &quot;Cha Cha Cha&quot;               -- 22 (average 3.67)
+  Israel - &quot;Unicorn&quot;                    -- 20 (average 3.33)
+  Norway - &quot;Queen of Kings&quot;             -- 17 (average 2.83)
+  Croatia - &quot;Mama &Scaron;Č!&quot;           -- 17 (average 2.83)
+  Australia - &quot;Promise&quot;                 -- 17 (average 2.83)
+  Czechia - &quot;My Sister&#039;s Crown&quot;    -- 16 (average 2.67)
+  Austria - &quot;Who The Hell is Edgar?&quot;    -- 15 (average 2.50)
+  Portugal - &quot;Ai Cora&ccedil;&atilde;o&quot; -- 12 (average 2.00)
+  Ireland - &quot;We Are One&quot;                -- 12 (average 2.00)
+  Moldova - &quot;Soarele şi Luna&quot;           -- 10 (average 1.67)
+  Belgium - &quot;Because of You&quot;            -- 10 (average 1.67)
+  Poland - &quot;Solo&quot;                       --  9 (average 1.50)
+  Netherlands - &quot;Burning Daylight&quot;      --  9 (average 1.50)
+  Lithuania - &quot;Stay&quot;                    --  9 (average 1.50)
+  Sweden - &quot;Tattoo&quot;                     --  8 (average 1.33)
+  Serbia - &quot;Samo Mi Se Spava&quot;           --  8 (average 1.33)
+  Malta - &quot;Dance (Our Own Party)&quot;       --  8 (average 1.33)
+  Cyprus - &quot;Break a Broken Heart&quot;       --  8 (average 1.33)
+  Slovenia - &quot;Joker Out&quot;                --  7 (average 1.17)
+  San Marino - &quot;Like an Animal&quot;         --  7 (average 1.17)
+  Latvia - &quot;Aijā&quot;                       --  7 (average 1.17)
+  Estonia - &quot;Bridges&quot;                   --  7 (average 1.17)
+  Azerbaijan - &quot;Tell Me More&quot;           --  7 (average 1.17)
+  Armenia - &quot;Future Lover&quot;              --  7 (average 1.17)
+  Albania - &quot;Duje&quot;                      --  7 (average 1.17)
+  Romania - &quot;D.G.T. (Off and On)&quot;       --  6 (average 1.00)
+  Iceland - &quot;Power&quot;                     --  6 (average 1.00)
+  Georgia - &quot;Echo&quot;                      --  6 (average 1.00)
+  Denmark - &quot;Breaking My Heart&quot;         --  6 (average 1.00)
+  Switzerland - &quot;Watergun&quot;              --  5 (average 0.83)
+  Greece - &quot;What They Say&quot;              --  4 (average 0.67)
+[Automatic runoff round]
+  Finland - &quot;Cha Cha Cha&quot; -- 3
+  Israel - &quot;Unicorn&quot;      -- 2
+  No preference                     -- 1
+[Winner]
+  Finland - &quot;Cha Cha Cha&quot;

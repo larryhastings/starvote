@@ -1,0 +1,9 @@
+[Score round]
+  Chuck -- 9 (average 3.00)
+  Brian -- 9 (average 3.00)
+  Amy   -- 9 (average 3.00)
+
+Unbreakable three-way tie for first in score round between Amy, Brian, and Chuck!
+
+[Winner]
+  None

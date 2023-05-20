@@ -18,7 +18,17 @@ mapping the candidate to the ballot's vote for the candidate
 
 Once you've added all the ballots, call `poll.result` to compute the winner.
 If there's an unbreakable tie, `poll.result` will raise an
-`UnbreakableTieError`.
+`UnbreakableTieError`.  The following scenarios can result in an
+unbreakable tie:
+
+* If the top two candidates tie during the automated runoff round
+  *and* their scores are also a tie.
+* If the second and third candidates during the score round tie,
+  and their preference scores are also a tie.
+* If three or more candiates are tied for first *or* second place
+  during the score round.
+
+(These scenarios are highly unlikely with real-world data.)
 
 If you want to see how the vote was tabulated, pass in an argument
 to the `print` keyword-only argument to `poll.result`.  This should
@@ -62,7 +72,7 @@ the result.  For example, you can run this from the root of the
 source-code repository:
 
 ```
-% python3 -m starvote sample_votes/sample_vote_automatic_runoff_breakable_tie.csv
+% python3 -m starvote sample_polls/sample_vote_automatic_runoff_breakable_tie.csv
 ```
 
 to see how **starvote** handles a tie during the automatic runoff round.
@@ -86,3 +96,18 @@ The source code repository includes sample ballots downloaded from
 [https://star.vote/](https://star.vote/).  The licensing of these
 sample ballots is unclear, but they're assumed to be public-domain
 or otherwise freely redistributable.
+
+## Changelog
+
+**1.1** 2023/05/20
+
+* Bugfix: raise `UnbreakableTieError` if there's a three-way
+  tie for *second* place.  Previously **starvote** only noticed
+  if there was a three-way tie for *first* place.
+* Added sample output for every sample poll in `sample_polls/`.
+  These outputs have been confirmed correct by inspection, and
+  could in the future be used as part of an automated test suite.
+
+**1.0** 2023/05/20
+
+Initial release.
