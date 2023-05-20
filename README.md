@@ -63,3 +63,8 @@ the result.
 Currently this module only supports single-winner STAR voting;
 "Bloc STAR" and "Proportional STAR" variants are not yet
 supported.
+
+## License
+
+`starvote` is licensed using the (MIT license.)[https://opensource.org/license/mit/]
+See the `LICENSE` file.
