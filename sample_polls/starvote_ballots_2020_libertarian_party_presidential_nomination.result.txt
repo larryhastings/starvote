@@ -1,3 +1,4 @@
+[STAR]
 [Score round]
   Vermin Supreme    -- 2865 (average 3.99)
   Dan Behrman       --  708 (average 0.99)

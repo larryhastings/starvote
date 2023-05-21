@@ -2,9 +2,9 @@
 
 __doc__ = "A simple STAR vote tabulator"
 
-__version__ = "1.3"
+__version__ = "1.4"
 
-__all__ = ['Poll', 'UnbreakableTieError', 'PollVariant', 'STAR', 'BLOC_STAR']
+__all__ = ['Poll', 'UnbreakableTieError', 'PollVariant', 'STAR', 'BLOC_STAR', 'main']
 
 import enum
 import math
@@ -158,7 +158,9 @@ class Poll:
             if len(round_winners) > 2:
                 raise UnbreakableTieError(f"{len(round_winners)}-way tie in round {polling_round}", *round_winners)
             if len(round_winners) == 2:
-                winner = self.preference(ballots, *round_winners, when="proportional score round {polling_round}")
+                if print:
+                    print(f"[Tie-breaker preference round {polling_round}]")
+                winner = self.preference(ballots, *round_winners, when=f"score round {polling_round}", print=print)
             else:
                 assert len(round_winners) == 1
                 winner = round_winners.pop()
@@ -352,3 +354,141 @@ class Poll:
         assert len(winners) == self.seats
         return winners
 
+
+def main(argv, print=None):
+    import csv
+    import os.path
+
+    text = []
+    if print is None:
+        def print(*a, sep=" "):
+            text.append(sep.join(str(o) for o in a))
+
+    def usage(s=None):
+        if s:
+            print(s)
+            print()
+        print("usage: starvote.py [-v|--variant variant] [-s|--seats seats] ballot.csv")
+        print()
+        print("-v|--variant specifies STAR variant.  supported variants are STAR (default) and BLOC_STAR.")
+        print("-s|--seats specifies number of seats, default 1.")
+        print()
+        print("ballot is assumed to be in https://start.vote CSV format.")
+        print()
+        return -1
+
+    if not argv:
+        usage()
+
+    consume_variant = False
+    variant = None
+
+    consume_seats = False
+    seats = None
+
+    csv_file = None
+
+    extraneous_args = []
+
+    for arg in argv:
+        if consume_variant:
+            variant = arg
+            consume_variant = False
+            continue
+        if arg.startswith("-v=") or arg.startswith("--variant="):
+            if variant is not None:
+                usage("variant specified twice")
+            variant = arg.partition('=')[2]
+            continue
+        if arg in ("-v", "--variant"):
+            if variant is not None:
+                usage("variant specified twice")
+            consume_variant = True
+            continue
+
+        if consume_seats:
+            seats = int(arg)
+            consume_seats = False
+            continue
+        if arg.startswith("-s=") or arg.startswith("--seats="):
+            if seats is not None:
+                usage("seats specified twice")
+            seats = int(arg.partition('='))
+            continue
+        if arg in ("-s", "--seats"):
+            if seats is not None:
+                usage("seats specified twice")
+            consume_seats = True
+            continue
+
+        if csv_file is None:
+            csv_file = arg
+            continue
+        extraneous_args.append(arg)
+
+    if extraneous_args:
+        usage("too many arguments: " + " ".join(extraneous_args))
+
+    if variant in ("STAR", None):
+        variant = STAR
+    elif variant == "BLOC_STAR":
+        variant = BLOC_STAR
+    elif variant == "Proportional_STAR":
+        variant = Proportional_STAR
+    else:
+        usage("unknown variant " + variant)
+
+    if seats == None:
+        seats = 1
+
+    if csv_file is None:
+        usage("no CSV file specified.")
+    if not os.path.isfile(csv_file):
+        usage("invalid CSV file specified.")
+
+    poll = Poll(variant=variant, seats=seats)
+    with open(csv_file, "rt") as f:
+        reader = csv.reader(f)
+        candidates = None
+        for row in reader:
+            # clip off voterid, date, and pollid
+            row = row[3:]
+            if candidates == None:
+                candidates = row
+                # for candidate in candidates:
+                #     poll.add_candidate(candidate)
+                continue
+            ballot = {candidate: int(vote) for candidate, vote in zip(candidates, row)}
+            poll.add_ballot(ballot)
+
+    winner = None
+    try:
+        winner = poll.result(print=print)
+    except UnbreakableTieError as e:
+        if len(e.candidates) == 2:
+            winner = f"Tie between {e.candidates[0]} and {e.candidates[1]}"
+        else:
+            candidates = list(e.candidates)
+            last_candidate = candidates.pop()
+            winner = f"Tie between {', '.join(candidates)}, and {last_candidate}"
+        # hack so we print winner correctly
+        seats = 1
+
+        s = str(e)
+        s = s[0].title() + s[1:]
+        print(f"\n{s}!")
+        print("")
+    if seats == 1:
+        print("[Winner]")
+        print(f"  {winner}")
+    else:
+        print("[Winners]")
+        for w in winner:
+            print(f"  {w}")
+
+    if text:
+        import builtins
+        t = "\n".join(text)
+        builtins.print(t)
+
+    return 0

@@ -1,3 +1,4 @@
+[STAR]
 [Score round]
   Chuck -- 12 (average 4.00)
   Brian -- 12 (average 4.00)

@@ -1,0 +1,18 @@
+[Proportional STAR]
+  3 seats.
+  Hare quota is 1.
+[Score round 1]
+  4 ballots.
+  Darcy -- 19 (average 4.75)
+  Chuck -- 19 (average 4.75)
+  Brian -- 12 (average 3.00)
+  Amy   -- 12 (average 3.00)
+[Tie-breaker preference round 1]
+  Darcy         -- 1
+  Chuck         -- 1
+  No preference -- 2
+
+Two-way tie during score round 1 between Chuck and Darcy!
+
+[Winner]
+  Tie between Chuck and Darcy

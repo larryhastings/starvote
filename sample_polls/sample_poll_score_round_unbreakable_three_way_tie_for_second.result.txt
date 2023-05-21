@@ -1,3 +1,4 @@
+[STAR]
 [Score round]
   Darcy -- 20 (average 5.00)
   Chuck -- 12 (average 3.00)

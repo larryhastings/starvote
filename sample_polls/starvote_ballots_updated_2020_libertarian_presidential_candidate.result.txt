@@ -1,3 +1,4 @@
+[STAR]
 [Score round]
   Vermin Supreme    -- 4653 (average 3.03)
   Judge Jim Gray    -- 3008 (average 1.96)

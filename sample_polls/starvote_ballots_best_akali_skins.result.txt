@@ -1,3 +1,4 @@
+[STAR]
 [Score round]
   Star Guardian        -- 2930 (average 4.38)
   Prestige K/DA        -- 2458 (average 3.67)

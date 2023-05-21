@@ -1,3 +1,4 @@
+[STAR]
 [Score round]
   Finland - &quot;Cha Cha Cha&quot;               -- 22 (average 3.67)
   Israel - &quot;Unicorn&quot;                    -- 20 (average 3.33)

@@ -137,6 +137,14 @@ or otherwise freely redistributable.
 
 ## Changelog
 
+**1.4** *2023/05/21*
+
+* Automated the test suite.
+* Add logging prints for tie-breaker preference round
+  for Proportional STAR.
+* Fixed presentation in `__main__` for multiple winner
+  elections that end in a tie.
+
 **1.3** *2023/05/21*
 
 * Added support for

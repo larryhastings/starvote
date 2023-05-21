@@ -1,3 +1,4 @@
+[STAR]
 [Score round]
   Loren Culp     -- 4054 (average 4.15)
   Joshua Freed   --  979 (average 1.00)

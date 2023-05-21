@@ -1,3 +1,4 @@
+[STAR]
 [Score round]
   Jo Jorgensen   -- 3385 (average 3.92)
   Andrew Yang    -- 1018 (average 1.18)

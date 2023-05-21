@@ -1,3 +1,4 @@
+[STAR]
 [Score round]
   Andrew Yang - D                               -- 3226 (average 3.16)
   Bernie Sanders - D                            -- 2020 (average 1.98)
