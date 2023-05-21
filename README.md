@@ -24,7 +24,7 @@ Darcy  0 1 2 3 4 5
 ```
 
 To vote, give every candidate a score from 0 to 5.  5 means you like
-them the best, 0 means you like them the worst.  (If you don't pick one
+them the most, 0 means you like them the least.  (If you don't pick one
 of the scores, that's the same as a 0.)  If you give two candidates
 the same score, that means you like them equally--you don't have a
 preference between them.
