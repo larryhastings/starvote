@@ -10,6 +10,103 @@ It's simple to vote and simple to tabulate.  While a completely fair and perfect
 electoral system is impossible, STAR voting's approach makes reasonable tradeoffs
 and avoids the worst electoral system pitfalls.  It's really great!
 
+## A quick STAR voting primer
+
+When you vote using STAR voting, your ballot looks something like this:
+
+```
+STAR voting ballot
+
+Amy    0 1 2 3 4 5
+Brad   0 1 2 3 4 5
+Chuck  0 1 2 3 4 5
+Darcy  0 1 2 3 4 5
+```
+
+To vote, give every candidate a score from 0 to 5.  5 means you like
+them the best, 0 means you like them the worst.  (If you don't pick one
+of the scores, that's the same as a 0.)  If you give two candidates
+the same score, that means you like them equally--you don't have a
+preference between them.
+
+To figure out who won, you apply the **STAR** methd: **S**core,
+**T**hen **A**utomatic **R**unoff.
+
+In the first round, the score round, you add up the scores of all the
+candidates.  The top two scoring candidates automatically advance to
+the second round.
+
+In the second round, you examine every ballot to see which of the
+two remaining candidates they preferred.  If one has a higher score,
+that ballot prefers that candidate.  If the ballot scored both
+candidates the same, they have no preference.  The candidate that
+was preferred by more ballots wins the election.  It's that simple!
+
+## What's so good about STAR voting?
+
+Electoral systems are a surprisingly deep topic.  They've been studied
+for hundreds of years, and there are many many different approaches.
+There are a number of desirable properties *and* undesirable properties
+that electoral systems can have.  And, bad news: it's impossible for
+there to be one best-possible voting system.  There are mutually
+exclusive desirable properties.  You can't make a one-size-fits-all
+system that avoids every problem.
+
+STAR voting avoid the worst problems of electoral systems.
+The remaining undesirable properties were chosen as the least-bad
+option.
+
+Here are some desirable properites STAR voting displays:
+
+* It's [monotonic.](https://en.wikipedia.org/wiki/Monotonicity_criterion)
+  Giving a candidate a higher score can never hurt them, and
+  giving a candidate a lower score can never help them.  (And yes,
+  this is not always true of voting systems.  The increasingly popular
+  [Instant Runoff Voting](https://en.wikipedia.org/wiki/Instant-runoff_voting)
+  fails this; it's possible to hurt a candidate you like by giving them
+  a higher score.)
+* It's [resolvable.](https://en.wikipedia.org/wiki/Resolvability_criterion)
+  Ties are unlikely.
+* It complies with the [majority loser criterion.](https://en.wikipedia.org/wiki/Majority_loser_criterion)
+  If a majority of candidates like one candidate the least, that candidate will
+  never win a STAR voting election.
+
+
+Here are some desirable properties STAR voting doesn't have,
+or undesirable properites STAR voting has:
+
+* It's not a [Condorcet method,](https://en.wikipedia.org/wiki/Condorcet_winner_criterion)
+  which is a very particular property of an electoral system.
+  Let's say you have an election with three candidates, A, B, and C.  You ask each voter
+  to vote in three head-to-head races: "which do you like better, A or B?", "which do
+  you like better, B or C?", and "which do you like better, A or C?"  If there's one
+  candidate that wins in every such head-to-head vote in the election, they would be
+  the "Condorcet winner", and an electoral system that guarantees the "Condorcet winner"
+  will win the election is called a "Condorcet method".  STAR isn't a Condorcet method,
+  because Condorcet doesn't take into consideration the strength of preference.  So
+  STAR can arguably give a better result.  (On the other hand, STAR does guarantee
+  the opposite: a [Condorcet loser](https://en.wikipedia.org/wiki/Condorcet_loser_criterion)
+  will never win a STAR election.)
+* It doesn't satisfy the [majority criterion.](https://en.wikipedia.org/wiki/Majority_criterion)
+  The majority criterion requires: *"if one candidate is ranked first by a majority of voters,
+  that candidate must win".*
+* It doesn't satisfy the [later-no-harm criterion.](https://en.wikipedia.org/wiki/Later-no-harm_criterion)
+  Later-no-harm requires that if you've already expressed a preference for a candidate on your
+  ballot, you shouldn't be able to harm that candidate by expressing another preference for
+  another candidate later on the ballot.  STAR fails this; giving a higher vote to a
+  less-preferred candidate might mean that your more-preferred candidate doesn't get
+  elected.  The STAR voting team [wrote an essay on why they gave up on this criterion.](https://www.starvoting.org/pass_fail)
+  The short version is: electoral systems that satisfy later-no-harm generally also
+  exhibit
+  [the spoiler effect,](https://en.wikipedia.org/wiki/Vote_splitting#%22Spoiler_effect%22)
+  which is a worse property.  But achieving later-no-harm *and* avoiding the spoiler effect
+  makes your electoral system even worse!
+
+
+
+
+## starvote
+
 This module, **starvote**, implements a simple STAR vote tabulator.
 To use, `import starvote`, then instantiate a `starvote.Poll` object.
 Feed in the ballots using `poll.add_ballot(ballot)`; ballots are `dict` objects,
