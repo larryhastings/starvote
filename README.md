@@ -234,7 +234,7 @@ or otherwise freely redistributable.
 
 ## Changelog
 
-**1.4** *2023/05/21*
+**1.4** - *2023/05/21*
 
 * Automated the test suite.
 * Add logging prints for tie-breaker preference round
@@ -242,7 +242,7 @@ or otherwise freely redistributable.
 * Fixed presentation in `__main__` for multiple winner
   elections that end in a tie.
 
-**1.3** *2023/05/21*
+**1.3** - *2023/05/21*
 
 * Added support for
   [Proportional STAR](https://www.starvoting.org/star-pr)
@@ -252,7 +252,7 @@ or otherwise freely redistributable.
   Sorry to break your code, all zero people planetwide who already started
   using the parameter!  But this new name is a big improvement.
 
-**1.2** *2023/05/20*
+**1.2** - *2023/05/20*
 
 * Add support for [Bloc STAR](https://www.starvoting.org/multi_winner)
   polls:
@@ -263,7 +263,7 @@ or otherwise freely redistributable.
 * Add the list of tied candidates to the `UnbreakableTieError`
   exception as the new `candidates` attribute.
 
-**1.1** *2023/05/20*
+**1.1** - *2023/05/20*
 
 * Bugfix: raise `UnbreakableTieError` if there's a three-way
   tie for *second* place.  Previously **starvote** only noticed
@@ -272,6 +272,6 @@ or otherwise freely redistributable.
   These outputs have been confirmed correct by inspection, and
   could in the future be used as part of an automated test suite.
 
-**1.0** *2023/05/20*
+**1.0** - *2023/05/20*
 
 * Initial release.
