@@ -202,7 +202,7 @@ module, too.  You can specify the variant with `-v` and the
 number of seats with `-s`:
 
 ```
-% python3 -m starvote -v BLOC_STAR -s 2 sample_polls/starvote_ballots_dd1wc4yx_20230520050413.csv
+% python3 -m starvote -v Proportional_STAR -s 3 sample_poll_proportional_star_3_seats_breakable_tie.csv
 ```
 
 ### Warning
