@@ -125,7 +125,7 @@ or otherwise freely redistributable.
 
 ## Changelog
 
-**1.2** *under development*
+**1.2** 2023/05/20
 
 * Add support for [Bloc STAR](https://www.starvoting.org/multi_winner)
   polls.
