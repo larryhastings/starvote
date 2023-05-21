@@ -75,19 +75,42 @@ the result.  For example, you can run this from the root of the
 source-code repository:
 
 ```
-% python3 -m starvote sample_polls/sample_vote_automatic_runoff_breakable_tie.csv
+% python3 -m starvote sample_polls/sample_poll_automatic_runoff_breakable_tie.csv
 ```
 
 to see how **starvote** handles a tie during the automatic runoff round.
 
+## Multiple-winner elections
+
+**starvote** also implements the
+[Bloc STAR](https://www.starvoting.org/multi_winner)
+variant of STAR for multi-winner elections.  Simply
+instantiate your `Poll` object passing in `starvote.BLOC_STAR`
+for the `variant` parameter, and the number of winners in
+the `winners` keyword-only parameter:
+
+```Python
+poll = starvote.Poll(variant=starvote.BLOC_STAR, winners=2)
+```
+
+This changes `poll.result` to return a list of winners instead
+of a single winner.
+
+You can experiment with these with the command-line version of the
+module, too:
+
+```
+% python3 -m starvote -v BLOC_STAR -w 2 sample_polls/starvote_ballots_dd1wc4yx_20230520050413.csv
+```
+
+
 ## Limitations
 
-Currently this module only supports single-winner STAR voting;
-variants such as
-[Bloc STAR](https://www.starvoting.org/multi_winner) and
-[Proportional STAR](https://www.starvoting.org/star-pr)
+Currently this module only supports single-winner STAR voting
+and the [Bloc STAR](https://www.starvoting.org/multi_winner)
+variant.  [Proportional STAR](https://www.starvoting.org/star-pr)
 (aka [Allocated Score](https://electowiki.org/wiki/Allocated_Score))
-are not yet supported.
+is not yet supported.
 
 ## License
 
@@ -103,6 +126,12 @@ or otherwise freely redistributable.
 ## Changelog
 
 **1.2** *under development*
+
+* Add support for [Bloc STAR](https://www.starvoting.org/multi_winner)
+  polls.
+
+  * Added `PollVariant` enum.
+  * Added `variant` and `winners` parameters to `Poll`.
 
 * Add the list of tied candidates to the `UnbreakableTieError`
   exception as the new `candidates` attribute.
