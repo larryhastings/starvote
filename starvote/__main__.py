@@ -3,16 +3,16 @@
 import csv
 import os.path
 import sys
-from . import Poll, UnbreakableTieError, STAR, BLOC_STAR
+from . import Poll, UnbreakableTieError, STAR, BLOC_STAR, Proportional_STAR
 
 def usage(s=None):
     if s:
         print(s)
         print()
-    print("usage: starvote.py [-v|--variant variant] [-w|--winners winners] ballot.csv")
+    print("usage: starvote.py [-v|--variant variant] [-s|--seats seats] ballot.csv")
     print()
     print("-v|--variant specifies STAR variant.  supported variants are STAR (default) and BLOC_STAR.")
-    print("-w|--winners specifies number of winners, default 1.")
+    print("-s|--seats specifies number of seats, default 1.")
     print()
     print("ballot is assumed to be in https://start.vote CSV format.")
     print()
@@ -24,8 +24,8 @@ if len(sys.argv) == 1:
 consume_variant = False
 variant = None
 
-consume_winners = False
-winners = None
+consume_seats = False
+seats = None
 
 csv_file = None
 
@@ -47,19 +47,19 @@ for arg in sys.argv[1:]:
         consume_variant = True
         continue
 
-    if consume_winners:
-        winners = int(arg)
-        consume_winners = False
+    if consume_seats:
+        seats = int(arg)
+        consume_seats = False
         continue
-    if arg.startswith("-w=") or arg.startswith("--winners="):
-        if winners is not None:
-            usage("winners specified twice")
-        winners = int(arg.partition('='))
+    if arg.startswith("-s=") or arg.startswith("--seats="):
+        if seats is not None:
+            usage("seats specified twice")
+        seats = int(arg.partition('='))
         continue
-    if arg in ("-w", "--winners"):
-        if winners is not None:
-            usage("winners specified twice")
-        consume_winners = True
+    if arg in ("-s", "--seats"):
+        if seats is not None:
+            usage("seats specified twice")
+        consume_seats = True
         continue
 
     if csv_file is None:
@@ -74,18 +74,20 @@ if variant in ("STAR", None):
     variant = STAR
 elif variant == "BLOC_STAR":
     variant = BLOC_STAR
+elif variant == "Proportional_STAR":
+    variant = Proportional_STAR
 else:
     usage("unknown variant " + variant)
 
-if winners == None:
-    winners = 1
+if seats == None:
+    seats = 1
 
 if csv_file is None:
     usage("no CSV file specified.")
 if not os.path.isfile(csv_file):
     usage("invalid CSV file specified.")
 
-poll = Poll(variant=variant, winners=winners)
+poll = Poll(variant=variant, seats=seats)
 with open(csv_file, "rt") as f:
     reader = csv.reader(f)
     candidates = None
@@ -119,7 +121,7 @@ except UnbreakableTieError as e:
     s = s[0].title() + s[1:]
     myprint(f"\n{s}!")
     myprint("")
-if winners == 1:
+if seats == 1:
     myprint("[Winner]")
     myprint(f"  {winner}")
 else:

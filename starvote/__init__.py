@@ -25,27 +25,27 @@ class UnbreakableTieError(ValueError):
 class PollVariant(enum.Enum):
     STAR = 1
     BLOC_STAR = 2
-    # Proportional_STAR = 3
+    Proportional_STAR = 3
 
 STAR = PollVariant.STAR
 BLOC_STAR = PollVariant.BLOC_STAR
-# Proportional_STAR = PollVariant.Proportional_STAR
+Proportional_STAR = PollVariant.Proportional_STAR
 
 
 class Poll:
-    def __init__(self, variant=STAR, *, winners=1):
+    def __init__(self, variant=STAR, *, seats=1):
         self.variant = variant
-        self.winners = winners
+        self.seats = seats
 
         self.candidates = {}
         self.ballots = []
 
         if variant == STAR:
-            if winners != 1:
-                raise ValueError("winners must be 1 when using variant STAR")
+            if seats != 1:
+                raise ValueError("seats must be 1 when using variant STAR")
         else:
-            if winners == 1:
-                raise ValueError("winners must be > 1 when using variant " + str(variant).rpartition(".")[2])
+            if seats == 1:
+                raise ValueError("seats must be > 1 when using variant " + str(variant).rpartition(".")[2])
 
     def add_candidate(self, name):
         self.candidates[name] = 0
@@ -104,6 +104,144 @@ class Poll:
 
         return winner
 
+
+    def print_rankings(self, ballots, rankings, print):
+        candidate_width, score_width, average_width = self.compute_widths(ballots, rankings)
+        total_average_width = average_width + 3
+        ballots_count = len(ballots)
+
+        # are the scores all ints?
+        for score, candidate in rankings:
+            int_score = int(score)
+            if int_score != score:
+                score_format = f"{score_width}.3f"
+                total_score_width = score_width + 4
+                break
+        else:
+            score_format = score_width
+            total_score_width = score_width
+
+
+        for score, candidate in reversed(rankings):
+            average = score / ballots_count
+            average = f"{average:>1.2f}"
+            score = f"{score:>{score_format}}"
+            print(f"  {candidate:<{candidate_width}} -- {score:>{total_score_width}} (average {average:>{total_average_width}})")
+
+
+    def _proportional_result(self, ballots, candidates, *, print=None):
+        winners = []
+
+        # Floordiv so hare_quota is an integer.
+        # If there would have been a fraction,
+        # it just means the last round's hare quota
+        # would be one more.
+        #   e.g. 100 voters, 3 seats, you'd use 33, 33, and 34.
+        # But we don't need to bother with the Hare quota
+        # during the last round.
+        # So we can just ignore the fraction completely.
+        hare_quota = len(ballots) // self.seats
+
+        if print:
+            print(f"  Hare quota is {hare_quota}.")
+
+        for polling_round in range(1, self.seats+1):
+            rankings = [(score, candidate) for candidate, score in candidates.items()]
+            rankings.sort()
+            if print:
+                print(f"[Score round {polling_round}]")
+                remaining = " remaining" if polling_round > 1 else ""
+                print(f"  {len(ballots)}{remaining} ballots.")
+                self.print_rankings(ballots, rankings, print)
+
+            round_winners = [t[1] for t in rankings if t[0] == rankings[-1][0]]
+            if len(round_winners) > 2:
+                raise UnbreakableTieError(f"{len(round_winners)}-way tie in round {polling_round}", *round_winners)
+            if len(round_winners) == 2:
+                winner = self.preference(ballots, *round_winners, when="proportional score round {polling_round}")
+            else:
+                assert len(round_winners) == 1
+                winner = round_winners.pop()
+
+            # we need to allocate voters to the winner,
+            # do the hare quota thing, etc.
+            # for simplicity of implementation, we're only going to handle
+            # one winner here.  if we reached here and there were multiple
+            # tied winners, we'll process the other winners in future
+            # iterations of the loop.  doing them one at a time won't
+            # affect the outcome.
+
+            winners.append(winner)
+            if print:
+                print(f"[Winner round {polling_round}]")
+                print(f"  {winner}")
+            if len(winners) == self.seats:
+                return winners
+
+            del candidates[winner]
+
+            # gonna iterate.
+            # remove hare quota voters, possibly fractionally.
+            if print:
+                print(f"[Allocating voters round {polling_round}]")
+
+            quota = hare_quota
+            all_supporters = [ballot for ballot in ballots if ballot.get(winner, 0)]
+            all_supporters.sort(key=lambda ballot: ballot[winner])
+
+            while all_supporters:
+                # find highest score.
+                # note that this might not be an integer!
+                # after the first scoring round, it's likely there will be non-integer votes.
+                score = all_supporters[-1][winner]
+
+                tranche = [ballot for ballot in all_supporters if ballot[winner] == score]
+                tranche_count = len(tranche)
+
+                assert all_supporters[-tranche_count][winner] == score
+                assert (len(all_supporters) == tranche_count) or (all_supporters[-(tranche_count + 1)][winner] != score)
+                del all_supporters[-tranche_count:]
+
+                unallocated_ballots = [ballot for ballot in ballots if ballot.get(winner, 0) != score]
+
+                if print:
+                    print(f"  Quota remaining {quota}.")
+                    print(f"    Allocating {tranche_count} voters at score {score}.")
+                if tranche_count <= quota:
+                    quota -= tranche_count
+                    ballots = unallocated_ballots
+                    if not quota:
+                        break
+                    continue
+
+                # this tranche has more supporters than we need to fill the quota.
+                # reduce every supporter's vote by the surplus, then keep them in play.
+                weight_reduction_ratio = 1 - (quota / tranche_count)
+                if print:
+                    print(f"    This would take us over quota, so handling fractional surplus.")
+                    print(f"    Allocating {(1 - weight_reduction_ratio) * 100:2.2f}% of these ballots.")
+                    print(f"    Multiplying these ballot's scores by {weight_reduction_ratio:2.6f}, then keeping them unallocated.")
+                for ballot in tranche:
+                    del ballot[winner]
+                    for candidate, vote in ballot.items():
+                        adjusted_vote = vote * weight_reduction_ratio
+                        candidates[candidate] += (adjusted_vote - vote)
+                        ballot[candidate] = adjusted_vote
+
+                unallocated_ballots.extend(tranche)
+
+                ballots = unallocated_ballots
+                break
+
+            for ballot in ballots:
+                if winner in ballot:
+                    del ballot[winner]
+
+
+        raise RuntimeError("shouldn't reach here")
+
+
+
     def result(self, *, print=None):
         winners = []
         candidates = self.candidates
@@ -113,25 +251,36 @@ class Poll:
             raise ValueError("no candidates")
 
         if self.variant == STAR:
+            if print:
+                print("[STAR]")
             if len(candidates) == 1:
                 winners = list(candidates)
                 winner = winners[0]
-                print("Only one candidate, returning winner " + winner)
+                if print:
+                    print("  Only one candidate, returning winner {winner}!")
                 return winner
             round_text_format = ""
         else:
-            if len(candidates) <= self.winners:
-                raise ValueError(f"not enough candidates, need {self.winners}, have {len(candidates)}")
-            if len(candidates) == self.winners:
-                winners = list(candidates)
-                print(f"Only {self.winners} candidates, returning all candidates as winners")
-                return winners
+            if print:
+                if self.variant == BLOC_STAR:
+                    print("[BLOC STAR]")
+                else:
+                    print("[Proportional STAR]")
+                print(f"  {self.seats} seats.")
+            if len(candidates) <= self.seats:
+                raise ValueError(f"not enough candidates, need {self.seats}, have {len(candidates)}")
+            if len(candidates) == self.seats:
+                print(f"  Have exactly {self.seats} candidates, all candidates are winners!")
+                return list(candidates)
             # we're gonna modify ballots, so, make copies
             ballots = [dict(b) for b in ballots]
             candidates = dict(candidates)
             round_text_format = " {polling_round}"
 
-        for polling_round in range(1, self.winners+1):
+        if self.variant == Proportional_STAR:
+            return self._proportional_result(ballots, candidates, print=print)
+
+        for polling_round in range(1, self.seats+1):
             candidates_count = len(candidates)
             ballots_count = len(ballots)
             assert candidates_count
@@ -145,17 +294,8 @@ class Poll:
             rankings = [(score, candidate) for candidate, score in candidates.items()]
             rankings.sort()
 
-            def print_rankings(rankings):
-                candidate_width, score_width, average_width = self.compute_widths(ballots, rankings)
-                total_average_width = average_width + 3
-
-                for score, candidate in reversed(rankings):
-                    average = score / ballots_count
-                    average = f"{average:>1.2f}"
-                    print(f"  {candidate:<{candidate_width}} -- {score:>{score_width}} (average {average:>{total_average_width}})")
-
             if print:
-                print_rankings(rankings)
+                self.print_rankings(ballots, rankings, print)
 
             top_two = rankings[-2:]
             if candidates_count > 2:
@@ -185,7 +325,7 @@ class Poll:
             except UnbreakableTieError:
                 if print:
                     print(f"[Resolving two-way tie in automatic runoff round{round_text}]")
-                    print_rankings(top_two)
+                    self.print_rankings(ballots, top_two, print)
 
                 if top_two[0][0] > top_two[1][0]:
                     winner= top_two[0][1]
@@ -193,12 +333,12 @@ class Poll:
                     winner = top_two[1][1]
                 else:
                     raise UnbreakableTieError(f"unbreakable tie between {top_two[0][1]} and {top_two[1][1]} in automatic runoff round{round_text}", top_two[0][1], top_two[1][1])
-            if print:
+            if (self.seats != 1) and print:
                 print(f"[Winner round{round_text}]")
                 print(f"  {winner}")
             winners.append(winner)
 
-            if self.winners > 1:
+            if self.seats > 1:
                 for b in ballots:
                     if winner in b:
                         del b[winner]
@@ -209,6 +349,6 @@ class Poll:
             assert len(winners) == 1
             return winner
 
-        assert len(winners) == self.winners
+        assert len(winners) == self.seats
         return winners
 

@@ -5,3 +5,5 @@ on Saturday, May 20, 2023.  The site doesn't make it clear what the files can be
 so I assume redistribution is okay.
 
 The `sample_poll_*.csv` files were hand-written by Larry Hastings.
+
+The `*.result.txt` files are the expected results when tabulating using conventional STAR voting.

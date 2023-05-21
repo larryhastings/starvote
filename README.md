@@ -84,39 +84,51 @@ to see how **starvote** handles a tie during the automatic runoff round.
 
 **starvote** also implements the
 [Bloc STAR](https://www.starvoting.org/multi_winner)
-variant of STAR for multi-winner elections.  Simply
-instantiate your `Poll` object passing in `starvote.BLOC_STAR`
-for the `variant` parameter, and the number of winners in
-the `winners` keyword-only parameter:
+and
+[Proportional STAR](https://www.starvoting.org/star-pr)
+(aka [Allocated Score](https://electowiki.org/wiki/Allocated_Score))
+variants of STAR for multi-winner elections.  Simply
+instantiate your `Poll` object passing in the enum constant
+`starvote.BLOC_STAR` or `starvote.Proportional_STAR`
+for the `variant` parameter, and the number of seats in
+the `seats` keyword-only parameter:
 
 ```Python
-poll = starvote.Poll(variant=starvote.BLOC_STAR, winners=2)
+poll = starvote.Poll(variant=starvote.BLOC_STAR, seats=2)
 ```
 
 This changes `poll.result` to return a list of winners instead
 of a single winner.
 
 You can experiment with these with the command-line version of the
-module, too:
+module, too.  You can specify the variant with `-v` and the
+number of seats with `-s`:
 
 ```
-% python3 -m starvote -v BLOC_STAR -w 2 sample_polls/starvote_ballots_dd1wc4yx_20230520050413.csv
+% python3 -m starvote -v BLOC_STAR -s 2 sample_polls/starvote_ballots_dd1wc4yx_20230520050413.csv
 ```
 
+### Warning
 
-## Limitations
-
-Currently this module only supports single-winner STAR voting
-and the [Bloc STAR](https://www.starvoting.org/multi_winner)
-variant.  [Proportional STAR](https://www.starvoting.org/star-pr)
-(aka [Allocated Score](https://electowiki.org/wiki/Allocated_Score))
-is not yet supported.
+I haven't found a test corpus for either of these voting methods.
+I'm following the rules, as best I can, and the results I'm getting
+make sense.  But, so far, my implementations of BLOC STAR
+and Proportional STAR definitely could be wrong.
 
 ## License
 
 **starvote** is licensed using the
 [MIT license.](https://opensource.org/license/mit/)
 See the `LICENSE` file.
+
+It seems particularly relevant to repeat here:
+*there is no warranty for this software.*
+I've done the best job I can implementing this election system
+tabulator.  But this software could have bugs,
+or my understanding of the rules could be wrong,
+and either of these could affect the results of elections
+you run with this software.
+**Use at your own risk.**
 
 The source code repository includes sample ballots downloaded from
 [https://star.vote/](https://star.vote/).  The licensing of these
@@ -125,18 +137,28 @@ or otherwise freely redistributable.
 
 ## Changelog
 
-**1.2** 2023/05/20
+**1.3** *2023/05/21*
+
+* Added support for
+  [Proportional STAR](https://www.starvoting.org/star-pr)
+  polls.  The only visible external change is the new
+  `Proportional_STAR` enum value.
+* Renamed the `winners` parameter on the `Poll` constructor to `seats`.
+  Sorry to break your code, all zero people planetwide who already started
+  using the parameter!  But this new name is a big improvement.
+
+**1.2** *2023/05/20*
 
 * Add support for [Bloc STAR](https://www.starvoting.org/multi_winner)
-  polls.
+  polls:
 
-  * Added `PollVariant` enum.
+  * Added `PollVariant` enum containing `STAR` and `BLOC_STAR` values.
   * Added `variant` and `winners` parameters to `Poll`.
 
 * Add the list of tied candidates to the `UnbreakableTieError`
   exception as the new `candidates` attribute.
 
-**1.1** 2023/05/20
+**1.1** *2023/05/20*
 
 * Bugfix: raise `UnbreakableTieError` if there's a three-way
   tie for *second* place.  Previously **starvote** only noticed
@@ -145,6 +167,6 @@ or otherwise freely redistributable.
   These outputs have been confirmed correct by inspection, and
   could in the future be used as part of an automated test suite.
 
-**1.0** 2023/05/20
+**1.0** *2023/05/20*
 
 * Initial release.
