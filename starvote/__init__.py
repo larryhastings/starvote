@@ -2,7 +2,7 @@
 
 __doc__ = "A simple STAR vote tabulator"
 
-__version__ = "1.2"
+__version__ = "1.3"
 
 __all__ = ['Poll', 'UnbreakableTieError', 'PollVariant', 'STAR', 'BLOC_STAR']
 
