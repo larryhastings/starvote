@@ -18,8 +18,11 @@ mapping the candidate to the ballot's vote for the candidate
 
 Once you've added all the ballots, call `poll.result` to compute the winner.
 If there's an unbreakable tie, `poll.result` will raise an
-`UnbreakableTieError`.  The following scenarios can result in an
-unbreakable tie:
+`UnbreakableTieError`.  You can get a text description of the tie by calling
+`str` on the exception; also, you can get a list of the tied candidates
+in its `candidates` attribute.
+
+The following scenarios produce an unbreakable tie:
 
 * If the top two candidates tie during the automated runoff round
   *and* their scores are also a tie.
@@ -98,6 +101,11 @@ sample ballots is unclear, but they're assumed to be public-domain
 or otherwise freely redistributable.
 
 ## Changelog
+
+**1.2** *under development*
+
+* Add the list of tied candidates to the `UnbreakableTieError`
+  exception as the new `candidates` attribute.
 
 **1.1** 2023/05/20
 

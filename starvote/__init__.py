@@ -9,7 +9,9 @@ import math
 __all__ = ['Poll', 'UnbreakableTieError']
 
 class UnbreakableTieError(ValueError):
-    pass
+    def __init__(self, description, *candidates):
+        super().__init__(description)
+        self.candidates = tuple(candidates)
 
 class Poll:
     def __init__(self):
@@ -66,7 +68,7 @@ class Poll:
                 print(f"  {candidate:<{candidate_width}} -- {score:>{score_width}}")
 
         if scores[1][0] == scores[2][0]:
-            raise UnbreakableTieError(f"two-way tie during {when} between {candidate0} and {candidate1}")
+            raise UnbreakableTieError(f"two-way tie during {when} between {candidate0} and {candidate1}", candidate0, candidate1)
         winner = scores[2][1]
 
         return winner
@@ -105,15 +107,17 @@ class Poll:
         if candidates_count > 2:
             if (rankings[-3][0] == rankings[-2][0]):
                 if rankings[-2][0] == rankings[-1][0]:
-                    candidates = ", ".join(r[1] for r in rankings[-3:])
-                    first_two, comma, last_one = candidates.rpartition(",")
-                    candidates = f"{first_two}{comma} and{last_one}"
-                    raise UnbreakableTieError("unbreakable three-way tie for first in score round between " + candidates)
+                    candidates = [r[1] for r in rankings[-3:]]
+                    description = ", ".join(candidates)
+                    first_two, comma, last_one = description.rpartition(",")
+                    description = f"{first_two}{comma} and{last_one}"
+                    raise UnbreakableTieError("unbreakable three-way tie for first in score round between " + description, *candidates)
                 if (candidates_count > 3) and (rankings[-4][0] == rankings[-3][0]):
-                    candidates = ", ".join(r[1] for r in rankings[-4:-1])
-                    first_two, comma, last_one = candidates.rpartition(",")
-                    candidates = f"{first_two}{comma} and{last_one}"
-                    raise UnbreakableTieError("unbreakable three-way tie for second in score round between " + candidates)
+                    candidates = ([r[1] for r in rankings[-4:-1]])
+                    description = ", ".join(candidates)
+                    first_two, comma, last_one = description.rpartition(",")
+                    description = f"{first_two}{comma} and{last_one}"
+                    raise UnbreakableTieError("unbreakable three-way tie for second in score round between " + description, *candidates)
                 if print:
                     print("[Resolving two-way tie between second and third in score round]")
                 preferred = self.preference(rankings[-3][1], rankings[-2][1], print=print, when="preference runoff between second and third in score round")
@@ -134,7 +138,7 @@ class Poll:
             elif top_two[1][0] > top_two[0][0]:
                 winner = top_two[1][1]
             else:
-                raise UnbreakableTieError(f"unbreakable tie between {top_two[0][1]} and {top_two[1][1]} in automatic runoff round")
+                raise UnbreakableTieError(f"unbreakable tie between {top_two[0][1]} and {top_two[1][1]} in automatic runoff round", top_two[0][1], top_two[1][1])
 
         return winner
 

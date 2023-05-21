@@ -30,6 +30,13 @@ winner = None
 try:
     winner = poll.result(print=myprint)
 except UnbreakableTieError as e:
+    if len(e.candidates) == 2:
+        winner = f"Tie between {e.candidates[0]} and {e.candidates[1]}"
+    else:
+        candidates = list(e.candidates)
+        last_candidate = candidates.pop()
+        winner = f"Tie between {', '.join(candidates)}, and {last_candidate}"
+
     s = str(e)
     s = s[0].title() + s[1:]
     myprint(f"\n{s}!")
