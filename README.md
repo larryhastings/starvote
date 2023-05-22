@@ -27,7 +27,7 @@ of the scores, that's the same as a 0.)  If you give two candidates
 the same score, that means you like them equally--you don't have a
 preference between them.
 
-To figure out who won, you apply the **STAR** methd: **S**core,
+To figure out who won, you apply the **STAR** method: **S**core,
 **T**hen **A**utomatic **R**unoff.
 
 In the first round, the score round, you add up the scores of all the
@@ -149,7 +149,7 @@ print()
 print(f"[Winner]\n{winner}")
 ```
 
-Here's what the output of this program looks like:
+When run, the above example program produces this output:
 
 ```
 [Score round]
@@ -165,7 +165,8 @@ Here's what the output of this program looks like:
 Chuck
 ```
 
-If the module is executed as a script, it will read a single
+If the `starvote` module is executed as a script (`python -m starvote`),
+it'll read a single
 [CSV file](https://en.wikipedia.org/wiki/Comma-separated_values)
 in [`https://star.vote/`](https://star.vote/) format, tabulate, and print
 the result.  For example, you can run this from the root of the
@@ -219,14 +220,15 @@ and the maximum score with `-m`:
 
 ### Warning
 
-I haven't found a test corpus for either of the STAR multi-winner
-voting methods.
-I'm following the rules, as best I can, and the results I'm getting
-make sense.  But, so far, my implementations of Bloc STAR
-and Proportional STAR definitely could be wrong.
+I haven't found a single test corpus for either of the STAR
+multi-winner voting methods.
+I'm following the rules as best I can, and the results I'm getting
+make sense.  But so far I can't confirm my implementations of Bloc STAR
+and Proportional STAR are correct.  There's a very real possibility
+my code is wrong.
 
-(I do have one sample vote for Reweighted Range voting, so I'm pretty
-confident that implementation is fine.)
+(I do have one sample poll for Reweighted Range voting, so I'm
+reasonably confident that implementation is fine.)
 
 ## License
 
