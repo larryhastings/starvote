@@ -184,14 +184,16 @@ to see how **starvote** handles a tie during the automatic runoff round.
 **starvote** also implements several multi-winner electoral systems:
 
 * [Bloc STAR](https://www.starvoting.org/multi_winner),
+  a multi-winner variant of STAR voting that fills multiple
+  seats with the most *popular* candidates,
 * [Proportional STAR](https://www.starvoting.org/star-pr)
   (aka "STAR-PR", aka [Allocated Score](https://electowiki.org/wiki/Allocated_Score)),
   a [proportional representation](https://en.wikipedia.org/wiki/Proportional_representation)
   electoral system,
 * and [Reweighted Range Voting](https://rangevoting.org/RRV.html)
   (aka "RRV"),
-  an alternative proportional electoral system.
-  Not a STAR variant per se, but the ballot and voting mechanism
+  another proportional representation electoral system.
+  RRV isn't a STAR variant per se, but the ballot and voting mechanism
   is identical to a STAR ballot.
 
 Simply
