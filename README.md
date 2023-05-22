@@ -110,8 +110,10 @@ or undesirable properites STAR voting has:
 This module, **starvote**, implements a simple STAR vote tabulator.
 To use, `import starvote`, then instantiate a `starvote.Poll` object.
 Feed in the ballots using `poll.add_ballot(ballot)`; ballots are `dict` objects,
-mapping the candidate to the ballot's vote for the candidate
-(an `int` in the range 0 to 5 inclusive).
+mapping the candidate to the ballot's score for that candidate.
+(By convention, STAR ballot scores are in the range from 0 to 5 inclusive.
+You may change the maximum score with the `max_score` keyword-only parameter
+to the `Poll` constructor.)
 
 Once you've added all the ballots, call `poll.result` to compute the winner.
 If there's an unbreakable tie, `poll.result` will raise an
@@ -128,7 +130,7 @@ The following scenarios produce an unbreakable tie:
 * If three or more candiates are tied for first *or* second place
   during the score round.
 
-(These scenarios are highly unlikely with real-world data.)
+(These scenarios are unlikely with real-world data.)
 
 If you want to see how the vote was tabulated, pass in an argument
 to the `print` keyword-only argument to `poll.result`.  This should
@@ -167,7 +169,7 @@ Chuck
 
 If the module is executed as a script, it will read a single
 [CSV file](https://en.wikipedia.org/wiki/Comma-separated_values)
-in [*star.vote*](https://star.vote/) format, tabulate, and print
+in [`https://star.vote/`](https://star.vote/) format, tabulate, and print
 the result.  For example, you can run this from the root of the
 source-code repository:
 
@@ -179,38 +181,51 @@ to see how **starvote** handles a tie during the automatic runoff round.
 
 ## Multiple-winner elections
 
-**starvote** also implements the
-[Bloc STAR](https://www.starvoting.org/multi_winner)
-and
-[Proportional STAR](https://www.starvoting.org/star-pr)
-(aka [Allocated Score](https://electowiki.org/wiki/Allocated_Score))
-variants of STAR for multi-winner elections.  Simply
+**starvote** also implements several multi-winner electoral systems:
+
+* [Bloc STAR](https://www.starvoting.org/multi_winner),
+* [Proportional STAR](https://www.starvoting.org/star-pr)
+  (aka "STAR-PR", aka [Allocated Score](https://electowiki.org/wiki/Allocated_Score)),
+  a [proportional representation](https://en.wikipedia.org/wiki/Proportional_representation)
+  electoral system,
+* and [Reweighted Range Voting](https://rangevoting.org/RRV.html)
+  (aka "RRV"),
+  an alternative proportional electoral system.
+  Not a STAR variant per se, but the ballot and voting mechanism
+  is identical to a STAR ballot.
+
+Simply
 instantiate your `Poll` object passing in the enum constant
-`starvote.BLOC_STAR` or `starvote.Proportional_STAR`
+`starvote.Bloc_STAR`, `starvote.Proportional_STAR`,
+or `starvote.Reweighted_Range`
 for the `variant` parameter, and the number of seats in
 the `seats` keyword-only parameter:
 
 ```Python
-poll = starvote.Poll(variant=starvote.BLOC_STAR, seats=2)
+poll = starvote.Poll(variant=starvote.Bloc_STAR, seats=2)
 ```
 
 This changes `poll.result` to return a list of winners instead
 of a single winner.
 
 You can experiment with these with the command-line version of the
-module, too.  You can specify the variant with `-v` and the
-number of seats with `-s`:
+module, too.  You can specify the variant with `-v`,
+the number of seats with `-s`,
+and the maximum score with `-m`:
 
 ```
-% python3 -m starvote -v Proportional_STAR -s 3 sample_poll_proportional_star_3_seats_breakable_tie.csv
+% python3 -m starvote -v Reweighted_Range -s 3 -m 10 sample_polls/sample_poll_reweighted_range_3_seats.csv
 ```
 
 ### Warning
 
-I haven't found a test corpus for either of these voting methods.
+I haven't found a test corpus for either of the STAR multi-winner
+voting methods.
 I'm following the rules, as best I can, and the results I'm getting
-make sense.  But, so far, my implementations of BLOC STAR
+make sense.  But, so far, my implementations of Bloc STAR
 and Proportional STAR definitely could be wrong.
+
+(I do have one sample vote for )
 
 ## License
 
@@ -228,11 +243,27 @@ you run with this software.
 **Use at your own risk.**
 
 The source code repository includes sample ballots downloaded from
-[https://star.vote/](https://star.vote/).  The licensing of these
+[`https://star.vote/`](https://star.vote/).  The licensing of these
 sample ballots is unclear, but they're assumed to be public-domain
 or otherwise freely redistributable.
 
 ## Changelog
+
+**1.5** - *2023/05/22*
+
+* Added support for
+  [Reweighted Range Voting](https://rangevoting.org/RRV.html),
+  an attractive alternative to Proportional STAR.
+  Like STAR-PR, RRV is a proportional representation electoral
+  system.  But RRV is simpler to understand, simpler to
+  implement, and it never throws away votes.
+  Thanks to Tim Peters for pointing me in this direction.
+* Added the `max_score` parameter to the `Poll` constructor.
+  Now you can use whatever range you like.  (The minimum score
+  is still always 0.)
+* Changed the spelling of "Bloc STAR".  I thought the "Bloc"
+  was always properly capitalized (as "BLOC STAR"), but nope,
+  it's not.
 
 **1.4** - *2023/05/21*
 

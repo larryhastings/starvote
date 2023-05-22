@@ -1,0 +1,203 @@
+<html>
+<head>
+<title>
+RangeVoting.org - Reweighted Range Voting - a PR voting method that feels like range voting
+</title>
+</head>
+<body style="font-family: Arial, sans-serif">
+
+<H2> 
+Reweighted Range Voting (RRV) &ndash;
+a <a href="PropRep.html">Proportional Representation</a>
+voting method that feels like range voting
+</H2>
+<p><small>By Ivan Ryan with some contributions by Bruce R. Gilson.</small></p>
+<p><small>This exposition by Ivan Ryan is intended to be easier to digest than our 
+<a href="RRV.html">other RRV page</a>. Enjoy.</small></p>
+
+<p>
+The RRV procedure is
+</p>
+<ol>
+<li>
+Each voter casts a ballot rating the candidates from 0 to M
+</li><li>
+Each ballot is given a weight equal to
+<center>
+weight = C/(C + sum of the scores given to all elected candidates on that
+ballot)
+</center>
+</li><li>
+Sum up all the ballots using those weightings
+</li><li>
+The candidate with the highest score wins and is declared elected
+</li><li>
+goto (2) unless all seats are filled
+</li></ol>
+<p>
+The two parameters M and C are:
+<pre>
+M = maximum rating (say 10)
+C = determines how proportionality occurs:
+     C = M   &rArr; Greatest divisors (d'Hondt, Jefferson) proportionality
+     C = M/2 &rArr; Major fractions (Webster, Sainte-Lague) method
+</pre>
+The C parameter mainly affects small parties.
+</p>
+<h3> Worked Example </h3>
+<p>
+As an example, assume there are 3 seats to be filled and 2 parties "A" and "B."
+I am going to assume C=M (it doesn't make any difference here) and
+the max rating is M=10.  Party A puts forward three candidates A1,A2,A3, while
+party B runs two: B1 and B2.
+</p><p>
+I am going to assume that each voter from each party votes the same way:
+</p>
+<table bgcolor="#88ff88"><tr><td><pre>
+<b>60 "party A" voters:</b>    <b>40 "party B" voters:</b>
+A1: 10                  A1: 0
+A2: 9                   A2: 0
+A3: 8                   A3: 0
+B1: 1                   B1: 10
+B2: 0                   B2: 10
+</pre></td></tr></table>
+<p>
+The first round is easy, you just add up all the totals:
+</p>
+<a name="inittot"></a>
+<table bgcolor="#88ff88"><tr><td><pre>
+A1: <b>600</b>
+A2: 540
+A3: 480
+B1: 460
+B2: 400
+</pre></td></tr></table>
+<p>
+A1 is the first winner, since he has the most votes.
+</p><p>
+The weights then need to be recalculated. 
+In practice this would have to be done on a
+ballot by ballot basis. 
+But since in our example everyone in each party votes
+the same way, here it only needs to be done once for each
+party.
+</p><p>
+Remembering that the formula for the weightings is
+<center>
+weight = C/(C+Sum of ratings given to elected candidates),
+</center>
+<br>
+we get that
+</p>
+<table bgcolor="#ffcc88"><tr><td><pre>
+ROUND 2 BALLOT-WEIGHTS:
+Party A voters get weight = 10/(10+10) = 0.5
+Party B voters get weight = 10/(10+0)  = 1.0 (as they rated A1 as 0)
+</pre></td></tr></table>
+<p>
+So round 2 uses these weighted votes:
+</p>
+<table bgcolor="#88ff88"><tr><td><pre>
+60 @ 0.5 = 30 "party A" votes:
+  <font color="red">A1: 10</font>
+  A2: 9
+  A3: 8
+  B1: 1
+  B2: 0
+
+40 @ 1.0 = 40 "party B" votes:
+  <font color="red">A1: 0</font>
+  A2: 0
+  A3: 0
+  B1: 10
+  B2: 10
+</pre></td></tr></table>
+<p>
+We compute the totals (weighted sums) finding:
+</p>
+<table bgcolor="#88ff88"><tr><td><pre>
+A2: 270
+A3: 240
+B1: <b>430</b>
+B2: 400
+</pre></td></tr></table>
+<p>
+Observe that the deweighting of party-A voters causes the party-B
+choice B1 to win the 2nd round.  
+<small>The A's don't "deserve" as much power in the second round since they got their way in the
+first round.  But while RRV can be interpreted as thus obeying "moral principles" it was not designed
+using morals.  The weight formula was designed to make a proportionality theorem work.
+Any morality of it is merely a side effect of that.</small>
+</p>
+<p>
+For the third round, the weightings are calculated again using
+<center>
+weight = C/(C+Sum of ratings given to elected candidates),
+</center>
+<br>
+We get that
+</p>
+<table bgcolor="#88ccff"><tr><td><pre>
+ROUND 3 BALLOT WEIGHTS:
+Party A voters get  weight = 10/(10+10+1) = 0.476 (as they rated A1 at 10 and B1 at 1)
+Party B voters get  weight = 10/(10+10)   = 0.5 (as they rated B1 as 10)
+</pre></td></tr></table>
+<p>
+So round 3 uses these weighted votes:
+</p>
+<table bgcolor="#88ff88"><tr><td><pre>
+60 @ 0.476 = 28.6 "party A" votes:
+  <font color="red">A1: 10</font>
+  A2: 9
+  A3: 8
+  <font color="red">B1: 1</font>
+  B2: 0
+
+40 @ 0.5 = 20 "party B" votes
+  <font color="red">A1: 0</font>
+  A2: 0
+  A3: 0
+  <font color="red">B1: 10</font>
+  B2: 10
+</pre></td></tr></table>
+<p>
+The totals are:
+</p>
+<table bgcolor="#88ff88"><tr><td><pre>
+A2: <b>257</b>
+A3: 229
+B2: 200
+</pre></td></tr></table>
+<p>
+So A2 wins the last round.
+</p>
+<p>
+<b>The final result</b> is then that <b>A1, A2, and B1 win</b>.
+</p><p>
+This gives proportionality between the two parties.
+<small>If we had just picked the top three
+range voting finishers without any reweighting, 
+<a href="#inittot">then</a>
+we'd have gotten 100% party-A
+winners, which would have disproportionally denied representation to the 40% of the 
+population who were B-voters.</small>
+</p><p>
+However, if the voters didn't vote so robotically along party lines, then it would be
+messier.
+</p>
+
+<br>
+<p><a href="RangeVoting.html">Return to main page</a></p>
+<!-- Start of StatCounter Code -->
+<script type="text/javascript" language="javascript">
+var sc_project=1613646; 
+var sc_invisible=1; 
+var sc_partition=15; 
+var sc_security="a35ff8fb"; 
+</script>
+
+<script type="text/javascript" language="javascript" src="http://www.statcounter.com/counter/counter.js"></script><noscript><a href="http://www.statcounter.com/" target="_blank"><img  src="http://c16.statcounter.com/counter.php?sc_project=1613646&amp;java=0&amp;security=a35ff8fb&amp;invisible=1" alt="php hit counter" border="0"></a> </noscript>
+<!-- End of StatCounter Code to be inserted immediately before the /body command near end of your page -->
+</body>
+</html>
+

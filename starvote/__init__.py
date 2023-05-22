@@ -2,10 +2,23 @@
 
 __doc__ = "A simple STAR vote tabulator"
 
-__version__ = "1.4"
+__version__ = "1.5"
 
-__all__ = ['Poll', 'UnbreakableTieError', 'PollVariant', 'STAR', 'BLOC_STAR', 'main']
+__all__ = [
+    'Bloc_STAR',
+    'BLOC_STAR',
+    'main',
+    'Poll',
+    'PollVariant',
+    'Proportional_STAR',
+    'Reweighted_Range',
+    'RRV',
+    'STAR',
+    'STAR_PR',
+    'UnbreakableTieError',
+    ]
 
+import builtins
 import enum
 import math
 
@@ -24,18 +37,22 @@ class UnbreakableTieError(ValueError):
 @global_enum
 class PollVariant(enum.Enum):
     STAR = 1
-    BLOC_STAR = 2
+    Bloc_STAR = 2
     Proportional_STAR = 3
+    Reweighted_Range = 4
 
 STAR = PollVariant.STAR
-BLOC_STAR = PollVariant.BLOC_STAR
-Proportional_STAR = PollVariant.Proportional_STAR
+# permit old capitalized name, FOR NOW
+Bloc_STAR = BLOC_STAR = PollVariant.Bloc_STAR
+Proportional_STAR = STAR_PR = PollVariant.Proportional_STAR
+Reweighted_Range = RRV = PollVariant.Reweighted_Range
 
 
 class Poll:
-    def __init__(self, variant=STAR, *, seats=1):
+    def __init__(self, variant=STAR, *, seats=1, max_score=5):
         self.variant = variant
         self.seats = seats
+        self.max_score = max_score
 
         self.candidates = {}
         self.ballots = []
@@ -53,7 +70,7 @@ class Poll:
     def add_ballot(self, ballot):
         for candidate, score in ballot.items():
             assert isinstance(score, int)
-            assert 0 <= score <= 5
+            assert 0 <= score <= self.max_score, f"score {score} not in the range 0..{self.max_score}"
             if candidate not in self.candidates:
                 self.add_candidate(candidate)
             self.candidates[candidate] += score
@@ -121,12 +138,69 @@ class Poll:
             score_format = score_width
             total_score_width = score_width
 
-
         for score, candidate in reversed(rankings):
             average = score / ballots_count
             average = f"{average:>1.2f}"
             score = f"{score:>{score_format}}"
             print(f"  {candidate:<{candidate_width}} -- {score:>{total_score_width}} (average {average:>{total_average_width}})")
+
+    def _rrv(self, ballots, candidates, *, print=None):
+        # Suggested by Tim Peters as an alternative to Proportional STAR;
+        # a score-based proportional electoral system that doesn't throw away ballots.
+        # https://rangevoting.org/RRV.html
+        # https://rangevoting.org/RRVr.html
+
+        C = self.max_score
+        weight = 1.0 # aka C/C
+        weighted_ballots = [ [b, C, weight] for b in ballots ]
+        winners = []
+
+        for polling_round in range(1, self.seats + 1):
+            if print:
+                print(f"[Reweighted Range {polling_round}]")
+            # zero out candidate votes
+            for candidate in candidates:
+                candidates[candidate] = 0
+
+            for t in weighted_ballots:
+                ballot, sum, weight = t
+                for candidate, score in ballot.items():
+                    if score:
+                        score *= weight
+                        candidates[candidate] += score
+
+            rankings = [(score, candidate) for candidate, score in candidates.items()]
+            rankings.sort()
+
+            if print:
+                self.print_rankings(ballots, rankings, print)
+
+            winning_score, winner = rankings[-1]
+            if (len(rankings) > 1) and (rankings[-2][0] == winning_score):
+                tied_candidates = [c for s, c in rankings if s == winning_score]
+                raise UnbreakableTieError("Tie between {len(tied_candidates)} candidates in round {polling_round}", *tied_candidates)
+
+            if print:
+                print(f"[Winner {polling_round}]")
+                print(f"  {winner}")
+
+            winners.append(winner)
+            assert winner in candidates
+            del candidates[winner]
+            if len(winners) == self.seats:
+                break
+
+            for t in weighted_ballots:
+                ballot, C_plus_scores, weight = t
+                score = ballot.get(winner, 0)
+                if score:
+                    del ballot[winner]
+                    C_plus_scores += score
+                    weight = C / C_plus_scores
+                    t[1] = C_plus_scores
+                    t[2] = weight
+
+        return winners
 
 
     def _proportional_result(self, ballots, candidates, *, print=None):
@@ -266,8 +340,10 @@ class Poll:
             if print:
                 if self.variant == BLOC_STAR:
                     print("[BLOC STAR]")
-                else:
+                elif self.variant == Proportional_STAR:
                     print("[Proportional STAR]")
+                else:
+                    print("[Reweighted Range]")
                 print(f"  {self.seats} seats.")
             if len(candidates) <= self.seats:
                 raise ValueError(f"not enough candidates, need {self.seats}, have {len(candidates)}")
@@ -281,6 +357,9 @@ class Poll:
 
         if self.variant == Proportional_STAR:
             return self._proportional_result(ballots, candidates, print=print)
+
+        if self.variant == Reweighted_Range:
+            return self._rrv(ballots, candidates, print=print)
 
         for polling_round in range(1, self.seats+1):
             candidates_count = len(candidates)
@@ -380,36 +459,63 @@ def main(argv, print=None):
     if not argv:
         usage()
 
-    consume_variant = False
-    variant = None
+    variant_map = {
+        "STAR": STAR,
+        None: STAR,
 
-    consume_seats = False
+        "Bloc_STAR": Bloc_STAR,
+        "Bloc": Bloc_STAR,
+        # permit old capitalized names, FOR NOW
+        "BLOC_STAR": Bloc_STAR,
+        "BLOC": Bloc_STAR,
+
+        "Proportional_STAR": Proportional_STAR,
+        "STAR-PR": Proportional_STAR,
+
+        "Reweighted_Range": Reweighted_Range,
+        "RRV": Reweighted_Range,
+    }
+
+    variant = None
     seats = None
+    max_score = None
 
     csv_file = None
 
+    value_waiting_for_oparg = None
     extraneous_args = []
 
     for arg in argv:
-        if consume_variant:
-            variant = arg
-            consume_variant = False
+
+        if value_waiting_for_oparg:
+            option, name = value_waiting_for_oparg
+            if name == "variant":
+                variant = variant_map.get(arg)
+                if variant is None:
+                    usage(f"unknown variant {arg}")
+            elif name == "seats":
+                seats = int(arg)
+            elif name == "max_score":
+                max_score = int(arg)
+            else:
+                raise RuntimeError(f"unknown value waiting for oparg {variant!r}")
+            value_waiting_for_oparg = None
             continue
+
         if arg.startswith("-v=") or arg.startswith("--variant="):
             if variant is not None:
                 usage("variant specified twice")
-            variant = arg.partition('=')[2]
+            v = arg.partition('=')[2]
+            variant = variant_map.get(v, None)
+            if variant is None:
+                usage(f"unknown variant {v}")
             continue
         if arg in ("-v", "--variant"):
             if variant is not None:
                 usage("variant specified twice")
-            consume_variant = True
+            value_waiting_for_oparg = (arg, "variant")
             continue
 
-        if consume_seats:
-            seats = int(arg)
-            consume_seats = False
-            continue
         if arg.startswith("-s=") or arg.startswith("--seats="):
             if seats is not None:
                 usage("seats specified twice")
@@ -418,7 +524,18 @@ def main(argv, print=None):
         if arg in ("-s", "--seats"):
             if seats is not None:
                 usage("seats specified twice")
-            consume_seats = True
+            value_waiting_for_oparg = (arg, "seats")
+            continue
+
+        if arg.startswith("-m=") or arg.startswith("--max-score="):
+            if max_score is not None:
+                usage("max-score specified twice")
+            max_score = int(arg.partition('='))
+            continue
+        if arg in ("-m", "--max-score"):
+            if max_score is not None:
+                usage("max-score specified twice")
+            value_waiting_for_oparg = (arg, "max_score")
             continue
 
         if csv_file is None:
@@ -428,25 +545,28 @@ def main(argv, print=None):
 
     if extraneous_args:
         usage("too many arguments: " + " ".join(extraneous_args))
+    if value_waiting_for_oparg:
+        option, name = value_waiting_for_oparg
+        usage(f"no argument specified for {option}")
 
-    if variant in ("STAR", None):
-        variant = STAR
-    elif variant == "BLOC_STAR":
-        variant = BLOC_STAR
-    elif variant == "Proportional_STAR":
-        variant = Proportional_STAR
-    else:
-        usage("unknown variant " + variant)
+    args = []
+    kwargs = {}
 
-    if seats == None:
-        seats = 1
+    if variant is not None:
+        args.append(variant)
+
+    if seats is not None:
+        kwargs["seats"] = seats
+
+    if max_score is not None:
+        kwargs["max_score"] = max_score
 
     if csv_file is None:
         usage("no CSV file specified.")
     if not os.path.isfile(csv_file):
         usage("invalid CSV file specified.")
 
-    poll = Poll(variant=variant, seats=seats)
+    poll = Poll(*args, **kwargs)
     with open(csv_file, "rt") as f:
         reader = csv.reader(f)
         candidates = None
@@ -471,14 +591,13 @@ def main(argv, print=None):
             candidates = list(e.candidates)
             last_candidate = candidates.pop()
             winner = f"Tie between {', '.join(candidates)}, and {last_candidate}"
-        # hack so we print winner correctly
-        seats = 1
 
         s = str(e)
         s = s[0].title() + s[1:]
         print(f"\n{s}!")
         print("")
-    if seats == 1:
+
+    if isinstance(winner, str):
         print("[Winner]")
         print(f"  {winner}")
     else:
@@ -487,7 +606,6 @@ def main(argv, print=None):
             print(f"  {w}")
 
     if text:
-        import builtins
         t = "\n".join(text)
         builtins.print(t)
 

@@ -1,0 +1,27 @@
+[Reweighted Range]
+  3 seats.
+[Reweighted Range 1]
+  A1 -- 600.0 (average 6.00)
+  A2 -- 540.0 (average 5.40)
+  A3 -- 480.0 (average 4.80)
+  B1 -- 460.0 (average 4.60)
+  B2 -- 400.0 (average 4.00)
+[Winner 1]
+  A1
+[Reweighted Range 2]
+  B1 -- 430.0 (average 4.30)
+  B2 -- 400.0 (average 4.00)
+  A2 -- 270.0 (average 2.70)
+  A3 -- 240.0 (average 2.40)
+[Winner 2]
+  B1
+[Reweighted Range 3]
+  A2 -- 257.143 (average 2.57)
+  A3 -- 228.571 (average 2.29)
+  B2 -- 200.000 (average 2.00)
+[Winner 3]
+  A2
+[Winners]
+  A1
+  B1
+  A2
