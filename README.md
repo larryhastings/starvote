@@ -15,8 +15,6 @@ and avoids the worst electoral system pitfalls.  It's really great!
 When you vote using STAR voting, your ballot looks something like this:
 
 ```
-STAR voting ballot
-
 Amy    0 1 2 3 4 5
 Brad   0 1 2 3 4 5
 Chuck  0 1 2 3 4 5
