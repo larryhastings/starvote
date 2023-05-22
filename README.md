@@ -227,7 +227,8 @@ I'm following the rules, as best I can, and the results I'm getting
 make sense.  But, so far, my implementations of Bloc STAR
 and Proportional STAR definitely could be wrong.
 
-(I do have one sample vote for )
+(I do have one sample vote for Reweighted Range voting, so I'm pretty
+confident that implementation is fine.)
 
 ## License
 
