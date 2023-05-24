@@ -2,14 +2,14 @@
 
 __doc__ = "A simple STAR vote tabulator"
 
-__version__ = "1.5"
+__version__ = "1.5.1"
 
 __all__ = [
     'Bloc_STAR',
     'BLOC_STAR',
     'main',
     'Poll',
-    'PollVariant',
+    'ElectoralSystem',
     'Proportional_STAR',
     'Reweighted_Range',
     'RRV',
@@ -35,34 +35,34 @@ class UnbreakableTieError(ValueError):
 
 
 @global_enum
-class PollVariant(enum.Enum):
+class ElectoralSystem(enum.Enum):
     STAR = 1
     Bloc_STAR = 2
     Proportional_STAR = 3
     Reweighted_Range = 4
 
-STAR = PollVariant.STAR
+STAR = ElectoralSystem.STAR
 # permit old capitalized name, FOR NOW
-Bloc_STAR = BLOC_STAR = PollVariant.Bloc_STAR
-Proportional_STAR = STAR_PR = PollVariant.Proportional_STAR
-Reweighted_Range = RRV = PollVariant.Reweighted_Range
+Bloc_STAR = BLOC_STAR = ElectoralSystem.Bloc_STAR
+Proportional_STAR = STAR_PR = ElectoralSystem.Proportional_STAR
+Reweighted_Range = RRV = ElectoralSystem.Reweighted_Range
 
 
 class Poll:
-    def __init__(self, variant=STAR, *, seats=1, max_score=5):
-        self.variant = variant
+    def __init__(self, electoral_system=STAR, *, seats=1, maximum_score=5):
+        self.electoral_system = electoral_system
         self.seats = seats
-        self.max_score = max_score
+        self.maximum_score = maximum_score
 
         self.candidates = {}
         self.ballots = []
 
-        if variant == STAR:
+        if electoral_system == STAR:
             if seats != 1:
-                raise ValueError("seats must be 1 when using variant STAR")
+                raise ValueError("seats must be 1 when using STAR electoral system")
         else:
             if seats == 1:
-                raise ValueError("seats must be > 1 when using variant " + str(variant).rpartition(".")[2])
+                raise ValueError("seats must be > 1 when using {str(electoral_system).rpartition('.'')[2]} electoral system")
 
     def add_candidate(self, name):
         self.candidates[name] = 0
@@ -70,7 +70,7 @@ class Poll:
     def add_ballot(self, ballot):
         for candidate, score in ballot.items():
             assert isinstance(score, int)
-            assert 0 <= score <= self.max_score, f"score {score} not in the range 0..{self.max_score}"
+            assert 0 <= score <= self.maximum_score, f"score {score} not in the range 0..{self.maximum_score}"
             if candidate not in self.candidates:
                 self.add_candidate(candidate)
             self.candidates[candidate] += score
@@ -150,7 +150,7 @@ class Poll:
         # https://rangevoting.org/RRV.html
         # https://rangevoting.org/RRVr.html
 
-        C = self.max_score
+        C = self.maximum_score
         weight = 1.0 # aka C/C
         weighted_ballots = [ [b, C, weight] for b in ballots ]
         winners = []
@@ -326,7 +326,7 @@ class Poll:
         if not candidates:
             raise ValueError("no candidates")
 
-        if self.variant == STAR:
+        if self.electoral_system == STAR:
             if print:
                 print("[STAR]")
             if len(candidates) == 1:
@@ -338,9 +338,9 @@ class Poll:
             round_text_format = ""
         else:
             if print:
-                if self.variant == BLOC_STAR:
+                if self.electoral_system == BLOC_STAR:
                     print("[BLOC STAR]")
-                elif self.variant == Proportional_STAR:
+                elif self.electoral_system == Proportional_STAR:
                     print("[Proportional STAR]")
                 else:
                     print("[Reweighted Range]")
@@ -355,10 +355,10 @@ class Poll:
             candidates = dict(candidates)
             round_text_format = " {polling_round}"
 
-        if self.variant == Proportional_STAR:
+        if self.electoral_system == Proportional_STAR:
             return self._proportional_result(ballots, candidates, print=print)
 
-        if self.variant == Reweighted_Range:
+        if self.electoral_system == Reweighted_Range:
             return self._rrv(ballots, candidates, print=print)
 
         for polling_round in range(1, self.seats+1):
@@ -426,7 +426,7 @@ class Poll:
                 assert winner in candidates
                 del candidates[winner]
 
-        if self.variant == STAR:
+        if self.electoral_system == STAR:
             assert len(winners) == 1
             return winner
 
@@ -442,24 +442,32 @@ def main(argv, print=None):
     if print is None:
         def print(*a, sep=" "):
             text.append(sep.join(str(o) for o in a))
+        def flush_print():
+            t = "\n".join(text)
+            builtins.print(t)
+    else:
+        def flush_print(): pass
 
     def usage(s=None):
         if s:
             print(s)
             print()
-        print("usage: starvote.py [-v|--variant variant] [-s|--seats seats] ballot.csv")
+        print("usage: starvote.py [-e|--electoral-system system] [-m|--maximum-score score] [-s|--seats seats] ballot.csv")
         print()
-        print("-v|--variant specifies STAR variant.  supported variants are STAR (default) and BLOC_STAR.")
-        print("-s|--seats specifies number of seats, default 1.")
+        print("Options:")
+        print("  -e|--electoral-system specifies electoral system.  Supported systems are STAR (default), BLOC, STAR-PR, and RRV.")
+        print("  -m|--maximum-score specifies the maximum score per vote, default 5.")
+        print("  -s|--seats specifies number of seats, default 1.")
         print()
-        print("ballot is assumed to be in https://start.vote CSV format.")
+        print("ballot.csv is assumed to be in https://start.vote CSV format.")
         print()
+        flush_print()
         return -1
 
     if not argv:
-        usage()
+        return usage()
 
-    variant_map = {
+    electoral_system_map = {
         "STAR": STAR,
         None: STAR,
 
@@ -476,67 +484,77 @@ def main(argv, print=None):
         "RRV": Reweighted_Range,
     }
 
-    variant = None
+    electoral_system = None
     seats = None
-    max_score = None
+    maximum_score = None
 
     csv_file = None
 
     value_waiting_for_oparg = None
     extraneous_args = []
 
+    allow_options = True
+
     for arg in argv:
 
         if value_waiting_for_oparg:
             option, name = value_waiting_for_oparg
-            if name == "variant":
-                variant = variant_map.get(arg)
-                if variant is None:
-                    usage(f"unknown variant {arg}")
+            if name == "electoral_system":
+                electoral_system = electoral_system_map.get(arg)
+                if electoral_system is None:
+                    return usage(f"unknown electoral system {arg}")
             elif name == "seats":
                 seats = int(arg)
-            elif name == "max_score":
-                max_score = int(arg)
+            elif name == "maximum_score":
+                maximum_score = int(arg)
             else:
-                raise RuntimeError(f"unknown value waiting for oparg {variant!r}")
+                raise RuntimeError(f"unknown value waiting for oparg {value_waiting_for_oparg!r}")
             value_waiting_for_oparg = None
             continue
 
-        if arg.startswith("-v=") or arg.startswith("--variant="):
-            if variant is not None:
-                usage("variant specified twice")
-            v = arg.partition('=')[2]
-            variant = variant_map.get(v, None)
-            if variant is None:
-                usage(f"unknown variant {v}")
-            continue
-        if arg in ("-v", "--variant"):
-            if variant is not None:
-                usage("variant specified twice")
-            value_waiting_for_oparg = (arg, "variant")
-            continue
+        if allow_options:
+            if arg.startswith("-e=") or arg.startswith("--electoral-system="):
+                if electoral_system is not None:
+                    return usage("electoral system specified twice")
+                e = arg.partition('=')[2]
+                electoral_system = electoral_system_map.get(e, None)
+                if electoral_system is None:
+                    return usage(f"unknown electoral system {e}")
+                continue
+            if arg in ("-e", "--electoral-system"):
+                if electoral_system is not None:
+                    return usage("electoral system specified twice")
+                value_waiting_for_oparg = (arg, "electoral_system")
+                continue
 
-        if arg.startswith("-s=") or arg.startswith("--seats="):
-            if seats is not None:
-                usage("seats specified twice")
-            seats = int(arg.partition('='))
-            continue
-        if arg in ("-s", "--seats"):
-            if seats is not None:
-                usage("seats specified twice")
-            value_waiting_for_oparg = (arg, "seats")
-            continue
+            if arg.startswith("-s=") or arg.startswith("--seats="):
+                if seats is not None:
+                    return usage("seats specified twice")
+                seats = int(arg.partition('='))
+                continue
+            if arg in ("-s", "--seats"):
+                if seats is not None:
+                    return usage("seats specified twice")
+                value_waiting_for_oparg = (arg, "seats")
+                continue
 
-        if arg.startswith("-m=") or arg.startswith("--max-score="):
-            if max_score is not None:
-                usage("max-score specified twice")
-            max_score = int(arg.partition('='))
-            continue
-        if arg in ("-m", "--max-score"):
-            if max_score is not None:
-                usage("max-score specified twice")
-            value_waiting_for_oparg = (arg, "max_score")
-            continue
+            if arg.startswith("-m=") or arg.startswith("--maximum-score="):
+                if maximum_score is not None:
+                    return usage("maximum score specified twice")
+                maximum_score = int(arg.partition('='))
+                continue
+            if arg in ("-m", "--maximum-score"):
+                if maximum_score is not None:
+                    return usage("maximum score specified twice")
+                value_waiting_for_oparg = (arg, "maximum_score")
+                continue
+
+            if arg == "--":
+                allow_options = False
+                continue
+
+            if arg.startswith('-'):
+                return usage(f"unknown option {arg}")
 
         if csv_file is None:
             csv_file = arg
@@ -544,27 +562,27 @@ def main(argv, print=None):
         extraneous_args.append(arg)
 
     if extraneous_args:
-        usage("too many arguments: " + " ".join(extraneous_args))
+        return usage("too many arguments: " + " ".join(extraneous_args))
     if value_waiting_for_oparg:
         option, name = value_waiting_for_oparg
-        usage(f"no argument specified for {option}")
+        return usage(f"no argument specified for {option}")
 
     args = []
     kwargs = {}
 
-    if variant is not None:
-        args.append(variant)
+    if electoral_system is not None:
+        args.append(electoral_system)
 
     if seats is not None:
         kwargs["seats"] = seats
 
-    if max_score is not None:
-        kwargs["max_score"] = max_score
+    if maximum_score is not None:
+        kwargs["maximum_score"] = maximum_score
 
     if csv_file is None:
-        usage("no CSV file specified.")
+        return usage("no CSV file specified.")
     if not os.path.isfile(csv_file):
-        usage("invalid CSV file specified.")
+        return usage("invalid CSV file specified.")
 
     poll = Poll(*args, **kwargs)
     with open(csv_file, "rt") as f:
@@ -606,7 +624,6 @@ def main(argv, print=None):
             print(f"  {w}")
 
     if text:
-        t = "\n".join(text)
-        builtins.print(t)
+        flush_print()
 
     return 0

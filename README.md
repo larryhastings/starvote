@@ -199,23 +199,23 @@ Simply
 instantiate your `Poll` object passing in the enum constant
 `starvote.Bloc_STAR`, `starvote.Proportional_STAR`,
 or `starvote.Reweighted_Range`
-for the `variant` parameter, and the number of seats in
+for the `electoral_system` parameter, and the number of seats in
 the `seats` keyword-only parameter:
 
 ```Python
-poll = starvote.Poll(variant=starvote.Bloc_STAR, seats=2)
+poll = starvote.Poll(electoral_system=starvote.Bloc_STAR, seats=2)
 ```
 
 This changes `poll.result` to return a list of winners instead
 of a single winner.
 
 You can experiment with these with the command-line version of the
-module, too.  You can specify the variant with `-v`,
+module, too.  You can specify the electoral system with `-e`,
 the number of seats with `-s`,
 and the maximum score with `-m`:
 
 ```
-% python3 -m starvote -v Reweighted_Range -s 3 -m 10 sample_polls/sample_poll_reweighted_range_3_seats.csv
+% python3 -m starvote -e Reweighted_Range -s 3 -m 10 sample_polls/sample_poll_reweighted_range_3_seats.csv
 ```
 
 ### Warning
@@ -251,6 +251,17 @@ sample ballots is unclear, but they're assumed to be public-domain
 or otherwise freely redistributable.
 
 ## Changelog
+
+**1.5.1** - *2023/05/24*
+
+* Renamed a bunch of names in the API.
+  * Renamed `PollVariant` enum to `ElectoralSystem`.
+  * Renamed `variant` parameter to `electoral_system`.
+  * Renamed `max_score` parameter to `maximum_score`.
+* Changed command-line module options to match.
+  * Changed `-v|--variant` to `-e|--electoral-system`.
+  * Changed `-m|--max_score` to `-m|--maximum_score`.
+
 
 **1.5** - *2023/05/22*
 

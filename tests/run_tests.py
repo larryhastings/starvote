@@ -41,7 +41,7 @@ def flush_text():
 verbose = ("-v" in sys.argv) or ("--verbose" in sys.argv)
 
 seats_re = re.compile("_(\d+)_seats_")
-max_score_re = re.compile("_max-score_(\d+)[_.]")
+maximum_score_re = re.compile("_max-score_(\d+)[_.]")
 
 tests_run = 0
 for csv in sorted(glob.glob("sample_polls/*.csv")):
@@ -53,13 +53,13 @@ for csv in sorted(glob.glob("sample_polls/*.csv")):
     args = []
     multi_winner = False
     if "_proportional_star_" in csv:
-        args.extend(("-v", "Proportional_STAR"))
+        args.extend(("-e", "Proportional_STAR"))
         multi_winner = True
     elif "_bloc_star_" in csv:
-        args.extend(("-v", "Bloc_STAR"))
+        args.extend(("-e", "Bloc_STAR"))
         multi_winner = True
     elif "_reweighted_range_" in csv:
-        args.extend(("-v", "Reweighted_Range"))
+        args.extend(("-e", "Reweighted_Range"))
         multi_winner = True
 
     if multi_winner:
@@ -68,10 +68,10 @@ for csv in sorted(glob.glob("sample_polls/*.csv")):
         seats = match.group(1)
         args.extend(("-s", seats))
 
-        match = max_score_re.search(csv)
+        match = maximum_score_re.search(csv)
         if match:
-            max_score = match.group(1)
-            args.extend(("-m", max_score))
+            maximum_score = match.group(1)
+            args.extend(("-m", maximum_score))
 
     args.append(csv)
     if verbose:
