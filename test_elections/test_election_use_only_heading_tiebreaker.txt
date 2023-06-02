@@ -1,0 +1,4 @@
+[STAR Voting]
+  Tabulating 5 ballots.
+  Maximum score is 5.
+ValueError("if tiebreaker function docstring isn't empty, it must have at least two lines")

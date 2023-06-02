@@ -1,0 +1,5 @@
+[options]
+
+    method = allocated
+    starvote_path = test_election_unbreakable_three_way_tie_for_second_in_score_round.starvote
+    seats = 3

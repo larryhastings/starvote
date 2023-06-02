@@ -1,0 +1,27 @@
+[options]
+
+    method = star
+    verbosity = 1
+    tiebreaker = [
+        Darcy
+        Chuck
+        Brian
+        Amy
+        ]
+
+[ballots]
+
+    Amy = 1
+    Brian = 3
+    Chuck = 5
+    Darcy = 5
+
+    Amy = 3
+    Brian = 5
+    Chuck = 1
+    Darcy = 5
+
+    Amy = 5
+    Brian = 1
+    Chuck = 3
+    Darcy = 5

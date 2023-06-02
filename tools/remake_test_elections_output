@@ -1,0 +1,78 @@
+#!/usr/bin/env python3
+
+import glob
+import os.path
+import sys
+
+try:
+    import pandas
+    import numpy
+except ImportError:
+    print(f"{os.path.basename(sys.argv[0])} requires both Pandas and NumPy.")
+    print()
+    print("Run this:")
+    print(f"  % {sys.executable} -m pip install pandas numpy")
+    sys.exit(-1)
+
+def preload_local_starvote():
+    """
+    Pre-load the local "starvote" module, to preclude finding
+    an already-installed one on the path.
+    """
+    from os.path import abspath, dirname, isfile, join, normpath
+    import sys
+    starvote_dir = abspath(dirname(sys.argv[0]))
+    while True:
+        starvote_init = join(starvote_dir, "starvote/__init__.py")
+        if isfile(starvote_init):
+            break
+        starvote_dir = normpath(join(starvote_dir, ".."))
+    sys.path.insert(1, starvote_dir)
+    import starvote
+    return starvote_dir
+
+starvote_dir = preload_local_starvote()
+import starvote.reference
+
+starvote.reference.monkey_patch()
+
+os.chdir(starvote_dir)
+
+
+text = []
+
+def text_clear():
+    text.clear()
+
+def text_print(*a, sep=" ", end="\n"):
+    text.append(sep.join(str(o) for o in a))
+    text.append(end)
+
+def text_getvalue():
+    output = "".join(text)
+    text.clear()
+    return output
+
+
+files_written = 0
+
+work = []
+
+for extension in (".csv", ".starvote"):
+    for election_path in glob.glob(f"test_elections/*{extension}"):
+        output_path = election_path.replace(extension, ".txt")
+        work.append((election_path, output_path))
+
+work.sort()
+
+for election_path, output_path in work:
+    print(election_path)
+    text_clear()
+    starvote.main_with_usage(["-r", election_path], print=text_print)
+    got = text_getvalue().strip() + "\n"
+
+    with open(output_path, "wt") as f:
+        f.write(got)
+    files_written += 1
+
+print(f"{files_written} output files written.")

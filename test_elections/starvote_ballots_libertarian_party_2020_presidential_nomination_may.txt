@@ -1,0 +1,36 @@
+[STAR Voting]
+  Tabulating 2909 ballots.
+  Maximum score is 5.
+[STAR Voting: Scoring Round]
+  The two highest-scoring candidates advance to the next round.
+    Justin Amash      -- 8018 (average 2+2200/2909) -- First place
+    Vermin Supreme    -- 7200 (average 2+1382/2909) -- Second place
+    Judge Jim Gray    -- 3826 (average 1+ 917/2909)
+    Jacob Hornberger  -- 3193 (average 1+ 284/2909)
+    Jo Jorgensen      -- 2625 (average 2625/2909)
+    Adam Kokesh       -- 2324 (average 2324/2909)
+    Daniel Behrman    -- 1941 (average 1941/2909)
+    John Monds        -- 1707 (average 1707/2909)
+    Sam Robb          -- 1315 (average 1315/2909)
+    Sorinne Ardeleanu --  929 (average  929/2909)
+    Arvin Vohra       --  919 (average  919/2909)
+    Brian Ellison     --  830 (average  830/2909)
+    Mark Whitney      --  807 (average  807/2909)
+    Phil Gray         --  687 (average  687/2909)
+    Kenneth Blevins   --  660 (average  660/2909)
+    Jedidiah Hill     --  613 (average  613/2909)
+    Steve Richey      --  572 (average  572/2909)
+    Keenan Dunham     --  559 (average  559/2909)
+    Erik Gerhardt     --  557 (average  557/2909)
+    James Ogle        --  557 (average  557/2909)
+    Rhett Smith       --  546 (average  546/2909)
+    Louis Vanacore    --  519 (average  519/2909)
+  Justin Amash and Vermin Supreme advance.
+[STAR Voting: Automatic Runoff Round]
+  The candidate preferred in the most head-to-head matchups wins.
+    Justin Amash   -- 1404 -- First place
+    Vermin Supreme -- 1138
+    No Preference  --  367
+  Justin Amash wins.
+[STAR Voting: Winner]
+  Justin Amash

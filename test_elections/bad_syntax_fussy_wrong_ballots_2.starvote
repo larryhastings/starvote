@@ -1,0 +1,11 @@
+[options]
+
+method = star
+
+[ballots]
+
+2 ballot:
+
+Amy = 3
+Chuck = 5
+

@@ -1,0 +1,35 @@
+[Reweighted Range Voting]
+  Tabulating 100 ballots.
+  Maximum score is 10.
+  Want to fill 3 seats.
+[Reweighted Range Voting: Round 1: Score round]
+  The highest-scoring candidate wins a seat.
+    A1 -- 600 (average 6)     -- First place
+    A2 -- 540 (average 5+2/5)
+    A3 -- 480 (average 4+4/5)
+    B1 -- 460 (average 4+3/5)
+    B2 -- 400 (average 4)
+  A1 wins a seat.
+[Reweighted Range Voting: Round 1: Reweighing Ballots]
+  60 ballots reweighted from 1 to 1/2.
+[Reweighted Range Voting: Round 2: Score round]
+  The highest-scoring candidate wins a seat.
+    B1 -- 430 (average 4+3/10) -- First place
+    B2 -- 400 (average 4)
+    A2 -- 270 (average 2+7/10)
+    A3 -- 240 (average 2+2/5)
+  B1 wins a seat.
+[Reweighted Range Voting: Round 2: Reweighing Ballots]
+  Reweighted 100 ballots:
+    60 ballots reweighted from 1/2 to 10/21.
+    40 ballots reweighted from 1 to 1/2.
+[Reweighted Range Voting: Round 3: Score round]
+  The highest-scoring candidate wins a seat.
+    A2 -- 257+1/7 (average 2+4/7) -- First place
+    A3 -- 228+4/7 (average 2+2/7)
+    B2 -- 200     (average 2)
+  A2 wins a seat.
+[Reweighted Range Voting: Winners]
+  A1
+  A2
+  B1

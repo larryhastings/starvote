@@ -1,0 +1,11 @@
+
+[options]
+
+    method = star
+
+[ballots]
+
+    Amy = 3
+    Chuck = 5
+
+    5 ballots:

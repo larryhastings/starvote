@@ -1,0 +1,47 @@
+[Bloc STAR]
+  Tabulating 14 ballots.
+  Maximum score is 5.
+  Want to fill 3 seats.
+[Bloc STAR: Round 1: Scoring Round]
+  The two highest-scoring candidates advance to the next round.
+    Amy     -- 10 (average 5/7)  -- First place
+    Brian   -- 10 (average 5/7)  -- Second place
+    Chuck   --  9 (average 9/14)
+    David   --  8 (average 4/7)
+    Eleanor --  0 (average 0)
+  Amy and Brian advance.
+[Bloc STAR: Round 1: Automatic Runoff Round]
+  The candidate preferred in the most head-to-head matchups wins.
+    Brian         -- 5 -- First place
+    Amy           -- 2
+    No Preference -- 7
+  Brian wins.
+[Bloc STAR: Round 2: Scoring Round]
+  The two highest-scoring candidates advance to the next round.
+    Amy     -- 10 (average 5/7)  -- First place
+    Chuck   --  9 (average 9/14) -- Second place
+    David   --  8 (average 4/7)
+    Eleanor --  0 (average 0)
+  Amy and Chuck advance.
+[Bloc STAR: Round 2: Automatic Runoff Round]
+  The candidate preferred in the most head-to-head matchups wins.
+    Chuck         -- 3 -- First place
+    Amy           -- 2
+    No Preference -- 9
+  Chuck wins.
+[Bloc STAR: Round 3: Scoring Round]
+  The two highest-scoring candidates advance to the next round.
+    Amy     -- 10 (average 5/7) -- First place
+    David   --  8 (average 4/7) -- Second place
+    Eleanor --  0 (average 0)
+  Amy and David advance.
+[Bloc STAR: Round 3: Automatic Runoff Round]
+  The candidate preferred in the most head-to-head matchups wins.
+    David         -- 4 -- First place
+    Amy           -- 2
+    No Preference -- 8
+  David wins.
+[Bloc STAR: Winners]
+  Brian
+  Chuck
+  David

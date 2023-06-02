@@ -1,0 +1,24 @@
+[STAR Voting]
+  Tabulating 5 ballots.
+  Maximum score is 5.
+[STAR Voting: Scoring Round]
+  The two highest-scoring candidates advance to the next round.
+    Amy   -- 0 (average 0) -- Tied for first place
+    Brian -- 0 (average 0) -- Tied for first place
+    Chuck -- 0 (average 0) -- Tied for first place
+  There's a three-way tie for first.
+[STAR Voting: Scoring Round: First tiebreaker]
+  The two candidates preferred in the most head-to-head matchups advance.
+    Amy           --  0 -- Tied for first place
+    Brian         --  0 -- Tied for first place
+    Chuck         --  0 -- Tied for first place
+    No Preference -- 15
+  There's still a three-way tie for first.
+[STAR Voting: Scoring Round: Second tiebreaker]
+  The two candidates with the most votes of score 5 advance.
+    Amy   -- 0 -- Tied for first place
+    Brian -- 0 -- Tied for first place
+    Chuck -- 0 -- Tied for first place
+  There's still a three-way tie for first.
+[STAR Voting: Scoring Round: Unbreakable Tie]
+  Tie between Amy, Brian, and Chuck.

@@ -1,0 +1,39 @@
+# This demonstrates that STAR fails "cloneproofness":
+#    https://electowiki.org/wiki/Independence_of_clone_alternatives
+# The election ending in _1 is the normal election.  Brian wins.
+# The election ending in _2 adds a clone of Amy, who gets nearly-identical votes.
+# (Clone Of Amy gets an identical score, but I changed the preferences so Amy
+# will win the runoff.)
+
+
+[options]
+
+    method = star
+    verbosity = 1
+    tiebreaker = none
+
+[ballots]
+
+    2 ballots:
+        Amy = 5
+        Brian = 2
+        Clancy = 1
+        # Clone Of Amy = 5
+
+    2 ballots:
+        Amy = 4
+        Brian = 2
+        Clancy = 1
+        # Clone Of Amy = 3
+
+    2 ballots:
+        Amy = 4
+        Brian = 2
+        Clancy = 1
+        # Clone Of Amy = 5
+
+    11 ballots:
+        Amy = 0
+        Brian = 1
+        Clancy = 1
+        # Clone Of Amy = 0

@@ -1,0 +1,20 @@
+[options]
+
+    method = star
+    verbosity = 1
+    tiebreaker = none
+
+[ballots]
+
+    Amy = 1
+    Brian = 4
+    Chuck = 5
+
+    Amy = 1
+    Brian = 3
+    Chuck = 2
+
+    Amy = 1
+    Brian = 5
+    Chuck = 5
+

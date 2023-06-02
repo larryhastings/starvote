@@ -1,0 +1,45 @@
+[STAR Voting]
+  Tabulating 3 ballots.
+  Maximum score is 5.
+[STAR Voting: Initializing ordered permutation tiebreaker]
+  Permutation was defined in 'test_elections/test_election_unbreakable_three_way_tie_for_second_in_score_round.starvote'.
+  Permuted list of candidates:
+    1. Darcy
+    2. Chuck
+    3. Brian
+    4. Amy
+  Tiebreaker candidates will be selected from this list, preferring candidates with lower numbers.
+[STAR Voting: Scoring Round]
+  The two highest-scoring candidates advance to the next round.
+    Darcy -- 15 (average 5) -- First place
+    Amy   --  9 (average 3) -- Tied for second place
+    Brian --  9 (average 3) -- Tied for second place
+    Chuck --  9 (average 3) -- Tied for second place
+  Darcy advances, but there's a three-way tie for second.
+[STAR Voting: Scoring Round: First tiebreaker]
+  The candidate preferred in the most head-to-head matchups advances.
+    Amy           -- 3 -- Tied for second place
+    Brian         -- 3 -- Tied for second place
+    Chuck         -- 3 -- Tied for second place
+    No Preference -- 0
+  There's still a three-way tie for second.
+[STAR Voting: Scoring Round: Second tiebreaker]
+  The candidate with the most votes of score 5 advances.
+    Amy   -- 1 -- Tied for second place
+    Brian -- 1 -- Tied for second place
+    Chuck -- 1 -- Tied for second place
+  There's still a three-way tie for second.
+[STAR Voting: Scoring Round: Predefined permutation tiebreaker]
+  Choosing the earliest of these candidates from the permuted list:
+    Amy
+    Brian
+    Chuck
+  Selected winner: Chuck
+[STAR Voting: Automatic Runoff Round]
+  The candidate preferred in the most head-to-head matchups wins.
+    Darcy         -- 2 -- First place
+    Chuck         -- 0
+    No Preference -- 1
+  Darcy wins.
+[STAR Voting: Winner]
+  Darcy

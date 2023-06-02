@@ -1,0 +1,11 @@
+[options]
+
+    tiebreaker = [ Amy
+        Charles
+    ]
+
+[ballots]
+
+Amy = 5
+Charles = 2
+

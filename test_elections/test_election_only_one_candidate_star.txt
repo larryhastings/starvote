@@ -1,0 +1,13 @@
+[STAR Voting]
+  Tabulating 5 ballots.
+  Maximum score is 5.
+[STAR Voting: Initializing ordered permutation tiebreaker]
+  Permutation was defined in 'test_elections/test_election_only_one_candidate_star.starvote'.
+  Permuted list of candidates:
+    1. Amy
+  Tiebreaker candidates will be selected from this list, preferring candidates with lower numbers.
+[STAR Voting: Scoring Round]
+  The two highest-scoring candidates advance to the next round.
+  Only one candidate, they win.
+[STAR Voting: Winner]
+  A

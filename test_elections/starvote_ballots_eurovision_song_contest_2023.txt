@@ -1,0 +1,45 @@
+[STAR Voting]
+  Tabulating 6 ballots.
+  Maximum score is 5.
+[STAR Voting: Scoring Round]
+  The two highest-scoring candidates advance to the next round.
+    Finland - &quot;Cha Cha Cha&quot;               -- 22 (average 3+2/3) -- First place
+    Israel - &quot;Unicorn&quot;                    -- 20 (average 3+1/3) -- Second place
+    Australia - &quot;Promise&quot;                 -- 17 (average 2+5/6)
+    Croatia - &quot;Mama &Scaron;Č!&quot;           -- 17 (average 2+5/6)
+    Norway - &quot;Queen of Kings&quot;             -- 17 (average 2+5/6)
+    Czechia - &quot;My Sister&#039;s Crown&quot;    -- 16 (average 2+2/3)
+    Austria - &quot;Who The Hell is Edgar?&quot;    -- 15 (average 2+1/2)
+    Ireland - &quot;We Are One&quot;                -- 12 (average 2)
+    Portugal - &quot;Ai Cora&ccedil;&atilde;o&quot; -- 12 (average 2)
+    Belgium - &quot;Because of You&quot;            -- 10 (average 1+2/3)
+    Moldova - &quot;Soarele şi Luna&quot;           -- 10 (average 1+2/3)
+    Lithuania - &quot;Stay&quot;                    --  9 (average 1+1/2)
+    Netherlands - &quot;Burning Daylight&quot;      --  9 (average 1+1/2)
+    Poland - &quot;Solo&quot;                       --  9 (average 1+1/2)
+    Cyprus - &quot;Break a Broken Heart&quot;       --  8 (average 1+1/3)
+    Malta - &quot;Dance (Our Own Party)&quot;       --  8 (average 1+1/3)
+    Serbia - &quot;Samo Mi Se Spava&quot;           --  8 (average 1+1/3)
+    Sweden - &quot;Tattoo&quot;                     --  8 (average 1+1/3)
+    Albania - &quot;Duje&quot;                      --  7 (average 1+1/6)
+    Armenia - &quot;Future Lover&quot;              --  7 (average 1+1/6)
+    Azerbaijan - &quot;Tell Me More&quot;           --  7 (average 1+1/6)
+    Estonia - &quot;Bridges&quot;                   --  7 (average 1+1/6)
+    Latvia - &quot;Aijā&quot;                       --  7 (average 1+1/6)
+    San Marino - &quot;Like an Animal&quot;         --  7 (average 1+1/6)
+    Slovenia - &quot;Joker Out&quot;                --  7 (average 1+1/6)
+    Denmark - &quot;Breaking My Heart&quot;         --  6 (average 1)
+    Georgia - &quot;Echo&quot;                      --  6 (average 1)
+    Iceland - &quot;Power&quot;                     --  6 (average 1)
+    Romania - &quot;D.G.T. (Off and On)&quot;       --  6 (average 1)
+    Switzerland - &quot;Watergun&quot;              --  5 (average 5/6)
+    Greece - &quot;What They Say&quot;              --  4 (average 2/3)
+  Finland - &quot;Cha Cha Cha&quot; and Israel - &quot;Unicorn&quot; advance.
+[STAR Voting: Automatic Runoff Round]
+  The candidate preferred in the most head-to-head matchups wins.
+    Finland - &quot;Cha Cha Cha&quot; -- 3 -- First place
+    Israel - &quot;Unicorn&quot;      -- 2
+    No Preference                     -- 1
+  Finland - &quot;Cha Cha Cha&quot; wins.
+[STAR Voting: Winner]
+  Finland - &quot;Cha Cha Cha&quot;

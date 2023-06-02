@@ -1,0 +1,85 @@
+#!/usr/bin/env python3
+
+import contextlib
+import os
+import sys
+import pathlib
+
+
+def preload_local_starvote():
+    """
+    Pre-load the local "starvote" module, to preclude finding
+    an already-installed one on the path.
+    """
+    from os.path import abspath, dirname, isfile, join, normpath
+    import sys
+    starvote_dir = abspath(dirname(sys.argv[0]))
+    while True:
+        starvote_init = join(starvote_dir, "starvote/__init__.py")
+        if isfile(starvote_init):
+            break
+        starvote_dir = normpath(join(starvote_dir, ".."))
+    sys.path.insert(1, starvote_dir)
+    import starvote
+    return starvote_dir
+
+starvote_dir = preload_local_starvote()
+import starvote
+
+argv = sys.argv[1:]
+if not argv:
+    print("usage: is_ok <path>")
+    print()
+    print("Runs")
+    print("    % python -m starvote on <basename(path)>{.starvote,.csv}")
+    print("and overwrites <basename>.txt with the result.")
+    print()
+    print("Used to refresh the .txt output files for the unit test suite.")
+    sys.exit(0)
+
+starting_dir = pathlib.Path(os.getcwd())
+starvote_dir = pathlib.Path(starvote_dir)
+
+@contextlib.contextmanager
+def pushd(d):
+    old_dir = os.getcwd()
+    os.chdir(d)
+    yield old_dir
+    os.chdir(old_dir)
+
+for path in argv:
+    path = pathlib.Path(path)
+    for ext in (".starvote", ".csv"):
+        test_path = path.with_suffix(ext)
+        if test_path.is_file():
+            break
+    else:
+        sys.exit(f"couldn't find test file for {path}")
+
+    test_path_from_starvote_root = test_path.resolve().relative_to(starvote_dir)
+    with pushd(starvote_dir):
+
+        text = []
+
+        def text_clear():
+            text.clear()
+
+        def text_print(*a, sep=" ", end="\n"):
+            text.append(sep.join(str(o) for o in a))
+            text.append(end)
+
+        def text_getvalue():
+            output = "".join(text)
+            text.clear()
+            return output
+
+        starvote.main_with_usage([test_path_from_starvote_root], print=text_print)
+
+    # print("GONNA RPINT-A", text_getvalue())
+
+    # sys.exit(0)
+    output_path = path.with_suffix(".txt")
+    with output_path.open("wt") as f:
+        f.write(text_getvalue())
+
+    print(f"{output_path} is now OK.")

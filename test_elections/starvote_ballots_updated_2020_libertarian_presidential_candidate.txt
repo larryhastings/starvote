@@ -1,0 +1,33 @@
+[STAR Voting]
+  Tabulating 1534 ballots.
+  Maximum score is 5.
+[STAR Voting: Scoring Round]
+  The two highest-scoring candidates advance to the next round.
+    Vermin Supreme    -- 4653 (average 3+ 51/1534) -- First place
+    Judge Jim Gray    -- 3008 (average 1+737/767)  -- Second place
+    Jo Jorgensen      -- 2012 (average 1+239/767)
+    Jacob Hornberger  -- 2011 (average 1+477/1534)
+    Adam Kokesh       -- 1403 (average 1403/1534)
+    John Monds        -- 1132 (average  566/767)
+    Dan Behrman       -- 1050 (average  525/767)
+    Sam Robb          --  596 (average  298/767)
+    Sorinne Ardeleanu --  483 (average  483/1534)
+    Arvin Vohra       --  477 (average  477/1534)
+    Brian Ellison     --  450 (average  225/767)
+    Kenneth Blevins   --  390 (average   15/59)
+    Phil Gray         --  383 (average  383/1534)
+    Souraya Faas      --  376 (average  188/767)
+    Erik Gerhardt     --  299 (average   23/118)
+    Steve Richey      --  296 (average  148/767)
+    Keenan Dunham     --  293 (average  293/1534)
+    Jedidiah Hill     --  292 (average  146/767)
+    Louis Vanacore    --  263 (average  263/1534)
+  Vermin Supreme and Judge Jim Gray advance.
+[STAR Voting: Automatic Runoff Round]
+  The candidate preferred in the most head-to-head matchups wins.
+    Vermin Supreme -- 830 -- First place
+    Judge Jim Gray -- 519
+    No Preference  -- 185
+  Vermin Supreme wins.
+[STAR Voting: Winner]
+  Vermin Supreme

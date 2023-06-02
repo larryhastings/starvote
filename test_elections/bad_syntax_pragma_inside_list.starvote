@@ -1,0 +1,16 @@
+
+[options]
+
+    tiebreaker = [
+
+    Amy
+    5 ballots:
+
+    Chuck
+
+    ]
+
+[ballots]
+
+Amy = 3
+Chuck = 1

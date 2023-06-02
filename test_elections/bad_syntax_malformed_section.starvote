@@ -1,0 +1,10 @@
+
+
+[option
+
+  method = star
+
+[ballots]
+
+Pizza = 3
+Tower = 4

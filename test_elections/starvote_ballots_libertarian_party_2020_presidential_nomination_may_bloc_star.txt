@@ -1,0 +1,211 @@
+[Allocated Score Voting]
+  Tabulating 2909 ballots.
+  Maximum score is 5.
+  Want to fill 5 seats.
+  Hare quota is 2909/5.
+[Allocated Score Voting: Round 1]
+  The highest-scoring candidate wins a seat.
+    Justin Amash      -- 8018 (average 2+2200/2909) -- First place
+    Vermin Supreme    -- 7200 (average 2+1382/2909)
+    Judge Jim Gray    -- 3826 (average 1+ 917/2909)
+    Jacob Hornberger  -- 3193 (average 1+ 284/2909)
+    Jo Jorgensen      -- 2625 (average 2625/2909)
+    Adam Kokesh       -- 2324 (average 2324/2909)
+    Daniel Behrman    -- 1941 (average 1941/2909)
+    John Monds        -- 1707 (average 1707/2909)
+    Sam Robb          -- 1315 (average 1315/2909)
+    Sorinne Ardeleanu --  929 (average  929/2909)
+    Arvin Vohra       --  919 (average  919/2909)
+    Brian Ellison     --  830 (average  830/2909)
+    Mark Whitney      --  807 (average  807/2909)
+    Phil Gray         --  687 (average  687/2909)
+    Kenneth Blevins   --  660 (average  660/2909)
+    Jedidiah Hill     --  613 (average  613/2909)
+    Steve Richey      --  572 (average  572/2909)
+    Keenan Dunham     --  559 (average  559/2909)
+    Erik Gerhardt     --  557 (average  557/2909)
+    James Ogle        --  557 (average  557/2909)
+    Rhett Smith       --  546 (average  546/2909)
+    Louis Vanacore    --  519 (average  519/2909)
+  Justin Amash wins a seat.
+[Allocated Score Voting: Round 1: Ballot allocation round]
+  Allocating 581+4/5 ballots.
+[Allocated Score Voting: Round 1: Ballot allocation round: Round 1]
+  Allocating 1337 ballots at score 5.
+  This allocation overfills the quota.  Returning fractional surplus.
+  Allocating only 43.52% of these ballots.
+  Keeping these ballots, but multiplying their weights by 3776/6685.
+  1337 ballots reweighted from 1 to 3776/6685.
+[Allocated Score Voting: Round 2]
+  The highest-scoring candidate wins a seat.
+    Vermin Supreme    -- 6564+ 904/1337 (average 2+998306/3889333)  -- First place
+    Judge Jim Gray    -- 2845+ 157/955  (average  2717132/2778095)
+    Jacob Hornberger  -- 2510+1634/6685 (average 16780984/19446665)
+    Jo Jorgensen      -- 1977+3288/6685 (average 13219533/19446665)
+    Adam Kokesh       -- 1886+ 897/1337 (average  2522479/3889333)
+    Daniel Behrman    -- 1621+3994/6685 (average 10840379/19446665)
+    John Monds        -- 1345+2591/6685 (average  8993916/19446665)
+    Sam Robb          -- 1093+  96/1337 (average  1461437/3889333)
+    Sorinne Ardeleanu --  754+ 457/6685 (average  5040947/19446665)
+    Arvin Vohra       --  751+ 206/6685 (average  5020641/19446665)
+    Brian Ellison     --  683+ 753/955  (average   653018/2778095)
+    Mark Whitney      --  645+ 533/955  (average   616508/2778095)
+    Phil Gray         --  540+ 753/955  (average   516453/2778095)
+    Kenneth Blevins   --  539+6001/6685 (average  3609216/19446665)
+    Jedidiah Hill     --  497+ 238/955  (average   474873/2778095)
+    Steve Richey      --  459+ 282/955  (average   438627/2778095)
+    James Ogle        --  454+2031/6685 (average  3037021/19446665)
+    Erik Gerhardt     --  449+6366/6685 (average  3007931/19446665)
+    Keenan Dunham     --  448+  48/1337 (average   599024/3889333)
+    Rhett Smith       --  438+6366/6685 (average  2934396/19446665)
+    Louis Vanacore    --  417+4073/6685 (average  2791718/19446665)
+  Vermin Supreme wins a seat.
+[Allocated Score Voting: Round 2: Ballot allocation round]
+  Allocating 581+4/5 ballots.
+[Allocated Score Voting: Round 2: Ballot allocation round: Round 1]
+  Allocating 1022 ballots at score 5.
+  This allocation overfills the quota.  Returning fractional surplus.
+  Allocating only 56.93% of these ballots.
+  Keeping these ballots, but multiplying their weights by 2201/5110.
+  1022 ballots reweighted from 1 to 2201/5110.
+[Allocated Score Voting: Round 3]
+  The highest-scoring candidate wins a seat.
+    Judge Jim Gray    -- 2622+112731/195202 (average  511932375/567842618)  -- First place
+    Jacob Hornberger  -- 2190+151943/488005 (average 1068882893/1419606545)
+    Jo Jorgensen      -- 1730+207936/488005 (average  844456586/1419606545)
+    Adam Kokesh       -- 1554+  1429/6685   (average   10389919/19446665)
+    Daniel Behrman    -- 1270+ 90133/97601  (average  124043403/283921309)
+    John Monds        -- 1124+248162/488005 (average  548765782/1419606545)
+    Sam Robb          --  942+382087/488005 (average  460082797/1419606545)
+    Arvin Vohra       --  603+114847/195202 (average  117821653/567842618)
+    Sorinne Ardeleanu --  573+  3769/97601  (average   55929142/283921309)
+    Mark Whitney      --  517+459731/976010 (average  505056901/2839213090)
+    Brian Ellison     --  492+ 35678/69715  (average   34335458/202800935)
+    Phil Gray         --  428+625743/976010 (average  418358023/2839213090)
+    Kenneth Blevins   --  411+791151/976010 (average  401931261/2839213090)
+    Jedidiah Hill     --  377+ 48889/69715  (average   26331444/202800935)
+    Keenan Dunham     --  348+ 80543/195202 (average   68010839/567842618)
+    Steve Richey      --  346+282386/488005 (average  169132116/1419606545)
+    Erik Gerhardt     --  342+ 70103/195202 (average   66829187/567842618)
+    Rhett Smith       --  341+  2567/69715  (average   23775382/202800935)
+    James Ogle        --  340+218933/488005 (average  166140633/1419606545)
+    Louis Vanacore    --  321+473813/488005 (average  157123418/1419606545)
+  Judge Jim Gray wins a seat.
+[Allocated Score Voting: Round 3: Ballot allocation round]
+  Allocating 581+4/5 ballots.
+[Allocated Score Voting: Round 3: Ballot allocation round: Round 1]
+  Allocating 161 ballots at score 5.
+[Allocated Score Voting: Round 3: Ballot allocation round: Round 2]
+  Remaining allocation quota is 2104/5.
+  Allocating 33 ballots at score 4.
+[Allocated Score Voting: Round 3: Ballot allocation round: Round 3]
+  Remaining allocation quota is 1939/5.
+  Allocating 46 ballots at score 3.
+[Allocated Score Voting: Round 3: Ballot allocation round: Round 4]
+  Remaining allocation quota is 1709/5.
+  Allocating 119 ballots at score 3776/1337.
+[Allocated Score Voting: Round 3: Ballot allocation round: Round 5]
+  Remaining allocation quota is 1114/5.
+  Allocating 229 ballots at score 15104/6685.
+  This allocation overfills the remaining quota.  Returning fractional surplus.
+  Allocating only 97.29% of these ballots.
+  Keeping these ballots, but multiplying their weights by 31/1145.
+  229 ballots reweighted from 3776/6685 to 117056/7654325.
+[Allocated Score Voting: Round 4]
+  Tabulating 2550 remaining ballots.
+  The highest-scoring candidate wins a seat.
+    Jacob Hornberger  -- 1404+   2591394/558765725  (average 130751611549/237475433125)  -- First place
+    Adam Kokesh       -- 1017+   1822363/7654325    (average   3893135444/9759264375)
+    Jo Jorgensen      --  912+ 303828914/558765725  (average 254949085057/712426299375)
+    Daniel Behrman    --  866+  74522901/558765725  (average  28468567103/83814858750)
+    Sam Robb          --  642+ 172269227/558765725  (average 358899864677/1424852598750)
+    John Monds        --  624+ 366095728/558765725  (average 174517954064/712426299375)
+    Arvin Vohra       --  362+ 643370509/1117531450 (average 135063251803/949901732500)
+    Sorinne Ardeleanu --  339+   1645444/3192947    (average   1084054477/8142014850)
+    Brian Ellison     --  285+   3885862/79823675   (average  22753633237/203550371250)
+    Mark Whitney      --  251+ 522234499/1117531450 (average  93674209483/949901732500)
+    Phil Gray         --  242+    236667/159647350  (average  38634895367/407100742500)
+    Kenneth Blevins   --  240+    838169/6385894    (average   1533452729/16284029700)
+    Jedidiah Hill     --  222+  89412069/111753145  (average   8299536753/94990173250)
+    Steve Richey      --  203+ 250700766/558765725  (average 113680142941/1424852598750)
+    James Ogle        --  200+  32696941/79823675   (average  15997431941/203550371250)
+    Erik Gerhardt     --  199+1032247577/1117531450 (average  74473668709/949901732500)
+    Keenan Dunham     --  196+1075144233/1117531450 (average 220111308433/2849705197500)
+    Rhett Smith       --  189+  28956584/558765725  (average 105635678609/1424852598750)
+    Louis Vanacore    --  183+ 251823242/558765725  (average 102505950917/1424852598750)
+  Jacob Hornberger wins a seat.
+[Allocated Score Voting: Round 4: Ballot allocation round]
+  Allocating 581+4/5 ballots.
+[Allocated Score Voting: Round 4: Ballot allocation round: Round 1]
+  Allocating 101 ballots at score 5.
+[Allocated Score Voting: Round 4: Ballot allocation round: Round 2]
+  Remaining allocation quota is 2404/5.
+  Allocating 16 ballots at score 4.
+[Allocated Score Voting: Round 4: Ballot allocation round: Round 3]
+  Remaining allocation quota is 2324/5.
+  Allocating 14 ballots at score 3.
+[Allocated Score Voting: Round 4: Ballot allocation round: Round 4]
+  Remaining allocation quota is 2254/5.
+  Allocating 31 ballots at score 3776/1337.
+[Allocated Score Voting: Round 4: Ballot allocation round: Round 5]
+  Remaining allocation quota is 2099/5.
+  Allocating 80 ballots at score 15104/6685.
+[Allocated Score Voting: Round 4: Ballot allocation round: Round 6]
+  Remaining allocation quota is 1699/5.
+  Allocating 28 ballots at score 2201/1022.
+[Allocated Score Voting: Round 4: Ballot allocation round: Round 7]
+  Remaining allocation quota is 1559/5.
+  Allocating 13 ballots at score 2.
+[Allocated Score Voting: Round 4: Ballot allocation round: Round 8]
+  Remaining allocation quota is 1494/5.
+  Allocating 28 ballots at score 4402/2555.
+[Allocated Score Voting: Round 4: Ballot allocation round: Round 9]
+  Remaining allocation quota is 1354/5.
+  Allocating 79 ballots at score 11328/6685.
+[Allocated Score Voting: Round 4: Ballot allocation round: Round 10]
+  Remaining allocation quota is 959/5.
+  Allocating 58 ballots at score 6603/5110.
+[Allocated Score Voting: Round 4: Ballot allocation round: Round 11]
+  Remaining allocation quota is 669/5.
+  Allocating 62 ballots at score 7552/6685.
+[Allocated Score Voting: Round 4: Ballot allocation round: Round 12]
+  Remaining allocation quota is 359/5.
+  Allocating 6 ballots at score 1.
+[Allocated Score Voting: Round 4: Ballot allocation round: Round 13]
+  Remaining allocation quota is 329/5.
+  Allocating 35 ballots at score 2201/2555.
+[Allocated Score Voting: Round 4: Ballot allocation round: Round 14]
+  Remaining allocation quota is 154/5.
+  Allocating 71 ballots at score 3776/6685.
+  This allocation overfills the remaining quota.  Returning fractional surplus.
+  Allocating only 43.38% of these ballots.
+  Keeping these ballots, but multiplying their weights by 201/355.
+  71 ballots reweighted from 3776/6685 to 758976/2373175.
+[Allocated Score Voting: Round 5]
+  Tabulating 1999 remaining ballots.
+  The highest-scoring candidate wins a seat.
+    Adam Kokesh       -- 376+ 7396779449/79344732950 (average 29841016368649/158610121167050) -- First place
+    Daniel Behrman    -- 374+    9942727/415417450   (average   155376069027/830419482550)
+    Sam Robb          -- 354+78061257357/79344732950 (average 28166096721657/158610121167050)
+    Jo Jorgensen      -- 343+57248246537/79344732950 (average 27272491648387/158610121167050)
+    John Monds        -- 191+25938757268/39672366475 (average  7603360753993/79305060583525)
+    Sorinne Ardeleanu -- 132+ 4476905049/79344732950 (average 10477981654449/158610121167050)
+    Brian Ellison     -- 117+ 3163925938/7934473295  (average   931497301453/15861012116705)
+    Arvin Vohra       -- 103+12570935257/39672366475 (average  4098824682182/79305060583525)
+    Kenneth Blevins   --  93+  746667503/11334961850 (average  1054898119553/22658588738150)
+    Phil Gray         --  90+20479941221/79344732950 (average  7161505906721/158610121167050)
+    Jedidiah Hill     --  78+46514107067/79344732950 (average  6235403277167/158610121167050)
+    Mark Whitney      --  72+  411932287/3173789318  (average   228924763183/6344404846682)
+    James Ogle        --  68+   47036982/39672366475 (average  2697767957282/79305060583525)
+    Steve Richey      --  62+36693850287/39672366475 (average  2496380571737/79305060583525)
+    Erik Gerhardt     --  61+ 2368624193/3173789318  (average   195969772591/6344404846682)
+    Keenan Dunham     --  59+ 8398712716/39672366475 (average  2349068334741/79305060583525)
+    Rhett Smith       --  58+ 5970470323/15868946590 (average   926369372543/31722024233410)
+    Louis Vanacore    --  51+ 8411482463/15868946590 (average   817727758553/31722024233410)
+  Adam Kokesh wins a seat.
+[Allocated Score Voting: Winners]
+  Adam Kokesh
+  Jacob Hornberger
+  Judge Jim Gray
+  Justin Amash
+  Vermin Supreme

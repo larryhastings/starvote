@@ -21,3 +21,10 @@ dynamic = [
 
 [project.urls]
 Source = "https://github.com/larryhastings/starvote/"
+
+
+[project.optional-dependencies]
+reference = [
+    "numpy",
+    "pandas",
+    ]

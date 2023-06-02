@@ -1,0 +1,12 @@
+[Reweighted Range Voting]
+  Tabulating 5 ballots.
+  Maximum score is 5.
+  Want to fill 2 seats.
+[Reweighted Range Voting: Initializing ordered permutation tiebreaker]
+  Permutation was defined in 'test_elections/test_election_only_two_candidates_rrv.starvote'.
+  Permuted list of candidates:
+    1. Amy
+    2. Becky
+  Tiebreaker candidates will be selected from this list, preferring candidates with lower numbers.
+[Reweighted Range Voting: Round 1]
+  There are exactly 2 candidates seeking 2 seats.  Every candidate wins.

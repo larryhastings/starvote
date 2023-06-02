@@ -1,0 +1,83 @@
+[Bloc STAR]
+  Tabulating 16 ballots.
+  Maximum score is 5.
+  Want to fill 4 seats.
+[Bloc STAR: Initializing ordered permutation tiebreaker]
+  Permutation was defined in 'test_elections/test_election_bloc_star_and_electowiki.starvote'.
+  Permuted list of candidates:
+    1. First
+    2. Condorcet Loser
+    3. Second
+    4. Third
+    5. Fourth
+  Tiebreaker candidates will be selected from this list, preferring candidates with lower numbers.
+[Bloc STAR: Round 1: Scoring Round]
+  The two highest-scoring candidates advance to the next round.
+    Condorcet Loser -- 24 (average 1+1/2)  -- First place
+    First           -- 24 (average 1+1/2)  -- Second place
+    Second          -- 19 (average 1+3/16)
+    Third           -- 16 (average 1)
+    Fourth          -- 13 (average 13/16)
+  Condorcet Loser and First advance.
+[Bloc STAR: Round 1: Automatic Runoff Round]
+  The candidate preferred in the most head-to-head matchups wins.
+    Condorcet Loser -- 8 -- Tied for first place
+    First           -- 8 -- Tied for first place
+    No Preference   -- 0
+  There's a two-way tie for first.
+[Bloc STAR: Round 1: Automatic Runoff Round: First tiebreaker]
+  The highest-scoring candidate wins.
+    Condorcet Loser -- 24 -- Tied for first place
+    First           -- 24 -- Tied for first place
+  There's still a two-way tie for first.
+[Bloc STAR: Round 1: Automatic Runoff Round: Second tiebreaker]
+  The candidate with the most votes of score 5 wins.
+    Condorcet Loser -- 0 -- Tied for first place
+    First           -- 0 -- Tied for first place
+  There's still a two-way tie for first.
+[Bloc STAR: Round 1: Automatic Runoff Round: Predefined permutation tiebreaker]
+  Choosing the earliest of these candidates from the permuted list:
+    Condorcet Loser
+    First
+  Selected winner: First
+[Bloc STAR: Round 2: Scoring Round]
+  The two highest-scoring candidates advance to the next round.
+    Condorcet Loser -- 24 (average 1+1/2)  -- First place
+    Second          -- 19 (average 1+3/16) -- Second place
+    Third           -- 16 (average 1)
+    Fourth          -- 13 (average 13/16)
+  Condorcet Loser and Second advance.
+[Bloc STAR: Round 2: Automatic Runoff Round]
+  The candidate preferred in the most head-to-head matchups wins.
+    Second          -- 11 -- First place
+    Condorcet Loser --  5
+    No Preference   --  0
+  Second wins.
+[Bloc STAR: Round 3: Scoring Round]
+  The two highest-scoring candidates advance to the next round.
+    Condorcet Loser -- 24 (average 1+1/2)  -- First place
+    Third           -- 16 (average 1)      -- Second place
+    Fourth          -- 13 (average 13/16)
+  Condorcet Loser and Third advance.
+[Bloc STAR: Round 3: Automatic Runoff Round]
+  The candidate preferred in the most head-to-head matchups wins.
+    Third           -- 11 -- First place
+    Condorcet Loser --  5
+    No Preference   --  0
+  Third wins.
+[Bloc STAR: Round 4: Scoring Round]
+  The two highest-scoring candidates advance to the next round.
+    Condorcet Loser -- 24 (average 1+1/2)  -- First place
+    Fourth          -- 13 (average 13/16)  -- Second place
+  Condorcet Loser and Fourth advance.
+[Bloc STAR: Round 4: Automatic Runoff Round]
+  The candidate preferred in the most head-to-head matchups wins.
+    Fourth          -- 9 -- First place
+    Condorcet Loser -- 5
+    No Preference   -- 2
+  Fourth wins.
+[Bloc STAR: Winners]
+  First
+  Second
+  Third
+  Fourth

@@ -1,0 +1,7 @@
+[options]
+
+    csv_path = starvote_ballots_libertarian_party_2020_presidential_nomination_may.csv
+    method = allocated
+    seats = 5
+    tiebreaker = none
+    verbosity = 1

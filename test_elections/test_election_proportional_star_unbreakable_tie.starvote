@@ -1,0 +1,28 @@
+[options]
+
+    method = allocated
+    seats = 3
+    verbosity = 1
+    tiebreaker = none
+
+[ballots]
+
+    Amy = 1
+    Brian = 3
+    Chuck = 5
+    Darcy = 5
+
+    Amy = 3
+    Brian = 5
+    Chuck = 5
+    Darcy = 5
+
+    Amy = 5
+    Brian = 1
+    Chuck = 5
+    Darcy = 4
+
+    Amy = 3
+    Brian = 3
+    Chuck = 4
+    Darcy = 5

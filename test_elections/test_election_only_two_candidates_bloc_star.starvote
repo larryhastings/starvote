@@ -1,0 +1,15 @@
+[options]
+
+    method = bloc
+    seats = 2
+    tiebreaker = [
+        Amy
+        Becky
+        ]
+    verbosity = 1
+
+[ballots]
+
+    5 ballots:
+        Amy = 3
+        Becky = 3

@@ -1,0 +1,18 @@
+[STAR Voting]
+  Tabulating 628 ballots.
+  Maximum score is 5.
+[STAR Voting: Scoring Round]
+  The two highest-scoring candidates advance to the next round.
+    Jorgensen, Jo (Libertarian) -- 2452 (average 3+142/157) -- First place
+    Hawkins, Howie (Green)      -- 1017 (average 1+389/628) -- Second place
+    Biden, Joe (Democratic)     --  709 (average 1+ 81/628)
+    Trump, Donald (Republican)  --  467 (average 467/628)
+  Jorgensen, Jo (Libertarian) and Hawkins, Howie (Green) advance.
+[STAR Voting: Automatic Runoff Round]
+  The candidate preferred in the most head-to-head matchups wins.
+    Jorgensen, Jo (Libertarian) -- 461 -- First place
+    Hawkins, Howie (Green)      -- 112
+    No Preference               --  55
+  Jorgensen, Jo (Libertarian) wins.
+[STAR Voting: Winner]
+  Jorgensen, Jo (Libertarian)

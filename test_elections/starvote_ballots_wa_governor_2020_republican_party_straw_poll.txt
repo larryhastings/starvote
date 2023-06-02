@@ -1,0 +1,20 @@
+[STAR Voting]
+  Tabulating 977 ballots.
+  Maximum score is 5.
+[STAR Voting: Scoring Round]
+  The two highest-scoring candidates advance to the next round.
+    Loren Culp     -- 4054 (average 4+146/977) -- First place
+    Joshua Freed   --  979 (average 1+  2/977) -- Second place
+    Tim Eyman      --  812 (average 812/977)
+    Phil Fortunato --  450 (average 450/977)
+    Raul Garcia    --  342 (average 342/977)
+    Anton Sakharov --  282 (average 282/977)
+  Loren Culp and Joshua Freed advance.
+[STAR Voting: Automatic Runoff Round]
+  The candidate preferred in the most head-to-head matchups wins.
+    Loren Culp    -- 772 -- First place
+    Joshua Freed  -- 115
+    No Preference --  90
+  Loren Culp wins.
+[STAR Voting: Winner]
+  Loren Culp

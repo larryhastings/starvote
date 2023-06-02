@@ -1,0 +1,4 @@
+[options]
+
+    method = allocated
+    starvote_path = test_election_all_threes_bloc_star.starvote

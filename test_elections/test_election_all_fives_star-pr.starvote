@@ -1,0 +1,13 @@
+[options]
+
+    method = allocated
+    seats = 2
+    tiebreaker = none
+    verbosity = 1
+
+[ballots]
+
+5 ballots:
+    Amy = 5
+    Brian = 5
+    Chuck = 5

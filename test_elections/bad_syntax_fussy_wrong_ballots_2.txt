@@ -1,0 +1,45 @@
+File 'test_elections/bad_syntax_fussy_wrong_ballots_2.starvote', Line 7: ballot pragma must specify exactly 1 repetition
+
+usage: starvote.py [options] <ballots_file>
+
+Tabulates an election based on votes in a CSV or starvote file.
+The parameters for the election can be inferred from the CSV filename,
+or explicitly specified via options.
+
+Options:
+
+    -m|--method <method>
+
+        Specifies the electoral system.
+        Supported methods are 'star', 'bloc', 'allocated', and 'rrv'.
+
+    -r|--reference
+
+        Adds the available reference implementations of methods.
+        Continues even if any reference implementations are unavailable.
+
+    -R|--force-reference
+
+        Adds the available reference implementations of methods.
+        If any reference implementations are unavailable, exits.
+
+    -s|--seats <seats>
+
+        Specifies number of seats, default 1.
+        Required when method is not STAR.
+
+    -v|--verbose
+
+        Increments verbosity, default 0.
+        Can be specified more than once.
+
+    -x|--maximum-score <maximum_score>
+
+        Specifies the maximum score per vote, default 5.
+
+ballots_file should be a path to a file ending either in '.csv' or '.star':
+
+    * .csv files must be in https://start.vote CSV format.
+      When loading a .csv file, starvote defaults to STAR Voting,
+      one seat, verbosity 1, and
+    * .starvote files must be in "starvote format".

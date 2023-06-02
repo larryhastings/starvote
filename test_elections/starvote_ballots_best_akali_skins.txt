@@ -1,0 +1,30 @@
+[STAR Voting]
+  Tabulating 669 ballots.
+  Maximum score is 5.
+[STAR Voting: Scoring Round]
+  The two highest-scoring candidates advance to the next round.
+    Star Guardian        -- 2930 (average 4+254/669) -- First place
+    Prestige K/DA        -- 2458 (average 3+451/669) -- Second place
+    True Damage          -- 2379 (average 3+124/223)
+    K/DA All Out         -- 2371 (average 3+364/669)
+    K/DA                 -- 2325 (average 3+106/223)
+    Blood Moon           -- 2175 (average 3+ 56/223)
+    Original             -- 2175 (average 3+ 56/223)
+    Infernal             -- 2092 (average 3+ 85/669)
+    Project              -- 1955 (average 2+617/669)
+    Crime City Nightmare -- 1952 (average 2+614/669)
+    Silverfang           -- 1754 (average 2+416/669)
+    Headhunter           -- 1735 (average 2+397/669)
+    Nurse                -- 1731 (average 2+131/223)
+    Sashimi              -- 1440 (average 2+ 34/223)
+    Stinger              -- 1293 (average 1+208/223)
+    All-Star             -- 1287 (average 1+206/223)
+  Star Guardian and Prestige K/DA advance.
+[STAR Voting: Automatic Runoff Round]
+  The candidate preferred in the most head-to-head matchups wins.
+    Star Guardian -- 288 -- First place
+    Prestige K/DA --  80
+    No Preference -- 301
+  Star Guardian wins.
+[STAR Voting: Winner]
+  Star Guardian

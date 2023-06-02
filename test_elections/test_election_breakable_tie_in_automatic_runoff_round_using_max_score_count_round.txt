@@ -1,0 +1,27 @@
+[STAR Voting]
+  Tabulating 3 ballots.
+  Maximum score is 5.
+[STAR Voting: Scoring Round]
+  The two highest-scoring candidates advance to the next round.
+    Brian -- 12 (average 4) -- First place
+    Chuck -- 12 (average 4) -- Second place
+    Amy   --  3 (average 1)
+  Brian and Chuck advance.
+[STAR Voting: Automatic Runoff Round]
+  The candidate preferred in the most head-to-head matchups wins.
+    Brian         -- 1 -- Tied for first place
+    Chuck         -- 1 -- Tied for first place
+    No Preference -- 1
+  There's a two-way tie for first.
+[STAR Voting: Automatic Runoff Round: First tiebreaker]
+  The highest-scoring candidate wins.
+    Brian -- 12 -- Tied for first place
+    Chuck -- 12 -- Tied for first place
+  There's still a two-way tie for first.
+[STAR Voting: Automatic Runoff Round: Second tiebreaker]
+  The candidate with the most votes of score 5 wins.
+    Chuck -- 2 -- First place
+    Brian -- 1
+  Chuck wins.
+[STAR Voting: Winner]
+  Chuck

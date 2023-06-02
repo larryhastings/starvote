@@ -1,0 +1,49 @@
+[STAR Voting]
+  Tabulating 1022 ballots.
+  Maximum score is 5.
+[STAR Voting: Scoring Round]
+  The two highest-scoring candidates advance to the next round.
+    Andrew Yang - D                               -- 3229 (average 3+ 163/1022) -- First place
+    Bernie Sanders - D                            -- 2025 (average 1+1003/1022) -- Second place
+    Tulsi Gabbard - D                             -- 1373 (average 1+ 351/1022)
+    Elizabeth Warren - D                          -- 1259 (average 1+ 237/1022)
+    Pete Buttigieg - D                            --  980 (average  70/73)
+    Beto O&#039;Rourke - D                        --  792 (average 396/511)
+    Joe Biden - D                                 --  722 (average 361/511)
+    Kamala Harris - D                             --  695 (average 695/1022)
+    Justin Amash - L                              --  691 (average 691/1022)
+    Vermin Supreme - L                            --  672 (average  48/73)
+    Cory Booker - D                               --  655 (average 655/1022)
+    Jesse Ventura - G                             --  618 (average 309/511)
+    Donald Trump - R                              --  579 (average 579/1022)
+    Larry Sharpe - L                              --  570 (average 285/511)
+    Howie Hawkins - G                             --  548 (average 274/511)
+    Bill Weld - R                                 --  547 (average 547/1022)
+    Marianne Williamson - D                       --  544 (average 272/511)
+    Amy Klobuchar - D                             --  538 (average 269/511)
+    Julian Castro - D                             --  525 (average  75/146)
+    Jay Inslee - D                                --  496 (average 248/511)
+    Kirsten Gillibrand - D                        --  478 (average 239/511)
+    Austin Petersen - L                           --  434 (average  31/73)
+    John Kasich - R                               --  433 (average 433/1022)
+    John McAfee - L                               --  414 (average 207/511)
+    Ajamu Baraka - G                              --  392 (average  28/73)
+    John Hickenlooper - D                         --  343 (average  49/146)
+    Sam Seder - L                                 --  337 (average 337/1022)
+    Dario Hunter - G                              --  316 (average 158/511)
+    Adam Kokesh - L                               --  314 (average 157/511)
+    Howard Schultz - unaffiliated                 --  313 (average 313/1022)
+    Sedinam Kinamo Christin Moyowasifza-Curry - G --  297 (average 297/1022)
+    John Delaney - D                              --  290 (average 145/511)
+    Arvin Vohra - L                               --  271 (average 271/1022)
+    Ian Schlakman - G                             --  271 (average 271/1022)
+    Larry Hogan - R                               --  226 (average 113/511)
+  Andrew Yang - D and Bernie Sanders - D advance.
+[STAR Voting: Automatic Runoff Round]
+  The candidate preferred in the most head-to-head matchups wins.
+    Andrew Yang - D    -- 550 -- First place
+    Bernie Sanders - D -- 272
+    No Preference      -- 200
+  Andrew Yang - D wins.
+[STAR Voting: Winner]
+  Andrew Yang - D

@@ -1,0 +1,31 @@
+# This test is a starvote implementation of the sample election described on
+#    https://rangevoting.org/RRVr.html](https://rangevoting.org/RRVr.html
+
+
+[options]
+    method = RRV
+    seats = 3
+    maximum score = 10
+    verbosity = 1
+    tiebreaker = none
+
+
+[ballots]
+
+# "party A" voters:
+
+60 ballots:
+    A1 = 10
+    A2 = 9
+    A3 = 8
+    B1 = 1
+    B2 = 0
+
+# "party B" voters:
+
+40 ballots:
+    A1 = 0
+    A2 = 0
+    A3 = 0
+    B1 = 10
+    B2 = 10

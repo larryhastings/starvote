@@ -1,0 +1,33 @@
+[STAR Voting]
+  Tabulating 718 ballots.
+  Maximum score is 5.
+[STAR Voting: Scoring Round]
+  The two highest-scoring candidates advance to the next round.
+    Vermin Supreme    -- 2865 (average 3+711/718) -- First place
+    Dan Behrman       --  708 (average 354/359)   -- Second place
+    Jacob Hornberger  --  703 (average 703/718)
+    John McAfee       --  584 (average 292/359)
+    Lincoln Chafee    --  340 (average 170/359)
+    Jo Jorgensen      --  333 (average 333/718)
+    John Monds        --  299 (average 299/718)
+    Ken Armstrong     --  263 (average 263/718)
+    Mark Whitney      --  259 (average 259/718)
+    Arvin Vohra       --  186 (average  93/359)
+    Max Abramson      --  184 (average  92/359)
+    Sam Robb          --  170 (average  85/359)
+    Jedi Hill         --  136 (average  68/359)
+    Souraya Fass      --  128 (average  64/359)
+    Sorinne Ardeleanu --  112 (average  56/359)
+    Ben Leder         --   97 (average  97/718)
+    Keenan Dunham     --   96 (average  48/359)
+    Erik Gerhardt     --   95 (average  95/718)
+    James Ogle        --   86 (average  43/359)
+  Vermin Supreme and Dan Behrman advance.
+[STAR Voting: Automatic Runoff Round]
+  The candidate preferred in the most head-to-head matchups wins.
+    Vermin Supreme -- 541 -- First place
+    Dan Behrman    --  77
+    No Preference  -- 100
+  Vermin Supreme wins.
+[STAR Voting: Winner]
+  Vermin Supreme

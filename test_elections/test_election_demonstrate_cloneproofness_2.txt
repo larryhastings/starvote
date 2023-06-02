@@ -1,0 +1,28 @@
+[STAR Voting]
+  Tabulating 17 ballots.
+  Maximum score is 5.
+[STAR Voting: Scoring Round]
+  The two highest-scoring candidates advance to the next round.
+    Amy          -- 26 (average 1+9/17) -- First place
+    Clone Of Amy -- 26 (average 1+9/17) -- Second place
+    Brian        -- 23 (average 1+6/17)
+    Clancy       -- 17 (average 1)
+  Amy and Clone Of Amy advance.
+[STAR Voting: Automatic Runoff Round]
+  The candidate preferred in the most head-to-head matchups wins.
+    Amy           --  2 -- Tied for first place
+    Clone Of Amy  --  2 -- Tied for first place
+    No Preference -- 13
+  There's a two-way tie for first.
+[STAR Voting: Automatic Runoff Round: First tiebreaker]
+  The highest-scoring candidate wins.
+    Amy          -- 26 -- Tied for first place
+    Clone Of Amy -- 26 -- Tied for first place
+  There's still a two-way tie for first.
+[STAR Voting: Automatic Runoff Round: Second tiebreaker]
+  The candidate with the most votes of score 5 wins.
+    Clone Of Amy -- 4 -- First place
+    Amy          -- 2
+  Clone Of Amy wins.
+[STAR Voting: Winner]
+  Clone Of Amy

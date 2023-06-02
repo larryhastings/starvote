@@ -1,0 +1,40 @@
+# This test was an experiment.  I had a theory that maybe I could make multiwinner
+# elections cheaper to calculate:
+#
+#    If you have an N-way tie for first, and more than N seats left to fill,
+#    simply advance all the tied winners.
+#
+# But this doesn't work, as it can change the results.  This test election
+# demonstrates how.  We're using Bloc STAR to fill 3 seats.
+# Amy ties for first in the first score round--and outright wins subsequent
+# score rounds--but always loses in the automatic runoff rounds.
+#
+# Note that if you don't specify a candidate in a ballot, they get a score of
+# 0 automatically.  As long as every candidate is explicitly mentioned at
+# least once in a ballot somewhere, they'll be a valid candidate.
+
+[options]
+
+    method = bloc
+    seats = 3
+    tiebreaker = none
+    verbosity = 1
+
+[ballots]
+
+    2 ballots:
+
+        Amy = 5
+        Eleanor = 0
+
+    5 ballots:
+
+        Brian = 2
+
+    3 ballots:
+
+        Chuck = 3
+
+    4 ballots:
+
+        David = 2

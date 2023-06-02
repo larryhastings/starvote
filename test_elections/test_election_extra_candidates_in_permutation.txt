@@ -1,0 +1,4 @@
+[STAR Voting]
+  Tabulating 5 ballots.
+  Maximum score is 5.
+ValueError("candidates list doesn't exactly match ballot, extraneous ['Snoopy']")

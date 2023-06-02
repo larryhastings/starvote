@@ -1,0 +1,12 @@
+[options]
+
+    method = star
+    verbosity = 1
+    tiebreaker = [
+        Amy
+        ]
+
+[ballots]
+
+    5 ballots:
+        Amy = 3

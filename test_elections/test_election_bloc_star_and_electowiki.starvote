@@ -1,0 +1,81 @@
+#
+# Electowiki says:
+#
+#     A STAR voting ranking of candidates can be done by using the
+#     Bloc STAR voting procedure: find the STAR winner, put them in
+#     1st place, then remove them from the election, and repeat,
+#     putting each consecutive STAR winner in a lower rank than all
+#     previous STAR winners. Optionally, if two candidates tie in the
+#     automatic runoff during this procedure, they can both be put as
+#     tied for the same rank, and then both are removed from the
+#     election. Note that while STAR voting can never put someone
+#     ranked 3rd or worse by Score voting as 1st i.e. its winner
+#     (when run on the same ballots; this is because only the two
+#     candidates ranked highest by Score voting can enter the STAR
+#     automatic runoff and thus even be eligible to win), it can put
+#     the candidate Score ranked 1st (i.e. the Score winner) as its
+#     last place candidate using this procedure, since the Score
+#     winner may be a Condorcet loser i.e. a candidate who would
+#     lose an automatic runoff against any other candidate.
+#
+#     https://electowiki.org/wiki/STAR_voting#Complete_ranking
+#
+# Let me draw your attention to the second sentence:
+#
+#     Optionally, if two candidates tie in the automatic runoff
+#     during this procedure, they can both be put as tied for the
+#     same rank, and then both are removed from the election.
+#
+# The rest of that paragraph goes on to say why this isn't a good
+# idea.  Basically, one of the first two winners could be a
+# Condorcet loser--they lose in head-to-head runoff against any
+# other candidate.
+#
+# This election demonstrates this happening.  Condorcet Loser
+# completely ties with First for the first seat, requiring a
+# tiebreaker.  The tiebreaker gives the first seat to First.
+# Condorcet Loser then goes on to lose in every subsequent
+# election, coming in last place.  If we gave seats to both
+# candidates that tied in the first round, Condorcet Loser
+# would have gotten a seat--and I don't think that's what the
+# STAR Voting folks would have wanted.
+#
+
+[options]
+
+    method = bloc
+    seats = 4
+    verbosity = 1
+    tiebreaker = [
+        First
+        Condorcet Loser
+        Second
+        Third
+        Fourth
+        ]
+
+[ballots]
+
+    8 ballots:
+        First = 3
+        Condorcet Loser = 0
+        Second = 1
+        Third = 1
+        Fourth = 1
+
+    5 ballots:
+        Condorcet Loser = 4
+
+    2 ballots:
+        First = 0
+        Condorcet Loser = 1
+        Second = 3
+        Third = 2
+        Fourth = 1
+
+    1 ballot:
+        First = 0
+        Condorcet Loser = 2
+        Second = 5
+        Third = 4
+        Fourth = 3

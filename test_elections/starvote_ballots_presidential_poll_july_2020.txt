@@ -1,0 +1,21 @@
+[STAR Voting]
+  Tabulating 863 ballots.
+  Maximum score is 5.
+[STAR Voting: Scoring Round]
+  The two highest-scoring candidates advance to the next round.
+    Jo Jorgensen   -- 3385 (average 3+796/863) -- First place
+    Andrew Yang    -- 1018 (average 1+155/863) -- Second place
+    Bernie Sanders --  970 (average 1+107/863)
+    Howie Hawkins  --  719 (average 719/863)
+    Joe Biden      --  593 (average 593/863)
+    Donald Trump   --  554 (average 554/863)
+    Kanye West     --  363 (average 363/863)
+  Jo Jorgensen and Andrew Yang advance.
+[STAR Voting: Automatic Runoff Round]
+  The candidate preferred in the most head-to-head matchups wins.
+    Jo Jorgensen  -- 645 -- First place
+    Andrew Yang   -- 153
+    No Preference --  65
+  Jo Jorgensen wins.
+[STAR Voting: Winner]
+  Jo Jorgensen

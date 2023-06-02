@@ -1,0 +1,13 @@
+[Allocated Score Voting]
+  Tabulating 5 ballots.
+  Maximum score is 5.
+  Want to fill 2 seats.
+  Hare quota is 5/2.
+[Allocated Score Voting: Round 1]
+  The highest-scoring candidate wins a seat.
+    Amy   -- 0 (average 0) -- Tied for first place
+    Brian -- 0 (average 0) -- Tied for first place
+    Chuck -- 0 (average 0) -- Tied for first place
+  There's a three-way tie for first.
+[Allocated Score Voting: Round 1: Unbreakable Tie]
+  Tie between Amy, Brian, and Chuck.
