@@ -654,7 +654,7 @@ For example, you can run this from the root of the
 source-code repository:
 
 ```
-% python3 -m starvote test_elections/test_election_automatic_runoff_breakable_tie_using_5_score_count_round.starvote
+% python3 -m starvote test_elections/test_election_breakable_tie_in_automatic_runoff_round_using_max_score_count_round.starvote
 ```
 
 to see how **starvote** handles ties during the automatic runoff round.
