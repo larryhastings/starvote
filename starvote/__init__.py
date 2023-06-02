@@ -2,7 +2,7 @@
 
 __doc__ = "An election tabulator for the STAR electoral system, and others"
 
-__version__ = "2.0"
+__version__ = "2.0.1"
 
 __all__ = [
     'Allocated_Score_Voting', # Method

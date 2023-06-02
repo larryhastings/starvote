@@ -159,8 +159,8 @@ def monkey_patch():
     """
     for name in (
         'Allocated Score Voting (reference)',
-        'Reference Allocated Score',
-        'reference allocated score',
+        'Allocated-R',
+        'allocated-r',
         ):
         starvote.methods[name] = Allocated_Score_Voting_reference
     starvote.Allocated_Score_Voting_reference = Allocated_Score_Voting_reference

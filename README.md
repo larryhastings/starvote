@@ -730,6 +730,11 @@ or otherwise freely redistributable.
 
 ## Changelog
 
+**2.0.1** - *2023/05/27*
+
+* Changed the nickname of the reference version of
+  Allocated Score Voting to "Allocated-R".
+
 **2.0** - *2023/05/27*
 
 A complete rewrite!  The 1.x code base was pretty smelly.
