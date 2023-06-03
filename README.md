@@ -771,7 +771,7 @@ These will override the settings from inside a *starvote format* file
 Here's a quick explanation about what "proportional voting" means,
 in the context of multiwinner elections.
 As with every other topic, you can read more about it
-[at Wikipedia.]https://en.wikipedia.org/wiki/Proportional_representation
+[at Wikipedia.](https://en.wikipedia.org/wiki/Proportional_representation)
 
 A straight multiwinner election simply means you're electing
 2 or more candidates instead of one candidate.  The candidates
@@ -784,7 +784,7 @@ have a city election to fill five seats where
 and 40% of the voters vote only for party B,
 all five seats are likely going to go to party A candidates.
 And maybe that's unfair--it's the
-[tyrrany of the majority.](https://en.wikipedia.org/wiki/Tyranny_of_the_majority)
+["tyranny of the majority".](https://en.wikipedia.org/wiki/Tyranny_of_the_majority)
 
 There's an alternate approach to apportioning seats, used
 in political systems across the world, called "Proportional
@@ -796,8 +796,7 @@ three seats to party A and two seats to party B.
 Often proportional representation is done based on voting
 for parties rather than voting for candidates.  This is
 called
-[Party-list proportional representation,]
-(https://en.wikipedia.org/wiki/Party-list_proportional_representation)
+[Party-list proportional representation,](https://en.wikipedia.org/wiki/Party-list_proportional_representation)
 and it's used to elect governmental bodies across the world.
 
 But it's also possible to devise a voting method that permits
@@ -829,15 +828,25 @@ Range voting is how they allocate vs. reweigh ballots.
 Allocated Score Voting allocates ballots, but Reweighted
 Range Voting never does--every vote is counted in every round.
 Also, the two systems use different formulae to compute the
-new weight of a ballot after each round.
+new weight of a ballot after each round.  In Allocated Score,
+the new weight is based on how many excess voters were needed
+to fill a quota (called a
+[Hare quota](https://en.wikipedia.org/wiki/Hare_quota));
+in Reweighted Range Voting, the new weight is based on the
+sum of the score(s) you contribute to the winning candidate(s).
 
 **starvote** ships a sample election that does a good job of
-showing how this can work, in
-`allocated test_elections/test_election_reweighted_range_sample_election.starvote`.
+showing how direct-elected proportional representation elections
+can work:
+
+```
+test_elections/test_election_reweighted_range_sample_election.starvote
+```
+
 This election is very similar to the 60/40 election I used
 as an example in the description above.  It uses Reweighted Range Voting
 to fill three seats, and each vote has a maximum score of 10.
-60 of the voters prefer party A, and give high scores to candidates A1, A2, and A3.
+60 of the voters prefer party A, and give high scores to candidates A1, A2, and A3;
 40 of the voters prefer party B, and give high scores to candidates B1 and B2.
 
 You can run the election in the `starvote` main directory with this command:
