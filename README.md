@@ -263,16 +263,20 @@ You can import it with `import starvote.reference`;
 the directly-callable function is
 `starvote.reference.allocated_score_voting_reference`.
 You can also use the `Method` object
+`starvote.reference.Allocated_Score_Voting_reference`;
+it also has the nickname
+`starvote.reference.allocated_r`.
 
 If you want to integrate it into the `starvote` module,
 call`starvote.reference.monkey_patch()`.  This does
 three things:
 
-* Adds the function to the `starvote` module directly,
-  as `starvote.allocated_score_voting_reference`.
-* Adds it to `starvote.__all__` so that symbol
-  gets brought in by `from starvote import *`.
-*
+* Adds the function and `Method` objects to the `starvote`
+  module directly.
+
+  - Also adds them to `starvote.__all__` so they get
+    brought in by `from starvote import *`.
+
 * Adds the appropriate `Method` object
   to `starvote.methods`, using the name
   `'Allocated Score Voting (reference)'`
