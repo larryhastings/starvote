@@ -9,6 +9,12 @@
 ##     * confirms the "multi-winner elections" cmdline works
 ##   (I keep breaking these.)
 ##
+## * alternate output format idea:
+##     * make something more computer-readable.
+##     * maybe just super-regular HTML, with classes and names to make it easy?
+##
+## * restore printing the preference matrix (it's lurking in 1.x versions)
+##
 
 __doc__ = "An election tabulator for the STAR electoral system, and others"
 

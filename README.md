@@ -23,7 +23,7 @@ Features:
   - [STAR Voting](https://www.starvoting.org/star), the snazzy
     new single-winner voting system.
   - [Bloc STAR Voting](https://www.starvoting.org/multi_winner),
-    a multi-winner variant of STAR voting that fills multiple
+    a multiwinner variant of STAR voting that fills multiple
     seats with the *most popular* candidates.
   - [Allocated Score Voting](https://electowiki.org/wiki/Allocated_Score),
     a [proportional representation](https://en.wikipedia.org/wiki/Proportional_representation)
@@ -91,18 +91,19 @@ of the scores, that's the same as a 0.)  If you give two candidates
 the same score, that means you like them equally--you don't have a
 preference between them.
 
-To figure out who won, you apply the **STAR** method: **S**core,
-**T**hen **A**utomatic **R**unoff.
+Tabulating the election is easy!  You apply the **STAR** method:
+**S**core, **T**hen **A**utomatic **R**unoff.
 
-In the first round, the score round, you add up the scores of all the
+In the first round, the *Scoring Round,* you add up the scores of all the
 candidates.  The top two scoring candidates automatically advance to
 the second round.
 
-In the second round, you examine every ballot to see which of the
-two remaining candidates they preferred.  If one has a higher score,
-that ballot prefers that candidate.  If the ballot scored both
-candidates the same, they have no preference.  The candidate that
-was preferred by more ballots wins the election.  It's that simple!
+In the second round, the *Automatic Runoff Round,* you examine every
+ballot to see which of the two remaining candidates they preferred.
+If one has a higher score, that ballot prefers that candidate.  If the
+ballot scored both candidates the same, they have no preference.
+The candidate preferred by more ballots wins the election.  It's that
+simple!
 
 
 ## What's so good about STAR Voting?
@@ -110,16 +111,20 @@ was preferred by more ballots wins the election.  It's that simple!
 Electoral systems are a surprisingly deep topic.  They've been studied
 for hundreds of years, and there are many many different approaches.
 There are a number of desirable properties *and* undesirable properties
-that electoral systems can have.  And, bad news: it's impossible for
-there to be one best-possible voting system.  There are mutually
-exclusive desirable properties.  You can't make a one-size-fits-all
-system that avoids every problem.
+that electoral systems can have.  And here's the bad news: it's
+*impossible* for there to be one best-possible voting system.  There
+are mutually exclusive desirable properties, and there are desirable
+properties that bring with them downsides.  You just can't make a
+one-size-fits-all best system that avoids every problem--every electoral
+system has to be a compromise.  Wikipedia has
+[a comprehensive article](https://en.wikipedia.org/wiki/Comparison_of_electoral_systems)
+on the topic.
 
 STAR Voting avoid the worst problems of electoral systems.
 The remaining undesirable properties were chosen as the least-bad
 option.
 
-Here are some desirable properites STAR Voting displays:
+Here are some desirable properites STAR Voting has:
 
 * It's [monotonic.](https://en.wikipedia.org/wiki/Monotonicity_criterion)
   Giving a candidate a higher score can never hurt them, and
@@ -134,7 +139,7 @@ Here are some desirable properites STAR Voting displays:
   If a majority of candidates like one candidate the least, that candidate will
   never win a STAR Voting election.
 
-Here are some desirable properties STAR Voting doesn't have:
+But here are some desirable properties STAR Voting doesn't have:
 
 * It's not a [Condorcet method,](https://en.wikipedia.org/wiki/Condorcet_winner_criterion)
   which is a very particular property of an electoral system.
@@ -169,7 +174,8 @@ Here are some desirable properties STAR Voting doesn't have:
 
 ### `election`
 
-To use `starvote`, `import starvote`, then call the `election` method:
+To use `starvote`, first `import starvote`,
+then call its `election` function:
 
 ```Python
 def election(method, ballots, *,
@@ -180,21 +186,22 @@ def election(method, ballots, *,
     ):
 ```
 
-`election` tabulates an election based on your
-parameter and returns a `list` containing the
-winners. (Even for single-winner STAR Voting--in
+`election` tabulates an election based on the
+arguments you pass in and returns a `list` containing
+the winners. (Even for single-winner STAR Voting--in
 that case, the list will only contain one element.)
 
-`method` specifies which election system you want to use,
-via predefined `Method` objects. The allowed values are:
+`method` specifies which method (which "election system")
+you want to use in this election, via predefined `Method`
+objects. The supported values are:
 
 * `starvote.STAR_Voting`,
 * `starvote.Bloc_STAR_Voting`,
 * `starvote.Allocated_Score_Voting`, and
 * `starvote.Reweighted_Range_Voting`.
 
-Since those are a lot to
-type, `starvote` also provides nicknames, respectively:
+Since those are a lot to type, `starvote` also provides
+nicknames for these methods, respectively:
 
 * `starvote.star`,
 * `starvote.bloc`,
@@ -202,16 +209,16 @@ type, `starvote` also provides nicknames, respectively:
 * `starvote.rrv`.
 
 `ballots` should be an iterable containing individual ballots.
-Ballots are `dict` objects, mapping the candidate to that ballot's
-score for that candidate.  The candidate can be any Python value;
-the score must be an `int`.
+A ballot is a `dict` mapping the candidate to that ballot's
+score for that candidate.  The candidate can be any hashable
+Python value; the score must be an `int`.
 
-`maximum_score` specifies the maximum score allowed for any vote
-on any ballot.
+`maximum_score` specifies the maximum score allowed for
+any vote on any ballot.
 
 `seats` specifies how many seats the election should fill.
 STAR Voting is a single-winner method, so this should be
-`1` when using STAR Voting; for all the other methods,
+`1` when using STAR Voting; for the other methods,
 `seats` must be greater than or equal to `2`.
 
 `verbosity` specifies how much output you want.
@@ -232,29 +239,31 @@ same signature.
 the supported electoral systems:
 
 * `star_voting` implements single-winner STAR Voting.
-* `bloc_star_voting` implements multi-winner Bloc STAR Voting.
+* `bloc_star_voting` implements multiwinner Bloc STAR Voting.
 * `allocated_score_voting` implements Allocated Score Voting.
 * `reweighted_range_voting` implements Reweighted Range Voting.
 
-These functions take much the same signature as `election`,
+These functions have much the same signature as `election`,
 with the following changes:
 
-* They don't take the `method` positional parameter;
-  the method is implicit in the function.  All four only
-  take one positional parameter, `ballots`, which is
-  required.
-* `star` doesn't take a `seats` parameter.  The other three
+* They don't have a `method` parameter; the method is implicit
+  in the function.  All four only take one positional parameter,
+  `ballots`, which is required.
+* `star` doesn't have a `seats` parameter.  The other three
   have a `seats` keyword-only parameter, and this parameter
-  is required--it doesn't have a default.  (A required
+  is required--it doesn't have a default.  (A *required*
   keyword-only parameter is pretty rare in Python!)
-* Note that these functions also always return a list,
-  even `star_voting`.
+* Note that, like `election`, these functions always
+  return a list, even `star_voting`.
 
 #### Reference implementation of Allocated Score Voting
 
 `starvote` ships a copy of the reference implementation
-of Allocated Score Voting.  Since this requires both NumPy
-and Pandas, it's not imported by default.  (I didn't want
+of Allocated Score Voting.  Since this requires both
+[NumPy](https://numpy.org/)
+and
+[Pandas](https://pandas.pydata.org/),
+it's not imported by default.  (I didn't want
 `starvote` to have any external dependencies.  The unit
 test suite runs correctly whether or not these external
 dependencies are installed.)
@@ -263,8 +272,8 @@ You can import it with `import starvote.reference`;
 the directly-callable function is
 `starvote.reference.allocated_score_voting_reference`.
 You can also use the `Method` object
-`starvote.reference.Allocated_Score_Voting_reference`;
-it also has the nickname
+`starvote.reference.Allocated_Score_Voting_reference`,
+with the nickname
 `starvote.reference.allocated_r`.
 
 If you want to integrate it into the `starvote` module,
@@ -289,11 +298,11 @@ be `None`.
 
 ### Ties
 
-The good news is, STAR Voting elections rarely result in a tie in the
-real world.  But ties can still happen.  The good news is, STAR Voting
-has a sensible, thorough protocol on how to break a tie.  The bad news is,
-not all ties are breakable--some ties genuinely represent the ambivalent
-will of the voters.
+STAR Voting elections rarely result in a tie in the real world.
+But ties can still happen.  The good news is, STAR Voting has a
+sensible, thorough protocol on how to break a tie.  The bad news is,
+not all ties are breakable--some ties genuinely represent the
+indecisive will of the voters.
 
 **starvote** gives you control over how to break ties in elections,
 through the `tiebreaker` parameter to `election` and the election-specific
@@ -351,6 +360,14 @@ you may also pass in a string for the
 `description` keyword-only parameter, which
 should be text describing the source of
 this ordered list of candidates.
+
+Note that, if you pass in your own
+`candidates` list, *starvote*'s tabulation
+of the election will be 100% deterministic
+and repeatable.  You can run that election
+a million times and you'll always get the
+same result.
+
 
 #### `on_demand_random_tiebreaker`
 
@@ -733,8 +750,8 @@ to see how **starvote** handles ties during the automatic runoff round.
 
 ## Multiple-winner elections
 
-**starvote** also implements several multi-winner electoral systems.
-All you need to do is pass in one of the multi-winner methods, such as
+**starvote** also implements several multiwinner electoral systems.
+All you need to do is pass in one of the multiwinner methods, such as
 `starvote.bloc`, `starvote.allocated`,
 or `starvote.rrv`, when you call `election`:
 
@@ -748,11 +765,97 @@ the number of seats with `-s`,
 and the maximum score with `-x`.
 These will override the settings from inside a *starvote format* file
 (and the default settings for CSV files).
-For example, you could run the Reweighted Range Voting sample
-with Allocated Score Voting instead by running this:
+
+### Multiwinner vs proportional
+
+Here's a quick explanation about what "proportional voting" means,
+in the context of multiwinner elections.
+As with every other topic, you can read more about it
+[at Wikipedia.]https://en.wikipedia.org/wiki/Proportional_representation
+
+A straight multiwinner election simply means you're electing
+2 or more candidates instead of one candidate.  The candidates
+that get the most votes--or however the election is tabulated--win.
+
+But electing the most popular candidates in this way may be a
+poor representation of the electorate.  For example, if you
+have a city election to fill five seats where
+60% of the voters vote only for party A,
+and 40% of the voters vote only for party B,
+all five seats are likely going to go to party A candidates.
+And maybe that's unfair--it's the
+[tyrrany of the majority.](https://en.wikipedia.org/wiki/Tyranny_of_the_majority)
+
+There's an alternate approach to apportioning seats, used
+in political systems across the world, called "Proportional
+Representation".  The idea is, you have N seats, and you
+assign portions of them based on representing portions of
+the populace.  In the above example, you'd want to give
+three seats to party A and two seats to party B.
+
+Often proportional representation is done based on voting
+for parties rather than voting for candidates.  This is
+called
+[Party-list proportional representation,]
+(https://en.wikipedia.org/wiki/Party-list_proportional_representation)
+and it's used to elect governmental bodies across the world.
+
+But it's also possible to devise a voting method that permits
+voting directly for candidates, and produces proportional
+representation.  Allocated Score Voting and Reweighted Range
+Voting both accomplish this.  Both methods work something
+like this:
+
+* Each vote is a number, with higher numbers
+  indicating a stronger preference.
+* You run N rounds of the election to fill N seats,
+  each round electing one candidate.
+* When a candidate is elected, we may *allocate* ballots
+  to that candidate, which means we consider them used-up
+  and we remove them from the election.  If you vote
+  for candidate A1, and candidate A1 wins the first round,
+  your ballot might get "allocated" to candidate A1 and
+  ignored for the rest of the election.
+* Alternatively, we may *re-weigh* the
+  ballots of voters who voted for that candidate.
+  That means we reduce the voting power of those ballots.
+  If in the election, you voted for candidate A1, and they
+  win the first round, in the second round your vote will
+  count for less.  If I gave A1 a score of 0, my ballot
+  would still be at full strength.
+
+The difference between Allocated Score Voting and Reweighted
+Range voting is how they allocate vs. reweigh ballots.
+Allocated Score Voting allocates ballots, but Reweighted
+Range Voting never does--every vote is counted in every round.
+Also, the two systems use different formulae to compute the
+new weight of a ballot after each round.
+
+**starvote** ships a sample election that does a good job of
+showing how this can work, in
+`allocated test_elections/test_election_reweighted_range_sample_election.starvote`.
+This election is very similar to the 60/40 election I used
+as an example in the description above.  It uses Reweighted Range Voting
+to fill three seats, and each vote has a maximum score of 10.
+60 of the voters prefer party A, and give high scores to candidates A1, A2, and A3.
+40 of the voters prefer party B, and give high scores to candidates B1 and B2.
+
+You can run the election in the `starvote` main directory with this command:
+
+```
+% python3 -m starvote test_elections/test_election_reweighted_range_sample_election.starvote
+```
+
+To see how the tabulation works using Allocated Score Voting, run this:
 
 ```
 % python3 -m starvote -m allocated test_elections/test_election_reweighted_range_sample_election.starvote
+```
+
+And to see the tyrrany of the majority in practice, using simple Bloc STAR Voting, run this:
+
+```
+% python3 -m starvote -m bloc test_elections/test_election_reweighted_range_sample_election.starvote
 ```
 
 ### Warning
@@ -802,6 +905,12 @@ or otherwise freely redistributable.
 
 
 ## Changelog
+
+**2.0.4** - *under development*
+
+* Doc changes.  Standardized on the spelling "multiwinner",
+  instead of "multi-winner".
+
 
 **2.0.3** - *2023/06/01*
 
