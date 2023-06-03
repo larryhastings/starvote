@@ -180,13 +180,21 @@ def election(method, ballots, *,
     ):
 ```
 
+`election` tabulates an election based on your
+parameter and returns a `list` containing the
+winners. (Even for single-winner STAR Voting--in
+that case, the list will only contain one element.)
+
 `method` specifies which election system you want to use.
 The allowed values are
-`starvote.STAR`,
-`starvote.Bloc_STAR`,
-`starvote.Proportional_STAR`,
+`starvote.STAR_Voting`,
+`starvote.Bloc_STAR_Voting`,
+`starvote.Allocated_Score_Voting`,
 and
-`starvote.Reweighted_Range`.
+`starvote.Reweighted_Range_Voting`.  (Since those are a lot to
+type, `starvote` also provides nicknames, respectively:
+`starvote.star`, `starvote.bloc`, `starvote.allocated`,
+and `starvote.rrv`.)
 
 `ballots` should be an iterable containing individual ballots.
 Ballots are `dict` objects, mapping the candidate to that ballot's
@@ -197,33 +205,31 @@ the score must be an `int`.
 on any ballot.
 
 `seats` specifies how many seats the election should fill.
-STAR Voting is a single-winner method, so this should be 1 when
-using STAR Voting; for all the other methods,
-`seats` must be greater than or equal to 2.
+STAR Voting is a single-winner method, so this should be
+`1` when using STAR Voting; for all the other methods,
+`seats` must be greater than or equal to `2`.
 
 `verbosity` specifies how much output you want.
-The default of 0 suppresses input; `verbosity=1` produces
-human-readable output, and `verbosity=2` adds some additional
-information (the "preferences matrix" for STAR runoff rounds).
+The current supported values are `0` (no output)
+and `1` (output); values higher than `1` are
+currently equivalent to `1`.
 
-`print` lets you specify your own printing function.  By default
-`election` will use `builtins.print`; your replacement `print`
-function should have the same signature.
+`print` lets you specify your own printing function.
+By default `election` will use `builtins.print`;
+your replacement `print` function should have the
+same signature.
 
-`election` tabulates the election and returns a list of the winners.
-(Even for single-winner STAR Voting--in that case, the list will
-only contain one element.)
 
 
 ### Functions for specific electoral systems
 
-`starvote` also exports functions that implement each of
+`starvote` also exports functions implementing each of
 the supported electoral systems:
 
 * `star_voting` implements single-winner STAR Voting.
 * `bloc_star_voting` implements multi-winner Bloc STAR Voting.
 * `allocated_score_voting` implements Allocated Score Voting.
-* `reweighted_range` implements Reweighted Range Voting.
+* `reweighted_range_voting` implements Reweighted Range Voting.
 
 These functions take much the same signature as `election`,
 with the following changes:
@@ -237,26 +243,29 @@ with the following changes:
   is required--it doesn't have a default.  (A required
   keyword-only parameter is pretty rare in Python!)
 * Note that these functions also always return a list,
-  including `star`.
+  even `star_voting`.
 
 #### Reference implementation of Allocated Score Voting
 
-`starvote` also ships a copy of the reference implementation
-of Allocated Score Voting.  This requires both NumPy and Pandas,
-so it's not imported by default.  (I didn't want `starvote`
-to have any external dependencies.  The unit test suite runs
-correctly whether or not these external dependencies are installed.)
+`starvote` ships a copy of the reference implementation
+of Allocated Score Voting.  Since this requires both NumPy
+and Pandas, it's not imported by default.  (I didn't want
+`starvote` to have any external dependencies.  The unit
+test suite runs correctly whether or not these external
+dependencies are installed.)
 
-You can import it with `import starvote.reference`, and you can
-integrate it into the `starvote` module by calling
-`starvote.reference.monkey_patch()`.  Its implementation
-function can be found at
+You can import it with `import starvote.reference`,
+and you can integrate it into the `starvote` module by
+calling `starvote.reference.monkey_patch()`.  Its
+implementation function can be found at
 `starvote.reference.allocated_score_voting_reference`,
 and it's added to `methods` under the name
 `'Allocated Score Voting (reference)'`.
 
-*Note:* the reference implementation doesn't support tiebreakers.
-`tiebreaker` must be `None`.
+*Note:* the reference implementation doesn't support
+tiebreakers.  `allocated_score_voting_reference` does
+accept a `tiebreaker` argument, but currently it *must*
+be `None`.
 
 ### Ties
 
@@ -271,31 +280,68 @@ through the `tiebreaker` parameter to `election` and the election-specific
 functions.  **starvote** also has two predefined tiebreaker functions,
 but you can substitute your own--or none at all.
 
+The default tiebreaker in **starvote** is
+`predefined_permutation_tiebreaker`, passing
+in `candidates=None`.
+
 #### `predefined_permutation_tiebreaker`
 
 The main tiebreaker for **starvote** is
 `predefined_permutation_tiebreaker`.  This
+is a class; you should instantiate it and
+pass in the instance as the `tiebreaker`
+argument when you run the election.
+
+`predefined_permutation_tiebreaker`
 resolves the tie in favor of an ordered
-list of candidates--the candidate(s) that
-appear earliest in the list win the tie.
+list of candidates.
 
-If you don't pass in a list of candidates,
-`predefined_permutation_tiebreaker` will scan
-the ballots at the start of the election to
-produce a list of all the candidates, then
-randomly shuffle the list and use *that* list
-as the list of candidates.
+Given these three variables, defined
+at the time it breaks the tie:
 
-`predefined_permutation_tiebreaker` prints
-the permuted list of candidates at election
-initialization time, and prints its process
+* `candidates`, an ordered list of *all*
+  candidates participating in the election,
+* `tie`, an iterable of the tied candidates, and
+* `desired`, the number of winners we wanted.
+
+`predefined_permutation_tiebreaker` computes
+the winners of the tie as follows:
+
+```
+winners = [c for c in candidates if c in tie][:desired]
+```
+
+In other words, it returns a *desired*-length
+subset of *tie*, preferring candidates that
+appear earlier in *candidates* over those that
+appear later.
+
+`predefined_permutation_tiebreaker` accepts
+a `candidates` argument, which should be
+an ordered pre-chosen list of all candidates.
+The default value is `None`, which instructs
+`predefined_permutation_tiebreaker` to scan
+the ballots at the start of the election,
+produce its own list of all the candidates,
+randomly shuffle that list, and use that list
+as the `candidates` list.
+
+If you pass in your own `candidates` list,
+you may also pass in a string for the
+`description` keyword-only parameter, which
+should be text describing the source of
+this ordered list of candidates.
 
 #### `on_demand_random_tiebreaker`
 
-If you prefer you can use `on_demand_random_tiebreaker`
+If you prefer more unpredictability in your life,
+you can choose `on_demand_random_tiebreaker`
 to break ties.  `on_demand_random_tiebreaker` will
 simply pick a random candidate (or candidates)
 on demand, using Python's `random.sample` function.
+`on_demand_random_tiebreaker` is a function;
+you should simply pass it in as the `tiebreaker`
+parameter.
 
 #### `UnbreakableTieError`
 
@@ -316,7 +362,7 @@ or a class.
 A custom tiebreaker function should have this signature:
 
 ```Python
-def custom_tiebreaker(options, candidates, desired, exception):
+def custom_tiebreaker(options, tie, desired, exception):
 ```
 
 Here's what these four parameters will contain:
@@ -341,7 +387,7 @@ Here's what these four parameters will contain:
     false, `print_candidates` attempts to sort the
     candidates before printing them.
 
-* `candidates` is a list of the tied candidates.
+* `tie` is a list of the tied candidates.
 
 * `desired` is the desired number of winners.
 
@@ -349,11 +395,12 @@ Here's what these four parameters will contain:
   tie.  If you can't break the tie, you should raise
   this object.
 
-Note that **starvote** will parse the tiebreaker function's
-docstring.  The first line of the docstring will be used
-as a "heading" printed during election initialization, with
-the rest of the docstring printed as the body of that heading
-if `options.verbosity` is 1 or greater.
+Note that **starvote** will also parse the tiebreaker
+function's docstring.  The first line of the docstring
+will be used as a "heading" printed during election
+initialization, with the rest of the docstring will be
+printed as the body of that heading if `options.verbosity`
+is 1 or greater.
 
 You can also write a custom tiebreaker class.  The only
 requirement is that the class inherits from
@@ -409,29 +456,29 @@ the `winners` variable will contain the list `['Chuck']`.
 The example also produces this output:
 
 ```
-[STAR]
+[STAR Voting]
   Tabulating 3 ballots.
   Maximum score is 5.
-[STAR: Initializing ordered permutation tiebreaker]
+[STAR Voting: Initializing ordered permutation tiebreaker]
   Computing a random permutation of all the candidates.
   Permuted list of candidates:
-    1. Chuck
-    2. Amy
-    3. Brian
+    1. Brian
+    2. Chuck
+    3. Amy
   Tiebreaker candidates will be selected from this list, preferring candidates with lower numbers.
-[STAR: Scoring Round]
+[STAR Voting: Scoring Round]
   The two highest-scoring candidates advance to the next round.
     Chuck -- 13 (average 4+1/3) -- First place
     Amy   -- 10 (average 3+1/3) -- Second place
     Brian --  9 (average 3)
   Chuck and Amy advance.
-[STAR: Automatic Runoff Round]
+[STAR Voting: Automatic Runoff Round]
   The candidate preferred in the most head-to-head matchups wins.
     Chuck         -- 2 -- First place
     Amy           -- 1
     No Preference -- 0
   Chuck wins.
-[STAR: Winner]
+[STAR Voting: Winner]
   Chuck
 ```
 
@@ -729,6 +776,13 @@ or otherwise freely redistributable.
 
 
 ## Changelog
+
+**2.0.2** - *2023/05/27*
+
+* Renamed the `tiebreaker` parameter `candidates` to `tie`.
+* Evicted some testing-only tiebreakers from the `starvote`
+  module.  They're now in their own script, which only gets
+  loaded when working with the test suite.
 
 **2.0.1** - *2023/05/27*
 

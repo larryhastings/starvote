@@ -43,4 +43,3 @@ ballots_file should be a path to a file ending either in '.csv' or '.star':
       When loading a .csv file, starvote defaults to STAR Voting,
       one seat, verbosity 1, and
     * .starvote files must be in "starvote format".
-

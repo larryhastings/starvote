@@ -13,22 +13,27 @@ def preload_local_starvote():
     Pre-load the local "starvote" module, to preclude finding
     an already-installed one on the path.
     """
-    from os.path import abspath, dirname, isfile, join, normpath
     import sys
-    starvote_dir = abspath(dirname(sys.argv[0]))
+    import pathlib
+    argv_0 = pathlib.Path(sys.argv[0])
+    starvote_dir = argv_0.parent.resolve()
     while True:
-        starvote_init = join(starvote_dir, "starvote/__init__.py")
-        if isfile(starvote_init):
+        starvote_init = starvote_dir / "starvote" / "__init__.py"
+        if starvote_init.is_file():
             break
-        starvote_dir = normpath(join(starvote_dir, ".."))
-    sys.path.insert(1, starvote_dir)
+        starvote_dir = starvote_dir.parent
+    sys.path.insert(0, str(starvote_dir))
     import starvote
-    return pathlib.Path(starvote_dir)
+    return starvote_dir
 
 starvote_dir = preload_local_starvote()
 import starvote
 
+#
+# Useless testing-only tiebreakers
+#
 
+import harness
 
 def inject_test_elections(cls, argv): # pragma: no cover
     """
@@ -64,7 +69,7 @@ def inject_test_elections(cls, argv): # pragma: no cover
 
             if smushed_and_lowered_expected != smushed_and_lowered_got: # pragma: no cover
                 self.maxDiff = 2**32
-                self.assertEqual("\n".join(expected), "\n".join(got))
+                self.assertEqual("\n".join(expected) + "\n", "\n".join(got) + "\n")
         return run_test
 
     work = []
@@ -227,11 +232,11 @@ class StarvoteTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             o.break_tie(text="foo", candidates=['a', 'b'], desired=3)
 
-        o = starvote.Options(method=starvote.STAR_Voting, verbosity=1, tiebreaker=lambda options, candidates, desired, tie: 3.1415)
+        o = starvote.Options(method=starvote.STAR_Voting, verbosity=1, tiebreaker=lambda options, tie, desired, exception: 3.1415)
         with self.assertRaises(TypeError):
             o.break_tie(text="foo", candidates=['a', 'b'], desired=1)
 
-        o = starvote.Options(method=starvote.STAR_Voting, verbosity=1, tiebreaker=lambda options, candidates, desired, tie: ['a', 'b', 'c', 'd', 'e'])
+        o = starvote.Options(method=starvote.STAR_Voting, verbosity=1, tiebreaker=lambda options, tie, desired, exception: ['a', 'b', 'c', 'd', 'e'])
         with self.assertRaises(TypeError):
             o.break_tie(text="foo", candidates=['a', 'b'], desired=1)
 
@@ -1121,5 +1126,7 @@ class StarvoteTests(unittest.TestCase):
             '1000000000000000000000000000000000000000000000000000000000000000000000000001',
             '1000000000000000000000000000000000000000000000000000000000000000000000000001')
 
-inject_test_elections(StarvoteTests, sys.argv[1:])
-unittest.main()
+if __name__ == '__main__':
+    # is_ok imports this to get the test tiebreakers
+    inject_test_elections(StarvoteTests, sys.argv[1:])
+    unittest.main()

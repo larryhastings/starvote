@@ -1,14 +1,17 @@
 #!/usr/bin/env python3
 
 import glob
-import os.path
+import os
+import pathlib
 import sys
+
+argv_0 = pathlib.Path(sys.argv[0])
 
 try:
     import pandas
     import numpy
 except ImportError:
-    print(f"{os.path.basename(sys.argv[0])} requires both Pandas and NumPy.")
+    print(f"{argv_0.name} requires both Pandas and NumPy.")
     print()
     print("Run this:")
     print(f"  % {sys.executable} -m pip install pandas numpy")
@@ -19,15 +22,16 @@ def preload_local_starvote():
     Pre-load the local "starvote" module, to preclude finding
     an already-installed one on the path.
     """
-    from os.path import abspath, dirname, isfile, join, normpath
     import sys
-    starvote_dir = abspath(dirname(sys.argv[0]))
+    import pathlib
+    argv_0 = pathlib.Path(sys.argv[0])
+    starvote_dir = argv_0.parent.resolve()
     while True:
-        starvote_init = join(starvote_dir, "starvote/__init__.py")
-        if isfile(starvote_init):
+        starvote_init = starvote_dir / "starvote" / "__init__.py"
+        if starvote_init.is_file():
             break
-        starvote_dir = normpath(join(starvote_dir, ".."))
-    sys.path.insert(1, starvote_dir)
+        starvote_dir = starvote_dir.parent
+    sys.path.insert(0, str(starvote_dir))
     import starvote
     return starvote_dir
 
@@ -35,6 +39,14 @@ starvote_dir = preload_local_starvote()
 import starvote.reference
 
 starvote.reference.monkey_patch()
+
+# load test scaffolding stuff (e.g. custom tiebreakers)
+# from unit test suite.
+# we don't actually need the symbols from inside,
+# they monkey-patch themselves in.
+sys.path.insert(0, str(starvote_dir / "tests"))
+import harness
+
 
 os.chdir(starvote_dir)
 

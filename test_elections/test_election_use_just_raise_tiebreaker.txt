@@ -3,8 +3,6 @@
   Maximum score is 5.
 [STAR Voting: Just raise tiebreaker]
   Raises the exception immediately.
-  Don't actually use this, it's pointless.
-  It's only useful for coverage in the test suite.
 [STAR Voting: Scoring Round]
   The two highest-scoring candidates advance to the next round.
     Amy   -- 15 (average 3) -- Tied for first place

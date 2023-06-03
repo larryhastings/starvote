@@ -1,8 +1,16 @@
 #!/usr/bin/env python3
 
+##
+## TODO
+##
+## * write a unit test that confirms "example.py"
+##   runs, and the output in README.md is up to date
+##   (I keep breaking it / its output keeps getting outdated.)
+##
+
 __doc__ = "An election tabulator for the STAR electoral system, and others"
 
-__version__ = "2.0.1"
+__version__ = "2.0.2"
 
 __all__ = [
     'Allocated_Score_Voting', # Method
@@ -220,7 +228,7 @@ class Tiebreaker:
     def initialize(self, options, ballots): # pragma: no cover
         pass
 
-    def __call__(self, options, candidates, desired, exception): # pragma: no cover
+    def __call__(self, options, tie, desired, exception): # pragma: no cover
         pass
 
     def print_description(self, options, description):
@@ -260,8 +268,8 @@ class TiebreakerFunctionWrapper(Tiebreaker):
             with options.heading(self.heading):
                 self.print_description(options, self.description)
 
-    def __call__(self, options, candidates, desired, exception):
-        return self.function(options, candidates, desired, exception)
+    def __call__(self, options, tie, desired, exception):
+        return self.function(options, tie, desired, exception)
 
 
 tiebreakers = {'None': None, 'none': None}
@@ -271,51 +279,23 @@ def _add_tiebreaker(o):
     return o
 
 @_add_tiebreaker
-def on_demand_random_tiebreaker(options, candidates, desired, exception):
+def on_demand_random_tiebreaker(options, tie, desired, exception):
     """
     On-demand random tiebreaker
 
     Tie-breaking winners will be chosen at random, on demand.
     """
-    result = random.sample(population=candidates, k=desired)
+    result = random.sample(population=tie, k=desired)
     with options.heading("On-demand random tiebreaker"):
         if options.verbosity:
             two_candidates = "two candidates" if desired == 2 else "one candidate"
             options.print(f"Choosing {two_candidates} from this list:")
-            options.print_candidates(candidates)
+            options.print_candidates(tie)
             if desired == 1:
                 options.print(f"Randomly chose winner: {result[0]}")
             else:
                 options.print(f"Randomly chose winners: {' and '.join(result)}")
     return result
-
-@_add_tiebreaker
-def _just_raise_tiebreaker(options, candidates, desired, exception):
-    """
-    Just raise tiebreaker
-
-
-    Raises the exception immediately.
-    Don't actually use this, it's pointless.
-    It's only useful for coverage in the test suite.
-
-
-    """
-    raise exception
-
-@_add_tiebreaker
-def _only_heading_tiebreaker(options, candidates, desired, exception): # pragma: nocover
-    """
-    This tiebreaker only has a heading, no description.
-
-
-    """
-    raise exception
-
-@_add_tiebreaker
-def _no_description_tiebreaker(options, candidates, desired, exception):
-    # don't use this, it's only for testing
-    raise exception
 
 
 @_add_tiebreaker
@@ -368,14 +348,14 @@ class predefined_permutation_tiebreaker(Tiebreaker):
                 options.print_candidates(self.candidates, numbered=True)
                 options.print("Tiebreaker candidates will be selected from this list, preferring candidates with lower numbers.")
 
-    def __call__(self, options, candidates, desired, exception):
-        subset = set(candidates)
-        result = [candidate for candidate in self.candidates if candidate in subset][:desired]
+    def __call__(self, options, tie, desired, exception):
+        tie_set = set(tie)
+        result = [candidate for candidate in self.candidates if candidate in tie_set][:desired]
         if options.verbosity:
             with options.heading("Predefined permutation tiebreaker"):
                 two = "two " if desired == 2 else ""
                 options.print(f"Choosing the earliest {two}of these candidates from the permuted list:")
-                options.print_candidates(candidates)
+                options.print_candidates(tie)
                 if desired == 1:
                     options.print(f"Selected winner: {result[0]}")
                 else:
