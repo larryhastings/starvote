@@ -186,15 +186,20 @@ winners. (Even for single-winner STAR Voting--in
 that case, the list will only contain one element.)
 
 `method` specifies which election system you want to use.
-The allowed values are
-`starvote.STAR_Voting`,
-`starvote.Bloc_STAR_Voting`,
-`starvote.Allocated_Score_Voting`,
-and
-`starvote.Reweighted_Range_Voting`.  (Since those are a lot to
+The allowed values are:
+
+* `starvote.STAR_Voting`,
+* `starvote.Bloc_STAR_Voting`,
+* `starvote.Allocated_Score_Voting`, and
+* `starvote.Reweighted_Range_Voting`.
+
+Since those are a lot to
 type, `starvote` also provides nicknames, respectively:
-`starvote.star`, `starvote.bloc`, `starvote.allocated`,
-and `starvote.rrv`.)
+
+* `starvote.star`,
+* `starvote.bloc`,
+* `starvote.allocated`, and
+* `starvote.rrv`.
 
 `ballots` should be an iterable containing individual ballots.
 Ballots are `dict` objects, mapping the candidate to that ballot's
