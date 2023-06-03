@@ -185,8 +185,8 @@ parameter and returns a `list` containing the
 winners. (Even for single-winner STAR Voting--in
 that case, the list will only contain one element.)
 
-`method` specifies which election system you want to use.
-The allowed values are:
+`method` specifies which election system you want to use,
+via predefined `Method` objects. The allowed values are:
 
 * `starvote.STAR_Voting`,
 * `starvote.Bloc_STAR_Voting`,
@@ -259,16 +259,27 @@ and Pandas, it's not imported by default.  (I didn't want
 test suite runs correctly whether or not these external
 dependencies are installed.)
 
-You can import it with `import starvote.reference`,
-and you can integrate it into the `starvote` module by
-calling `starvote.reference.monkey_patch()`.  Its
-implementation function can be found at
-`starvote.reference.allocated_score_voting_reference`,
-and it's added to `methods` under the name
-`'Allocated Score Voting (reference)'`.
+You can import it with `import starvote.reference`;
+the directly-callable function is
+`starvote.reference.allocated_score_voting_reference`.
+You can also use the `Method` object
+
+If you want to integrate it into the `starvote` module,
+call`starvote.reference.monkey_patch()`.  This does
+three things:
+
+* Adds the function to the `starvote` module directly,
+  as `starvote.allocated_score_voting_reference`.
+* Adds it to `starvote.__all__` so that symbol
+  gets brought in by `from starvote import *`.
+*
+* Adds the appropriate `Method` object
+  to `starvote.methods`, using the name
+  `'Allocated Score Voting (reference)'`
+  and the nickname `allocated_r`.
 
 *Note:* the reference implementation doesn't support
-tiebreakers.  `allocated_score_voting_reference` does
+tiebreakers.  `allocated_score_voting_reference` *does*
 accept a `tiebreaker` argument, but currently it *must*
 be `None`.
 
@@ -732,7 +743,7 @@ the number of seats with `-s`,
 and the maximum score with `-m`:
 
 ```
-% python3 -m starvote -e Reweighted_Range -s 3 -m 10 sample_polls/sample_poll_reweighted_range_3_seats.csv
+% python3 -m starvote test_elections/test_election_reweighted_range_sample_election.starvote
 ```
 
 ### Warning
@@ -781,6 +792,22 @@ or otherwise freely redistributable.
 
 
 ## Changelog
+
+**2.0.3** - *2023/05/27*
+
+* Normalized nomenclature for `Method` objects.  Now,
+  every method has an official correctly-spelled
+  correctly-capitalized name, and exactly one "nickname".
+  The nickname is always lowercase, and would return
+  True for `isidentifier`.  These are used in the
+  `starvote.method` map; a variant of these names is
+  also bound as module attributes (changed so they're
+  valid identifiers).
+* Improved `starvote.reference.monkey_patch`.  It's now
+  data-driven and thus more reliable.
+* Added `starvote.reference.__all__`, in case you want
+  to `from starvote.reference import *`.
+* Doc fixes.
 
 **2.0.2** - *2023/05/27*
 

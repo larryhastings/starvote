@@ -147,11 +147,24 @@ tied_election = """
 class StarvoteTests(unittest.TestCase):
 
     def test_import_star(self):
-        module = "from starvote import *"
+        # test that import * works
+        # (it will fail if there's a bug with the definition of __all__)
 
+        # test should still work even if we can't load numpy / pandas
+        try:
+            import starvote.reference
+            module = "import starvote.reference\nstarvote.reference.monkey_patch()\ndel starvote\nfrom starvote import *"
+            reference_imported_ok = True
+        except ImportError: # pragma: no cover
+            module = "from starvote import *"
+            reference_imported_ok = False
+
+        import starvote
         g = {}
         exec(module, g, g)
         self.assertEqual(g['STAR_Voting'], starvote.STAR_Voting)
+        if reference_imported_ok:
+            self.assertEqual(g['allocated_r'], starvote.reference.allocated_r)
 
     def test_random_tiebreaker(self):
         election = tied_election.format(options="tiebreaker = on_demand_random_tiebreaker")
@@ -374,7 +387,7 @@ class StarvoteTests(unittest.TestCase):
         except ImportError: # pragma: no cover
             return
 
-        kwargs['method'] = reference.Allocated_Score_Voting_reference
+        kwargs['method'] = reference.allocated_r
         kwargs['tiebreaker'] = None
         reference_results = starvote.election(**kwargs)
         self.assertEqual(reference_results, results)

@@ -3,7 +3,7 @@
 
 
 [options]
-    method = RRV
+    method = rrv
     seats = 3
     maximum score = 10
     verbosity = 1

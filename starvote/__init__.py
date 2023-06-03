@@ -3,21 +3,23 @@
 ##
 ## TODO
 ##
-## * write a unit test that confirms "example.py"
-##   runs, and the output in README.md is up to date
-##   (I keep breaking it / its output keeps getting outdated.)
+## * write a unit test that checks the code examples
+##   in README.md are up to date
+##     * confirms "example.py" and the output in README.md matches
+##     * confirms the "multi-winner elections" cmdline works
+##   (I keep breaking these.)
 ##
 
 __doc__ = "An election tabulator for the STAR electoral system, and others"
 
-__version__ = "2.0.2"
+__version__ = "2.0.3"
 
 __all__ = [
     'Allocated_Score_Voting', # Method
-    'Allocated', # Method (nickname)
+    'allocated', # Method (nickname)
     'allocated_score_voting', # function
     'Bloc_STAR_Voting', # Method
-    'Bloc', # Method (nickname)
+    'bloc', # Method (nickname)
     'bloc_star_voting', # function
     'Method', # class for method metadata
     'methods', # maps string to Methods
@@ -28,10 +30,10 @@ __all__ = [
     'parse_starvote', # function
     'on_demand_random_tiebreaker', # tiebreaker function
     'Reweighted_Range_Voting', # Method
-    'RRV', # Method (nickname)
+    'rrv', # Method (nickname)
     'reweighted_range_voting', # function
     'STAR_Voting', # Method
-    'STAR', # Method (name)
+    'star', # Method (name)
     'star_voting', # function
     'Tiebreaker', # class
     'tiebreakers', # maps string to tiebreakers
@@ -1366,8 +1368,8 @@ def star_voting(ballots, *,
     return options.election_result(winners, tie)
 
 
-STAR_Voting = STAR = Method("STAR Voting", star_voting, False)
-for _ in ('STAR Voting', 'STAR', 'star'):
+STAR_Voting = star = Method("STAR Voting", star_voting, False)
+for _ in ('STAR Voting', 'star'):
     methods[_] = STAR_Voting
 
 
@@ -1442,8 +1444,8 @@ def bloc_star_voting(ballots, *,
         tie = e
     return options.election_result(winners, tie)
 
-Bloc = Bloc_STAR_Voting = Method("Bloc STAR", bloc_star_voting, True)
-for _ in ('Bloc STAR Voting', 'Bloc', 'bloc'):
+Bloc_STAR_Voting = bloc = Method("Bloc STAR", bloc_star_voting, True)
+for _ in ('Bloc STAR Voting', 'bloc'):
     methods[_] = Bloc_STAR_Voting
 
 
@@ -1687,8 +1689,8 @@ def allocated_score_voting(ballots, *,
         tie = e
     return options.election_result(winners, tie)
 
-Allocated_Score_Voting = Allocated = Method("Allocated Score Voting", allocated_score_voting, True)
-for _ in ('Allocated Score Voting', 'Allocated', 'allocated'):
+Allocated_Score_Voting = allocated = Method("Allocated Score Voting", allocated_score_voting, True)
+for _ in ('Allocated Score Voting', 'allocated'):
     methods[_] = Allocated_Score_Voting
 
 
@@ -1828,8 +1830,8 @@ def reweighted_range_voting(ballots, *,
         tie = e
     return options.election_result(winners, tie)
 
-Reweighted_Range_Voting = RRV = Method("Reweighted Range Voting", reweighted_range_voting, True)
-for _ in ('Reweighted Range Voting', 'RRV', 'rrv'):
+Reweighted_Range_Voting = rrv = Method("Reweighted Range Voting", reweighted_range_voting, True)
+for _ in ('Reweighted Range Voting', 'rrv'):
     methods[_] = Reweighted_Range_Voting
 
 
@@ -2473,7 +2475,7 @@ def main(argv, print=builtins.print):
     def load_election_from_csv_file(path):
         return {
             'ballots': load_csv_file(path),
-            'method': STAR,
+            'method': STAR_Voting,
             'verbosity': 1,
             'tiebreaker': None,
             }
@@ -2533,7 +2535,7 @@ def main(argv, print=builtins.print):
 
     if (winners or tie) and (not kwargs.get('verbosity', 0)):
         # no output!  print the results ourselves.
-        fake_options = Options(STAR, print=text_print, verbosity=1, seats=1, tiebreaker=None, maximum_score=5)
+        fake_options = Options(STAR_Voting, print=text_print, verbosity=1, seats=1, tiebreaker=None, maximum_score=5)
         fake_options.election_result(winners, tie, raise_tie=False)
 
     s = text_getvalue()

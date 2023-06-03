@@ -149,7 +149,17 @@ def allocated_score_voting_reference(ballots, *,
     return winners
 
 
-Allocated_Score_Voting_reference = starvote.Method("Allocated Score Voting (reference)", allocated_score_voting_reference, True)
+Allocated_Score_Voting_reference = allocated_r = starvote.Method("Allocated Score Voting (reference)", allocated_score_voting_reference, True)
+methods = {
+    'Allocated Score Voting (reference)': Allocated_Score_Voting_reference,
+    'allocated_r': Allocated_Score_Voting_reference,
+    }
+
+__all__ = [
+    "Allocated_Score_Voting_reference", # Method
+    "allocated_r", # Method (nickname)
+    "allocated_score_voting_reference", # function
+    ]
 
 def monkey_patch():
     """
@@ -157,12 +167,11 @@ def monkey_patch():
     to the available electoral systems provided by starvote, under the name
     'Reference Proportional STAR'.
     """
-    for name in (
-        'Allocated Score Voting (reference)',
-        'Allocated-R',
-        'allocated-r',
-        ):
-        starvote.methods[name] = Allocated_Score_Voting_reference
-    starvote.Allocated_Score_Voting_reference = Allocated_Score_Voting_reference
-    starvote.allocated_score_voting_reference = allocated_score_voting_reference
-    starvote.__all__.append('Allocated_Score_Voting_reference')
+    starvote.methods.update(methods)
+
+    g = globals()
+
+    for name in __all__:
+        symbol = g[name]
+        setattr(starvote, name, symbol)
+        starvote.__all__.append(name)
