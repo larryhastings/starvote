@@ -694,7 +694,8 @@ encoding is `'utf-8'`.
 
 ### Command-line module
 
-The `starvote` module supports being run as a script (`python -m starvote`).
+The `starvote` module supports being run as a script
+(`python -m starvote`).
 Run it without arguments to see usage.
 
 To use, specify the path to a single file on the
@@ -707,11 +708,14 @@ CSV files should end with the file extension `.csv`,
 and be in
 [`https://star.vote/`](https://star.vote/)
 format.  By default elections in CSV files are run
-using STAR Voting.
+using STAR Voting, for one seat, with `verbosity=1`
+and the default tiebreaker.
 
 Alternatively, the path may be a *starvote format* file.
-*starvote format* files should end with the file extension `.starvote`
-and contain a *starvote format election* in UTF-8 format.
+*starvote format* files should end with the file extension
+`.starvote` and contain a *starvote format election* in
+UTF-8 format.  *starvote format elections* explicitly
+specify all the parameters of the election.
 
 For example, you can run this from the root of the
 source-code repository:
@@ -725,25 +729,26 @@ to see how **starvote** handles ties during the automatic runoff round.
 
 ## Multiple-winner elections
 
-**starvote** also implements several multi-winner electoral systems:
-
-Simply instantiate your `Poll` object passing in the enum constant
-`starvote.Bloc_STAR`, `starvote.Proportional_STAR`,
-or `starvote.Reweighted_Range`
-for the `electoral_system` parameter, and the number of seats in
-the `seats` keyword-only parameter:
+**starvote** also implements several multi-winner electoral systems.
+All you need to do is pass in one of the multi-winner methods, such as
+`starvote.bloc`, `starvote.allocated`,
+or `starvote.rrv`, when you call `election`:
 
 ```Python
-poll = starvote.Poll(electoral_system=starvote.Bloc_STAR, seats=2)
+poll = election(starvote.bloc, ballots, seats=2)
 ```
 
 You can experiment with these with the command-line version of the
-module, too.  You can specify the electoral system with `-e`,
+module too.  Simply specify the method with `-m`,
 the number of seats with `-s`,
-and the maximum score with `-m`:
+and the maximum score with `-x`.
+These will override the settings from inside a *starvote format* file
+(and the default settings for CSV files).
+For example, you could run the Reweighted Range Voting sample
+with Allocated Score Voting instead by running this:
 
 ```
-% python3 -m starvote test_elections/test_election_reweighted_range_sample_election.starvote
+% python3 -m starvote -m allocated test_elections/test_election_reweighted_range_sample_election.starvote
 ```
 
 ### Warning
@@ -767,7 +772,8 @@ development of this library.  Although Tim didn't have any input
 on the library itself--if you don't like the library it's 100%
 my fault!--he tirelessly answered all my questions about voting
 during its development, and convinced me to change my approach
-several times.
+several times.  In particular, Tim's feedback pushed me to
+develop the `tiebreaker` plug-in interface.
 
 
 ## License
