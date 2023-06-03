@@ -803,7 +803,7 @@ or otherwise freely redistributable.
 
 ## Changelog
 
-**2.0.3** - *2023/05/27*
+**2.0.3** - *2023/06/01*
 
 * Normalized nomenclature for `Method` objects.  Now,
   every method has an official correctly-spelled
@@ -819,19 +819,19 @@ or otherwise freely redistributable.
   to `from starvote.reference import *`.
 * Doc fixes.
 
-**2.0.2** - *2023/05/27*
+**2.0.2** - *2023/06/01*
 
 * Renamed the `tiebreaker` parameter `candidates` to `tie`.
 * Evicted some testing-only tiebreakers from the `starvote`
   module.  They're now in their own script, which only gets
   loaded when working with the test suite.
 
-**2.0.1** - *2023/05/27*
+**2.0.1** - *2023/06/01*
 
 * Changed the nickname of the reference version of
   Allocated Score Voting to "Allocated-R".
 
-**2.0** - *2023/05/27*
+**2.0** - *2023/06/01*
 
 A complete rewrite!  The 1.x code base was pretty smelly.
 This codebase is much, much cleaner--and I think I squashed
