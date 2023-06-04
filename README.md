@@ -5,9 +5,11 @@
 ## Copyright 2023 by Larry Hastings
 
 [STAR voting](https://www.starvoting.org/) is a
-relatively-new [electoral system](https://en.wikipedia.org/wiki/Electoral_system).
-It's simple to vote and simple to tabulate.  While a completely fair and perfect
-electoral system is impossible, STAR Voting's approach makes reasonable tradeoffs
+relatively-new ["electoral system"](https://en.wikipedia.org/wiki/Electoral_system)--a
+method of running an election.  STAR Voting is simple--it's
+simple to vote, and simple to tabulate.  And while a completely
+fair and perfect electoral system is impossible,
+STAR Voting's approach makes sensible tradeoffs
 and avoids the worst pitfalls.  It's really great!
 
 This module, **starvote**, implements a STAR Voting tabulator.
@@ -39,7 +41,8 @@ Features:
     than Proportional STAR Voting, and its "never discard a voter"
     approach is appealing.
 
-* Implements the [Official Tiebreaker Protocol](https://www.starvoting.org/ties)
+* Implements the
+  [Official Tiebreaker Protocol](https://www.starvoting.org/ties)
   for STAR Voting and Bloc STAR Voting elections.
 
 * Provides a user-configurable final tiebreaker mechanism
@@ -66,8 +69,8 @@ Features:
 * Supports running elections specified in CSV files using
   [`https://star.vote/`](https://star.vote/) format.
 
-* Also supports running elections specified in a convenient custom
-  file format called *starvote format*.
+* Also supports running elections specified in
+  a convenient custom file format called *starvote format*.
 
 * *starvote* 2.0.3 passes its test suite with 100% coverage on
   all supported versions.
@@ -106,15 +109,15 @@ ballot scored both candidates the same, they have no preference.
 The candidate preferred by more ballots wins the election.  It's that
 simple!
 
-And you'll notice--in both steps, you examine every ballot.
-STAR Voting never throws away ballots.  When you vote, your
-vote always matters, every step of the way.
+And notice--you always examine every ballot.  STAR Voting never throws
+away ballots.  When you vote, your vote always matters,
+every step of the way.
 
 
 ## What's so good about STAR Voting?
 
 Electoral systems are a surprisingly deep topic.  They've been studied
-for hundreds of years, and there are many many different approaches.
+for hundreds of years, and there are many *many* different approaches.
 There are a number of desirable properties *and* undesirable properties
 that electoral systems can have.  And here's the bad news: it's
 *impossible* for there to be one best-possible voting system.  There
@@ -173,6 +176,11 @@ But here are some desirable properties STAR Voting doesn't have:
   [the spoiler effect,](https://en.wikipedia.org/wiki/Vote_splitting#%22Spoiler_effect%22)
   which is a worse property.  But achieving later-no-harm *and* avoiding the spoiler effect
   makes your electoral system even worse!
+
+(If there isn't a best-possible voting system, is there a worst-possible?  Maybe!
+If there *is* a worst electoral system, it's almost certainly
+[Plurality voting](https://en.wikipedia.org/wiki/Plurality_voting)...
+the predominant electoral system used here in the United States.  Sigh.)
 
 
 ## API
