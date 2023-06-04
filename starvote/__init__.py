@@ -15,8 +15,8 @@
 ##
 ## * restore printing the preference matrix (it's lurking in 1.x versions)
 ##
-## add Sequentially Spent Score Voting?  is that an official STAR-PR method?
-##    https://electowiki.org/wiki/Sequentially_Spent_Score
+## * add Sequentially Spent Score Voting?  is that an official STAR-PR method?
+##     https://electowiki.org/wiki/Sequentially_Spent_Score
 ##
 
 __doc__ = "An election tabulator for the STAR electoral system, and others"
