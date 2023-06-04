@@ -7,13 +7,14 @@
 ##   in README.md are up to date
 ##     * confirms "example.py" and the output in README.md matches
 ##     * confirms the "multi-winner elections" cmdline works
-##   (I keep breaking these.)
+##   (I keep breaking 'em.)
 ##
-## * alternate output format idea:
-##     * make something more computer-readable.
-##     * maybe just super-regular HTML, with classes and names to make it easy?
-##
-## * restore printing the preference matrix (it's lurking in 1.x versions)
+## * output
+##     * alternate output format idea:
+##         * make something more computer-readable.
+##         * maybe just super-regular HTML, with classes and names to make it easy?
+##     * allow displaying in floats
+##     * restore printing the preference matrix (it's lurking in 1.x versions)
 ##
 ## * add Sequentially Spent Score Voting?  is that an official STAR-PR method?
 ##     https://electowiki.org/wiki/Sequentially_Spent_Score

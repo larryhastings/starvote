@@ -1,6 +1,6 @@
 # starvote
 
-## A simple STAR Voting tabulator
+## A STAR Voting election tabulator
 
 ## Copyright 2023 by Larry Hastings
 
@@ -10,7 +10,7 @@ It's simple to vote and simple to tabulate.  While a completely fair and perfect
 electoral system is impossible, STAR Voting's approach makes reasonable tradeoffs
 and avoids the worst pitfalls.  It's really great!
 
-This module, **starvote**, implements a simple STAR Voting tabulator.
+This module, **starvote**, implements a STAR Voting tabulator.
 It requires Python 3.7 or newer, but also supports CPython 3.6.
 (**starvote** relies on dictionaries preserving insertion order,
 which is guaranteed as of Python 3.7, but happened to work in CPython 3.6.)
@@ -49,16 +49,17 @@ Features:
     all the candidates in advance of running the election,
     then breaks the tie in favor of the candidate(s) that
     appear earliest in the list.
-  - Alternatively, you may choose to randomly pick a candidate
-    (or candidates) from the tied candidates, on demand.
+  - Alternatively, you can break ties by randomly picking
+    a candidate (or candidates) from the tied candidates,
+    on demand.
   - You can also implement your own custom tiebreaker.
-  - If you specify that there should be no tiebreaker, in
-    the event of an unbreakable tie the election will raise
-    an `UnbreakableTieError` exception.
+  - If you specify that there should be no tiebreaker,
+    and the election ends in an unbreakable tie, it will
+    raise an `UnbreakableTieError` exception.
 
 * All election tabulation calculations are performed using only integers
   and [fractions](https://docs.python.org/3/library/fractions.html).
-  This guarantees the calculations are 100% consistent and accurate
+  This guarantees results are 100% consistent and accurate
   across all platforms.  Floating-point rounding errors are
   impossible--because floats are never used!
 
@@ -68,7 +69,7 @@ Features:
 * Also supports running elections specified in a convenient custom
   file format called *starvote format*.
 
-* *starvote* 2.0 passes its test suite with 100% coverage on
+* *starvote* 2.0.3 passes its test suite with 100% coverage on
   all supported versions.
 
 * *starvote* has no external dependencies.
@@ -104,6 +105,10 @@ If one has a higher score, that ballot prefers that candidate.  If the
 ballot scored both candidates the same, they have no preference.
 The candidate preferred by more ballots wins the election.  It's that
 simple!
+
+And you'll notice--in both steps, you examine every ballot.
+STAR Voting never throws away ballots.  When you vote, your
+vote always matters, every step of the way.
 
 
 ## What's so good about STAR Voting?
@@ -777,21 +782,21 @@ A straight multiwinner election simply means you're electing
 2 or more candidates instead of one candidate.  The candidates
 that get the most votes--or however the election is tabulated--win.
 
-But electing the most popular candidates in this way may be a
-poor representation of the electorate.  For example, if you
-have a city election to fill five seats where
-60% of the voters vote only for party A,
-and 40% of the voters vote only for party B,
-all five seats are likely going to go to party A candidates.
-And maybe that's unfair--it's the
+But electing only the most popular candidates can be a poor
+representation of the electorate.  Let's say you have a city
+election to fill five seats.  In this city, 60% of the voters
+vote only for party A, and 40% of the voters vote only for
+party B.  Bloc STAR Voting would very likely award all five
+seats to party A candidates.  Is that fair?  It seems like the
 ["tyranny of the majority".](https://en.wikipedia.org/wiki/Tyranny_of_the_majority)
 
 There's an alternate approach to apportioning seats, used
 in political systems across the world, called "Proportional
 Representation".  The idea is, you have N seats, and you
 assign portions of them based on representing portions of
-the populace.  In the above example, you'd want to give
-three seats to party A and two seats to party B.
+the populace.  In the above example, you'd *want* to give
+three seats to party A and two seats to party B.  What
+system could do that?
 
 Often proportional representation is done based on voting
 for parties rather than voting for candidates.  This is
@@ -799,11 +804,10 @@ called
 [Party-list proportional representation,](https://en.wikipedia.org/wiki/Party-list_proportional_representation)
 and it's used to elect governmental bodies across the world.
 
-But it's also possible to devise a voting method that permits
-voting directly for candidates, and produces proportional
-representation.  Allocated Score Voting and Reweighted Range
-Voting both accomplish this.  Both methods work something
-like this:
+But there are voting methods that permit voting directly for
+candidates and produces proportional representation.
+Allocated Score Voting and Reweighted Range Voting are
+two such methods.  They both work something like this:
 
 * Each vote is a number, with higher numbers
   indicating a stronger preference.
@@ -818,15 +822,15 @@ like this:
 * Alternatively, we may *re-weigh* the
   ballots of voters who voted for that candidate.
   That means we reduce the voting power of those ballots.
-  If in the election, you voted for candidate A1, and they
-  win the first round, in the second round your vote will
-  count for less.  If I gave A1 a score of 0, my ballot
-  would still be at full strength.
+  If in the election, you voted for candidate A1, and A1
+  wins the first round, in the second round your vote
+  will count for less.  But if I gave A1 a score of 0,
+  my ballot would still be at full strength.
 
 The difference between Allocated Score Voting and Reweighted
 Range voting is how they allocate vs. reweigh ballots.
-Allocated Score Voting allocates ballots, but Reweighted
-Range Voting never does--every vote is counted in every round.
+Allocated Score Voting allocates ballots, Reweighted Range
+Voting never does--with RRV every vote is counted in every round.
 Also, the two systems use different formulae to compute the
 new weight of a ballot after each round.  In Allocated Score,
 the new weight is based on how many excess voters were needed
@@ -835,17 +839,16 @@ to fill a quota (called a
 in Reweighted Range Voting, the new weight is based on the
 sum of the score(s) you contribute to the winning candidate(s).
 
-**starvote** ships a sample election that does a good job of
-showing how direct-elected proportional representation elections
-can work:
+**starvote** ships a sample election that nicely demonstrates
+how direct-elected proportional representation elections can work:
 
 ```
 test_elections/test_election_reweighted_range_sample_election.starvote
 ```
 
-This election is very similar to the 60/40 election I used
-as an example in the description above.  It uses Reweighted Range Voting
-to fill three seats, and each vote has a maximum score of 10.
+This election is like the example election I used in the description
+above.  It uses Reweighted Range Voting to fill three seats, and each
+vote has a maximum score of 10.
 60 of the voters prefer party A, and give high scores to candidates A1, A2, and A3;
 40 of the voters prefer party B, and give high scores to candidates B1 and B2.
 
@@ -861,7 +864,9 @@ To see how the tabulation works using Allocated Score Voting, run this:
 % python3 -m starvote -m allocated test_elections/test_election_reweighted_range_sample_election.starvote
 ```
 
-And to see the tyrrany of the majority in practice, using simple Bloc STAR Voting, run this:
+You'll notice that some votes get allocated--thrown away.  RRV doesn't do that.
+
+And to see the tyrrany of the majority in action, this command will tabulate the election using Bloc STAR Voting:
 
 ```
 % python3 -m starvote -m bloc test_elections/test_election_reweighted_range_sample_election.starvote
