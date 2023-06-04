@@ -72,10 +72,10 @@ Features:
 * Also supports running elections specified in
   a convenient custom file format called *starvote format*.
 
-* *starvote* 2.0.3 passes its test suite with 100% coverage on
+* **starvote** 2.0.3 passes its test suite with 100% coverage on
   all supported versions.
 
-* *starvote* has no external dependencies.
+* **starvote** has no external dependencies.
 
 
 ## A quick STAR Voting primer
@@ -375,7 +375,7 @@ should be text describing the source of
 this ordered list of candidates.
 
 Note that, if you pass in your own
-`candidates` list, *starvote*'s tabulation
+`candidates` list, **starvote**'s tabulation
 of the election will be 100% deterministic
 and repeatable.  You can run that election
 a million times and you'll always get the
