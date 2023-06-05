@@ -16,13 +16,10 @@
 ##     * allow displaying in floats
 ##     * restore printing the preference matrix (it's lurking in 1.x versions)
 ##
-## * add Sequentially Spent Score Voting?  is that an official STAR-PR method?
-##     https://electowiki.org/wiki/Sequentially_Spent_Score
-##
 
 __doc__ = "An election tabulator for the STAR electoral system, and others"
 
-__version__ = "2.0.3"
+__version__ = "2.0.4"
 
 __all__ = [
     'Allocated_Score_Voting', # Method
@@ -42,8 +39,11 @@ __all__ = [
     'Reweighted_Range_Voting', # Method
     'rrv', # Method (nickname)
     'reweighted_range_voting', # function
+    'Sequentially_Spent_Score', # Method
+    'sss', # Method (nickname)
+    'sequentially_spent_score', # function
     'STAR_Voting', # Method
-    'star', # Method (name)
+    'star', # Method (nickname)
     'star_voting', # function
     'Tiebreaker', # class
     'tiebreakers', # maps string to tiebreakers
@@ -629,8 +629,9 @@ class Options:
 
         self.print_result(first, second, tie, advance=advance)
 
-    def print_scores_and_averages(self, ballots, scores, first, second, tie, *, advance=False, no_preference=None):
-        ballot_count = len(ballots)
+    def print_scores_and_averages(self, ballots, scores, first, second, tie, *, advance=False, no_preference=None, ballot_count=None):
+        if ballot_count is None:
+            ballot_count = len(ballots)
         averages = {candidate: Fraction(score, ballot_count) for candidate, score in scores.items()}
         self.print_scores(scores, first, second, tie, advance=advance, averages=averages, no_preference=no_preference)
 
@@ -771,7 +772,7 @@ def _fraction_or_int(numerator, denominator=1):
     denominator.  Thanks, Sjoerd and Jeffrey!
     """
     assert isinstance(numerator, (int, Fraction))
-    assert isinstance(denominator, int)
+    assert isinstance(denominator, (int, Fraction))
 
     if denominator == 1:
         f = numerator
@@ -1509,7 +1510,8 @@ def allocated_score_voting(ballots, *,
         verbosity=verbosity,
         )
 
-    hare_quota = _fraction_or_int(len(ballots), seats)
+    original_ballot_count = len(ballots)
+    hare_quota = _fraction_or_int(original_ballot_count, seats)
 
     options.initialize(ballots, messages=[f"Hare quota is {hare_quota}."])
 
@@ -1539,27 +1541,27 @@ def allocated_score_voting(ballots, *,
     # sometimes (but not always) we throw away ballots in the
     # allocation round, which means that sometimes (but not always)
     # we need to recalculate this list during the loop.
-    recalculate_ballots = True
+    recalculate_weighted_ballots = True
 
     candidates = None
 
     try:
         for polling_round in range(1, seats+1):
             with options.round_heading(f"Round {polling_round}"):
-                if recalculate_ballots:
-                    ballots = [t[INDEX_WEIGHTED_BALLOT] for t in decorated_ballots]
-                    recalculate_ballots = False
+                if recalculate_weighted_ballots:
+                    weighted_ballots = [t[INDEX_WEIGHTED_BALLOT] for t in decorated_ballots]
+                    recalculate_weighted_ballots = False
 
-                scores = _scoring_round(ballots, candidates)
+                scores = _scoring_round(weighted_ballots, candidates)
                 first, tie = _compute_first_from_scores(scores)
 
                 if candidates is None:
                     candidates = set(scores)
 
                 if options.verbosity:
-                    options.print_ballot_count_if_changed(ballots)
+                    options.print_ballot_count_if_changed(weighted_ballots)
                     options.print("The highest-scoring candidate wins a seat.")
-                    options.print_scores_and_averages(ballots, scores, first, None, tie, advance="wins a seat")
+                    options.print_scores_and_averages(weighted_ballots, scores, first, None, tie, advance="wins a seat", ballot_count=original_ballot_count)
 
                 if tie:
                     tie_winner = options.break_tie(f"{int_to_words(len(tie), flowery=False)}-way tie in Scoring Round", tie, 1)
@@ -1620,8 +1622,8 @@ def allocated_score_voting(ballots, *,
                                 del supporters[score_start:]
                                 quota = _fraction_or_int(quota - allocation_count)
                                 # deleted some ballots, so we have to
-                                # recalculate both ballots and decorated_ballots
-                                recalculate_ballots = True
+                                # recalculate both weighted_ballots and decorated_ballots
+                                recalculate_weighted_ballots = True
                                 if not quota:
                                     break
                                 continue
@@ -1689,7 +1691,7 @@ def allocated_score_voting(ballots, *,
 
                             break
 
-                    if recalculate_ballots:
+                    if recalculate_weighted_ballots:
                         decorated_ballots = non_supporters + supporters
 
         _attempt_to_sort(winners)
@@ -1702,7 +1704,6 @@ def allocated_score_voting(ballots, *,
 Allocated_Score_Voting = allocated = Method("Allocated Score Voting", allocated_score_voting, True)
 for _ in ('Allocated Score Voting', 'allocated'):
     methods[_] = Allocated_Score_Voting
-
 
 
 def reweighted_range_voting(ballots, *,
@@ -1845,6 +1846,202 @@ for _ in ('Reweighted Range Voting', 'rrv'):
     methods[_] = Reweighted_Range_Voting
 
 
+def sequentially_spent_score(ballots, *,
+    maximum_score=_DEFAULT_MAXIMUM_SCORE,
+    print=_DEFAULT_PRINT,
+    seats,
+    tiebreaker=_DEFAULT_TIEBREAKER,
+    verbosity=_DEFAULT_VERBOSITY,
+    ):
+    """
+    Tabulates an election using Sequentially Spent Score:
+        https://electowiki.org/wiki/Sequentially_Spent_Score
+
+    Returns a list of results.
+
+    Takes one required positional parameter:
+    * "ballots" should be an iterable of ballot dicts.
+
+    Also accepts five optional keyword-only parameters:
+    * "maximum_score" specifies the maximum score allowed
+      per vote, default 5.
+    * "print" is a function called to print output.
+    * "seats" specifies the number of seats,
+      for multiwinner elections.
+    * "tiebreaker" specifies how to break ties;
+      should be a tiebreaker function or Tiebreaker
+      object.
+    * "verbosity" is an int specifying how much output
+      you want; 0 indicates no output, higher numbers
+      add more output.
+    """
+
+    options = Options(
+        Sequentially_Spent_Score,
+
+        maximum_score=maximum_score,
+        print=print,
+        seats=seats,
+        tiebreaker=tiebreaker,
+        verbosity=verbosity,
+        )
+
+    original_ballot_count = len(ballots)
+    hare_score_quota = _fraction_or_int(original_ballot_count * maximum_score, seats)
+    presentation_hare_score_quota = "".join(split_int_or_fraction_as_str(hare_score_quota))
+
+    options.initialize(ballots, messages=[f"Hare score quota is {presentation_hare_score_quota}."])
+
+    scores = _scoring_round(ballots)
+    if len(scores) == seats:
+        with options.heading(f"Round 1"):
+            if options.verbosity:
+                options.print(f"There are exactly {seats} candidates seeking {seats} seats.  Every candidate wins.")
+        winners = list(scores)
+        _attempt_to_sort(winners)
+        return winners
+
+    stars = maximum_score
+    weight = 1
+    # t = [weighted_ballot, ballot, stars, weight]
+
+    INDEX_WEIGHTED_BALLOT = 0
+    INDEX_BALLOT = 1
+    INDEX_STARS = 2
+    INDEX_WEIGHT = 3
+    decorated_ballots = [ [dict(b), dict(b), stars, weight] for b in ballots ]
+    weighted_ballots = [t[INDEX_WEIGHTED_BALLOT] for t in decorated_ballots]
+    winners = []
+    first = None
+    candidates = None
+
+    try:
+        for polling_round in range(1, seats+1):
+            with options.round_heading(f"Round {polling_round}"):
+
+                scores = _scoring_round(weighted_ballots, candidates)
+                first, tie = _compute_first_from_scores(scores)
+
+                if candidates is None:
+                    candidates = set(scores)
+
+                if options.verbosity:
+                    options.print_ballot_count_if_changed(ballots)
+                    options.print("The highest-scoring candidate wins a seat.")
+                    options.print_scores_and_averages(ballots, scores, first, None, tie, advance="wins a seat")
+
+                if tie:
+                    tie_winner = options.break_tie(f"{int_to_words(len(tie), flowery=False)}-way tie in Scoring Round", tie, 1)
+                    first = tie_winner[0]
+
+                winners.append(first)
+                candidates.remove(first)
+
+                if len(winners) == seats:
+                    # success!
+                    break
+
+                with options.subround_heading("Ballot allocation round"):
+                    winner_score = scores[first]
+                    if not winner_score:
+                        # all votes for candidate were zero.
+                        # nobody has to give back any stars.
+                        continue
+
+                    weight_reduction_ratio = min( _fraction_or_int(hare_score_quota, winner_score), 1)
+                    one_minus_weight_reduction_ratio = 1 - weight_reduction_ratio
+                    have_surplus = weight_reduction_ratio < 1
+
+                    if options.verbosity:
+                        counts = defaultdict(int)
+                        modified = 0
+                        if have_surplus:
+                            giving_back_surplus = "giving back surplus"
+                            # no need to normalize this for presentation via split_fraction_or_int,
+                            # one_minus_weight_reduction_ratio is guaranteed to be either 1 or a fraction < 1
+                            reduction = f" * {one_minus_weight_reduction_ratio}"
+                        else:
+                            giving_back_surplus = "no surplus to give back"
+                            reduction = ""
+
+                        presentation_winner_score = "".join(split_int_or_fraction_as_str(winner_score))
+                        options.print(f"Total score is {presentation_winner_score}, Hare score quota is {presentation_hare_score_quota}, {giving_back_surplus}.")
+                        options.print(f"Reducing each ballot's stars by their vote{reduction}.")
+
+                        remaining_decorated_ballots = []
+                        remaining_weighted_ballots = []
+
+                        allocated = 0
+                        for t in decorated_ballots:
+                            weighted_ballot, ballot, stars, weight = t
+
+                            score = weighted_ballot.get(first, 0)
+
+                            if score:
+                                starting_stars = stars
+                                star_reduction = score
+                                if have_surplus:
+                                    star_reduction = _fraction_or_int(star_reduction * weight_reduction_ratio)
+
+                                stars = max(stars - star_reduction, 0)
+                                if stars != starting_stars:
+                                    if not stars:
+                                        # remove, uh I mean "allocate", ballot
+                                        # (don't append to remaining_decorated_ballots)
+                                        allocated += 1
+                                        continue
+
+                                    t[INDEX_STARS] = stars
+
+                                    weight = _fraction_or_int(stars, maximum_score)
+                                    t[INDEX_WEIGHT] = weight
+
+                                    for c, s in ballot.items():
+                                        weighted_ballot[c] = s * weight
+
+                                    if options.verbosity:
+                                        key = (score, weight, starting_stars, stars)
+                                        counts[key] += 1
+                                        modified += 1
+
+                                remaining_decorated_ballots.append(t)
+                                remaining_weighted_ballots.append(weighted_ballot)
+
+                        if allocated:
+                            decorated_ballots = remaining_decorated_ballots
+                            weighted_ballots = remaining_weighted_ballots
+
+                        if options.verbosity:
+                            if allocated:
+                                options.print(f"Allocated {allocated} ballot{pluralizer(allocated)}.")
+
+                            # convert counts to list,
+                            counts = list(counts.items())
+                            if len(counts) == 1:
+                                prefix = ""
+                            else: # pragma: no cover
+                                options.print(f"Reweighted {modified} ballot{pluralizer(modified)}:")
+                                prefix = "   "
+                                # then sort by count then key, highest first.
+                                counts.sort(key=lambda t: (t[1], t[0]), reverse=True)
+
+                            for key, count in counts:
+                                score, weight, starting_stars, stars = key
+                                options.print(f"{prefix}{count} ballot{pluralizer(count)} voted {score}, stars reduced from {starting_stars} to {stars}, reweighted to {weight}.")
+
+
+        _attempt_to_sort(winners)
+        tie = None
+    except UnbreakableTieError as e:
+        winners = None
+        tie = e
+    return options.election_result(winners, tie)
+
+Sequentially_Spent_Score = sss = Method("Sequentially Spent Score", sequentially_spent_score, True)
+for _ in ('Sequentially Spent Score', 'sss'):
+    methods[_] = Sequentially_Spent_Score
+
+
 def election(method, ballots, *,
     maximum_score=_DEFAULT_MAXIMUM_SCORE,
     print=_DEFAULT_PRINT,
@@ -1897,7 +2094,7 @@ def election(method, ballots, *,
 
 
 
-def parse_starvote(starvote, *, path="<string>"):
+def parse_starvote(starvote, *, path=None):
     """
     Parses a custom election text format called "starvote format".
     Returns a kwargs dict usable for running an election, e.g.
@@ -2024,11 +2221,12 @@ def parse_starvote(starvote, *, path="<string>"):
 
     exception_prefix_format = "Line {line_number}: " # deliberately not f-string
 
-    if path != "<string>":
+    if path:
         exception_prefix_format = f"File '{path}', " + exception_prefix_format
         current_directory = pathlib.Path(path).parent
     else:
         current_directory = pathlib.Path(os.getcwd())
+        path = "<string>"
 
 
     ballots = []
@@ -2574,7 +2772,7 @@ Options:
     -m|--method <method>
 
         Specifies the electoral system.
-        Supported methods are 'star', 'bloc', 'allocated', and 'rrv'.
+        Supported methods are 'star', 'bloc', 'allocated', 'rrv', and 'sss'.
 
     -r|--reference
 

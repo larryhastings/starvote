@@ -1,0 +1,13 @@
+[Sequentially Spent Score]
+  Tabulating 5 ballots.
+  Maximum score is 5.
+  Want to fill 2 seats.
+  Hare score quota is 12+1/2.
+[Sequentially Spent Score: Round 1]
+  The highest-scoring candidate wins a seat.
+    Amy   -- 15 (average 3) -- Tied for first place
+    Brian -- 15 (average 3) -- Tied for first place
+    Chuck -- 15 (average 3) -- Tied for first place
+  There's a three-way tie for first.
+[Sequentially Spent Score: Round 1: Unbreakable Tie]
+  Tie between Amy, Brian, and Chuck.

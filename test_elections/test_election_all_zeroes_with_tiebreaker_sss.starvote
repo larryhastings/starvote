@@ -1,0 +1,19 @@
+[options]
+
+    method = sss
+    seats = 3
+    tiebreaker = [
+        Chuck
+        Brian
+        Amy
+        Davis
+        ]
+    verbosity = 1
+
+[ballots]
+
+5 ballots:
+    Amy = 0
+    Brian = 0
+    Chuck = 0
+    Davis = 0

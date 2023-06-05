@@ -40,6 +40,9 @@ Features:
     to a STAR-PR election.  The RRV algorithm is much simpler
     than Proportional STAR Voting, and its "never discard a voter"
     approach is appealing.
+  - [Sequentially Spent Score](https://electowiki.org/wiki/Sequentially_Spent_Score),
+    a third variety of score-based proportional representation
+    electoral system.
 
 * Implements the
   [Official Tiebreaker Protocol](https://www.starvoting.org/ties)
@@ -210,16 +213,18 @@ objects. The supported values are:
 
 * `starvote.STAR_Voting`,
 * `starvote.Bloc_STAR_Voting`,
-* `starvote.Allocated_Score_Voting`, and
-* `starvote.Reweighted_Range_Voting`.
+* `starvote.Allocated_Score_Voting`,
+* `starvote.Reweighted_Range_Voting`, and
+* `starvote.Sequentially_Spent_Score`.
 
 Since those are a lot to type, `starvote` also provides
 nicknames for these methods, respectively:
 
 * `starvote.star`,
 * `starvote.bloc`,
-* `starvote.allocated`, and
-* `starvote.rrv`.
+* `starvote.allocated`,
+* `starvote.rrv`, and
+* `starvote.sss`, and
 
 `ballots` should be an iterable containing individual ballots.
 A ballot is a `dict` mapping the candidate to that ballot's
@@ -255,6 +260,7 @@ the supported electoral systems:
 * `bloc_star_voting` implements multiwinner Bloc STAR Voting.
 * `allocated_score_voting` implements Allocated Score Voting.
 * `reweighted_range_voting` implements Reweighted Range Voting.
+* `sequentially_spent_score` implements Sequentially Spent Score.
 
 These functions have much the same signature as `election`,
 with the following changes:
@@ -585,9 +591,11 @@ each name maps to a parameter to the `election` function.
 Here are all the supported names:
 
 ```
+    csv_path = <string>
     maximum score = <integer>
     method = <string>
     seats = <integer>
+    starvote_path = <string>
     tiebreaker = <string | list>
     verbosity = <integer>
 ```
@@ -611,7 +619,8 @@ to the list currently being defined.  To deactivate
   in *list mode.*
 * You can't nest lists.
 
-The only option that supports lists is `tiebreaker`.
+The only assignment that supports lists is the
+`tiebreaker` option in the `options` section.
 If `tiebreaker` is set to a string, this specifies
 the name of the tiebreaker in the `starvote.tiebreakers`
 dict to use for this election.  If `tiebreaker` is set
@@ -648,6 +657,17 @@ just above the ballot:
 
 (You're explicitly permitted to have blank lines between the
 `ballots` pragma and the ballot it's repeating.)
+
+The `starvote_path` and `csv_path` options allow you to
+"import" another file into the current election.  They
+can specify relative or absolute paths; if relative,
+they will be resolved using the directory the *starvote
+format* file is in (if the *starvote format election* was
+loaded from a file) or the current directory.  Both settings
+will load ballots from the file specified; `starvote_path`
+will also load the options from the file specified, however
+any options set in the current election will override those
+options.
 
 #### Example
 
@@ -814,8 +834,9 @@ and it's used to elect governmental bodies across the world.
 
 But there are voting methods that permit voting directly for
 candidates and produces proportional representation.
-Allocated Score Voting and Reweighted Range Voting are
-two such methods.  They both work something like this:
+Allocated Score Voting, Reweighted Range Voting, and
+Sequentially Spent Score are three such methods.
+They all work something like this:
 
 * Each vote is a number, with higher numbers
   indicating a stronger preference.
@@ -835,12 +856,13 @@ two such methods.  They both work something like this:
   will count for less.  But if I gave A1 a score of 0,
   my ballot would still be at full strength.
 
-The difference between Allocated Score Voting and Reweighted
-Range voting is how they allocate vs. reweigh ballots.
-Allocated Score Voting allocates ballots, Reweighted Range
-Voting never does--with RRV every vote is counted in every round.
-Also, the two systems use different formulae to compute the
-new weight of a ballot after each round.  In Allocated Score,
+The differences between the three is how they allocate
+vs. reweigh ballots. Allocated Score Voting and Sequentially
+Spent Score both allocate ballots, Reweighted Range Voting
+never does--with RRV every vote is counted in every round.
+Also, the three systems use different formulae to compute the
+new weight of a ballot after each round.  In Allocated Score
+and Sequentially Spent Score,
 the new weight is based on how many excess voters were needed
 to fill a quota (called a
 [Hare quota](https://en.wikipedia.org/wiki/Hare_quota));
@@ -872,7 +894,11 @@ To see how the tabulation works using Allocated Score Voting, run this:
 % python3 -m starvote -m allocated test_elections/test_election_reweighted_range_sample_election.starvote
 ```
 
-You'll notice that some votes get allocated--thrown away.  RRV doesn't do that.
+You can also see how it changes with Sequentially Spent Score by running this:
+
+```
+% python3 -m starvote -m allocated test_elections/test_election_reweighted_range_sample_election.starvote
+```
 
 And to see the tyrrany of the majority in action, this command will tabulate the election using Bloc STAR Voting:
 
@@ -928,8 +954,18 @@ or otherwise freely redistributable.
 
 ## Changelog
 
-**2.0.4** - *under development*
+**2.0.4** - *2023/06/05*
 
+* Added support for Sequentially Spent Score voting.
+* Changed presentation slightly for Allocated Score:
+  the average vote is now computed using the count of
+  *all* ballots in the election, including allocated
+  ballots.  (Previously the average was computing using
+  just the *remaining* ballots.)  This doesn't change
+  the outcome of the election, it's just a presentation
+  change.
+* Removed last traces of "STAR-PR", which I thought was
+  an alternate name for Allocated Score.
 * Doc changes.  Standardized on the spelling "multiwinner",
   instead of "multi-winner".
 
@@ -980,7 +1016,7 @@ pre-chosen randomize list of candidates.  (`election` can
 still raise `UnbreakableTieError` exceptions if you prefer.)
 
 You can also call the voting method functions directly:
-`star`, `bloc_star`, `proportional_star`, and `reweighted_range`
+`star`, `bloc_star`, `proportional_star`, `reweighted_range`,
 are all functions, too.  These omit the `method` parameter
 but still require the `ballots` parameter.
 

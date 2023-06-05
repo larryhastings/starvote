@@ -1,0 +1,57 @@
+[Sequentially Spent Score]
+  Tabulating 3 ballots.
+  Maximum score is 5.
+  Want to fill 3 seats.
+  Hare score quota is 5.
+[Sequentially Spent Score: Initializing ordered permutation tiebreaker]
+  Permutation was defined in 'test_elections/test_election_unbreakable_three_way_tie_for_second_in_score_round.starvote'.
+  Permuted list of candidates:
+    1. Darcy
+    2. Chuck
+    3. Brian
+    4. Amy
+  Tiebreaker candidates will be selected from this list, preferring candidates with lower numbers.
+[Sequentially Spent Score: Round 1]
+  The highest-scoring candidate wins a seat.
+    Darcy -- 15 (average 5) -- First place
+    Amy   --  9 (average 3)
+    Brian --  9 (average 3)
+    Chuck --  9 (average 3)
+  Darcy wins a seat.
+[Sequentially Spent Score: Round 1: Ballot allocation round]
+  Total score is 15, Hare score quota is 5, giving back surplus.
+  Reducing each ballot's stars by their vote * 2/3.
+  3 ballots voted 5, stars reduced from 5 to 10/3, reweighted to 2/3.
+[Sequentially Spent Score: Round 2]
+  The highest-scoring candidate wins a seat.
+    Amy   -- 6 (average 2) -- Tied for first place
+    Brian -- 6 (average 2) -- Tied for first place
+    Chuck -- 6 (average 2) -- Tied for first place
+  There's a three-way tie for first.
+[Sequentially Spent Score: Round 2: Predefined permutation tiebreaker]
+  Choosing the earliest of these candidates from the permuted list:
+    Amy
+    Brian
+    Chuck
+  Selected winner: Chuck
+[Sequentially Spent Score: Round 2: Ballot allocation round]
+  Total score is 6, Hare score quota is 5, giving back surplus.
+  Reducing each ballot's stars by their vote * 1/6.
+  Reweighted 3 ballots:
+     1 ballot voted 10/3, stars reduced from 10/3 to 5/9, reweighted to 1/9.
+     1 ballot voted 2, stars reduced from 10/3 to 5/3, reweighted to 1/3.
+     1 ballot voted 2/3, stars reduced from 10/3 to 25/9, reweighted to 5/9.
+[Sequentially Spent Score: Round 3]
+  The highest-scoring candidate wins a seat.
+    Amy   -- 3+4/9 (average 1+4/27) -- Tied for first place
+    Brian -- 3+4/9 (average 1+4/27) -- Tied for first place
+  There's a two-way tie for first.
+[Sequentially Spent Score: Round 3: Predefined permutation tiebreaker]
+  Choosing the earliest of these candidates from the permuted list:
+    Amy
+    Brian
+  Selected winner: Brian
+[Sequentially Spent Score: Winners]
+  Brian
+  Chuck
+  Darcy

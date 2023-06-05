@@ -11,7 +11,7 @@ Options:
     -m|--method <method>
 
         Specifies the electoral system.
-        Supported methods are 'star', 'bloc', 'allocated', and 'rrv'.
+        Supported methods are 'star', 'bloc', 'allocated', 'rrv', and 'sss'.
 
     -r|--reference
 

@@ -1,0 +1,4 @@
+[options]
+
+    method = sss
+    starvote_path = test_election_all_threes_bloc_star.starvote
