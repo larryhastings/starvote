@@ -268,9 +268,9 @@ with the following changes:
 * They don't have a `method` parameter; the method is implicit
   in the function.  All four only take one positional parameter,
   `ballots`, which is required.
-* `star` doesn't have a `seats` parameter.  The other three
-  have a `seats` keyword-only parameter, and this parameter
-  is required--it doesn't have a default.  (A *required*
+* `star` doesn't have a `seats` parameter.  The others do
+  accept a `seats` keyword-only parameter, and it's
+  *required*--it doesn't have a default.  (A *required*
   keyword-only parameter is pretty rare in Python!)
 * Note that, like `election`, these functions always
   return a list, even `star_voting`.
