@@ -6,4 +6,4 @@ ballots = [
     {'Amy': 4, 'Brian': 4, 'Chuck': 5},
 ]
 
-winners = starvote.election(starvote.STAR, ballots, verbosity=1)
+winners = starvote.election(starvote.star, ballots, verbosity=1)
