@@ -19,7 +19,7 @@ which is guaranteed as of Python 3.7, but happened to work in CPython 3.6.)
 
 Features:
 
-* Supports four
+* Supports five
   [electoral systems](https://en.wikipedia.org/wiki/Electoral_system):
 
   - [STAR Voting](https://www.starvoting.org/star), the snazzy
@@ -266,7 +266,7 @@ These functions have much the same signature as `election`,
 with the following changes:
 
 * They don't have a `method` parameter; the method is implicit
-  in the function.  All four only take one positional parameter,
+  in the function.  All five only take one positional parameter,
   `ballots`, which is required.
 * `star` doesn't have a `seats` parameter.  The others do
   accept a `seats` keyword-only parameter, and it's
