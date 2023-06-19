@@ -9,6 +9,9 @@
 ##     * confirms the "multi-winner elections" cmdline works
 ##   (I keep breaking 'em.)
 ##
+## * have starvote format import detect a recursion loop and complain
+##   A imports B, B imports A, you blow your stack.
+##
 ## * output
 ##     * alternate output format idea:
 ##         * make something more computer-readable.

@@ -669,6 +669,10 @@ will also load the options from the file specified, however
 any options set in the current election will override those
 options.
 
+Note that `starvote_path` is fully recursive.  Starvote
+file A can import starvote file B, which in turn imports
+starvote file C, etc. etc.
+
 #### Example
 
 Here's a sample starvote format election:
