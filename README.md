@@ -224,7 +224,7 @@ nicknames for these methods, respectively:
 * `starvote.bloc`,
 * `starvote.allocated`,
 * `starvote.rrv`, and
-* `starvote.sss`, and
+* `starvote.sss`.
 
 `ballots` should be an iterable containing individual ballots.
 A ballot is a `dict` mapping the candidate to that ballot's
