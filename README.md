@@ -958,6 +958,12 @@ or otherwise freely redistributable.
 
 ## Changelog
 
+**2.0.5** - *2023/07/05*
+
+* No code changes, just a tweak to the license to remove the
+  admittedly-confusing phrase "All rights reserved."  Also,
+  embedded the license in the module.
+
 **2.0.4** - *2023/06/05*
 
 * Added support for Sequentially Spent Score voting.
