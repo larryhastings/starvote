@@ -4,6 +4,8 @@
 
 ## Copyright 2023 by Larry Hastings
 
+[![# test badge](https://img.shields.io/github/actions/workflow/status/larryhastings/starvote/test.yml?branch=master&label=test)](https://github.com/larryhastings/starvote/actions/workflows/test.yml) [![# coverage badge](https://img.shields.io/github/actions/workflow/status/larryhastings/starvote/coverage.yml?branch=master&label=coverage)](https://github.com/larryhastings/starvote/actions/workflows/coverage.yml) [![# python versions badge](https://img.shields.io/pypi/pyversions/starvote.svg?logo=python&logoColor=FBE072)](https://pypi.org/project/starvote/)
+
 [STAR voting](https://www.starvoting.org/) is a
 relatively-new ["electoral system"](https://en.wikipedia.org/wiki/Electoral_system)--a
 method of running an election.  STAR Voting is simple--it's
@@ -957,6 +959,19 @@ or otherwise freely redistributable.
 
 
 ## Changelog
+
+**2.0.6** - *2023/07/22*
+
+Extremely minor release.  No new features or bug fixes.
+
+* Added GitHub Actions integration.  Tests and
+  coverage are run in the cloud after every checkin.
+  Thanks to [Dan Pope](https://github.com/lordmauve)
+  for gently walking me through this!
+* Fixed metadata in the `pyproject.toml` file.
+* Added badges for testing, coverage,
+  and supported Python versions.
+
 
 **2.0.5** - *2023/07/05*
 
