@@ -3,6 +3,7 @@
   Maximum score is 5.
   Want to fill 5 seats.
   Hare score quota is 2909.
+
 [Sequentially Spent Score: Round 1]
   The highest-scoring candidate wins a seat.
     Justin Amash      -- 8018 (average 2+2200/2909) -- First place
@@ -28,6 +29,7 @@
     Rhett Smith       --  546 (average  546/2909)
     Louis Vanacore    --  519 (average  519/2909)
   Justin Amash wins a seat.
+
 [Sequentially Spent Score: Round 1: Ballot allocation round]
   Total score is 8018, Hare score quota is 2909, giving back surplus.
   Reducing each ballot's stars by their vote * 5109/8018.
@@ -37,6 +39,7 @@
      137 ballots voted 3, stars reduced from 5 to 31363/8018, reweighted to 31363/40090.
      108 ballots voted 1, stars reduced from 5 to 37181/8018, reweighted to 37181/40090.
      61 ballots voted 2, stars reduced from 5 to 17136/4009, reweighted to 17136/20045.
+
 [Sequentially Spent Score: Round 2]
   The highest-scoring candidate wins a seat.
     Vermin Supreme    -- 6362+18598/20045 (average 2+10923078/58310905)  -- First place
@@ -61,6 +64,7 @@
     Rhett Smith       --  419+ 6158/20045 (average   8405013/58310905)
     Louis Vanacore    --  396+ 4521/20045 (average   7942341/58310905)
   Vermin Supreme wins a seat.
+
 [Sequentially Spent Score: Round 2: Ballot allocation round]
   Total score is 6362+18598/20045, Hare score quota is 2909, giving back surplus.
   Reducing each ballot's stars by their vote * 69233983/127544888.
@@ -95,6 +99,7 @@
      5 ballots voted 51408/20045, stars reduced from 17136/4009 to 198259974990/63915931999, reweighted to 39651994998/63915931999.
      5 ballots voted 37181/20045, stars reduced from 37181/8018 to 1937511688603/511327455992, reweighted to 1937511688603/2556637279960.
      5 ballots voted 17136/20045, stars reduced from 17136/4009 to 248220758394/63915931999, reweighted to 248220758394/319579659995.
+
 [Sequentially Spent Score: Round 3]
   The highest-scoring candidate wins a seat.
     Judge Jim Gray    -- 2332+4266007672193/5113274559920 (average 11928422281405633/14874515694807280) -- First place
@@ -118,6 +123,7 @@
     Rhett Smith       --  296+3891584751527/5113274559920 (average  1517420854487847/14874515694807280)
     Louis Vanacore    --  279+1436065531283/5113274559920 (average  1428039667748963/14874515694807280)
   Judge Jim Gray wins a seat.
+
 [Sequentially Spent Score: Round 3: Ballot allocation round]
   Total score is 2332+4266007672193/5113274559920, Hare score quota is 2909, no surplus to give back.
   Reducing each ballot's stars by their vote.
@@ -234,6 +240,7 @@
      1 ballot voted 634286597883/1278318639980, stars reduced from 634286597883/255663727996 to 634286597883/319579659995, reweighted to 634286597883/1597898299975.
      1 ballot voted 287727431307/639159319990, stars reduced from 287727431307/127831863998 to 575454862614/319579659995, reweighted to 575454862614/1597898299975.
      1 ballot voted 984991876141/2556637279960, stars reduced from 984991876141/511327455992 to 984991876141/639159319990, reweighted to 984991876141/3195796599950.
+
 [Sequentially Spent Score: Round 4]
   The highest-scoring candidate wins a seat.
     Jacob Hornberger  -- 418+20139084623169/25566372799600 (average 10706882914855969/74372578474036400) -- First place
@@ -256,6 +263,7 @@
     Keenan Dunham     --  98+11638024673851/25566372799600 (average  2517142559034651/74372578474036400)
     Louis Vanacore    --  97+16742514922273/25566372799600 (average  2496680676483473/74372578474036400)
   Jacob Hornberger wins a seat.
+
 [Sequentially Spent Score: Round 4: Ballot allocation round]
   Total score is 418+20139084623169/25566372799600, Hare score quota is 2909, no surplus to give back.
   Reducing each ballot's stars by their vote.
@@ -440,6 +448,7 @@
      1 ballot voted 984991876141/6391593199900, stars reduced from 984991876141/2556637279960 to 2954975628423/12783186399800, reweighted to 2954975628423/63915931999000.
      1 ballot voted 103324625469/1278318639980, stars reduced from 103324625469/255663727996 to 103324625469/319579659995, reweighted to 103324625469/1597898299975.
      1 ballot voted 353716419147/5113274559920, stars reduced from 353716419147/1022654911984 to 353716419147/1278318639980, reweighted to 353716419147/6391593199900.
+
 [Sequentially Spent Score: Round 5]
   The highest-scoring candidate wins a seat.
     Jo Jorgensen      -- 118+   95571712541/269119713680    (average    31851697926781/782869247095120)    -- First place
@@ -461,6 +470,7 @@
     James Ogle        --  45+11509436819257/63915931999000  (average  2887726376774257/185931446185091000)
     Keenan Dunham     --  43+17889222664177/63915931999000  (average  2766274298621177/185931446185091000)
   Jo Jorgensen wins a seat.
+
 [Sequentially Spent Score: Winners]
   Jacob Hornberger
   Jo Jorgensen

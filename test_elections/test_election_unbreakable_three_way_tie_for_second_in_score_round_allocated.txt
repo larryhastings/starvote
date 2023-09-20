@@ -3,6 +3,7 @@
   Maximum score is 5.
   Want to fill 3 seats.
   Hare quota is 1.
+
 [Allocated Score Voting: Initializing ordered permutation tiebreaker]
   Permutation was defined in 'test_elections/test_election_unbreakable_three_way_tie_for_second_in_score_round.starvote'.
   Permuted list of candidates:
@@ -11,6 +12,7 @@
     3. Brian
     4. Amy
   Tiebreaker candidates will be selected from this list, preferring candidates with lower numbers.
+
 [Allocated Score Voting: Round 1]
   The highest-scoring candidate wins a seat.
     Darcy -- 15 (average 5) -- First place
@@ -18,36 +20,44 @@
     Brian --  9 (average 3)
     Chuck --  9 (average 3)
   Darcy wins a seat.
+
 [Allocated Score Voting: Round 1: Ballot allocation round]
   Allocating 1 ballots.
+
 [Allocated Score Voting: Round 1: Ballot allocation round: Round 1]
   Allocating 3 ballots at score 5.
   This allocation overfills the quota.  Returning fractional surplus.
   Allocating only 33.33% of these ballots.
   Keeping these ballots, but multiplying their weights by 2/3.
   3 ballots reweighted from 1 to 2/3.
+
 [Allocated Score Voting: Round 2]
   The highest-scoring candidate wins a seat.
     Amy   -- 6 (average 2) -- Tied for first place
     Brian -- 6 (average 2) -- Tied for first place
     Chuck -- 6 (average 2) -- Tied for first place
   There's a three-way tie for first.
+
 [Allocated Score Voting: Round 2: Predefined permutation tiebreaker]
   Choosing the earliest of these candidates from the permuted list:
     Amy
     Brian
     Chuck
   Selected winner: Chuck
+
 [Allocated Score Voting: Round 2: Ballot allocation round]
   Allocating 1 ballots.
+
 [Allocated Score Voting: Round 2: Ballot allocation round: Round 1]
   Allocating 1 ballot at score 10/3.
+
 [Allocated Score Voting: Round 3]
   Tabulating 2 remaining ballots.
   The highest-scoring candidate wins a seat.
     Amy   -- 5+1/3 (average 1+7/9) -- First place
     Brian -- 4     (average 1+1/3)
   Amy wins a seat.
+
 [Allocated Score Voting: Winners]
   Amy
   Chuck

@@ -1,6 +1,7 @@
 [STAR Voting]
   Tabulating 863 ballots.
   Maximum score is 5.
+
 [STAR Voting: Scoring Round]
   The two highest-scoring candidates advance to the next round.
     Jo Jorgensen   -- 3385 (average 3+796/863) -- First place
@@ -11,11 +12,13 @@
     Donald Trump   --  554 (average 554/863)
     Kanye West     --  363 (average 363/863)
   Jo Jorgensen and Andrew Yang advance.
+
 [STAR Voting: Automatic Runoff Round]
   The candidate preferred in the most head-to-head matchups wins.
     Jo Jorgensen  -- 645 -- First place
     Andrew Yang   -- 153
     No Preference --  65
   Jo Jorgensen wins.
+
 [STAR Voting: Winner]
   Jo Jorgensen

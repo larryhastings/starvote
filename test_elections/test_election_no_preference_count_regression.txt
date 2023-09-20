@@ -1,6 +1,7 @@
 [STAR Voting]
   Tabulating 3 ballots.
   Maximum score is 5.
+
 [STAR Voting: Initializing ordered permutation tiebreaker]
   Permutation was defined in 'test_elections/test_election_no_preference_count_regression.starvote'.
   Permuted list of candidates:
@@ -8,12 +9,14 @@
     2. Blake
     3. Carmen
   Tiebreaker candidates will be selected from this list, preferring candidates with lower numbers.
+
 [STAR Voting: Scoring Round]
   The two highest-scoring candidates advance to the next round.
     Andre  -- 12 (average 4) -- Tied for first place
     Blake  -- 12 (average 4) -- Tied for first place
     Carmen -- 12 (average 4) -- Tied for first place
   There's a three-way tie for first.
+
 [STAR Voting: Scoring Round: First tiebreaker]
   The two candidates preferred in the most head-to-head matchups advance.
     Andre         -- 0 -- Tied for first place
@@ -21,38 +24,45 @@
     Carmen        -- 0 -- Tied for first place
     No Preference -- 3
   There's still a three-way tie for first.
+
 [STAR Voting: Scoring Round: Second tiebreaker]
   The two candidates with the most votes of score 5 advance.
     Andre  -- 1 -- Tied for first place
     Blake  -- 1 -- Tied for first place
     Carmen -- 1 -- Tied for first place
   There's still a three-way tie for first.
+
 [STAR Voting: Scoring Round: Predefined permutation tiebreaker]
   Choosing the earliest two of these candidates from the permuted list:
     Andre
     Blake
     Carmen
   Selected winners: Andre and Blake
+
 [STAR Voting: Automatic Runoff Round]
   The candidate preferred in the most head-to-head matchups wins.
     Andre         -- 0 -- Tied for first place
     Blake         -- 0 -- Tied for first place
     No Preference -- 3
   There's a two-way tie for first.
+
 [STAR Voting: Automatic Runoff Round: First tiebreaker]
   The highest-scoring candidate wins.
     Andre -- 12 -- Tied for first place
     Blake -- 12 -- Tied for first place
   There's still a two-way tie for first.
+
 [STAR Voting: Automatic Runoff Round: Second tiebreaker]
   The candidate with the most votes of score 5 wins.
     Andre -- 1 -- Tied for first place
     Blake -- 1 -- Tied for first place
   There's still a two-way tie for first.
+
 [STAR Voting: Automatic Runoff Round: Predefined permutation tiebreaker]
   Choosing the earliest of these candidates from the permuted list:
     Andre
     Blake
   Selected winner: Andre
+
 [STAR Voting: Winner]
   Andre

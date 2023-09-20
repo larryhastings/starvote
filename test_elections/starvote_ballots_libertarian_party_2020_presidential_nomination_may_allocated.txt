@@ -3,6 +3,7 @@
   Maximum score is 5.
   Want to fill 5 seats.
   Hare quota is 2909/5.
+
 [Allocated Score Voting: Round 1]
   The highest-scoring candidate wins a seat.
     Justin Amash      -- 8018 (average 2+2200/2909) -- First place
@@ -28,14 +29,17 @@
     Rhett Smith       --  546 (average  546/2909)
     Louis Vanacore    --  519 (average  519/2909)
   Justin Amash wins a seat.
+
 [Allocated Score Voting: Round 1: Ballot allocation round]
   Allocating 581+4/5 ballots.
+
 [Allocated Score Voting: Round 1: Ballot allocation round: Round 1]
   Allocating 1337 ballots at score 5.
   This allocation overfills the quota.  Returning fractional surplus.
   Allocating only 43.52% of these ballots.
   Keeping these ballots, but multiplying their weights by 3776/6685.
   1337 ballots reweighted from 1 to 3776/6685.
+
 [Allocated Score Voting: Round 2]
   The highest-scoring candidate wins a seat.
     Vermin Supreme    -- 6564+ 904/1337 (average 2+998306/3889333)  -- First place
@@ -60,14 +64,17 @@
     Rhett Smith       --  438+6366/6685 (average  2934396/19446665)
     Louis Vanacore    --  417+4073/6685 (average  2791718/19446665)
   Vermin Supreme wins a seat.
+
 [Allocated Score Voting: Round 2: Ballot allocation round]
   Allocating 581+4/5 ballots.
+
 [Allocated Score Voting: Round 2: Ballot allocation round: Round 1]
   Allocating 1022 ballots at score 5.
   This allocation overfills the quota.  Returning fractional surplus.
   Allocating only 56.93% of these ballots.
   Keeping these ballots, but multiplying their weights by 2201/5110.
   1022 ballots reweighted from 1 to 2201/5110.
+
 [Allocated Score Voting: Round 3]
   The highest-scoring candidate wins a seat.
     Judge Jim Gray    -- 2622+112731/195202 (average  511932375/567842618)  -- First place
@@ -91,19 +98,25 @@
     James Ogle        --  340+218933/488005 (average  166140633/1419606545)
     Louis Vanacore    --  321+473813/488005 (average  157123418/1419606545)
   Judge Jim Gray wins a seat.
+
 [Allocated Score Voting: Round 3: Ballot allocation round]
   Allocating 581+4/5 ballots.
+
 [Allocated Score Voting: Round 3: Ballot allocation round: Round 1]
   Allocating 161 ballots at score 5.
+
 [Allocated Score Voting: Round 3: Ballot allocation round: Round 2]
   Remaining allocation quota is 2104/5.
   Allocating 33 ballots at score 4.
+
 [Allocated Score Voting: Round 3: Ballot allocation round: Round 3]
   Remaining allocation quota is 1939/5.
   Allocating 46 ballots at score 3.
+
 [Allocated Score Voting: Round 3: Ballot allocation round: Round 4]
   Remaining allocation quota is 1709/5.
   Allocating 119 ballots at score 3776/1337.
+
 [Allocated Score Voting: Round 3: Ballot allocation round: Round 5]
   Remaining allocation quota is 1114/5.
   Allocating 229 ballots at score 15104/6685.
@@ -111,6 +124,7 @@
   Allocating only 97.29% of these ballots.
   Keeping these ballots, but multiplying their weights by 31/1145.
   229 ballots reweighted from 3776/6685 to 117056/7654325.
+
 [Allocated Score Voting: Round 4]
   Tabulating 2550 remaining ballots.
   The highest-scoring candidate wins a seat.
@@ -134,46 +148,61 @@
     Rhett Smith       --  189+  28956584/558765725  (average 105635678609/1625449494025)
     Louis Vanacore    --  183+ 251823242/558765725  (average 102505950917/1625449494025)
   Jacob Hornberger wins a seat.
+
 [Allocated Score Voting: Round 4: Ballot allocation round]
   Allocating 581+4/5 ballots.
+
 [Allocated Score Voting: Round 4: Ballot allocation round: Round 1]
   Allocating 101 ballots at score 5.
+
 [Allocated Score Voting: Round 4: Ballot allocation round: Round 2]
   Remaining allocation quota is 2404/5.
   Allocating 16 ballots at score 4.
+
 [Allocated Score Voting: Round 4: Ballot allocation round: Round 3]
   Remaining allocation quota is 2324/5.
   Allocating 14 ballots at score 3.
+
 [Allocated Score Voting: Round 4: Ballot allocation round: Round 4]
   Remaining allocation quota is 2254/5.
   Allocating 31 ballots at score 3776/1337.
+
 [Allocated Score Voting: Round 4: Ballot allocation round: Round 5]
   Remaining allocation quota is 2099/5.
   Allocating 80 ballots at score 15104/6685.
+
 [Allocated Score Voting: Round 4: Ballot allocation round: Round 6]
   Remaining allocation quota is 1699/5.
   Allocating 28 ballots at score 2201/1022.
+
 [Allocated Score Voting: Round 4: Ballot allocation round: Round 7]
   Remaining allocation quota is 1559/5.
   Allocating 13 ballots at score 2.
+
 [Allocated Score Voting: Round 4: Ballot allocation round: Round 8]
   Remaining allocation quota is 1494/5.
   Allocating 28 ballots at score 4402/2555.
+
 [Allocated Score Voting: Round 4: Ballot allocation round: Round 9]
   Remaining allocation quota is 1354/5.
   Allocating 79 ballots at score 11328/6685.
+
 [Allocated Score Voting: Round 4: Ballot allocation round: Round 10]
   Remaining allocation quota is 959/5.
   Allocating 58 ballots at score 6603/5110.
+
 [Allocated Score Voting: Round 4: Ballot allocation round: Round 11]
   Remaining allocation quota is 669/5.
   Allocating 62 ballots at score 7552/6685.
+
 [Allocated Score Voting: Round 4: Ballot allocation round: Round 12]
   Remaining allocation quota is 359/5.
   Allocating 6 ballots at score 1.
+
 [Allocated Score Voting: Round 4: Ballot allocation round: Round 13]
   Remaining allocation quota is 329/5.
   Allocating 35 ballots at score 2201/2555.
+
 [Allocated Score Voting: Round 4: Ballot allocation round: Round 14]
   Remaining allocation quota is 154/5.
   Allocating 71 ballots at score 3776/6685.
@@ -181,6 +210,7 @@
   Allocating only 43.38% of these ballots.
   Keeping these ballots, but multiplying their weights by 201/355.
   71 ballots reweighted from 3776/6685 to 758976/2373175.
+
 [Allocated Score Voting: Round 5]
   Tabulating 1999 remaining ballots.
   The highest-scoring candidate wins a seat.
@@ -203,6 +233,7 @@
     Rhett Smith       --  58+ 5970470323/15868946590 (average   926369372543/46162765630310)
     Louis Vanacore    --  51+ 8411482463/15868946590 (average   817727758553/46162765630310)
   Adam Kokesh wins a seat.
+
 [Allocated Score Voting: Winners]
   Adam Kokesh
   Jacob Hornberger

@@ -3,6 +3,7 @@
   Maximum score is 5.
   Want to fill 3 seats.
   Hare quota is 4/3.
+
 [Allocated Score Voting: Round 1]
   The highest-scoring candidate wins a seat.
     Chuck -- 19 (average 4+3/4) -- Tied for first place
@@ -10,5 +11,6 @@
     Amy   -- 12 (average 3)
     Brian -- 12 (average 3)
   There's a two-way tie for first.
+
 [Allocated Score Voting: Round 1: Unbreakable Tie]
   Tie between Chuck and Darcy.

@@ -1,6 +1,7 @@
 [STAR Voting]
   Tabulating 2909 ballots.
   Maximum score is 5.
+
 [STAR Voting: Scoring Round]
   The two highest-scoring candidates advance to the next round.
     Justin Amash      -- 8018 (average 2+2200/2909) -- First place
@@ -26,11 +27,13 @@
     Rhett Smith       --  546 (average  546/2909)
     Louis Vanacore    --  519 (average  519/2909)
   Justin Amash and Vermin Supreme advance.
+
 [STAR Voting: Automatic Runoff Round]
   The candidate preferred in the most head-to-head matchups wins.
     Justin Amash   -- 1404 -- First place
     Vermin Supreme -- 1138
     No Preference  --  367
   Justin Amash wins.
+
 [STAR Voting: Winner]
   Justin Amash

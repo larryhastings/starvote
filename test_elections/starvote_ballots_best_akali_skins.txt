@@ -1,6 +1,7 @@
 [STAR Voting]
   Tabulating 669 ballots.
   Maximum score is 5.
+
 [STAR Voting: Scoring Round]
   The two highest-scoring candidates advance to the next round.
     Star Guardian        -- 2930 (average 4+254/669) -- First place
@@ -20,11 +21,13 @@
     Stinger              -- 1293 (average 1+208/223)
     All-Star             -- 1287 (average 1+206/223)
   Star Guardian and Prestige K/DA advance.
+
 [STAR Voting: Automatic Runoff Round]
   The candidate preferred in the most head-to-head matchups wins.
     Star Guardian -- 288 -- First place
     Prestige K/DA --  80
     No Preference -- 301
   Star Guardian wins.
+
 [STAR Voting: Winner]
   Star Guardian

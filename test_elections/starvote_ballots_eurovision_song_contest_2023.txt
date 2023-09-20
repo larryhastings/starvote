@@ -1,6 +1,7 @@
 [STAR Voting]
   Tabulating 6 ballots.
   Maximum score is 5.
+
 [STAR Voting: Scoring Round]
   The two highest-scoring candidates advance to the next round.
     Finland - &quot;Cha Cha Cha&quot;               -- 22 (average 3+2/3) -- First place
@@ -35,11 +36,13 @@
     Switzerland - &quot;Watergun&quot;              --  5 (average 5/6)
     Greece - &quot;What They Say&quot;              --  4 (average 2/3)
   Finland - &quot;Cha Cha Cha&quot; and Israel - &quot;Unicorn&quot; advance.
+
 [STAR Voting: Automatic Runoff Round]
   The candidate preferred in the most head-to-head matchups wins.
     Finland - &quot;Cha Cha Cha&quot; -- 3 -- First place
     Israel - &quot;Unicorn&quot;      -- 2
     No Preference                     -- 1
   Finland - &quot;Cha Cha Cha&quot; wins.
+
 [STAR Voting: Winner]
   Finland - &quot;Cha Cha Cha&quot;

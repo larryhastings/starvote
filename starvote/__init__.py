@@ -459,6 +459,7 @@ class Options:
         self.header = None
         self.last_printed_header = None
         self.printed_headings = set()
+        self.ever_printed_anything = False
 
         self.last_printed_ballot_count = None
 
@@ -487,8 +488,12 @@ class Options:
                     self.printed_headings.add(header)
                 else: # pragma: no cover
                     continued = " (continued)"
+                if self.ever_printed_anything:
+                    # print a blank line before a new heading
+                    self._print()
                 self._print(f"[{header}{continued}]")
         self._print(" ", *a, sep=sep, end=end)
+        self.ever_printed_anything = True
 
     def enter(self, header):
         self.headers.append(header)

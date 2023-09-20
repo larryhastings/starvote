@@ -3,6 +3,7 @@
   Maximum score is 5.
   Want to fill 11 seats.
   Hare score quota is 2+3/11.
+
 [Sequentially Spent Score: Initializing ordered permutation tiebreaker]
   Permutation was defined in 'test_elections/test_election_too_many_candidates_sss.starvote'.
   Permuted list of candidates:

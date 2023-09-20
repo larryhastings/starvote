@@ -1,6 +1,7 @@
 [STAR Voting]
   Tabulating 718 ballots.
   Maximum score is 5.
+
 [STAR Voting: Scoring Round]
   The two highest-scoring candidates advance to the next round.
     Vermin Supreme    -- 2865 (average 3+711/718) -- First place
@@ -23,11 +24,13 @@
     Erik Gerhardt     --   95 (average  95/718)
     James Ogle        --   86 (average  43/359)
   Vermin Supreme and Dan Behrman advance.
+
 [STAR Voting: Automatic Runoff Round]
   The candidate preferred in the most head-to-head matchups wins.
     Vermin Supreme -- 541 -- First place
     Dan Behrman    --  77
     No Preference  -- 100
   Vermin Supreme wins.
+
 [STAR Voting: Winner]
   Vermin Supreme

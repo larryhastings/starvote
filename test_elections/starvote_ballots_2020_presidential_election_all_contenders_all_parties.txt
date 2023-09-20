@@ -1,6 +1,7 @@
 [STAR Voting]
   Tabulating 1022 ballots.
   Maximum score is 5.
+
 [STAR Voting: Scoring Round]
   The two highest-scoring candidates advance to the next round.
     Andrew Yang - D                               -- 3229 (average 3+ 163/1022) -- First place
@@ -39,11 +40,13 @@
     Ian Schlakman - G                             --  271 (average 271/1022)
     Larry Hogan - R                               --  226 (average 113/511)
   Andrew Yang - D and Bernie Sanders - D advance.
+
 [STAR Voting: Automatic Runoff Round]
   The candidate preferred in the most head-to-head matchups wins.
     Andrew Yang - D    -- 550 -- First place
     Bernie Sanders - D -- 272
     No Preference      -- 200
   Andrew Yang - D wins.
+
 [STAR Voting: Winner]
   Andrew Yang - D

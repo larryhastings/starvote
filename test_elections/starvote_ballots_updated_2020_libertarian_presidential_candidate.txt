@@ -1,6 +1,7 @@
 [STAR Voting]
   Tabulating 1534 ballots.
   Maximum score is 5.
+
 [STAR Voting: Scoring Round]
   The two highest-scoring candidates advance to the next round.
     Vermin Supreme    -- 4653 (average 3+ 51/1534) -- First place
@@ -23,11 +24,13 @@
     Jedidiah Hill     --  292 (average  146/767)
     Louis Vanacore    --  263 (average  263/1534)
   Vermin Supreme and Judge Jim Gray advance.
+
 [STAR Voting: Automatic Runoff Round]
   The candidate preferred in the most head-to-head matchups wins.
     Vermin Supreme -- 830 -- First place
     Judge Jim Gray -- 519
     No Preference  -- 185
   Vermin Supreme wins.
+
 [STAR Voting: Winner]
   Vermin Supreme
