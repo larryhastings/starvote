@@ -1,0 +1,36 @@
+# Bug submitted by Adam Masiarek, github issue #7
+#
+# "No Preference" should be the number of *voters*
+# who expressed no preference between any of the candidates
+# in what I call a "preference round".  It was actually
+# printing the number of individual head-to-head contests
+# in the round that had no preference, and there could be
+# more than one on a single ballot.
+#
+# For example, in this sample ballot, "No Preference"
+# should be 3, but it was printing 9.
+
+[options]
+
+method = star
+verbosity = 1
+
+tiebreaker = [
+    Andre
+    Blake
+    Carmen
+    ]
+
+[ballots]
+
+Andre  = 5
+Blake  = 5
+Carmen = 5
+
+Andre  = 3
+Blake  = 3
+Carmen = 3
+
+Andre  = 4
+Blake  = 4
+Carmen = 4

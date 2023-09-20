@@ -13,7 +13,7 @@
     Amy           --  0 -- Tied for first place
     Brian         --  0 -- Tied for first place
     Chuck         --  0 -- Tied for first place
-    No Preference -- 15
+    No Preference -- 5
   There's still a three-way tie for first.
 [Bloc STAR: Round 1: Scoring Round: Second tiebreaker]
   The two candidates with the most votes of score 5 advance.

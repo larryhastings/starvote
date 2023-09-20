@@ -22,7 +22,7 @@
 
 __doc__ = "An election tabulator for the STAR electoral system, and others"
 
-__version__ = "2.0.6"
+__version__ = "2.1"
 
 __all__ = [
     'Allocated_Score_Voting', # Method
@@ -1192,6 +1192,7 @@ def _preference_round(ballots, candidates):
         preferences = {candidate: 0 for candidate in candidates}
         for ballot in ballots:
             ballot_get = ballot.get
+            expressed_a_preference = False
             for skip_until, candidate0 in enumerate(candidates):
                 for i, candidate1 in enumerate(candidates):
                     if i <= skip_until:
@@ -1199,13 +1200,15 @@ def _preference_round(ballots, candidates):
                     score0 = ballot_get(candidate0, 0)
                     score1 = ballot_get(candidate1, 0)
                     if score0 == score1:
-                        no_preference += 1
                         continue
+                    expressed_a_preference = True
                     if score0 > score1:
                         winner = candidate0
                     else:
                         winner = candidate1
                     preferences[winner] += 1
+            if not expressed_a_preference:
+                no_preference += 1
         preferences = list(preferences.items())
 
     _sort_score_list(preferences)
