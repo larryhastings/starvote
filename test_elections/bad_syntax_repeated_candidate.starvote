@@ -1,0 +1,13 @@
+[options]
+
+    method = allocated
+    seats = 3
+    verbosity = 1
+
+[ballots]
+
+    Amy = 1
+    Amy = 2
+    Brian = 3
+    Chuck = 5
+    Darcy = 5

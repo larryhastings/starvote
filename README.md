@@ -960,6 +960,13 @@ or otherwise freely redistributable.
 
 ## Changelog
 
+**2.1.1** - *2023/09/20*
+
+* Bugfix: *starvote format* used to permit specifying the
+  same candidate more than once on the same ballot; only the
+  last vote would count.  It now raises `ValueError` when
+  this happens.  Fixes #8.
+
 **2.1** - *2023/09/20*
 
 * Change to `verbosity`.  If `verbosity` is 1, the permuted

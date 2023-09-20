@@ -22,7 +22,7 @@
 
 __doc__ = "An election tabulator for the STAR electoral system, and others"
 
-__version__ = "2.1"
+__version__ = "2.1.1"
 
 __all__ = [
     'Allocated_Score_Voting', # Method
@@ -2389,8 +2389,8 @@ def parse_starvote(starvote, *, path=None):
     # section handler functions *must not keep a reference to d.*
     # we reuse a single dict for all parsing.
     section_handlers = {
-        'options': (options_handler, options_pragma, True),
-        'ballots': (ballots_handler, ballots_pragma, False),
+        'options': (options_handler, options_pragma, True, "specified option '{key}' twice"),
+        'ballots': (ballots_handler, ballots_pragma, False, "specified candidate '{key}' twice on one ballot"),
     }
 
     d = {}
@@ -2428,7 +2428,7 @@ def parse_starvote(starvote, *, path=None):
             if section in sections_seen:
                 raise ValueError(f"{exception_prefix}section [{section}] specified twice")
             sections_seen.add(section)
-            section_handler, pragma_handler, flush_after_every_line = section_handlers[section]
+            section_handler, pragma_handler, flush_after_every_line, repeated_key_format = section_handlers[section]
             continue
 
         if not section:
@@ -2453,7 +2453,7 @@ def parse_starvote(starvote, *, path=None):
 
         key, equals, value = line.rpartition('=')
         if not equals:
-            raise ValueError(f"Line {line_number}: bad syntax {line!r}")
+            raise ValueError(f"{exception_prefix}bad syntax {line!r}")
         key = key.strip()
         value = value.strip()
         if value.startswith('['):
@@ -2466,8 +2466,11 @@ def parse_starvote(starvote, *, path=None):
             if value == ']':
                 d[key] = []
                 continue
-            raise ValueError(f"Line {line_number}: bad syntax {line!r}")
+            raise ValueError(f"{exception_prefix}bad syntax {line!r}")
 
+        if key in d:
+            description = repeated_key_format.format(key=key)
+            raise ValueError(f"{exception_prefix}{description}")
         d[key] = value
         if flush_after_every_line:
             flush()

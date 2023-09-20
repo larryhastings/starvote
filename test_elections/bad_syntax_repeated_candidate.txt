@@ -1,4 +1,4 @@
-File 'test_elections/bad_syntax_invalid_start_of_line_mode.starvote', Line 3: bad syntax 'tiebreaker = [ Amy'
+File 'test_elections/bad_syntax_repeated_candidate.starvote', Line 10: specified candidate 'Amy' twice on one ballot
 
 usage: starvote.py [options] <ballots_file>
 

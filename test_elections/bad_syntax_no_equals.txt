@@ -1,4 +1,4 @@
-ValueError("Line 4: bad syntax 'bafflegab is confusing stuff!'")
+File 'test_elections/bad_syntax_no_equals.starvote', Line 4: bad syntax 'bafflegab is confusing stuff!'
 
 usage: starvote.py [options] <ballots_file>
 
@@ -43,3 +43,4 @@ ballots_file should be a path to a file ending either in '.csv' or '.star':
       When loading a .csv file, starvote defaults to STAR Voting,
       one seat, verbosity 1, and
     * .starvote files must be in "starvote format".
+
