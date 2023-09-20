@@ -1,0 +1,17 @@
+[options]
+
+    method = bloc
+    seats = 11
+    verbosity = 1
+    tiebreaker = [
+        Amy
+        Brian
+        Chuck
+        ]
+
+[ballots]
+
+5 ballots:
+    Amy = 3
+    Brian = 3
+    Chuck = 3

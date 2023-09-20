@@ -255,6 +255,9 @@ def format_int_or_fraction(i, widths):
     return f"{s:<{overall_width}}"
 
 
+class ElectionError(ValueError):
+    pass
+
 class UnbreakableTieError(ValueError):
     def __init__(self, description, candidates, desired):
         super().__init__(description)
@@ -1452,6 +1455,8 @@ def bloc_star_voting(ballots, *,
     options.initialize(ballots)
 
     scores = _scoring_round(ballots)
+    if len(scores) < seats:
+        raise ElectionError(f"election must fill {seats} seats but there are only {len(scores)} candidates")
     if len(scores) == seats:
         with options.heading(f"Round 1"):
             if options.verbosity:
@@ -1542,6 +1547,8 @@ def allocated_score_voting(ballots, *,
     options.initialize(ballots, messages=[f"Hare quota is {hare_quota}."])
 
     scores = _scoring_round(ballots)
+    if len(scores) < seats:
+        raise ElectionError(f"election must fill {seats} seats but there are only {len(scores)} candidates")
     if len(scores) == seats:
         with options.heading(f"Round 1"):
             if options.verbosity:
@@ -1774,6 +1781,8 @@ def reweighted_range_voting(ballots, *,
     options.initialize(ballots)
 
     scores = _scoring_round(ballots)
+    if len(scores) < seats:
+        raise ElectionError(f"election must fill {seats} seats but there are only {len(scores)} candidates")
     if len(scores) == seats:
         with options.heading(f"Round 1"):
             if options.verbosity:
@@ -1919,6 +1928,8 @@ def sequentially_spent_score(ballots, *,
     options.initialize(ballots, messages=[f"Hare score quota is {presentation_hare_score_quota}."])
 
     scores = _scoring_round(ballots)
+    if len(scores) < seats:
+        raise ElectionError(f"election must fill {seats} seats but there are only {len(scores)} candidates")
     if len(scores) == seats:
         with options.heading(f"Round 1"):
             if options.verbosity:

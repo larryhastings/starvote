@@ -1,0 +1,12 @@
+[Bloc STAR]
+  Tabulating 5 ballots.
+  Maximum score is 5.
+  Want to fill 11 seats.
+[Bloc STAR: Initializing ordered permutation tiebreaker]
+  Permutation was defined in 'test_elections/test_election_too_many_candidates_bloc.starvote'.
+  Permuted list of candidates:
+    1. Amy
+    2. Brian
+    3. Chuck
+  Tiebreaker candidates will be selected from this list, preferring candidates with lower numbers.
+ElectionError('election must fill 11 seats but there are only 3 candidates')
