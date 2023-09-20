@@ -272,7 +272,8 @@ class Tiebreaker:
     def __call__(self, options, tie, desired, exception): # pragma: no cover
         pass
 
-    def print_description(self, options, description):
+    def print_description(self, options, description=None):
+        description = description if description is not None else self.description
         if not description: # pragma: no cover
             return
         if isinstance(description, str):
@@ -307,7 +308,7 @@ class TiebreakerFunctionWrapper(Tiebreaker):
     def initialize(self, options, ballots):
         if self.heading:
             with options.heading(self.heading):
-                self.print_description(options, self.description)
+                self.print_description(options)
 
     def __call__(self, options, tie, desired, exception):
         return self.function(options, tie, desired, exception)
@@ -327,8 +328,8 @@ def on_demand_random_tiebreaker(options, tie, desired, exception):
     Tie-breaking winners will be chosen at random, on demand.
     """
     result = random.sample(population=tie, k=desired)
-    with options.heading("On-demand random tiebreaker"):
-        if options.verbosity:
+    if options.verbosity:
+        with options.heading("On-demand random tiebreaker"):
             two_candidates = "two candidates" if desired == 2 else "one candidate"
             options.print(f"Choosing {two_candidates} from this list:")
             options.print_candidates(tie)
@@ -354,6 +355,12 @@ class predefined_permutation_tiebreaker(Tiebreaker):
         else:
             contents = f"<not yet initialized>"
         return f"predefined_permutation_tiebreaker({contents})"
+
+    def print_initialization(self, options, permuted):
+        self.print_description(options)
+        options.print(f"{permuted} list of candidates:")
+        options.print_candidates(self.candidates, numbered=True)
+        options.print("Tiebreaker candidates will be selected from this list, preferring candidates with lower numbers.")
 
     def initialize(self, options, ballots):
         all_candidates = _candidates(ballots)
@@ -382,18 +389,17 @@ class predefined_permutation_tiebreaker(Tiebreaker):
             else:
                 self.description = "Permutation was externally defined."
 
-        if options.verbosity:
+        if options.verbosity >= 2:
             with options.heading("Initializing ordered permutation tiebreaker"):
-                self.print_description(options, self.description)
-                options.print("Permuted list of candidates:")
-                options.print_candidates(self.candidates, numbered=True)
-                options.print("Tiebreaker candidates will be selected from this list, preferring candidates with lower numbers.")
+                self.print_initialization(options, "Permuted")
 
     def __call__(self, options, tie, desired, exception):
         tie_set = set(tie)
         result = [candidate for candidate in self.candidates if candidate in tie_set][:desired]
         if options.verbosity:
             with options.heading("Predefined permutation tiebreaker"):
+                if options.verbosity == 1:
+                    self.print_initialization(options, "Pre-permuted")
                 two = "two " if desired == 2 else ""
                 options.print(f"Choosing the earliest {two}of these candidates from the permuted list:")
                 options.print_candidates(tie)

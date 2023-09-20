@@ -960,6 +960,36 @@ or otherwise freely redistributable.
 
 ## Changelog
 
+**2.1** - *2023/09/20*
+
+* Change to `verbosity`.  If `verbosity` is 1, the permuted
+  tiebreaker doesn't print any output at initialization time.
+  Instead, if there's a tiebreaker, it prints the pre-permuted
+  list of candidates immediately before printing the results of
+  the tiebreaker.  Note that this doesn't change when the
+  initialization is done; when the the list of candidates is
+  randomly permuted by **starvote**, that's still done *before*
+  running the election.  If `verbosity` is 2 or higher,
+  the permuted tiebreaker initialization prints its output at
+  initialization time as before.
+* Feature request: added blank lines before section headings
+  for verbose output.  Fixes #2.
+* Bugfix: When "No Preference" is printed in the output of
+  a preference round, this should be the number of ballots that
+  expressed no preference between the candidates.  Previously it
+  was printing the total count of head-to-head matchups where
+  the voter expressed no preference, and there could be more than
+  one of those per ballot.  Fixes #7.
+* Bugfix: For multi-winner elections, `seats` must be less than
+  or equal to the number of candidates.  **starvote** now raises
+  an error when asked to tabulate an election where this is not
+  true.  Fixes #6.
+* Slight internal API change: `Tiebreaker.print_description`
+  accepts two arguments, the second being the description
+  string / list.  Since it's always `self.description` anyway,
+  it now has a default value of `None` which means it uses
+  `self.description`.
+
 **2.0.6** - *2023/07/22*
 
 Extremely minor release.  No new features or bug fixes.

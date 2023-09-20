@@ -4,15 +4,6 @@
   Want to fill 3 seats.
   Hare score quota is 8+1/3.
 
-[Sequentially Spent Score: Initializing ordered permutation tiebreaker]
-  Permutation was defined in 'test_elections/test_election_all_zeroes_with_tiebreaker_sss.starvote'.
-  Permuted list of candidates:
-    1. Chuck
-    2. Brian
-    3. Amy
-    4. Davis
-  Tiebreaker candidates will be selected from this list, preferring candidates with lower numbers.
-
 [Sequentially Spent Score: Round 1]
   The highest-scoring candidate wins a seat.
     Amy   -- 0 (average 0) -- Tied for first place
@@ -22,6 +13,13 @@
   There's a four-way tie for first.
 
 [Sequentially Spent Score: Round 1: Predefined permutation tiebreaker]
+  Permutation was defined in 'test_elections/test_election_all_zeroes_with_tiebreaker_sss.starvote'.
+  Pre-permuted list of candidates:
+    1. Chuck
+    2. Brian
+    3. Amy
+    4. Davis
+  Tiebreaker candidates will be selected from this list, preferring candidates with lower numbers.
   Choosing the earliest of these candidates from the permuted list:
     Amy
     Brian
@@ -37,6 +35,13 @@
   There's a three-way tie for first.
 
 [Sequentially Spent Score: Round 2: Predefined permutation tiebreaker]
+  Permutation was defined in 'test_elections/test_election_all_zeroes_with_tiebreaker_sss.starvote'.
+  Pre-permuted list of candidates:
+    1. Chuck
+    2. Brian
+    3. Amy
+    4. Davis
+  Tiebreaker candidates will be selected from this list, preferring candidates with lower numbers.
   Choosing the earliest of these candidates from the permuted list:
     Amy
     Brian
@@ -50,6 +55,13 @@
   There's a two-way tie for first.
 
 [Sequentially Spent Score: Round 3: Predefined permutation tiebreaker]
+  Permutation was defined in 'test_elections/test_election_all_zeroes_with_tiebreaker_sss.starvote'.
+  Pre-permuted list of candidates:
+    1. Chuck
+    2. Brian
+    3. Amy
+    4. Davis
+  Tiebreaker candidates will be selected from this list, preferring candidates with lower numbers.
   Choosing the earliest of these candidates from the permuted list:
     Amy
     Davis

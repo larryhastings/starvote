@@ -3,16 +3,6 @@
   Maximum score is 5.
   Want to fill 4 seats.
 
-[Bloc STAR: Initializing ordered permutation tiebreaker]
-  Permutation was defined in 'test_elections/test_election_bloc_star_and_electowiki.starvote'.
-  Permuted list of candidates:
-    1. First
-    2. Condorcet Loser
-    3. Second
-    4. Third
-    5. Fourth
-  Tiebreaker candidates will be selected from this list, preferring candidates with lower numbers.
-
 [Bloc STAR: Round 1: Scoring Round]
   The two highest-scoring candidates advance to the next round.
     Condorcet Loser -- 24 (average 1+1/2)  -- First place
@@ -42,6 +32,14 @@
   There's still a two-way tie for first.
 
 [Bloc STAR: Round 1: Automatic Runoff Round: Predefined permutation tiebreaker]
+  Permutation was defined in 'test_elections/test_election_bloc_star_and_electowiki.starvote'.
+  Pre-permuted list of candidates:
+    1. First
+    2. Condorcet Loser
+    3. Second
+    4. Third
+    5. Fourth
+  Tiebreaker candidates will be selected from this list, preferring candidates with lower numbers.
   Choosing the earliest of these candidates from the permuted list:
     Condorcet Loser
     First

@@ -4,15 +4,6 @@
   Want to fill 3 seats.
   Hare quota is 1.
 
-[Allocated Score Voting: Initializing ordered permutation tiebreaker]
-  Permutation was defined in 'test_elections/test_election_unbreakable_three_way_tie_for_second_in_score_round.starvote'.
-  Permuted list of candidates:
-    1. Darcy
-    2. Chuck
-    3. Brian
-    4. Amy
-  Tiebreaker candidates will be selected from this list, preferring candidates with lower numbers.
-
 [Allocated Score Voting: Round 1]
   The highest-scoring candidate wins a seat.
     Darcy -- 15 (average 5) -- First place
@@ -39,6 +30,13 @@
   There's a three-way tie for first.
 
 [Allocated Score Voting: Round 2: Predefined permutation tiebreaker]
+  Permutation was defined in 'test_elections/test_election_unbreakable_three_way_tie_for_second_in_score_round.starvote'.
+  Pre-permuted list of candidates:
+    1. Darcy
+    2. Chuck
+    3. Brian
+    4. Amy
+  Tiebreaker candidates will be selected from this list, preferring candidates with lower numbers.
   Choosing the earliest of these candidates from the permuted list:
     Amy
     Brian

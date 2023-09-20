@@ -2,14 +2,6 @@
   Tabulating 3 ballots.
   Maximum score is 5.
 
-[STAR Voting: Initializing ordered permutation tiebreaker]
-  Permutation was defined in 'test_elections/test_election_no_preference_count_regression.starvote'.
-  Permuted list of candidates:
-    1. Andre
-    2. Blake
-    3. Carmen
-  Tiebreaker candidates will be selected from this list, preferring candidates with lower numbers.
-
 [STAR Voting: Scoring Round]
   The two highest-scoring candidates advance to the next round.
     Andre  -- 12 (average 4) -- Tied for first place
@@ -33,6 +25,12 @@
   There's still a three-way tie for first.
 
 [STAR Voting: Scoring Round: Predefined permutation tiebreaker]
+  Permutation was defined in 'test_elections/test_election_no_preference_count_regression.starvote'.
+  Pre-permuted list of candidates:
+    1. Andre
+    2. Blake
+    3. Carmen
+  Tiebreaker candidates will be selected from this list, preferring candidates with lower numbers.
   Choosing the earliest two of these candidates from the permuted list:
     Andre
     Blake
@@ -59,6 +57,12 @@
   There's still a two-way tie for first.
 
 [STAR Voting: Automatic Runoff Round: Predefined permutation tiebreaker]
+  Permutation was defined in 'test_elections/test_election_no_preference_count_regression.starvote'.
+  Pre-permuted list of candidates:
+    1. Andre
+    2. Blake
+    3. Carmen
+  Tiebreaker candidates will be selected from this list, preferring candidates with lower numbers.
   Choosing the earliest of these candidates from the permuted list:
     Andre
     Blake
