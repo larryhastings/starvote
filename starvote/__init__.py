@@ -498,8 +498,11 @@ class Options:
                     # print a blank line before a new heading
                     self._print()
                 self._print(f"[{header}{continued}]")
-        self._print(" ", *a, sep=sep, end=end)
-        self.ever_printed_anything = True
+                self.ever_printed_anything = True
+        s = " " + sep.join(_ for _ in a) + end
+        self._print(s, end='')
+        if (not self.ever_printed_anything) and s.strip(): # pragma: no cover
+            self.ever_printed_anything = True
 
     def enter(self, header):
         self.headers.append(header)
