@@ -517,6 +517,7 @@ The example also produces this output:
 [STAR Voting]
   Tabulating 3 ballots.
   Maximum score is 5.
+
 [STAR Voting: Initializing ordered permutation tiebreaker]
   Computing a random permutation of all the candidates.
   Permuted list of candidates:
@@ -524,18 +525,21 @@ The example also produces this output:
     2. Chuck
     3. Amy
   Tiebreaker candidates will be selected from this list, preferring candidates with lower numbers.
+
 [STAR Voting: Scoring Round]
   The two highest-scoring candidates advance to the next round.
     Chuck -- 13 (average 4+1/3) -- First place
     Amy   -- 10 (average 3+1/3) -- Second place
     Brian --  9 (average 3)
   Chuck and Amy advance.
+
 [STAR Voting: Automatic Runoff Round]
   The candidate preferred in the most head-to-head matchups wins.
     Chuck         -- 2 -- First place
     Amy           -- 1
     No Preference -- 0
   Chuck wins.
+
 [STAR Voting: Winner]
   Chuck
 ```
