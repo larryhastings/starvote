@@ -22,7 +22,7 @@
 
 __doc__ = "An election tabulator for the STAR electoral system, and others"
 
-__version__ = "2.1.1"
+__version__ = "2.1.2"
 
 __all__ = [
     'Allocated_Score_Voting', # Method
@@ -83,6 +83,7 @@ from collections import defaultdict
 from contextlib import contextmanager
 import csv
 from fractions import Fraction
+import functools
 import enum
 import itertools
 from math import floor, log10
@@ -321,12 +322,16 @@ def _add_tiebreaker(o):
     return o
 
 @_add_tiebreaker
-def on_demand_random_tiebreaker(options, tie, desired, exception):
+def on_demand_random_tiebreaker(options, tie, desired, exception, *, random=None):
     """
     On-demand random tiebreaker
 
     Tie-breaking winners will be chosen at random, on demand.
     """
+    if random is None:
+        random = sys.modules['random']
+    tie = list(tie)
+    _attempt_to_sort(tie)
     result = random.sample(population=tie, k=desired)
     if options.verbosity:
         with options.heading("On-demand random tiebreaker"):
@@ -342,12 +347,15 @@ def on_demand_random_tiebreaker(options, tie, desired, exception):
 
 @_add_tiebreaker
 class predefined_permutation_tiebreaker(Tiebreaker):
-    def __init__(self, candidates=None, *, description=None):
+    def __init__(self, candidates=None, *, description=None, random=None):
         if (not candidates) and description:
             raise ValueError("you can't specify a message unless you specify an iterable of candidates")
         self.candidates = candidates
         self._description = description
         self.description = None
+        if random is None:
+            random = sys.modules['random']
+        self.random = random
 
     def __repr__(self): # pragma: no cover
         if self.description:
@@ -366,7 +374,7 @@ class predefined_permutation_tiebreaker(Tiebreaker):
         all_candidates = _candidates(ballots)
         if self.candidates is None:
             self.candidates = all_candidates
-            random.shuffle(self.candidates)
+            self.random.shuffle(self.candidates)
             self.description = "Computing a random permutation of all the candidates."
         else:
             if not self.candidates:
@@ -2297,8 +2305,64 @@ def parse_starvote(starvote, *, path=None):
                 raise ValueError("tiebreaker list must not be empty")
             return predefined_permutation_tiebreaker(value, description=f"Permutation was defined in '{path}'.")
         if isinstance(value, str):
-            t = tiebreakers.get(value, _sentinel)
+            kwargs = None
+            value = value.strip()
+            ok = False
+            name, paren, arguments = value.partition('(')
+            if paren:
+                str_kwargs = {}
+
+                arguments, rparen, trailing = arguments.rpartition(')')
+
+                if not rparen:
+                    raise SyntaxError(f"invalid syntax in tiebreaker '{value}': no closing )")
+                if trailing:
+                    raise SyntaxError(f"invalid syntax in tiebreaker '{value}': text after )")
+                for argument in arguments.split(','):
+                    argument = argument.strip()
+                    if not argument:
+                        continue
+                    a_name, equals, a_value = argument.partition('=')
+                    a_name = a_name.strip()
+                    a_value = a_value.strip()
+                    if not (a_name and equals and a_value):
+                        raise SyntaxError(f"invalid syntax in tiebreaker '{value}'")
+                    if a_name in str_kwargs:
+                        raise ValueError(f"argument '{a_name}' specified twice in tiebreaker '{value}'")
+                    str_kwargs[a_name] = a_value
+                if str_kwargs:
+                    kwargs = {}
+                    def seed_converter(s):
+                        try:
+                            seed = int(s)
+                        except ValueError:
+                            raise ValueError(f"invalid seed in tiebreaker '{value}'")
+                        kwargs['random'] = random.Random(seed)
+                        return _sentinel
+                    kwargs_converters = {
+                        'seed': seed_converter,
+                    }
+                    for a_name, a_value in str_kwargs.items():
+                        converter = kwargs_converters.get(a_name, None)
+                        if not converter:
+                            raise ValueError(f"invalid syntax in tiebreaker '{value}': unknown parameter '{a_name}'")
+                        a_value = converter(a_value)
+                        # the interface for converters here, in theory, is:
+                        # if you return _sentinel, ignore return value
+                        # otherwise set kwargs[a_name] to the return value.
+                        # since there's only one converter, and it returns _sentinel,
+                        # we never do the other one.
+                        # don't bother adding the code to support it until we actually
+                        # *do* it, because then we'd need a test, etc.
+                        assert a_value is _sentinel
+                        # kwargs[a_name] = a_value
+            t = tiebreakers.get(name, _sentinel)
             if t is not _sentinel:
+                if kwargs is not None:
+                    if isinstance(t, type) and issubclass(t, Tiebreaker):
+                        t = t(**kwargs)
+                    else:
+                        t = functools.partial(t, **kwargs)
                 return t
         raise ValueError(f"{exception_prefix}invalid tiebreaker {value!r}")
 
@@ -2326,7 +2390,7 @@ def parse_starvote(starvote, *, path=None):
     # from the starvote file into a native value for kwargs.
     #
     # (use a function of 'str' if a str is okay.)
-    kwargs_converters = {
+    option_converters = {
         'csv_path': path_converter('.csv'),
         'maximum_score': int,
         'method': method_converter,
@@ -2342,8 +2406,8 @@ def parse_starvote(starvote, *, path=None):
     def options_handler(d):
         for key, value in d.items():
             kwarg = option_to_kwarg.get(key, key)
-            converter = kwargs_converters.get(kwarg, None)
-            if not converter:
+            converter = option_converters.get(kwarg, None)
+            if converter is None:
                 raise ValueError(f"{exception_prefix}unknown option '{key}'")
             if kwarg in kwargs:
                 raise ValueError(f"{exception_prefix}specified option '{key}' twice")
@@ -2454,7 +2518,7 @@ def parse_starvote(starvote, *, path=None):
             value.append(line)
             continue
 
-        key, equals, value = line.rpartition('=')
+        key, equals, value = line.partition('=')
         if not equals:
             raise ValueError(f"{exception_prefix}bad syntax {line!r}")
         key = key.strip()

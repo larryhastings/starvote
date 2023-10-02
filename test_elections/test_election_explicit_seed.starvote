@@ -1,0 +1,12 @@
+[options]
+
+    method = star
+    tiebreaker = predefined_permutation_tiebreaker(seed=12345)
+    verbosity = 1
+
+[ballots]
+
+5 ballots:
+    Amy = 3
+    Brian = 3
+    Chuck = 3

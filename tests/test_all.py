@@ -2,9 +2,11 @@
 
 import builtins
 import fractions
+import functools
 import glob
 import os.path
 import pathlib
+import random
 import sys
 import unittest
 
@@ -415,6 +417,160 @@ class StarvoteTests(unittest.TestCase):
             (-234, 4),
             ):
             self.assertEqual(starvote._width(i), width)
+
+    def test_hand_seeded_predefined_permutation_tiebreaker(self):
+        r = random.Random(54321)
+        t = starvote.predefined_permutation_tiebreaker(random=r)
+        text_clear, text_print, text_getvalue = starvote._printer()
+        result = starvote.election(
+            'star',
+            [
+                {'A': 5, 'B': 3, 'C': 1},
+                {'A': 3, 'B': 1, 'C': 5},
+                {'A': 1, 'B': 5, 'C': 3},
+            ],
+            tiebreaker=t,
+            print=text_print,
+            verbosity=2,
+            )
+        self.assertEqual(result, ['C'])
+        expected_text = """
+[STAR Voting]
+ Tabulating 3 ballots.
+ Maximum score is 5.
+
+[STAR Voting: Initializing ordered permutation tiebreaker]
+ Computing a random permutation of all the candidates.
+ Permuted list of candidates:
+   1. C
+   2. A
+   3. B
+ Tiebreaker candidates will be selected from this list, preferring candidates with lower numbers.
+
+[STAR Voting: Scoring Round]
+ The two highest-scoring candidates advance to the next round.
+   A -- 9 (average 3) -- Tied for first place
+   B -- 9 (average 3) -- Tied for first place
+   C -- 9 (average 3) -- Tied for first place
+ There's a three-way tie for first.
+
+[STAR Voting: Scoring Round: First tiebreaker]
+ The two candidates preferred in the most head-to-head matchups advance.
+   A             -- 3 -- Tied for first place
+   B             -- 3 -- Tied for first place
+   C             -- 3 -- Tied for first place
+   No Preference -- 0
+ There's still a three-way tie for first.
+
+[STAR Voting: Scoring Round: Second tiebreaker]
+ The two candidates with the most votes of score 5 advance.
+   A -- 1 -- Tied for first place
+   B -- 1 -- Tied for first place
+   C -- 1 -- Tied for first place
+ There's still a three-way tie for first.
+
+[STAR Voting: Scoring Round: Predefined permutation tiebreaker]
+ Choosing the earliest two of these candidates from the permuted list:
+   A
+   B
+   C
+ Selected winners: C and A
+
+[STAR Voting: Automatic Runoff Round]
+ The candidate preferred in the most head-to-head matchups wins.
+   C             -- 2 -- First place
+   A             -- 1
+   No Preference -- 0
+ C wins.
+
+[STAR Voting: Winner]
+ C
+""".lstrip()
+        self.assertEqual(text_getvalue(), expected_text)
+
+    def test_hand_seeded_on_demand_random_tiebreaker(self):
+        r = random.Random(54321)
+        t = functools.partial(starvote.on_demand_random_tiebreaker, random=r)
+        text_clear, text_print, text_getvalue = starvote._printer()
+        result = starvote.election(
+            'star',
+            [
+                {'A': 5, 'B': 3, 'C': 1},
+                {'A': 3, 'B': 1, 'C': 5},
+                {'A': 1, 'B': 5, 'C': 3},
+            ],
+            tiebreaker=t,
+            print=text_print,
+            verbosity=2,
+            )
+        self.assertEqual(result, ['A'])
+        expected_text = """
+[STAR Voting]
+ Tabulating 3 ballots.
+ Maximum score is 5.
+
+[STAR Voting: Scoring Round]
+ The two highest-scoring candidates advance to the next round.
+   A -- 9 (average 3) -- Tied for first place
+   B -- 9 (average 3) -- Tied for first place
+   C -- 9 (average 3) -- Tied for first place
+ There's a three-way tie for first.
+
+[STAR Voting: Scoring Round: First tiebreaker]
+ The two candidates preferred in the most head-to-head matchups advance.
+   A             -- 3 -- Tied for first place
+   B             -- 3 -- Tied for first place
+   C             -- 3 -- Tied for first place
+   No Preference -- 0
+ There's still a three-way tie for first.
+
+[STAR Voting: Scoring Round: Second tiebreaker]
+ The two candidates with the most votes of score 5 advance.
+   A -- 1 -- Tied for first place
+   B -- 1 -- Tied for first place
+   C -- 1 -- Tied for first place
+ There's still a three-way tie for first.
+
+[STAR Voting: Scoring Round: On-demand random tiebreaker]
+ Choosing two candidates from this list:
+   A
+   B
+   C
+ Randomly chose winners: B and A
+
+[STAR Voting: Automatic Runoff Round]
+ The candidate preferred in the most head-to-head matchups wins.
+   A             -- 2 -- First place
+   B             -- 1
+   No Preference -- 0
+ A wins.
+
+[STAR Voting: Winner]
+ A
+""".lstrip()
+        got = text_getvalue()
+        self.assertEqual(got, expected_text)
+
+    def test_hand_starvote_format_seed_syntax(self):
+        def test_raises(s, exception=SyntaxError):
+            with self.assertRaises(exception):
+                starvote.parse_starvote(tied_election.format(options=s))
+        test_raises('tiebreaker=(') # no rparen
+        test_raises('tiebreaker=() xyz') # trailing text
+        test_raises('tiebreaker=(fluffernutter)') # no =value
+        test_raises('tiebreaker=(fluffernutter=333)', ValueError) # doesn't exist
+        test_raises('tiebreaker=(seed=333, seed=444)', ValueError) # repeated argument
+        test_raises('tiebreaker=(seed=abc)', ValueError) # invalid seed value
+
+        def test_success(s):
+            d = starvote.parse_starvote(tied_election.format(options=s))
+            self.assertIn('tiebreaker', d)
+            self.assertIsInstance(d['tiebreaker'], (starvote.Tiebreaker, functools.partial))
+
+        test_success('tiebreaker=predefined_permutation_tiebreaker(seed=234)')
+        test_success('tiebreaker=predefined_permutation_tiebreaker(,,seed=234,,,)')
+        test_success('tiebreaker=on_demand_random_tiebreaker(seed=4555)')
+
 
     def test_int_to_words(self):
 

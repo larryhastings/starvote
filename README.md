@@ -396,6 +396,19 @@ and repeatable.  You can run that election
 a million times and you'll always get the
 same result.
 
+`predefined_permutation_tiebreaker` also
+accepts a `random` keyword-only argument.
+This should be a `random.Random` object,
+which will be used for all randomization
+inside `predefined_permutation_tiebreaker`.
+Passing in an instance of `random.Random`
+with a fixed predefined seed will make
+`predefined_permutation_tiebreaker`
+completely deterministic.  The default
+value of `None` means `predefined_permutation_tiebreaker`
+will use the `random` module itself
+for all its randomization needs.
+
 
 #### `on_demand_random_tiebreaker`
 
@@ -407,6 +420,24 @@ on demand, using Python's `random.sample` function.
 `on_demand_random_tiebreaker` is a function;
 you should simply pass it in as the `tiebreaker`
 parameter.
+
+If you prefer *less* unpredictability in your life,
+you can also use the `random` keyword-only argument.
+This argument has the same semantics as the `random`
+argument to `predefined_permutation_tiebreaker`.
+If you pass in a random number generator using a fixed
+seed, `on_demand_random_tiebreaker` will be
+completely deterministic.
+
+In order to use this
+with `starvote.election` (et al), you'll have to
+use partial application to pre-bind the `random`
+argument, something like this:
+
+    t = functools.partial(
+        starvote.on_demand_random_tiebreaker,
+        random=random.Random(54321))
+    result = starvote.election(..., tiebreaker=t)
 
 #### `UnbreakableTieError`
 
@@ -634,17 +665,33 @@ to the list currently being defined.  To deactivate
 
 The only assignment that supports lists is the
 `tiebreaker` option in the `options` section.
-If `tiebreaker` is set to a string, this specifies
-the name of the tiebreaker in the `starvote.tiebreakers`
-dict to use for this election.  If `tiebreaker` is set
+`tiebreaker` also supports string values.
+
+If `tiebreaker` is set
 to a string, `parse_starvote` looks up that string in
 the `options.tiebreakers` dict and uses the tiebreaker
-found there.  If `tiebreaker` is set
+found there.  This string can optionally end with
+a list of `name=value` options in parentheses, separated
+by commas.  The only option currently defined is `seed`.
+`seed` should be set to an integer; this integer will be
+used to seed a Python `random.Random` instance, and that
+instance will be used for all randomization in the tiebreaker,
+effectively making it completely deterministic.  Example:
+
+
+    tiebreaker=predefined_permutation_tiebreaker(seed=12345)
+
+If `tiebreaker` is set
 to a list, this defines a pre-permuted list of candidates
 which is passed in to `predefined_permutation_tiebreaker`.
-(This lets you predefine a permuted list of candidates.
-You shouldn't use this in a real election, but it's useful
-in test elections as it makes the election deterministic.)
+This lets you predefine a permuted list of candidates, which
+makes the election completely deterministic.  Example:
+
+    tiebreaker=[
+        Amy
+        Brian
+        Carol
+        ]
 
 The `ballots` section defines ballots.  In this section,
 names are candidate names, and values are the score for that
@@ -971,12 +1018,45 @@ or otherwise freely redistributable.
 
 ## Changelog
 
+**2.1.2** - *2023/10/02*
+
+* New feature: you can specify a seed for the
+  [pseudorandom number generator (PRNG)](https://en.wikipedia.org/wiki/Pseudorandom_number_generator)
+  used for random tiebreakers
+  in a *starvote format* election.  The seed is simply
+  an integer number.  This required new syntax for the
+  `tiebreaker` option: you can specify options using a
+  syntax looks something like a Python function call
+  with keyword-only parameters.  For
+  example, to use `predefined_permutation_tiebreaker` with
+  a PRNG seeded with the number 12345, you would add this
+  to your *starvote format* election in the `options` section:
+
+    tiebreaker=predefined_permutation_tiebreaker(seed=12345)
+
+* New feature: `predefined_permutation_tiebreaker` and
+  `on_demand_random_tiebreaker` now both accept a
+  keyword-only parameter named `random`, which should
+  be either an instance of
+  [`random.Random`](https://docs.python.org/3/library/random.html#random.Random)
+  or `None`.
+  This lets you pass in a `random.Random` instance with
+  a fixed seed which the tiebreaker will use for all
+  randomization--a convenient way to make the tiebreaker
+  completely deterministic. The default value
+  of `None` means the tiebreaker will use the
+  [`random`](https://docs.python.org/3/library/random.html)
+  module itself for randomization.
+
+* **starvote** now has over a hundred tests!
+
 **2.1.1** - *2023/09/20*
 
 * Bugfix: *starvote format* used to permit specifying the
   same candidate more than once on the same ballot; only the
-  last vote would count.  It now raises `ValueError` when
-  this happens.  Fixes [#8.](https://github.com/larryhastings/starvote/issues/8)
+  last vote would count.  It now detects this and raises
+  `ValueError` on the second instance.
+  [Fixes #8.](https://github.com/larryhastings/starvote/issues/8)
 
 **2.1** - *2023/09/20*
 
@@ -989,15 +1069,15 @@ or otherwise freely redistributable.
   randomly permuted by **starvote**, that's still done *before*
   running the election.  If `verbosity` is 2 or higher,
   the permuted tiebreaker initialization prints its output at
-  initialization time as before.  Fixes [#3.](https://github.com/larryhastings/starvote/issues/3)
+  initialization time as before.  [Fixes #3.](https://github.com/larryhastings/starvote/issues/3)
 * Feature request: added blank lines before section headings
-  for verbose output.  Fixes [#2.](https://github.com/larryhastings/starvote/issues/2)
+  for verbose output.  [Fixes #2.](https://github.com/larryhastings/starvote/issues/2)
 * Bugfix: When "No Preference" is printed in the output of
   a preference round, this should be the number of ballots that
   expressed no preference between the candidates.  Previously it
   was printing the total count of head-to-head matchups where
   the voter expressed no preference, and there could be more than
-  one of those per ballot.  Fixes [#7.](https://github.com/larryhastings/starvote/issues/7)
+  one of those per ballot.  [Fixes #7.](https://github.com/larryhastings/starvote/issues/7)
 * Bugfix: For multi-winner elections, `seats` must be less than
   or equal to the number of candidates.  **starvote** now raises
   an error when asked to tabulate an election where this is not

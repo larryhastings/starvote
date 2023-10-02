@@ -1,0 +1,72 @@
+[STAR Voting]
+ Tabulating 5 ballots.
+ Maximum score is 5.
+
+[STAR Voting: Scoring Round]
+ The two highest-scoring candidates advance to the next round.
+   Amy   -- 15 (average 3) -- Tied for first place
+   Brian -- 15 (average 3) -- Tied for first place
+   Chuck -- 15 (average 3) -- Tied for first place
+ There's a three-way tie for first.
+
+[STAR Voting: Scoring Round: First tiebreaker]
+ The two candidates preferred in the most head-to-head matchups advance.
+   Amy           -- 0 -- Tied for first place
+   Brian         -- 0 -- Tied for first place
+   Chuck         -- 0 -- Tied for first place
+   No Preference -- 5
+ There's still a three-way tie for first.
+
+[STAR Voting: Scoring Round: Second tiebreaker]
+ The two candidates with the most votes of score 5 advance.
+   Amy   -- 0 -- Tied for first place
+   Brian -- 0 -- Tied for first place
+   Chuck -- 0 -- Tied for first place
+ There's still a three-way tie for first.
+
+[STAR Voting: Scoring Round: Predefined permutation tiebreaker]
+ Computing a random permutation of all the candidates.
+ Pre-permuted list of candidates:
+   1. Chuck
+   2. Amy
+   3. Brian
+ Tiebreaker candidates will be selected from this list, preferring candidates with lower numbers.
+ Choosing the earliest two of these candidates from the permuted list:
+   Amy
+   Brian
+   Chuck
+ Selected winners: Chuck and Amy
+
+[STAR Voting: Automatic Runoff Round]
+ The candidate preferred in the most head-to-head matchups wins.
+   Amy           -- 0 -- Tied for first place
+   Chuck         -- 0 -- Tied for first place
+   No Preference -- 5
+ There's a two-way tie for first.
+
+[STAR Voting: Automatic Runoff Round: First tiebreaker]
+ The highest-scoring candidate wins.
+   Amy   -- 15 -- Tied for first place
+   Chuck -- 15 -- Tied for first place
+ There's still a two-way tie for first.
+
+[STAR Voting: Automatic Runoff Round: Second tiebreaker]
+ The candidate with the most votes of score 5 wins.
+   Amy   -- 0 -- Tied for first place
+   Chuck -- 0 -- Tied for first place
+ There's still a two-way tie for first.
+
+[STAR Voting: Automatic Runoff Round: Predefined permutation tiebreaker]
+ Computing a random permutation of all the candidates.
+ Pre-permuted list of candidates:
+   1. Chuck
+   2. Amy
+   3. Brian
+ Tiebreaker candidates will be selected from this list, preferring candidates with lower numbers.
+ Choosing the earliest of these candidates from the permuted list:
+   Amy
+   Chuck
+ Selected winner: Chuck
+
+[STAR Voting: Winner]
+ Chuck
