@@ -976,7 +976,7 @@ or otherwise freely redistributable.
 * Bugfix: *starvote format* used to permit specifying the
   same candidate more than once on the same ballot; only the
   last vote would count.  It now raises `ValueError` when
-  this happens.  Fixes #8.
+  this happens.  Fixes [#8.](https://github.com/larryhastings/starvote/issues/8)
 
 **2.1** - *2023/09/20*
 
@@ -989,19 +989,19 @@ or otherwise freely redistributable.
   randomly permuted by **starvote**, that's still done *before*
   running the election.  If `verbosity` is 2 or higher,
   the permuted tiebreaker initialization prints its output at
-  initialization time as before.
+  initialization time as before.  Fixes [#3.](https://github.com/larryhastings/starvote/issues/3)
 * Feature request: added blank lines before section headings
-  for verbose output.  Fixes #2.
+  for verbose output.  Fixes [#2.](https://github.com/larryhastings/starvote/issues/2)
 * Bugfix: When "No Preference" is printed in the output of
   a preference round, this should be the number of ballots that
   expressed no preference between the candidates.  Previously it
   was printing the total count of head-to-head matchups where
   the voter expressed no preference, and there could be more than
-  one of those per ballot.  Fixes #7.
+  one of those per ballot.  Fixes [#7.](https://github.com/larryhastings/starvote/issues/7)
 * Bugfix: For multi-winner elections, `seats` must be less than
   or equal to the number of candidates.  **starvote** now raises
   an error when asked to tabulate an election where this is not
-  true.  Fixes #6.
+  true.  [Fixes #6.](https://github.com/larryhastings/starvote/issues/6)
 * Slight internal API change: `Tiebreaker.print_description`
   accepts two arguments, the second being the description
   string / list.  Since it's always `self.description` anyway,
