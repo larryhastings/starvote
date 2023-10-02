@@ -756,10 +756,10 @@ starvote.load_starvote_file(path, *, encoding='utf-8')
 
 `load_starvote_file` takes one positional parameter:
 `path`, which must be a `str`, `bytes`, or `pathlib.Path` object.
-It opens that file, reads the contents, passes those
-contents in to `parse_starvote`, and returns the result.
-You may specify the text encoding using the
-`encoding` keyword-only parameter; the default
+It opens that file, reads and decodes its contents,
+passes those contents in to `parse_starvote`,
+and returns the result.  You may specify the text encoding
+using the `encoding` keyword-only parameter; the default
 encoding is `'utf-8'`.
 
 
@@ -784,8 +784,8 @@ and the default tiebreaker.
 
 Alternatively, the path may be a *starvote format* file.
 *starvote format* files should end with the file extension
-`.starvote` and contain a *starvote format election* in
-UTF-8 format.  *starvote format elections* explicitly
+`.starvote` and contain a *starvote format election* encoded
+in UTF-8.  *starvote format elections* explicitly
 specify all the parameters of the election.
 
 For example, you can run this from the root of the
@@ -1150,8 +1150,8 @@ There's also a new text format for storing an election,
   using `python -m starvote`:
 
   - You may now specify a `.starvote` file.
-    Its should be in UTF-8, and the contents should be
-    a *starvote format election.*
+    Its contents should be a *starvote format election,*
+    encoded using UTF-8.
 
   - When specifying a `.csv` file, `starvote` uses several default
     values: method is STAR Voting, seats is 1, verbosity is 1.
