@@ -200,6 +200,7 @@ def election(method, ballots, *,
     maximum_score=5,
     print=None,
     seats=1,
+    tiebreaker=predefined_permutation_tiebreaker,
     verbosity=0,
     ):
 ```
@@ -240,6 +241,12 @@ any vote on any ballot.
 STAR Voting is a single-winner method, so this should be
 `1` when using STAR Voting; for the other methods,
 `seats` must be greater than or equal to `2`.
+
+`tiebreaker` specifies how to break ties.  It should
+be either a tiebreaker function, a tiebreaker class,
+or an instance of a tiebreaker class.  See the
+[Ties](#ties) section for a list of predefined
+tiebreakers.
 
 `verbosity` specifies how much output you want.
 The current supported values are `0` (no output)
