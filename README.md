@@ -1027,12 +1027,14 @@ or otherwise freely redistributable.
   an integer number.  This required new syntax for the
   `tiebreaker` option: you can specify options using a
   syntax looks something like a Python function call
-  with keyword-only parameters.  For
-  example, to use `predefined_permutation_tiebreaker` with
-  a PRNG seeded with the number 12345, you would add this
-  to your *starvote format* election in the `options` section:
+  with keyword-only parameters.  For example, to use
+  `predefined_permutation_tiebreaker` with a PRNG seeded
+  with the number 12345, add this to the `options` section
+  of your *starvote format* election:
 
+```
     tiebreaker=predefined_permutation_tiebreaker(seed=12345)
+```
 
 * New feature: `predefined_permutation_tiebreaker` and
   `on_demand_random_tiebreaker` now both accept a
@@ -1048,7 +1050,7 @@ or otherwise freely redistributable.
   [`random`](https://docs.python.org/3/library/random.html)
   module itself for randomization.
 
-* **starvote** now has over a hundred tests!
+p.s. **starvote** now has over a hundred tests!
 
 **2.1.1** - *2023/09/20*
 
