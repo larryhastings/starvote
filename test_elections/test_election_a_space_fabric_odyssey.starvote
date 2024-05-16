@@ -1,0 +1,32 @@
+# The STAR Voting election featured in the video
+# "Why voting feels TERRIBLE: A Space Fabric Odyssey"
+# https://www.youtube.com/watch?v=Nu4eTUafuSc
+
+[options]
+
+method = star
+verbosity = 1
+tiebreaker = None
+
+[ballots]
+
+# dragon, unicorn
+2 ballots:
+	Purple Space Fabric = 5
+	Plain Purple Fabric = 3
+	White Space Fabric = 0
+
+
+# Dumbo, Goofy, Mickey
+3 ballots:
+	Purple Space Fabric = 4
+	Plain Purple Fabric = 5
+	White Space Fabric = 0
+
+
+# Snorlax, Care Bear, Hello Kitty En Francais, Domokun
+4 ballots:
+	Purple Space Fabric = 4
+	Plain Purple Fabric = 0
+	White Space Fabric = 5
+
