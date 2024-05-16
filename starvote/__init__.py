@@ -3,6 +3,14 @@
 ##
 ## TODO
 ##
+## * avoid randomness in tiebreaker
+##    * glean data from the election, format as bytes
+##    * hash bytes to produce digest
+##    * seed random object with digest
+##    * use seeded random object to permute candidates
+##
+## * rework RRV so it supports K
+##
 ## * write a unit test that checks the code examples
 ##   in README.md are up to date
 ##     * confirms "example.py" and the output in README.md matches
@@ -18,6 +26,8 @@
 ##         * maybe just super-regular HTML, with classes and names to make it easy?
 ##     * allow displaying in floats
 ##     * restore printing the preference matrix (it's lurking in 1.x versions)
+##
+## * add IRV, sigh
 ##
 
 __doc__ = "An election tabulator for the STAR electoral system, and others"
@@ -2538,6 +2548,9 @@ def parse_starvote(starvote, *, path=None):
         if key in d:
             description = repeated_key_format.format(key=key)
             raise ValueError(f"{exception_prefix}{description}")
+        # permit line comments in vote lines
+        if '#' in value:
+            value = value.partition('#')[0].strip()
         d[key] = value
         if flush_after_every_line:
             flush()

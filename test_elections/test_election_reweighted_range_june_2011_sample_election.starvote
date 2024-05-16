@@ -1,0 +1,1138 @@
+#
+# Election cribbed from
+#        https://rangevoting.org/June2011RealWorldRRVvotes.txt
+#
+# (I included this text file below, as a comment.)
+
+[options]
+    method = rrv
+    seats = 9
+    maximum score = 9
+    verbosity = 1
+    tiebreaker = none
+
+[ballots]
+
+
+# V1
+C101 = 7
+C102 = 9
+C103 = 1
+C104 = 5
+C105 = 6
+C106 = 8
+C107 = 2
+C108 = 9
+C109 = 9
+C110 = 7
+C111 = 5
+C112 = 6
+C113 = 9
+C114 = 5
+C115 = 0
+C116 = 0
+
+# V2
+C101 = 8
+C102 = 9
+C103 = 8
+C104 = 9
+C105 = 2
+C106 = 7
+C107 = 5
+C108 = 2
+C109 = 4
+C110 = 8
+C111 = 8
+C112 = 3
+C113 = 9
+C114 = 2
+C115 = 9
+C116 = 9
+
+# V3
+C101 = 7
+C102 = 9
+C103 = 0
+C104 = 4
+C105 = 9
+C106 = 9
+C107 = 3
+C108 = 9
+C109 = 3
+C110 = 8
+C111 = 0
+C112 = 9
+C113 = 9
+C114 = 0
+C115 = 0
+C116 = 4
+
+# V4
+C101 = 8
+C102 = 7
+C103 = 8
+C104 = 7
+C105 = 8
+C106 = 9
+C107 = 3
+C108 = 6
+C109 = 6
+C110 = 7
+C111 = 4
+C112 = 4
+C113 = 5
+C114 = 5
+C115 = 0
+C116 = 5
+
+# V5
+C101 = 8
+C102 = 8
+C103 = 9
+C104 = 9
+C105 = 1
+C106 = 8
+C107 = 9
+C108 = 9
+C109 = 8
+C110 = 7
+C111 = 9
+C112 = 4
+C113 = 2
+C114 = 6
+C115 = 0
+C116 = 9
+
+# V6
+C101 = 9
+C102 = 0
+C103 = 0
+C104 = 9
+C105 = 0
+C106 = 9
+C107 = 9
+C108 = 9
+C109 = 9
+C110 = 0
+C111 = 0
+C112 = 0
+C113 = 9
+C114 = 0
+C115 = 0
+C116 = 0
+
+# V7
+C101 = 8
+C102 = 9
+C103 = 9
+C104 = 7
+C105 = 8
+C106 = 9
+C107 = 7
+# C108 = X
+C109 = 8
+C110 = 8
+# C111 = X
+C112 = 2
+C113 = 0
+C114 = 7
+C115 = 5
+C116 = 6
+
+# V8
+C101 = 6
+C102 = 7
+C103 = 9
+C104 = 2
+C105 = 9
+C106 = 9
+C107 = 6
+C108 = 4
+C109 = 9
+C110 = 9
+C111 = 7
+C112 = 3
+C113 = 2
+C114 = 7
+C115 = 8
+C116 = 6
+
+# V9
+C101 = 9
+C102 = 7
+C103 = 5
+C104 = 6
+C105 = 9
+C106 = 9
+C107 = 7
+C108 = 5
+C109 = 9
+C110 = 8
+C111 = 6
+C112 = 0
+C113 = 3
+C114 = 7
+C115 = 9
+C116 = 7
+
+# V10
+C101 = 9
+C102 = 9
+C103 = 9
+# C104 = X
+C105 = 1
+C106 = 9
+C107 = 8
+C108 = 5
+C109 = 9
+C110 = 9
+C111 = 9
+C112 = 6
+C113 = 1
+C114 = 9
+C115 = 1
+C116 = 1
+
+# V11
+C101 = 9
+C102 = 2
+C103 = 7
+C104 = 9
+C105 = 9
+C106 = 5
+C107 = 7
+C108 = 7
+C109 = 9
+C110 = 9
+# C111 = X
+C112 = 5
+C113 = 7
+C114 = 7
+C115 = 7
+# C116 = X
+
+# V12
+C101 = 9
+C102 = 9
+C103 = 9
+C104 = 6
+C105 = 0
+C106 = 9
+C107 = 9
+C108 = 7
+C109 = 5
+C110 = 5
+# C111 = X
+C112 = 2
+C113 = 0
+C114 = 5
+C115 = 5
+C116 = 9
+
+# V13
+C101 = 9
+C102 = 8
+C103 = 8
+C104 = 9
+C105 = 6
+C106 = 8
+C107 = 8
+C108 = 9
+C109 = 5
+C110 = 5
+C111 = 5
+C112 = 4
+C113 = 5
+C114 = 5
+C115 = 9
+C116 = 4
+
+# V14
+# C101 = X
+C102 = 9
+# C103 = X
+# C104 = X
+C105 = 0
+C106 = 0
+C107 = 0
+C108 = 9
+C109 = 0
+C110 = 9
+# C111 = X
+C112 = 0
+C113 = 0
+# C114 = X
+C115 = 0
+# C116 = X
+
+# V15
+C101 = 8
+C102 = 6
+C103 = 9
+C104 = 7
+C105 = 7
+C106 = 8
+C107 = 3
+C108 = 4
+C109 = 3
+C110 = 6
+C111 = 7
+C112 = 0
+C113 = 3
+C114 = 7
+C115 = 3
+C116 = 5
+
+# V16
+C101 = 9
+C102 = 6
+C103 = 8
+C104 = 5
+C105 = 5
+C106 = 9
+C107 = 4
+C108 = 6
+C109 = 8
+C110 = 8
+C111 = 2
+C112 = 4
+C113 = 4
+C114 = 5
+C115 = 1
+C116 = 7
+
+# V17
+C101 = 8
+C102 = 6
+C103 = 5
+C104 = 2
+C105 = 9
+C106 = 5
+C107 = 4
+C108 = 1
+C109 = 3
+C110 = 0
+# C111 = X
+C112 = 0
+C113 = 0
+C114 = 2
+C115 = 9
+C116 = 0
+
+# V18
+C101 = 7
+C102 = 7
+C103 = 5
+C104 = 6
+C105 = 0
+C106 = 8
+C107 = 9
+C108 = 9
+C109 = 9
+C110 = 9
+C111 = 7
+C112 = 1
+C113 = 1
+C114 = 9
+C115 = 9
+C116 = 9
+
+# V19
+C101 = 9
+C102 = 9
+C103 = 8
+C104 = 8
+C105 = 9
+C106 = 9
+C107 = 6
+C108 = 9
+C109 = 9
+C110 = 9
+C111 = 9
+C112 = 8
+C113 = 7
+C114 = 6
+C115 = 7
+C116 = 8
+
+# V20
+C101 = 5
+C102 = 8
+C103 = 9
+C104 = 3
+C105 = 9
+C106 = 9
+C107 = 3
+C108 = 7
+C109 = 9
+C110 = 6
+C111 = 9
+C112 = 4
+C113 = 4
+C114 = 2
+C115 = 4
+C116 = 4
+
+# V21
+C101 = 9
+C102 = 8
+C103 = 9
+C104 = 5
+C105 = 8
+C106 = 8
+C107 = 7
+C108 = 7
+C109 = 8
+C110 = 9
+C111 = 7
+C112 = 5
+C113 = 3
+C114 = 5
+C115 = 4
+C116 = 7
+
+# V22
+C101 = 0
+C102 = 8
+C103 = 9
+C104 = 5
+C105 = 5
+C106 = 7
+C107 = 6
+C108 = 4
+C109 = 6
+C110 = 6
+C111 = 7
+C112 = 8
+C113 = 4
+C114 = 0
+C115 = 7
+C116 = 7
+
+# V23
+C101 = 8
+C102 = 9
+C103 = 7
+C104 = 9
+C105 = 0
+C106 = 9
+C107 = 0
+C108 = 9
+C109 = 0
+C110 = 9
+C111 = 6
+C112 = 6
+C113 = 4
+C114 = 0
+C115 = 0
+C116 = 0
+
+# V24
+C101 = 9
+C102 = 9
+# C103 = X
+# C104 = X
+# C105 = X
+C106 = 9
+# C107 = X
+# C108 = X
+# C109 = X
+C110 = 9
+# C111 = X
+# C112 = X
+# C113 = X
+# C114 = X
+# C115 = X
+# C116 = X
+
+# V25
+C101 = 7
+C102 = 7
+C103 = 8
+C104 = 4
+C105 = 8
+C106 = 8
+C107 = 7
+C108 = 6
+C109 = 9
+C110 = 6
+C111 = 8
+C112 = 6
+C113 = 4
+C114 = 4
+C115 = 5
+C116 = 6
+
+# V26
+C101 = 9
+C102 = 9
+C103 = 0
+C104 = 5
+C105 = 0
+C106 = 9
+C107 = 9
+C108 = 5
+C109 = 9
+C110 = 0
+C111 = 0
+C112 = 0
+C113 = 0
+C114 = 0
+C115 = 0
+C116 = 9
+
+# V27
+C101 = 8
+C102 = 9
+C103 = 8
+C104 = 7
+C105 = 9
+C106 = 9
+C107 = 2
+C108 = 7
+C109 = 8
+C110 = 9
+C111 = 3
+C112 = 6
+C113 = 6
+C114 = 2
+C115 = 0
+C116 = 5
+
+# V28
+C101 = 2
+C102 = 7
+C103 = 8
+C104 = 5
+C105 = 0
+C106 = 6
+C107 = 9
+C108 = 9
+C109 = 9
+C110 = 6
+C111 = 9
+C112 = 4
+C113 = 6
+C114 = 6
+C115 = 0
+C116 = 8
+
+# V29
+C101 = 9
+C102 = 9
+C103 = 6
+C104 = 9
+C105 = 9
+C106 = 6
+C107 = 3
+C108 = 5
+C109 = 5
+C110 = 9
+# C111 = X
+C112 = 2
+C113 = 6
+C114 = 5
+C115 = 3
+C116 = 6
+
+# V30
+C101 = 7
+C102 = 7
+C103 = 9
+C104 = 0
+C105 = 2
+C106 = 9
+C107 = 5
+C108 = 9
+C109 = 9
+C110 = 2
+C111 = 2
+C112 = 0
+C113 = 0
+C114 = 0
+C115 = 0
+C116 = 9
+
+# V31
+C101 = 9
+C102 = 9
+C103 = 5
+C104 = 9
+C105 = 9
+C106 = 5
+C107 = 9
+C108 = 9
+C109 = 9
+C110 = 5
+C111 = 9
+C112 = 5
+C113 = 9
+C114 = 5
+C115 = 5
+C116 = 5
+
+# V32
+C101 = 9
+C102 = 9
+C103 = 9
+C104 = 7
+C105 = 9
+C106 = 9
+C107 = 7
+C108 = 8
+C109 = 9
+C110 = 9
+C111 = 7
+C112 = 4
+C113 = 3
+C114 = 4
+C115 = 2
+C116 = 7
+
+# V33
+# C101 = X
+C102 = 5
+# C103 = X
+# C104 = X
+C105 = 3
+C106 = 5
+C107 = 5
+C108 = 6
+C109 = 5
+C110 = 5
+# C111 = X
+C112 = 4
+# C113 = X
+C114 = 7
+# C115 = X
+C116 = 5
+
+# V34
+C101 = 7
+C102 = 9
+C103 = 3
+C104 = 6
+C105 = 5
+# C106 = X
+# C107 = X
+# C108 = X
+# C109 = X
+# C110 = X
+# C111 = X
+C112 = 5
+C113 = 2
+C114 = 9
+C115 = 5
+C116 = 3
+
+# V35
+C101 = 9
+C102 = 9
+# C103 = X
+# C104 = X
+C105 = 9
+C106 = 9
+# C107 = X
+# C108 = X
+C109 = 9
+# C110 = X
+# C111 = X
+C112 = 9
+# C113 = X
+# C114 = X
+C115 = 9
+# C116 = X
+
+# V36
+C101 = 6
+C102 = 8
+C103 = 8
+# C104 = X
+C105 = 0
+C106 = 9
+# C107 = X
+C108 = 7
+C109 = 7
+C110 = 6
+C111 = 6
+C112 = 3
+C113 = 0
+C114 = 6
+C115 = 5
+C116 = 7
+
+# V37
+C101 = 4
+C102 = 6
+C103 = 9
+C104 = 3
+C105 = 6
+C106 = 9
+C107 = 7
+C108 = 8
+C109 = 9
+C110 = 4
+C111 = 9
+C112 = 7
+C113 = 5
+C114 = 5
+C115 = 9
+C116 = 1
+
+# V38
+C101 = 9
+C102 = 9
+C103 = 0
+C104 = 5
+C105 = 5
+C106 = 9
+C107 = 3
+C108 = 0
+C109 = 0
+C110 = 2
+C111 = 3
+C112 = 0
+C113 = 9
+C114 = 5
+C115 = 0
+C116 = 9
+
+# V39
+C101 = 8
+C102 = 8
+C103 = 7
+C104 = 4
+C105 = 5
+C106 = 8
+C107 = 6
+C108 = 8
+C109 = 8
+C110 = 7
+C111 = 4
+C112 = 4
+C113 = 5
+C114 = 5
+C115 = 6
+C116 = 6
+
+
+
+
+
+# 39 16
+# voter   C101    C102    C103    C104    C105    C106    C107    C108    C109    C110    C111    C112    C113    C114    C115    C116
+# V1      7       9       1       5       6       8       2       9       9       7       5       6       9       5       0       0
+# V2      8       9       8       9       2       7       5       2       4       8       8       3       9       2       9       9
+# V3      7       9       0       4       9       9       3       9       3       8       0       9       9       0       0       4
+# V4      8       7       8       7       8       9       3       6       6       7       4       4       5       5       0       5
+# V5      8       8       9       9       1       8       9       9       8       7       9       4       2       6       0       9
+# V6      9       0       0       9       0       9       9       9       9       0       0       0       9       0       0       0
+# V7      8       9       9       7       8       9       7       X       8       8       X       2       0       7       5       6
+# V8      6       7       9       2       9       9       6       4       9       9       7       3       2       7       8       6
+# V9      9       7       5       6       9       9       7       5       9       8       6       0       3       7       9       7
+# V10     9       9       9       X       1       9       8       5       9       9       9       6       1       9       1       1
+# V11     9       2       7       9       9       5       7       7       9       9       X       5       7       7       7       X
+# V12     9       9       9       6       0       9       9       7       5       5       X       2       0       5       5       9
+# V13     9       8       8       9       6       8       8       9       5       5       5       4       5       5       9       4
+# V14     X       9       X       X       0       0       0       9       0       9       X       0       0       X       0       X
+# V15     8       6       9       7       7       8       3       4       3       6       7       0       3       7       3       5
+# V16     9       6       8       5       5       9       4       6       8       8       2       4       4       5       1       7
+# V17     8       6       5       2       9       5       4       1       3       0       X       0       0       2       9       0
+# V18     7       7       5       6       0       8       9       9       9       9       7       1       1       9       9       9
+# V19     9       9       8       8       9       9       6       9       9       9       9       8       7       6       7       8
+# V20     5       8       9       3       9       9       3       7       9       6       9       4       4       2       4       4
+# V21     9       8       9       5       8       8       7       7       8       9       7       5       3       5       4       7
+# V22     0       8       9       5       5       7       6       4       6       6       7       8       4       0       7       7
+# V23     8       9       7       9       0       9       0       9       0       9       6       6       4       0       0       0
+# V24     9       9       X       X       X       9       X       X       X       9       X       X       X       X       X       X
+# V25     7       7       8       4       8       8       7       6       9       6       8       6       4       4       5       6
+# V26     9       9       0       5       0       9       9       5       9       0       0       0       0       0       0       9
+# V27     8       9       8       7       9       9       2       7       8       9       3       6       6       2       0       5
+# V28     2       7       8       5       0       6       9       9       9       6       9       4       6       6       0       8
+# V29     9       9       6       9       9       6       3       5       5       9       X       2       6       5       3       6
+# V30     7       7       9       0       2       9       5       9       9       2       2       0       0       0       0       9
+# V31     9       9       5       9       9       5       9       9       9       5       9       5       9       5       5       5
+# V32     9       9       9       7       9       9       7       8       9       9       7       4       3       4       2       7
+# V33     X       5       X       X       3       5       5       6       5       5       X       4       X       7       X       5
+# V34     7       9       3       6       5       X       X       X       X       X       X       5       2       9       5       3
+# V35     9       9       X       X       9       9       X       X       9       X       X       9       X       X       9       X
+# V36     6       8       8       X       0       9       X       7       7       6       6       3       0       6       5       7
+# V37     4       6       9       3       6       9       7       8       9       4       9       7       5       5       9       1
+# V38     9       9       0       5       5       9       3       0       0       2       3       0       9       5       0       9
+# V39     8       8       7       4       5       8       6       8       8       7       4       4       5       5       6       6
+# voter   C101    C102    C103    C104    C105    C106    C107    C108    C109    C110    C111    C112    C113    C114    C115    C116
+#
+# --
+# Vote data used as INPUT for program.  (View widescreen.)
+#
+# ABOUT THIS ELECTION:
+#   This election had 45 potential voters, of whom 39 actually voted (denoted V1...V39),
+# and 16 candidates (denoted C101..C116).  The election's purpose was to elect 9 winners.
+# Roughly speaking, the stakes were equivalent to jobs for few years for the winners.
+# The voters each were supposed to rate each candidate on a scale from 0=terrible to 9=great.
+# However, evidently some voters left some candidates unscored (X), perhaps due to apathy,
+# laziness, or self-perceived ignorance.
+#
+# Q. Why it is that some voters did not score some candidates?
+# A.  Voters were instructed "PLEASE RATE ALL CANDIDATES BELOW unless
+# you feel you do not know someone well enough to evaluate him/her. You
+# may register a vote of 'no opinion' by leaving a candidate's rating
+# blank which will neither help nor hurt someone's score."
+#
+# While most people in the 45 know each other, there was a possibility
+# that some qualified candidates would be disadvantaged by the fact that
+# some voters didn't have the opportunity to work closely with them.
+# (Some candidates had the advantage of having worked with all voters
+# for several years, while other candidates - based on factors beyond
+# their control - had less time to work with all voters.)
+#
+# Q. Is it ok if I reveal that you're a prestigious musical group and the
+# vote-scores are presumably largely based on hearing performances by
+# the candidates?
+# A. Sure, but allow me to correct one misconception here. The primary
+# criteria was NOT based on performance ability - there were no playing
+# auditions for this vote.
+#    The goal of this election was focused on choosing a "leadership team"
+# from amongst the 45 players. The 9 members of the leadership team will
+# be charged with setting the artistic/administrative direction of the
+# organization.
+#    Playing ability was likely one factor among many that voters
+# considered when evaluating the candidates. Other factors that were
+# (hopefully!) considered were leadership ability, organizational
+# ability, etc.
+#    In addition to the body of work that each candidate has produced over
+# the past 1-3 years, all candidates were required to submit a statement
+# describing their vision/qualifications for serving on the leadership
+# team.  The specific instructions to voters were;
+#   "Based on your informed opinion and a close reading of the candidates'
+# statements, please rate each candidate's fitness for a spot on the
+# 'Leadership Team'."
+#    So this election was not just about hiring people (or making their
+# jobs more permanent) it has a political aspect as well.
+#
+# FULL RANKING:
+#    I was asked actually to rank the 16 candidates in order so that if some of the 9 winners
+# could not serve, they could go further down to list to hire "ALTERNATES."
+# The RRV program did so, but there is a CRITICISM of that, pointed out by Aaron Hamlin -- it
+# violates the PR (proportional representation) philosophy.   To explain that vis-a-vis
+# "Democrats" vs "Republicans," PR assures that Republicans (if a fraction-F minority) will
+# win about fraction F of the seats (as opposed to naive voting methods which would yield 100%
+# Democrat winners).  RRV does so by continually "reweighting" the votes.  In that situation
+# the Dems would win seat #1, but then the voters who rated winner#1 high, would get
+# their votes deweighted.  With enough Dem-winners and hence Dem-deweighting, the Republican
+# voters would obtain the majority of the weight and be able to elect a Republican winner (but
+# then they'd be deweighted).  The weighting formulas are devised to assure PR.  Now
+# Aaron Hamlin's point is this.   If among the 9 winners, the guy who drops out is a Republican,
+# then that ought to bias things so that the 1st alternate is Republican.  Or ditto
+# with "Democrat."  Point is, who should be the first alternate, DEPENDS on which of
+# the first 9 winners dropped out -- it isn't just one fixed ordering.  If two of the 9
+# drop out, it would depend on them both and could be even more complicated.
+#    Fortunately there does not appear to have been a lot of factionalism in this election
+# (at least compared to USA politics) so these issues probably do not matter hugely.
+#
+# RRV VOTING METHOD described here:     http://RangeVoting.org/RRV.html
+# It produces an ordering from best to worst, such that the first K candidates in the ordering are
+# the "best" K winners in a PR sense (for any & every value of K).
+#
+# FACTIONS:
+# The strategic voters seem a lot different to naive clustering algorithms, e.g.
+# {V24, V35} appear to form "one faction," with everybody else in the "other faction."
+# That may just indicate that naive clustering algorithms are not a good way to identify
+# factions.
+#
+# OUTPUT OF PROGRAM  RRVvoting.c:
+# 39 voters.
+# 16 candidates.
+# The 16 candidates are:
+# C101
+# C102
+# C103
+# C104
+# C105
+# C106
+# C107
+# C108
+# C109
+# C110
+# C111
+# C112
+# C113
+# C114
+# C115
+# C116
+# Am assuming single-digit scores {0,1,2,3,4,5,6,7,8,9} and "X" for "no score."
+# The 39 votes were:
+# voter V1:    7  9       1       5       6       8       2       9       9       7       5       0
+# voter V2:    8  9       8       9       2       7       5       2       4       8       8       9
+# voter V3:    7  9       0       4       9       9       3       9       3       8       0       4
+# voter V4:    8  7       8       7       8       9       3       6       6       7       4       5
+# voter V5:    8  8       9       9       1       8       9       9       8       7       9       9
+# voter V6:    9  0       0       9       0       9       9       9       9       0       0       0
+# voter V7:    8  9       9       7       8       9       7       X       8       8       X       6
+# voter V8:    6  7       9       2       9       9       6       4       9       9       7       6
+# voter V9:    9  7       5       6       9       9       7       5       9       8       6       7
+# voter V10:   9  9       9       X       1       9       8       5       9       9       9       1
+# voter V11:   9  2       7       9       9       5       7       7       9       9       X       X
+# voter V12:   9  9       9       6       0       9       9       7       5       5       X       9
+# voter V13:   9  8       8       9       6       8       8       9       5       5       5       4
+# voter V14:   X  9       X       X       0       0       0       9       0       9       X       X
+# voter V15:   8  6       9       7       7       8       3       4       3       6       7       5
+# voter V16:   9  6       8       5       5       9       4       6       8       8       2       7
+# voter V17:   8  6       5       2       9       5       4       1       3       0       X       0
+# voter V18:   7  7       5       6       0       8       9       9       9       9       7       9
+# voter V19:   9  9       8       8       9       9       6       9       9       9       9       8
+# voter V20:   5  8       9       3       9       9       3       7       9       6       9       4
+# voter V21:   9  8       9       5       8       8       7       7       8       9       7       7
+# voter V22:   0  8       9       5       5       7       6       4       6       6       7       7
+# voter V23:   8  9       7       9       0       9       0       9       0       9       6       0
+# voter V24:   9  9       X       X       X       9       X       X       X       9       X       X
+# voter V25:   7  7       8       4       8       8       7       6       9       6       8       6
+# voter V26:   9  9       0       5       0       9       9       5       9       0       0       9
+# voter V27:   8  9       8       7       9       9       2       7       8       9       3       5
+# voter V28:   2  7       8       5       0       6       9       9       9       6       9       8
+# voter V29:   9  9       6       9       9       6       3       5       5       9       X       6
+# voter V30:   7  7       9       0       2       9       5       9       9       2       2       9
+# voter V31:   9  9       5       9       9       5       9       9       9       5       9       5
+# voter V32:   9  9       9       7       9       9       7       8       9       9       7       7
+# voter V33:   X  5       X       X       3       5       5       6       5       5       X       5
+# voter V34:   7  9       3       6       5       X       X       X       X       X       X       3
+# voter V35:   9  9       X       X       9       9       X       X       9       X       X       X
+# voter V36:   6  8       8       X       0       9       X       7       7       6       6       7
+# voter V37:   4  6       9       3       6       9       7       8       9       4       9       1
+# voter V38:   9  9       0       5       5       9       3       0       0       2       3       9
+# voter V39:   8  8       7       4       5       8       6       8       8       7       4       6
+# No errors found in input.
+# Done reading input.
+#
+# Approval-style strategic voters: V6 V14 V24 V35  (4 total)
+# Did not employ full score range: V2 V8 V10 V11 V13 V16 V19 V20 V21 V24 V25 V29 V31 V32 V33 V34 V35 V37 V39  (19 total)
+# Left 1 or more candidates unscored: V7 V10 V11 V12 V14 V17 V24 V29 V33 V34 V35 V36  (12 total)
+# Left all candidates unscored:  (0 total)
+# Done inspecting input.
+#
+# Average Scores for the 16 candidates:
+# C101=7.595
+# C102=7.641
+# C103=6.600
+# C104=5.939
+# C105=5.237
+# C106=7.868
+# C107=5.629
+# C108=6.657
+# C109=6.838
+# C110=6.486
+# C111=5.759
+# C112=3.763
+# C113=4.056
+# C114=4.556
+# C115=3.946
+# C116=5.514
+# This would naively induce the following order (top to bottom) for the candidates:
+#  C106, C102, C101, C109, C108, C103, C110, C104, C111, C107, C116, C105, C114, C113, C115, C112
+# That order just is for perceived quality, without any attempt at "proportional
+# representation" (PR).  [With a majority-Democratic electorate, the naive order would
+# yield 100% Democratic winners and 0% Republican winners.  But PR would yield
+# about fraction F Republican winners if fraction F of voters Republican.]
+#
+# Now for proportional representation...
+#
+# Embarking on RRV process using K=0.500000:
+# Winner[1] is C106.
+# Winner[2] is C102.
+# Winner[3] is C101.
+# Winner[4] is C108.
+# Winner[5] is C109.
+# Winner[6] is C110.
+# Winner[7] is C103.
+# Winner[8] is C104.
+# Winner[9] is C107.
+# Winner[10] is C116.
+# Winner[11] is C105.
+# Winner[12] is C111.
+# Winner[13] is C114.
+# Winner[14] is C113.
+# Winner[15] is C115.
+# Winner[16] is C112.
+# RRV process(using K=0.500000) complete.
+#
+# Embarking on RRV process using K=1.000000:
+# Winner[1] is C106.
+# Winner[2] is C102.
+# Winner[3] is C101.
+# Winner[4] is C108.
+# Winner[5] is C109.
+# Winner[6] is C110.
+# Winner[7] is C103.
+# Winner[8] is C104.
+# Winner[9] is C107.
+# Winner[10] is C116.
+# Winner[11] is C105.
+# Winner[12] is C111.
+# Winner[13] is C114.
+# Winner[14] is C113.
+# Winner[15] is C115.
+# Winner[16] is C112.
+# RRV process(using K=1.000000) complete.
+# All done.
+#
+# --
+#
+# MORE COMMENTS AND OTHER ELECTION METHODS...
+# Note the K=0.5 and K=1 RRV processes gave the exact same order, which is
+# fortunate because there is some debate about the best value of K --
+# but for this election, K made no difference.  The naive and RRV orders
+# were the same except for swapping C108,C109 and C103,C110 and then
+# further changes from the 9th place onward.
+# The 9th placer actually matters since the 9th and last winner
+# (since they wanted 9 winners only) changes using RRV versus naive;
+# RRV elects C107, naive elects C111.
+# Unfortunately due to a bug in the program's handling of "X" votes
+# (now fixed) they may have gone with C111.
+#
+# Jameson Quinn says in this election he prefers K=1 but they returned the same winner set
+# so it does not matter.
+# I (Warren Smith) don't have any clear preference on K=1/2 versus K=1, there is
+# a small discussion of that on   http://RangeVoting.org/RRV.html
+# which doesn't really help me decide for your case.
+#
+# Jameson Quinn informs me meanwhile that he has programmed a voting method of his own
+# invention "AT-TV method" and it yielded this ordering and top 9:
+#    [C106, C102, C109, C101, C103, C108, C105, C110, C104]
+#    7 candidates elected in round 1 (cutoff=9), 1 in round 2 (cutoff=8),
+#    and one in round 5 (cutoff=5).
+#    Continuing onward to order the remaining 7 candidates, Quinn finds...
+#           C112, C107, C116, C114, C115, C113, C111.
+#
+# Quinn writes:
+#   The biggest discrepancy with the RRV results is that C105 is much higher on my list.
+# That is apparently because C105 had a strong core of supporters who rated him/her at 9,
+# but did not have broad support (relatively low average rating). I suspect that is
+# also because my method penalizes the C106 voters much less than RRV, and the voters for
+# lower elected candidates (i.e, C108) more. So perhaps my method chooses C105 to
+# "balance out" C108. That's just a superficial guess, though.
+#    Later: Ted Stern has run a method he calls PR-CTV, and
+# Kristofer Munsterhjelm has run several more methods "birational," "range PAV," and "STV"
+# (using certain random tie-breaks) and all four of these methods produced the same top 9 as AT-TV.
+# KM also ran "QPQ" and "Meek STV" both of which produced these top 9 (not in order):
+#     {C102 C103 C104 C105 C106 C107 C109 C110 C116}   note C101 did not win
+# while "Schulze STV" produced these top 9 (not in order)
+#     {C102 C103 C104 C105 C106 C107 C109 C114 C116}   note C101 did not win.
+#
+# Kristofer Munsterhjelm converted the 39 ballots to rank-order form (i.e. ignoring the
+# numerical scores aside from their ordering) finding the following:
+# 1: C113=C109=C108=C102>C106>C110=C101>C112=C105>C114=C111=C104>C107>C103>C116=C115
+# 1: C116=C115=C113=C104=C102>C111=C110=C103=C101>C106>C107>C109>C112>C114=C108=C105
+# 1: C113=C112=C108=C106=C105=C102>C110>C101>C116=C104>C109=C107>C115=C114=C111=C103
+# 1: C106>C105=C103=C101>C110=C104=C102>C109=C108>C116=C114=C113>C112=C111>C107>C115
+# 1: C116=C111=C108=C107=C104=C103>C109=C106=C102=C101>C110>C114>C112>C113>C105>C115
+# 1: C113=C109=C108=C107=C106=C104=C101>C116=C115=C114=C112=C111=C110=C105=C103=C102
+# 1: C106=C103=C102>C110=C109=C105=C101>C114=C107=C104>C116>C115>C112>C113
+# 1: C110=C109=C106=C105=C103>C115>C114=C111=C102>C116=C107=C101>C108>C112>C113=C104
+# 1: C115=C109=C106=C105=C101>C110>C116=C114=C107=C102>C111=C104>C108=C103>C113>C112
+# 1: C114=C111=C110=C109=C106=C103=C102=C101>C107>C112>C108>C116=C115=C113=C105
+# 1: C110=C109=C105=C104=C101>C115=C114=C113=C108=C107=C103>C112=C106>C102
+# 1: C116=C107=C106=C103=C102=C101>C108>C104>C115=C114=C110=C109>C112>C113=C105
+# 1: C115=C108=C104=C101>C107=C106=C103=C102>C105>C114=C113=C111=C110=C109>C116=C112
+# 1: C110=C108=C102>C115=C113=C112=C109=C107=C106=C105
+# 1: C103>C106=C101>C114=C111=C105=C104>C110=C102>C116>C108>C115=C113=C109=C107>C112
+# 1: C106=C101>C110=C109=C103>C116>C108=C102>C114=C105=C104>C113=C112=C107>C111>C115
+# 1: C115=C105>C101>C102>C106=C103>C107>C109>C114=C104>C108>C116=C113=C112=C110
+# 1: C116=C115=C114=C110=C109=C108=C107>C106>C111=C102=C101>C104>C103>C113=C112>C105
+# 1: C111=C110=C109=C108=C106=C105=C102=C101>C116=C112=C104=C103>C115=C113>C114=C107
+# 1: C111=C109=C106=C105=C103>C102>C108>C110>C101>C116=C115=C113=C112>C107=C104>C114
+# 1: C110=C103=C101>C109=C106=C105=C102>C116=C111=C108=C107>C114=C112=C104>C115>C113
+# 1: C103>C112=C102>C116=C115=C111=C106>C110=C109=C107>C105=C104>C113=C108>C114=C101
+# 1: C110=C108=C106=C104=C102>C101>C103>C112=C111>C113>C116=C115=C114=C109=C107=C105
+# 1: C110=C106=C102=C101
+# 1: C109>C111=C106=C105=C103>C107=C102=C101>C116=C112=C110=C108>C115>C114=C113=C104
+# 1: C116=C109=C107=C106=C102=C101>C108=C104>C115=C114=C113=C112=C111=C110=C105=C103
+# 1: C110=C106=C105=C102>C109=C103=C101>C108=C104>C113=C112>C116>C111>C114=C107>C115
+# 1: C111=C109=C108=C107>C116=C103>C102>C114=C113=C110=C106>C104>C112>C101>C115=C105
+# 1: C110=C105=C104=C102=C101>C116=C113=C106=C103>C114=C109=C108>C115=C107>C112
+# 1: C116=C109=C108=C106=C103>C102=C101>C107>C111=C110=C105>C115=C114=C113=C112=C104
+# 1: C113=C111=C109=C108=C107=C105=C104=C102=C101>C116=C115=C114=C112=C110=C106=C103
+# 1: C110=C109=C106=C105=C103=C102=C101>C108>C116=C111=C107=C104>C114=C112>C113>C115
+# 1: C114>C108>C116=C110=C109=C107=C106=C102>C112>C105
+# 1: C114=C102>C101>C104>C115=C112=C105>C116=C103>C113
+# 1: C115=C112=C109=C106=C105=C102=C101
+# 1: C106>C103=C102>C116=C109=C108>C114=C111=C110=C101>C115>C112>C113=C105
+# 1: C115=C111=C109=C106=C103>C108>C112=C107>C105=C102>C114=C113>C110=C101>C104>C116
+# 1: C116=C113=C106=C102=C101>C114=C105=C104>C111=C107>C110>C115=C112=C109=C108=C103
+# 1: C109=C108=C106=C102=C101>C110=C103>C116=C115=C107>C114=C113=C105>C112=C111=C104
+#
+# Based on this we find that C106 is not only the average-score winner, he/she also is the
+# Condorcet (beats all rivals pairwise) winner and the IRV (instant runoff) winner
+# (according to Eric Gorr, where note I believe his program regards unranked candidates as
+# ranked coequal bottom).  Gorr's program indeed finds that there is an unambiguous
+# notion of the top 5 candidates in order:
+#    C106 > C102 > C101 > C109 > C103
+# where each ">" means "preferred pairwise by a voter majority versus all candidates
+# to the right (if unranked candidates regarded as being ranked coequal bottom)" --
+# although the 6th-placer is unclear since there is a CONDORCET CYCLE
+#     C105 = C108 = C110 > C105.
+#        17:17  16:16  16:13
+# (6th placer could be C108 or C110...  C105 would be the
+# most likely IRV winner with the top 5 removed, "most likely" meaning with random
+# tiebreaks.)
+#   Note that this order agrees with RRV's election order (regardless of K=0.5 or K=1)
+# for these first 5, and RRV also agrees to take two out of three of the members of the Condorcet
+# cycle (C108 and C110) as its next two winners.  RRV however does not elect C105,
+# presumably because of deweighting.  C105 had a high correlation with C110 and C101, both of
+# whom had already been elected, but it seems as though this is not enough to explain why C105 was
+# not elected while C104 and C111 or C107 were.  It is not clear to me why RRV does not like C105;
+# apparently PAIRwise correlations are not enough to explain it and higher order correlations
+# (triples...) would be needed?
+#
+# Centered Correlation Coefficients between candidates:
+# ......   C101   C102   C103   C104   C105   C106   C107   C108   C109   C110   C111   C112   C113   C114   C115   C116
+#   C101  1.000  0.029 -0.223  0.415  0.140  0.134  0.003 -0.037 -0.094  0.066 -0.299 -0.267  0.037  0.154 -0.088  0.008
+#   C102  0.029  1.000  0.090 -0.032  0.059  0.110 -0.231 -0.031 -0.204  0.341  0.253  0.244 -0.153  0.013 -0.076  0.287
+#   C103 -0.223  0.090  1.000 -0.029  0.093  0.009  0.084  0.067  0.198  0.441  0.635  0.192 -0.396  0.234  0.280  0.213
+#   C104  0.415 -0.032 -0.029  1.000 -0.088 -0.209  0.121  0.184 -0.153  0.314  0.145  0.081  0.378  0.168 -0.037 -0.004
+#   C105  0.140  0.059  0.093 -0.088  1.000  0.094 -0.202 -0.193  0.178  0.243  0.123  0.326  0.299  0.072  0.321 -0.148
+#   C106  0.134  0.110  0.009 -0.209  0.094  1.000  0.189 -0.011  0.354 -0.038 -0.427  0.187  0.012 -0.133 -0.036  0.061
+#   C107  0.003 -0.231  0.084  0.121 -0.202  0.189  1.000  0.167  0.623 -0.223  0.238 -0.051 -0.147  0.306  0.328  0.329
+#   C108 -0.037 -0.031  0.067  0.184 -0.193 -0.011  0.167  1.000  0.334  0.231  0.014  0.324  0.054 -0.014 -0.230 -0.114
+#   C109 -0.094 -0.204  0.198 -0.153  0.178  0.354  0.623  0.334  1.000  0.052  0.206  0.217 -0.040  0.252  0.183  0.119
+#   C110  0.066  0.341  0.441  0.314  0.243 -0.038 -0.223  0.231  0.052  1.000  0.447  0.438  0.038  0.437  0.078  0.119
+#   C111 -0.299  0.253  0.635  0.145  0.123 -0.427  0.238  0.014  0.206  0.447  1.000  0.305 -0.113  0.530  0.470  0.036
+#   C112 -0.267  0.244  0.192  0.081  0.326  0.187 -0.051  0.324  0.217  0.438  0.305  1.000  0.386 -0.039  0.109 -0.254
+#   C113  0.037 -0.153 -0.396  0.378  0.299  0.012 -0.147  0.054 -0.040  0.038 -0.113  0.386  1.000 -0.207 -0.096 -0.187
+#   C114  0.154  0.013  0.234  0.168  0.072 -0.133  0.306 -0.014  0.252  0.437  0.530 -0.039 -0.207  1.000  0.310  0.109
+#   C115 -0.088 -0.076  0.280 -0.037  0.321 -0.036  0.328 -0.230  0.183  0.078  0.470  0.109 -0.096  0.310  1.000  0.057
+#   C116  0.008  0.287  0.213 -0.004 -0.148  0.061  0.329 -0.114  0.119  0.119  0.036 -0.254 -0.187  0.109  0.057  1.000
+#
+# WARNING: The below may be buggy, needs to be recomputed:
+#
+# One way to assess the impact of the 4 strategic approval-style voters V6 V14 V24 V35 is to re-count the election
+# with them removed.  We would then have these
+# Average Scores for the 16 candidates:
+# C101=7.471
+# C102=7.743
+# C103=6.794
+# C104=5.844
+# C105=5.429
+# C106=8.000
+# C107=5.697
+# C108=6.515
+# C109=6.912
+# C110=6.529
+# C111=5.964
+# C112=3.829
+# C113=4.029
+# C114=4.686
+# C115=4.029
+# C116=5.676
+# This would naively induce the following order (top to bottom) for the candidates:
+#  C106, C102, C101, C109, C103, C110, C108, C111, C104,  C107, C116, C105, C114, C115, C113, C112
+# as opposed to the naive order with the strategic voters left in, which was:
+#  C106, C102, C101, C109, C108, C103, C110, C104, C111,  C107, C116, C105, C114, C113, C115, C112
+# which note was the same top 9 (indeed the same top 1,2,3,4,7,9,10, and 11).
+# So in that naive sense, the strategic voting has zero effect.
+# The RRV(K=0.5 and K=1.0) order with the strategists removed was:
+#  C106, C102, C101, C109, C103,  C110, C108, C111, C116, C104,  C107, C105, C113, C114, C115,  C112
+# which compares with this RRV order with strategists included:
+#  C106, C102, C101, C109, C103,  C108, C110, C104, C107, C111,  C116, C105, C113, C114, C115,  C112
+# .................................A swap B....AAAAAAAA swap BBBBBBB...........
+# Thus in some sense the strategists had little effect, but they were able to change RRV winners #8 & #9.
