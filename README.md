@@ -77,7 +77,7 @@ Features:
 * Also supports running elections specified in
   a convenient custom file format called *starvote format*.
 
-* **starvote** 2.0.3 passes its test suite with 100% coverage on
+* **starvote** 2.1.2 passes its test suite with 100% coverage on
   all supported versions.
 
 * **starvote** has no external dependencies.
