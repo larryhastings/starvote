@@ -149,38 +149,40 @@ Here are some desirable properites STAR Voting has:
 * It's [resolvable.](https://en.wikipedia.org/wiki/Resolvability_criterion)
   Ties are unlikely.
 * It complies with the [majority loser criterion.](https://en.wikipedia.org/wiki/Majority_loser_criterion)
-  If a majority of candidates like one candidate the least, that candidate will
+  If a majority of voters rank one candidate last, that candidate will
   never win a STAR Voting election.
 
 But here are some desirable properties STAR Voting doesn't have:
 
 * It's not a [Condorcet method,](https://en.wikipedia.org/wiki/Condorcet_winner_criterion)
-  which is a very particular property of an electoral system.
+  which is considered a desirable property for an electoral system.
   Let's say you have an election with three candidates, A, B, and C.  You ask each voter
   to vote in three head-to-head races: "which do you like better, A or B?", "which do
   you like better, B or C?", and "which do you like better, A or C?"  If there's one
   candidate that wins in every such head-to-head vote in the election, they would be
   the "Condorcet winner", and an electoral system that guarantees the "Condorcet winner"
   will win the election is called a "Condorcet method".  STAR isn't a Condorcet method,
-  because Condorcet doesn't take into consideration the strength of preference.  So
-  STAR can arguably give a better result.  (On the other hand, STAR does guarantee
+  because Condorcet voting like this doesn't take into consideration the strength of a
+  voter's preference.  STAR permits voters to express relative preferences, which arguably
+  can lead to a better result.  (On the other hand, STAR does guarantee
   the opposite: a [Condorcet loser](https://en.wikipedia.org/wiki/Condorcet_loser_criterion)
   will never win a STAR election.  And, as a practical matter, it's frequently true
   that the winner of a STAR election just happens to be the Concorcet winner.)
 * It doesn't satisfy the [majority criterion.](https://en.wikipedia.org/wiki/Majority_criterion)
   The majority criterion requires: *"if one candidate is ranked first by a majority of voters,
-  that candidate must win".*
+  that candidate must win".*  I believe this only happens in contrived, unrealistic
+  simulated elections--it's extremely unlikely in a real-world election.
 * It doesn't satisfy the [later-no-harm criterion.](https://en.wikipedia.org/wiki/Later-no-harm_criterion)
   Later-no-harm requires that if you've already expressed a preference for a candidate on your
   ballot, you shouldn't be able to harm that candidate by expressing another preference for
   another candidate later on the ballot.  STAR fails this; giving a higher vote to a
   less-preferred candidate might mean that your more-preferred candidate doesn't get
   elected.  The STAR Voting team [wrote an essay on why they gave up on this criterion.](https://www.starvoting.org/pass_fail)
-  The short version is: electoral systems that satisfy later-no-harm generally also
+  In short: electoral systems that satisfy later-no-harm generally also
   exhibit
   [the spoiler effect,](https://en.wikipedia.org/wiki/Vote_splitting#%22Spoiler_effect%22)
-  which is a worse property.  But achieving later-no-harm *and* avoiding the spoiler effect
-  makes your electoral system even worse!
+  which is much worse.  And achieving later-no-harm *and* avoiding the spoiler effect
+  makes your electoral system even worse than that!
 
 (If there isn't a best-possible voting system, is there a worst-possible?  Maybe!
 If there *is* a worst electoral system, it's almost certainly
