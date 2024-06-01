@@ -127,32 +127,34 @@ There are a number of desirable properties *and* undesirable properties
 that electoral systems can have.  And here's the bad news: it's
 *impossible* for there to be one best-possible voting system.  There
 are mutually exclusive desirable properties, and there are desirable
-properties that bring with them downsides.  You just can't make a
-one-size-fits-all best system that avoids every problem--every electoral
-system has to be a compromise.  Wikipedia has
+properties that bring with them undesirable side-effects.  You just
+can't make a one-size-fits-all best system that avoids every
+problem--every electoral system must be a compromise.  Wikipedia has
 [a comprehensive article](https://en.wikipedia.org/wiki/Comparison_of_electoral_systems)
 on the topic.
 
 STAR Voting avoid the worst problems of electoral systems.
 The remaining undesirable properties were chosen as the least-bad
-option.
+option, and anyway as a rule STAR Voting avoids these undesirable
+properties in real-world elections.
 
-Here are some desirable properites STAR Voting has:
+Here are some desirable properites exhibited by STAR Voting:
 
 * It's [monotonic.](https://en.wikipedia.org/wiki/Monotonicity_criterion)
   Giving a candidate a higher score can never hurt them, and
   giving a candidate a lower score can never help them.  (And yes,
   this is not always true of voting systems.  The increasingly popular
-  [Instant Runoff Voting](https://en.wikipedia.org/wiki/Instant-runoff_voting)
-  fails this; paradoxically, it's possible to *hurt* a candidate you
-  prefer by giving them a *higher* score.)
+  [Instant Runoff Voting,](https://en.wikipedia.org/wiki/Instant-runoff_voting)
+  also often called "Ranked Choice Voting",
+  fails this criterion; as strange as it sounds, it's possible to *hurt*
+  a candidate you prefer by giving them a *higher* score.)
 * It's [resolvable.](https://en.wikipedia.org/wiki/Resolvability_criterion)
   Ties are unlikely.
 * It complies with the [majority loser criterion.](https://en.wikipedia.org/wiki/Majority_loser_criterion)
   If a majority of voters rank one candidate last, that candidate will
   never win a STAR Voting election.
 
-But here are some desirable properties STAR Voting doesn't have:
+On the other hand, here are some desirable properties STAR Voting lacks:
 
 * It's not a [Condorcet method,](https://en.wikipedia.org/wiki/Condorcet_winner_criterion)
   which is considered a desirable property for an electoral system.
@@ -185,8 +187,8 @@ But here are some desirable properties STAR Voting doesn't have:
   makes your electoral system even worse than that!
 
 (If there isn't a best-possible voting system, is there a worst-possible?  Maybe!
-If there *is* a worst electoral system, it's almost certainly
-[Plurality voting](https://en.wikipedia.org/wiki/Plurality_voting)...
+If there is one, it's almost certainly
+[Plurality voting...](https://en.wikipedia.org/wiki/Plurality_voting)
 the predominant electoral system used here in the United States.  Sigh.)
 
 
