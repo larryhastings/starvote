@@ -8,5 +8,5 @@
 
 5 ballots:
     Amy = 3
-    Brian = 3
+    Brian = 3 # look! a comment on a ballot vote line!
     Chuck = 3
