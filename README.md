@@ -94,18 +94,20 @@ Chuck  0 1 2 3 4 5
 Darcy  0 1 2 3 4 5
 ```
 
-To vote, give every candidate a score from 0 to 5.  5 means you like
-them the most, 0 means you like them the least.  (If you don't pick one
-of the scores, that's the same as a 0.)  If you give two candidates
-the same score, that means you like them equally--you don't have a
-preference between them.
+Here we see the list of candidates, and next to every candidate's
+name are six numbers, 0 through 5.  To vote, give a score to every
+candidate, one of those numbers from 0 to 5.  5 means you like
+them the most, 0 means you like them the least.  (If you don't give
+a score to a candidate, that's the same as giving them a 0.)
+If you give two candidates the same score, that means you like them
+equally--you don't have a preference between them.
 
 Tabulating the election is easy!  You apply the **STAR** method:
 **S**core, **T**hen **A**utomatic **R**unoff.
 
-In the first round, the *Scoring Round,* you add up the scores of all the
-candidates.  The top two scoring candidates automatically advance to
-the second round.
+In the first round, the *Scoring Round,* you add up the scores of all
+the candidates from all the ballots.  The top two scoring candidates
+automatically advance to the second round.
 
 In the second round, the *Automatic Runoff Round,* you examine every
 ballot to see which of the two remaining candidates they preferred.
@@ -114,8 +116,8 @@ ballot scored both candidates the same, they have no preference.
 The candidate preferred by more ballots wins the election.  It's that
 simple!
 
-And notice--you always examine every ballot.  STAR Voting never throws
-away ballots.  When you vote, your vote always matters,
+And notice--you always examine every ballot in both rounds.  STAR Voting
+never throws away ballots.  When you vote, your vote always matters,
 every step of the way.
 
 
@@ -124,33 +126,34 @@ every step of the way.
 Electoral systems are a surprisingly deep topic.  They've been studied
 for hundreds of years, and there are many *many* different approaches.
 There are a number of desirable properties *and* undesirable properties
-that electoral systems can have.  And here's the bad news: it's
-*impossible* for there to be one best-possible voting system.  There
+that electoral systems can have.  And here's the bad news: a best-possible
+voting system, that has all the desirable properties and none of the
+undesirable ones, is literally *impossible.*  There
 are mutually exclusive desirable properties, and there are desirable
-properties that bring with them undesirable side-effects.  You just
-can't make a one-size-fits-all best system that avoids every
-problem--every electoral system must be a compromise.  Wikipedia has
+properties that bring with them undesirable side-effects.  *Every*
+electoral system is a compromise.  (Wikipedia has
 [a comprehensive article](https://en.wikipedia.org/wiki/Comparison_of_electoral_systems)
-on the topic.
+on the topic.)
 
 STAR Voting avoid the worst problems of electoral systems.
 The remaining undesirable properties were chosen as the least-bad
-option, and anyway as a rule STAR Voting avoids these undesirable
-properties in real-world elections.
+option, and in practice STAR Voting generally avoids these
+undesirable properties anyway--they only happen in unrealistic,
+contrived scenarios.
 
-Here are some desirable properites exhibited by STAR Voting:
+Here are some desirable properites guaranteed by STAR Voting:
 
 * It's [monotonic.](https://en.wikipedia.org/wiki/Monotonicity_criterion)
   Giving a candidate a higher score can never hurt them, and
   giving a candidate a lower score can never help them.  (And yes,
-  this is not always true of voting systems.  The increasingly popular
+  this isn't always true of voting systems.  The increasingly popular
   [Instant Runoff Voting,](https://en.wikipedia.org/wiki/Instant-runoff_voting)
   also often called "Ranked Choice Voting",
   fails this criterion; as strange as it sounds, it's possible to *hurt*
   a candidate you prefer by giving them a *higher* score.)
 * It's [resolvable.](https://en.wikipedia.org/wiki/Resolvability_criterion)
   Ties are unlikely.
-* It complies with the [majority loser criterion.](https://en.wikipedia.org/wiki/Majority_loser_criterion)
+* It satisfies the [majority loser criterion.](https://en.wikipedia.org/wiki/Majority_loser_criterion)
   If a majority of voters rank one candidate last, that candidate will
   never win a STAR Voting election.
 
@@ -172,24 +175,24 @@ On the other hand, here are some desirable properties STAR Voting lacks:
   that the winner of a STAR election just happens to be the Concorcet winner.)
 * It doesn't satisfy the [majority criterion.](https://en.wikipedia.org/wiki/Majority_criterion)
   The majority criterion requires: *"if one candidate is ranked first by a majority of voters,
-  that candidate must win".*  I believe this only happens in contrived, unrealistic
-  simulated elections--it's extremely unlikely in a real-world election.
+  that candidate must win".*  STAR Voting doesn't *guarantee* this, and it's possible to contrive
+  an election where STAR Voting wouldn't satisfy this.  In practice, STAR Voting elections
+  do tend to satisfy this criterion.
 * It doesn't satisfy the [later-no-harm criterion.](https://en.wikipedia.org/wiki/Later-no-harm_criterion)
   Later-no-harm requires that if you've already expressed a preference for a candidate on your
   ballot, you shouldn't be able to harm that candidate by expressing another preference for
   another candidate later on the ballot.  STAR fails this; giving a higher vote to a
   less-preferred candidate might mean that your more-preferred candidate doesn't get
   elected.  The STAR Voting team [wrote an essay on why they gave up on this criterion.](https://www.starvoting.org/pass_fail)
-  In short: electoral systems that satisfy later-no-harm generally also
-  exhibit
-  [the spoiler effect,](https://en.wikipedia.org/wiki/Vote_splitting#%22Spoiler_effect%22)
+  In short: electoral systems that satisfy later-no-harm generally also exhibit
+  [the spoiler effect](https://en.wikipedia.org/wiki/Vote_splitting#%22Spoiler_effect%22)
   which is much worse.  And achieving later-no-harm *and* avoiding the spoiler effect
   makes your electoral system even worse than that!
 
 (If there isn't a best-possible voting system, is there a worst-possible?  Maybe!
 If there is one, it's almost certainly
 [Plurality voting...](https://en.wikipedia.org/wiki/Plurality_voting)
-the predominant electoral system used here in the United States.  Sigh.)
+which is the predominant electoral system used here in the United States.  Sigh.)
 
 
 ## API
@@ -927,7 +930,7 @@ They all work something like this:
 The differences between the three is how they allocate
 vs. reweigh ballots. Allocated Score Voting and Sequentially
 Spent Score both allocate ballots, Reweighted Range Voting
-never does--with RRV every vote is counted in every round.
+never does--RRV counts every vote in every round.
 Also, the three systems use different formulae to compute the
 new weight of a ballot after each round.  In Allocated Score
 and Sequentially Spent Score,
@@ -993,7 +996,7 @@ a little.
 Huge thanks to Tim Peters for his continuous input during the
 development of this library.  Although Tim didn't have any input
 on the library itself--if you don't like the library it's 100%
-my fault!--he tirelessly answered all my questions about voting
+my fault!--he tirelessly answered my questions about voting
 during its development, and convinced me to change my approach
 several times.  In particular, Tim's feedback pushed me to
 develop the `tiebreaker` plug-in interface.
