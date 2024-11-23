@@ -2,7 +2,7 @@
 
 ## A STAR Voting election tabulator
 
-## Copyright 2023 by Larry Hastings
+## Copyright 2023-2024 by Larry Hastings
 
 [![# test badge](https://img.shields.io/github/actions/workflow/status/larryhastings/starvote/test.yml?branch=master&label=test)](https://github.com/larryhastings/starvote/actions/workflows/test.yml) [![# coverage badge](https://img.shields.io/github/actions/workflow/status/larryhastings/starvote/coverage.yml?branch=master&label=coverage)](https://github.com/larryhastings/starvote/actions/workflows/coverage.yml) [![# python versions badge](https://img.shields.io/pypi/pyversions/starvote.svg?logo=python&logoColor=FBE072)](https://pypi.org/project/starvote/)
 
