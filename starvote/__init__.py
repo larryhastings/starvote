@@ -3,12 +3,6 @@
 ##
 ## TODO
 ##
-## * avoid randomness in tiebreaker
-##    * glean data from the election, format as bytes
-##    * hash bytes to produce digest
-##    * seed random object with digest
-##    * use seeded random object to permute candidates
-##
 ## * rework RRV so it supports K
 ##
 ## * write a unit test that checks the code examples
@@ -32,7 +26,7 @@
 
 __doc__ = "An election tabulator for the STAR electoral system, and others"
 
-__version__ = "2.1.2"
+__version__ = "2.1.5"
 
 __all__ = [
     'Allocated_Score_Voting', # Method
@@ -41,6 +35,7 @@ __all__ = [
     'Bloc_STAR_Voting', # Method
     'bloc', # Method (nickname)
     'bloc_star_voting', # function
+    'hashed_ballots_tiebreaker', # tiebreaker class
     'Method', # class for method metadata
     'methods', # maps string to Methods
     'load_starvote_file', # function
@@ -67,7 +62,7 @@ __all__ = [
 
 LICENSE = """
 starvote
-Copyright 2023 by Larry Hastings
+Copyright 2023-2024 by Larry Hastings
 
 Permission is hereby granted, free of charge, to any person obtaining a
 copy of this software and associated documentation files (the "Software"),
@@ -95,7 +90,9 @@ import csv
 from fractions import Fraction
 import functools
 import enum
+import hashlib
 import itertools
+import marshal
 from math import floor, log10
 import os
 import pathlib
@@ -328,7 +325,12 @@ class TiebreakerFunctionWrapper(Tiebreaker):
 tiebreakers = {'None': None, 'none': None}
 
 def _add_tiebreaker(o):
-    tiebreakers[o.__name__] = o
+    name = o.__name__
+    tiebreakers[name] = o
+    suffix = "_tiebreaker"
+    if name.endswith(suffix):
+        name = name[:-len(suffix)]
+        tiebreakers[name] = o
     return o
 
 @_add_tiebreaker
@@ -428,13 +430,142 @@ class predefined_permutation_tiebreaker(Tiebreaker):
         return result
 
 
+@_add_tiebreaker
+class hashed_ballots_tiebreaker(Tiebreaker):
+    """
+    A tiebreaker that is
+        * unpredictable,
+        * impossible to control externally, and yet also
+        * totally deterministic.
+
+    Here's how it works.  This tiebreaker:
+        * computes a list of all candidates, then
+        * sorts the list of candidates, then
+        * sorts each ballot, then
+        * sorts a list of all the sorted ballots, then
+        * converts this sorted list of sorted ballots
+          into a binary string (using "marshal.dumps"
+          by default), then
+        * hashes a serialized monotonically increasing counter
+          (1 by default, incremented after every tiebreaker)
+          followed by that binary string, using a
+          cryptographically secure hash ("sha3_512" by default),
+          then
+        * uses the digest produced by the hash to seed
+          a random number generator (Python's
+          "random.Random" by default), then
+        * randomly shuffles the list of candidates
+          using that random number generator object
+          some number of times (3 by default).
+
+    This shuffled list of candidates is then used to break
+    ties.  Given a set of tied candidates T where |T| is L,
+    and we want to break the tie by selecting N candidates
+    where N < L, we choose the N candidates that appear
+    earliest in the candidate list.
+
+    I assert this is the current best tiebreaker in starvote.
+    It's impossible to control externally, unless you control
+    every ballot--in which case, you don't need to influence
+    the tiebreaker, now do you!  And it's impossible to predict
+    how it will behave in advance; you can't determine what its
+    output will be until you have all the ballots.  But its
+    behavior is 100% deterministic, which is both reassuring
+    and satisfying.
+    """
+    def __init__(self, *,
+            counter=1, hash='sha3_512', Random=random.Random,
+            serializer=marshal.dumps, shuffles=3,
+            ):
+        self.counter = counter
+        self.hash = hash
+        self.Random = Random
+        self.serializer = serializer
+        assert shuffles > 0
+        self.shuffles = shuffles
+
+        self.ballot_count = 0
+        self.candidates = None
+        self.serialized_ballots = None
+
+    def __repr__(self): # pragma: no cover
+        if self.serialized_ballots:
+            contents = f"counter={self.counter} serialized_ballots=(len({self.serialized_ballots} bytes)"
+        else:
+            contents = f"<not yet initialized>"
+        return f"hash_the_ballots_tiebreaker({contents})"
+
+    def initialize(self, options, ballots):
+        self.ballot_count = len(ballots)
+
+        candidates = set()
+        sorted_ballots = []
+
+        for ballot in ballots:
+            candidates.update(set(ballot))
+            ballot = list(ballot.items())
+            ballot.sort()
+            sorted_ballots.append(ballot)
+
+        sorted_ballots.sort()
+        self.serialized_ballots = self.serializer(sorted_ballots)
+
+        candidates = list(candidates)
+        candidates.sort()
+        self.candidates = candidates
+
+        if options.verbosity >= 2:
+            with options.heading("Initializing Hashed Ballots tiebreaker"):
+                options.print(f"{len(self.candidates)} candidates")
+                options.print(f"Counter initialized to {self.counter}")
+                options.print(f"Serialized sorted ballots = ({len(self.serialized_ballots)} bytes)")
+                if options.verbosity >= 3:
+                    digester = hashlib.new(self.hash, self.serialized_ballots)
+                    options.print(f"Hexdigest of serialized sorted ballots = {digester.hexdigest()}")
+
+    def __call__(self, options, tie, desired, exception):
+        assert 1 <= desired <= 2
+        tie_set = set(tie)
+
+        c = self.serializer(self.counter)
+
+        digester = hashlib.new(self.hash)
+        for o in (c, self.serialized_ballots):
+            b = self.serializer(o)
+            digester.update(b)
+        seed = digester.digest()
+
+        candidates = self.candidates.copy()
+        r = self.Random(seed)
+        for _ in range(self.shuffles):
+            r.shuffle(candidates)
+
+        result = [candidate for candidate in candidates if candidate in tie_set][:desired]
+        if options.verbosity:
+            with options.heading("Hashed Ballots tiebreaker"):
+                options.print(f"Hashed {self.ballot_count} ballots")
+                options.print(f"Counter is now {self.counter}")
+                options.print(f"{self.shuffles} shuffles")
+                options.print(f"Permuted list of candidates:")
+                options.print_candidates(candidates, sorted=False)
+                two = "two " if desired == 2 else ""
+                options.print(f"Choosing the earliest {two}of these candidates from the permuted list:")
+                options.print_candidates(tie)
+                if desired == 1:
+                    options.print(f"Selected winner: {result[0]}")
+                else:
+                    options.print(f"Selected winners: {' and '.join(result)}")
+
+        self.counter += 1
+
+        return result
 
 
 
 _DEFAULT_MAXIMUM_SCORE = 5
 _DEFAULT_PRINT = None
 _DEFAULT_SEATS = 1
-_DEFAULT_TIEBREAKER = predefined_permutation_tiebreaker
+_DEFAULT_TIEBREAKER = hashed_ballots_tiebreaker
 _DEFAULT_VERBOSITY = 0
 
 class Options:
@@ -590,7 +721,7 @@ class Options:
             self.last_printed_ballot_count = ballot_count
             self.print(f"Tabulating {ballot_count} {remaining}ballots.")
 
-    def print_candidates(self, candidates, *, numbered=False):
+    def print_candidates(self, candidates, *, numbered=False, sorted=True):
         """
         Convenience function: prints the candidates using options.print.
         If numbered is true, prints the candidates in order, prepended with
@@ -602,7 +733,8 @@ class Options:
             width = _width(len(candidates))
         else:
             candidates = list(candidates)
-            _attempt_to_sort(candidates)
+            if sorted:
+                _attempt_to_sort(candidates)
         for i, candidate in enumerate(candidates, 1):
             if numbered:
                 prefix = f"{i:>{width}}. "
@@ -722,7 +854,6 @@ class Options:
             raise tie
 
         return winners
-
 
     def unbreakable_tie(self, text, candidates, desired):
         s = f"{self.header}: {text}"
@@ -2905,7 +3036,7 @@ Options:
 
     -m|--method <method>
 
-        Specifies the electoral system.
+        Specifies the electoral system, and there is no default.
         Supported methods are 'star', 'bloc', 'allocated', 'rrv', and 'sss'.
 
     -r|--reference
@@ -2920,17 +3051,22 @@ Options:
 
     -s|--seats <seats>
 
-        Specifies number of seats, default {_DEFAULT_SEATS}.
+        Specifies number of seats, default is {_DEFAULT_SEATS}.
         Required when method is not STAR.
+
+    -t|--tiebreaker <tiebreaker>
+
+        Specifies which tiebreaker to use, default is
+        {_DEFAULT_TIEBREAKER}.
 
     -v|--verbose
 
-        Increments verbosity, default {_DEFAULT_VERBOSITY}.
+        Increments verbosity, default is {_DEFAULT_VERBOSITY}.
         Can be specified more than once.
 
     -x|--maximum-score <maximum_score>
 
-        Specifies the maximum score per vote, default {_DEFAULT_MAXIMUM_SCORE}.
+        Specifies the maximum score per vote, default is {_DEFAULT_MAXIMUM_SCORE}.
 
 ballots_file should be a path to a file ending either in '.csv' or '.star':
 

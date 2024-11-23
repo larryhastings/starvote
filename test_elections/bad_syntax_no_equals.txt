@@ -10,7 +10,7 @@ Options:
 
     -m|--method <method>
 
-        Specifies the electoral system.
+        Specifies the electoral system, and there is no default.
         Supported methods are 'star', 'bloc', 'allocated', 'rrv', and 'sss'.
 
     -r|--reference
@@ -25,17 +25,22 @@ Options:
 
     -s|--seats <seats>
 
-        Specifies number of seats, default 1.
+        Specifies number of seats, default is 1.
         Required when method is not STAR.
+
+    -t|--tiebreaker <tiebreaker>
+
+        Specifies which tiebreaker to use, default is
+        <class 'starvote.hashed_ballots_tiebreaker'>.
 
     -v|--verbose
 
-        Increments verbosity, default 0.
+        Increments verbosity, default is 0.
         Can be specified more than once.
 
     -x|--maximum-score <maximum_score>
 
-        Specifies the maximum score per vote, default 5.
+        Specifies the maximum score per vote, default is 5.
 
 ballots_file should be a path to a file ending either in '.csv' or '.star':
 

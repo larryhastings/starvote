@@ -17,7 +17,8 @@ and avoids the worst pitfalls.  It's really great!
 This module, **starvote**, implements a STAR Voting tabulator.
 It requires Python 3.7 or newer, but also supports CPython 3.6.
 (**starvote** relies on dictionaries preserving insertion order,
-which is guaranteed as of Python 3.7, but happened to work in CPython 3.6.)
+which is only guaranteed as of Python 3.7, but happened to work
+in CPython 3.6.)
 
 Features:
 
@@ -53,8 +54,10 @@ Features:
 * Provides a user-configurable final tiebreaker mechanism
   if the election (or one round in the election) ends in a tie.
 
-  - The default tiebreaker mechanism randomly shuffles
-    all the candidates in advance of running the election,
+  - The default tiebreaker mechanism hashes all ballots
+    and a monotonically increasing number, then uses that
+    data to seed a random number generator, which shuffles
+    a list of candidates,
     then breaks the tie in favor of the candidate(s) that
     appear earliest in the list.
   - Alternatively, you can break ties by randomly picking
@@ -77,10 +80,12 @@ Features:
 * Also supports running elections specified in
   a convenient custom file format called *starvote format*.
 
-* **starvote** 2.1.2 passes its test suite with 100% coverage on
+* **starvote** passes its test suite with 100% coverage on
   all supported versions.
 
 * **starvote** has no external dependencies.
+
+The current version of **starvote** is [2.1.5.](#changelog)
 
 
 ## A quick STAR Voting primer
@@ -207,7 +212,7 @@ def election(method, ballots, *,
     maximum_score=5,
     print=None,
     seats=1,
-    tiebreaker=predefined_permutation_tiebreaker,
+    tiebreaker=hashed_ballots_tiebreaker,
     verbosity=0,
     ):
 ```
@@ -348,12 +353,66 @@ The default tiebreaker in **starvote** is
 `predefined_permutation_tiebreaker`, passing
 in `candidates=None`.
 
+#### `hashed_ballots_tiebreaker`
+
+The preferred tiebreaker for **starvote** is
+`hashed_ballots_tiebreaker`.
+This is a class; you should instantiate it
+and pass in the instance as the `tiebreaker`
+argument when you run the election.
+
+`hashed_ballots_tiebreaker` is the preferred
+tiebreaker for **starvote** because it is
+
+* impossible to usefully control externally,
+* impossible to predict, yet
+* completely deterministic.
+
+Here's how it works.  At initialization time,
+this tiebreaker:
+
+* computes a list of all candidates, then
+* sorts the list of candidates and stores this list, then
+* sorts each ballot, then
+* sorts a list of all the sorted ballots, then
+* converts this sorted list of sorted ballots
+  into a binary string (using `marshal.dumps`
+  by default).
+
+Then, when it's asked to break a tie, it
+
+* hashes a serialized monotonically increasing counter
+  (`1` by default, incremented after every tiebreaker)
+  followed by the binary string of sorted ballots,
+  using a cryptographically secure hash (`sha3_512`
+  by default), then
+* uses the digest produced by the hash to seed
+  a random number generator (Python's
+  `random.Random` by default), then
+* randomly shuffles the list of candidates
+  using that random number generator object
+  some number of times (`3` by default).
+
+There are no random inputs into this process, which
+means it's completely deterministic.  However, it would
+be impossible to predict the result of the process unless
+you knew the contents of all the ballots, making it
+as unpredictable as a method employing random numbers.
+
+Also, the only way to usefully control this algorithm is
+to control the seed value--and to do that you'd have
+to control *all* the ballots.  And if you control all the
+ballots, you don't need to influence the tiebreaker!  You
+can just change the votes to directly produce whatever
+outcome you prefer.
+
+
 #### `predefined_permutation_tiebreaker`
 
-The main tiebreaker for **starvote** is
-`predefined_permutation_tiebreaker`.  This
-is a class; you should instantiate it and
-pass in the instance as the `tiebreaker`
+Another tiebreaker for **starvote** is
+`predefined_permutation_tiebreaker`.
+This is a class; you should instantiate it
+and pass in the instance as the `tiebreaker`
 argument when you run the election.
 
 `predefined_permutation_tiebreaker`
@@ -1024,6 +1083,29 @@ or otherwise freely redistributable.
 
 
 ## Changelog
+
+**2.1.5** - *2024/11/22*
+
+* New tiebreaker: The `hashed_ballots_tiebreaker`.
+  This uses a fiendish, twisty bit of computation
+  to produce a tiebreaker that's
+
+    * impossible to usefully control externally,
+    * completely unpredictable, and yet also
+    * completely deterministic.
+
+  This is a big improvement over the previous
+  tiebreaker implementations!  Therefore I've made
+  this the new default tiebreaker.
+* The `-t` | `--tiebreaker` command-line option
+  for the module (`"python3 -m starvote"`) is now
+  documented.  It's been implemented for a while,
+  it just wasn't documented.
+* When specifying the name of the tiebreaker for
+  the `-t` and `--tiebreaker` command-line options,
+  and also for the `tiebreaker` option in a `.starvote`
+  file, you may now omit the `_tiebreaker` at the
+  end of the name.
 
 **2.1.2** - *2023/10/02*
 

@@ -1,0 +1,20 @@
+[options]
+
+    method = bloc
+    tiebreaker = hashed_ballots
+    verbosity = 3
+    seats = 5
+
+[ballots]
+
+12 ballots:
+    Amy = 3
+    Brian = 3
+    Chuck = 3
+    David = 3
+    Emily = 3
+    Fred = 3
+    Geraldine = 3
+    Hank = 3
+
+

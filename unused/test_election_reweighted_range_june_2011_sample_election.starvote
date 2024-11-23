@@ -3,6 +3,12 @@
 #        https://rangevoting.org/June2011RealWorldRRVvotes.txt
 #
 # (I included this text file below, as a comment.)
+#
+# Not currently used, because I can't figure out how to
+# verify I'm doing this correctly.  I think I entered the
+# data correctly? But I get different results.  Which maybe
+# means my RRV implementation is wrong.  Or maybe I screwed
+# something else up.
 
 [options]
     method = rrv
