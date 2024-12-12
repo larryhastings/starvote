@@ -430,6 +430,105 @@ class predefined_permutation_tiebreaker(Tiebreaker):
         return result
 
 
+def starvote_custom_serializer(o):
+    """
+    starvote's custom binary serializer for objects.
+    Only used by the "hashed ballot" tiebreaker.
+
+    Only knows how to serialize two types of objects:
+        * an int, or
+        * a sorted list of sorted ballot lists.
+
+    (A "sorted ballot list" is a ballot dict, converted
+    to a list via list(ballot_dict.items()), and sorted.)
+
+    Returns a binary string that, in theory, could be
+    run through a deserializer to exactly recreate
+    the serialized object.
+    """
+
+    buffer = []
+    append = buffer.append
+
+    # o must be one of these two objects:
+    #     * an int, or
+    #     * a sort list of sorted ballot lists.
+    write_serialized_int_marker    = lambda: append(b'int')
+    write_serialized_ballot_marker = lambda: append(b'ballots')
+
+    # the theory:
+    # values are either str or int.
+    #     int is converted to str and encoded using ascii.
+    #     str is encoded using utf-8.
+    # every value is terminated by a control character (< b' ').
+    # the control character tells you what's happening / what's next.
+
+    write_start_of_heading = lambda: append(b'\x01')
+    write_start_of_text = lambda: append(b'\x02')
+    write_end_of_text = lambda: append(b'\x03')
+    write_group_separator = lambda: append(b'\x1d')
+    write_record_separator = lambda: append(b'\x1e')
+    write_unit_separator = lambda: append(b'\x1f')
+
+    def write_str(s):
+        _ = sorted(s)
+        if _[0] < ' ':
+            raise ValueError("control characters are disallowed in candidate names")
+        b = s.encode('utf-8')
+        append(b)
+
+    def write_int(i):
+        b = str(i).encode('ascii')
+        append(b)
+
+    if isinstance(o, int):
+        i = o
+
+        write_start_of_heading()
+        write_serialized_int_marker()
+        write_start_of_text()
+        write_int(i)
+        write_end_of_text()
+
+        return b''.join(buffer)
+
+    ballots = o
+
+    assert isinstance(ballots, list)
+    assert isinstance(ballots[0], list)
+    assert isinstance(ballots[0][0], tuple)
+    assert len(ballots[0][0]) == 2
+    assert isinstance(ballots[0][0][0], str)
+    assert isinstance(ballots[0][0][1], int)
+
+    write_start_of_heading()
+
+    write_serialized_ballot_marker()
+    write_unit_separator()
+
+    write_int(len(ballots))
+
+    write_start_of_text()
+
+    for ballot_number, ballot in enumerate(ballots):
+        if ballot_number:
+            write_group_separator()
+
+        for entry_number, (candidate, vote) in enumerate(ballot):
+            if entry_number:
+                write_record_separator()
+
+            write_str(candidate)
+            write_unit_separator()
+
+            write_int(vote)
+
+    write_end_of_text()
+
+    return b''.join(buffer)
+
+
+
 @_add_tiebreaker
 class hashed_ballots_tiebreaker(Tiebreaker):
     """
@@ -475,7 +574,7 @@ class hashed_ballots_tiebreaker(Tiebreaker):
     """
     def __init__(self, *,
             counter=1, hash='sha3_512', Random=random.Random,
-            serializer=marshal.dumps, shuffles=3,
+            serializer=starvote_custom_serializer, shuffles=3,
             ):
         self.counter = counter
         self.hash = hash
@@ -530,8 +629,7 @@ class hashed_ballots_tiebreaker(Tiebreaker):
         c = self.serializer(self.counter)
 
         digester = hashlib.new(self.hash)
-        for o in (c, self.serialized_ballots):
-            b = self.serializer(o)
+        for b in (c, self.serialized_ballots):
             digester.update(b)
         seed = digester.digest()
 

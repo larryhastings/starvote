@@ -148,6 +148,8 @@ tied_election = """
 
 class StarvoteTests(unittest.TestCase):
 
+    maxDiff = 2**32
+
     def test_import_star(self):
         # test that import * works
         # (it will fail if there's a bug with the definition of __all__)
@@ -550,6 +552,21 @@ class StarvoteTests(unittest.TestCase):
 """.lstrip()
         got = text_getvalue()
         self.assertEqual(got, expected_text)
+
+
+    def test_starvote_custom_serializer(self):
+        for i in range(30):
+            self.assertEqual(starvote.starvote_custom_serializer(i), b'\x01int\x02' + str(i).encode('ascii') + b'\x03')
+
+        fake_ballot_list = [ [ ('Abel', 1), ('Jacob', 2) ],  [ ('Abel', 2), ('Jacob', 4) ], [ ('Abel', 3), ('Jacob', 5) ],  ]
+        self.assertEqual(starvote.starvote_custom_serializer(fake_ballot_list),
+            b'\x01ballots\x1f3\x02Abel\x1f1\x1eJacob\x1f2\x1dAbel\x1f2\x1eJacob\x1f4\x1dAbel\x1f3\x1eJacob\x1f5\x03')
+
+        invalid_candidate_name = [ [ ('\x0ebel', 1), ('Jacob', 2) ],  [ ('\x0ebel', 2), ('Jacob', 4) ], [ ('\x0ebel', 3), ('Jacob', 5) ],  ]
+        with self.assertRaises(ValueError):
+            starvote.starvote_custom_serializer(invalid_candidate_name)
+
+
 
     def test_hand_starvote_format_seed_syntax(self):
         def test_raises(s, exception=SyntaxError):
