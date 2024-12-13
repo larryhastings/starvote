@@ -261,9 +261,12 @@ or an instance of a tiebreaker class.  See the
 tiebreakers.
 
 `verbosity` specifies how much output you want.
-The current supported values are `0` (no output)
-and `1` (output); values higher than `1` are
-currently equivalent to `1`.
+In most contexts, the supported values are `0`
+(no output) and `1` (output); some contexts
+support higher verbosity values to mean
+"print more information", e.g.
+`hashed_ballots_tiebreaker` produces incremental
+output for verbosity levels `2` and `3`.
 
 `print` lets you specify your own printing function.
 By default `election` will use `builtins.print`;
@@ -376,8 +379,8 @@ this tiebreaker:
 * sorts each ballot, then
 * sorts a list of all the sorted ballots, then
 * converts this sorted list of sorted ballots
-  into a binary string (using `marshal.dumps`
-  by default).
+  into a binary string (using a custom binary
+  serializer by default).
 
 Then, when it's asked to break a tie, it
 
@@ -1086,9 +1089,11 @@ or otherwise freely redistributable.
 
 **2.1.6** - *2024/12/12*
 
-* Bugfix: the `hashed_ballots_tiebreaker` assumed
-  that `marshal.dumps` produced an identical bytes
-  string given identical inputs.  This is not true!
+* Bugfix: previously, `hashed_ballots_tiebreaker` used
+  `marshal.dumps` as its binary serializer, because I assumed
+  given identical objects it would always produce
+  an identical bytes string.  This is not true!
+  (And thanks to Petr Viktorin for pointing it out!)
   We also apparently can't rely on `pickle.dumps`
   to be deterministic.  So, **starvote** now has
   its own bespoke--and completely deterministic--simple

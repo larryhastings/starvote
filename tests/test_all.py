@@ -562,9 +562,9 @@ class StarvoteTests(unittest.TestCase):
         self.assertEqual(starvote.starvote_custom_serializer(fake_ballot_list),
             b'\x01ballots\x1f3\x02Abel\x1f1\x1eJacob\x1f2\x1dAbel\x1f2\x1eJacob\x1f4\x1dAbel\x1f3\x1eJacob\x1f5\x03')
 
-        invalid_candidate_name = [ [ ('\x0ebel', 1), ('Jacob', 2) ],  [ ('\x0ebel', 2), ('Jacob', 4) ], [ ('\x0ebel', 3), ('Jacob', 5) ],  ]
-        with self.assertRaises(ValueError):
-            starvote.starvote_custom_serializer(invalid_candidate_name)
+        candidate_name_with_control_characters = [ [ ('\x01el', 1), ('Jacob', 2) ],  [ ('\x0ebel', 2), ('Jacob', 4) ], [ ('\x05bel', 3), ('\x1fJacob', 5) ],  ]
+        self.assertEqual(starvote.starvote_custom_serializer(candidate_name_with_control_characters),
+            b'\x01ballots\x1f3\x02\x1a\x01el\x1f1\x1eJacob\x1f2\x1d\x1a\x0ebel\x1f2\x1eJacob\x1f4\x1d\x1a\x05bel\x1f3\x1e\x1a\x1fJacob\x1f5\x03')
 
 
 

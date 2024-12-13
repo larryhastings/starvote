@@ -26,7 +26,7 @@
 
 __doc__ = "An election tabulator for the STAR electoral system, and others"
 
-__version__ = "2.1.5"
+__version__ = "2.1.6"
 
 __all__ = [
     'Allocated_Score_Voting', # Method
@@ -92,7 +92,6 @@ import functools
 import enum
 import hashlib
 import itertools
-import marshal
 from math import floor, log10
 import os
 import pathlib
@@ -470,11 +469,15 @@ def starvote_custom_serializer(o):
     write_record_separator = lambda: append(b'\x1e')
     write_unit_separator = lambda: append(b'\x1f')
 
+    def quote_control_character(s):
+        c = s.encode('utf-8')
+        if s[0] < ' ':
+            return b'\x1a' + c
+        return c
+
     def write_str(s):
-        _ = sorted(s)
-        if _[0] < ' ':
-            raise ValueError("control characters are disallowed in candidate names")
-        b = s.encode('utf-8')
+        encoded = [quote_control_character(c) for c in s]
+        b = b''.join(encoded)
         append(b)
 
     def write_int(i):
@@ -543,8 +546,8 @@ class hashed_ballots_tiebreaker(Tiebreaker):
         * sorts each ballot, then
         * sorts a list of all the sorted ballots, then
         * converts this sorted list of sorted ballots
-          into a binary string (using "marshal.dumps"
-          by default), then
+          into a binary string (using a custom binary
+          serializer by default), then
         * hashes a serialized monotonically increasing counter
           (1 by default, incremented after every tiebreaker)
           followed by that binary string, using a
