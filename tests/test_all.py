@@ -555,6 +555,21 @@ class StarvoteTests(unittest.TestCase):
 
 
     def test_starvote_custom_serializer(self):
+        # also: test the reader and writer
+        w = starvote._writer()
+        w(b'a')
+        w(b'x')
+        w(b'c')
+        b = w.render()
+        self.assertEqual(b, b'axc')
+
+        r = starvote._reader(b)
+        self.assertEqual(r(), b'a')
+        self.assertTrue(r.read_marker(b'x'))
+        with self.assertRaises(ValueError):
+            r.read_marker(b'q')
+
+
         for i in range(30):
             b = starvote.starvote_custom_serializer(i)
             self.assertEqual(b, b'\x01int\x02' + str(i).encode('ascii') + b'\x03')
@@ -577,6 +592,13 @@ class StarvoteTests(unittest.TestCase):
 
             ballots2 =  starvote.starvote_custom_deserializer(b)
             self.assertEqual(ballots, ballots2)
+
+        # malform a serialized ballot to test error-handling code.
+        # we replace the record separator with a tab.
+        # note: the replacement character must be a control character for this to work.
+        b = b.replace(starvote._record_separator, b'\t')
+        with self.assertRaises(ValueError):
+            starvote.starvote_custom_deserializer(b)
 
 
     def test_hand_starvote_format_seed_syntax(self):

@@ -574,6 +574,7 @@ class _reader(io.BytesIO):
         got = self()
         if got != c:
             raise ValueError(f"expected {c!r}, got {got!r}")
+        return True
 
 
 def starvote_custom_deserializer(b):
