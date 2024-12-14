@@ -1087,23 +1087,29 @@ or otherwise freely redistributable.
 
 ## Changelog
 
-**2.1.6** - *2024/12/12*
+**2.1.6** - *2024/12/13*
 
 * Bugfix: previously, `hashed_ballots_tiebreaker` used
-  `marshal.dumps` as its binary serializer, because I assumed
-  given identical objects it would always produce
-  an identical bytes string.  This is not true!
+  `marshal.dumps` as its binary serializer, because I
+  assumed given identical objects it would always
+  produce an identical bytes string.  This is not true!
   (And thanks to Petr Viktorin for pointing it out!)
   We also apparently can't rely on `pickle.dumps`
-  to be deterministic.  So, **starvote** now has
-  its own bespoke--and completely deterministic--simple
-  binary serializer, called `starvote_custom_serializer`.
-  It's tailor-made for the needs of **starvote** and
-  isn't useful for anybody else.  But it does guarantee
-  that `hashed_ballots_tiebreaker` will now produce
+  to be deterministic, for similar reasons.
+
+  So, **starvote** now has its own bespoke--and
+  completely deterministic--simple binary serializer,
+  called `starvote_custom_serializer`.  It's tailor-made
+  for the needs of **starvote** and isn't useful for
+  anybody else.  But it does guarantee that
+  `hashed_ballots_tiebreaker` will now produce
   identical results across all supported Python
   versions, across all architectures, regardless of
   optimization level.
+
+  (There's also a matching deserializer, naturally called
+  `starvote_custom_deserializer`.  You shouldn't need
+  to use it either.)
 
 **2.1.5** - *2024/11/22*
 

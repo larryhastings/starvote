@@ -556,16 +556,27 @@ class StarvoteTests(unittest.TestCase):
 
     def test_starvote_custom_serializer(self):
         for i in range(30):
-            self.assertEqual(starvote.starvote_custom_serializer(i), b'\x01int\x02' + str(i).encode('ascii') + b'\x03')
+            b = starvote.starvote_custom_serializer(i)
+            self.assertEqual(b, b'\x01int\x02' + str(i).encode('ascii') + b'\x03')
 
-        fake_ballot_list = [ [ ('Abel', 1), ('Jacob', 2) ],  [ ('Abel', 2), ('Jacob', 4) ], [ ('Abel', 3), ('Jacob', 5) ],  ]
-        self.assertEqual(starvote.starvote_custom_serializer(fake_ballot_list),
-            b'\x01ballots\x1f3\x02Abel\x1f1\x1eJacob\x1f2\x1dAbel\x1f2\x1eJacob\x1f4\x1dAbel\x1f3\x1eJacob\x1f5\x03')
+            i2 = starvote.starvote_custom_deserializer(b)
+            self.assertEqual(i, i2)
 
-        candidate_name_with_control_characters = [ [ ('\x01el', 1), ('Jacob', 2) ],  [ ('\x0ebel', 2), ('Jacob', 4) ], [ ('\x05bel', 3), ('\x1fJacob', 5) ],  ]
-        self.assertEqual(starvote.starvote_custom_serializer(candidate_name_with_control_characters),
-            b'\x01ballots\x1f3\x02\x1a\x01el\x1f1\x1eJacob\x1f2\x1d\x1a\x0ebel\x1f2\x1eJacob\x1f4\x1d\x1a\x05bel\x1f3\x1e\x1a\x1fJacob\x1f5\x03')
+        for ballots, serialized_form in (
+                (
+                    [ [ ('Abel', 1), ('Jacob', 2) ],  [ ('Abel', 2), ('Jacob', 4) ], [ ('Abel', 3), ('Jacob', 5) ], ],
+                    b'\x01ballots\x1f3\x02Abel\x1f1\x1eJacob\x1f2\x1dAbel\x1f2\x1eJacob\x1f4\x1dAbel\x1f3\x1eJacob\x1f5\x03',
+                ),
+                (
+                    [ [ ('\x01el', 1), ('Jacob', 2) ],  [ ('\x0ebel', 2), ('Jacob', 4) ], [ ('\x05bel', 3), ('\x1fJacob', 5) ], ],
+                    b'\x01ballots\x1f3\x02\x1a\x01el\x1f1\x1eJacob\x1f2\x1d\x1a\x0ebel\x1f2\x1eJacob\x1f4\x1d\x1a\x05bel\x1f3\x1e\x1a\x1fJacob\x1f5\x03',
+                ),
+            ):
+            b = starvote.starvote_custom_serializer(ballots)
+            self.assertEqual(b, serialized_form)
 
+            ballots2 =  starvote.starvote_custom_deserializer(b)
+            self.assertEqual(ballots, ballots2)
 
 
     def test_hand_starvote_format_seed_syntax(self):
