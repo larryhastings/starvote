@@ -6,8 +6,8 @@
 [Bloc STAR: Initializing Hashed Ballots tiebreaker]
  8 candidates
  Counter initialized to 1
- Serialized sorted ballots = (1233 bytes)
- Hexdigest of serialized sorted ballots = 419128f36f760b5744f38e421e1154de0df636f9da558e5730827b5d0ce29da6d2f5cc9872929de9575c197d144b94719920144c2d06f64e4f2eeba0bf2ea0d5
+ Serialized sorted ballots = (780 bytes)
+ Hexdigest of serialized sorted ballots = 43cf03fbebcd47246931fdeccf703c78217ce4c0d3f4de5b7096fdb072dedb18025cf76a620a4f569bc3e8cb940be5b6667470ac0a7ec4bef781b562131efac5
 
 [Bloc STAR: Round 1: Scoring Round]
  The two highest-scoring candidates advance to the next round.
@@ -51,14 +51,14 @@
  Counter is now 1
  3 shuffles
  Permuted list of candidates:
-   Hank
-   Amy
    Brian
+   Amy
    Fred
    Emily
-   Geraldine
    David
+   Geraldine
    Chuck
+   Hank
  Choosing the earliest two of these candidates from the permuted list:
    Amy
    Brian
@@ -68,25 +68,25 @@
    Fred
    Geraldine
    Hank
- Selected winners: Hank and Amy
+ Selected winners: Brian and Amy
 
 [Bloc STAR: Round 1: Automatic Runoff Round]
  The candidate preferred in the most head-to-head matchups wins.
    Amy           --  0 -- Tied for first place
-   Hank          --  0 -- Tied for first place
+   Brian         --  0 -- Tied for first place
    No Preference -- 12
  There's a two-way tie for first.
 
 [Bloc STAR: Round 1: Automatic Runoff Round: First tiebreaker]
  The highest-scoring candidate wins.
-   Amy  -- 36 -- Tied for first place
-   Hank -- 36 -- Tied for first place
+   Amy   -- 36 -- Tied for first place
+   Brian -- 36 -- Tied for first place
  There's still a two-way tie for first.
 
 [Bloc STAR: Round 1: Automatic Runoff Round: Second tiebreaker]
  The candidate with the most votes of score 5 wins.
-   Amy  -- 0 -- Tied for first place
-   Hank -- 0 -- Tied for first place
+   Amy   -- 0 -- Tied for first place
+   Brian -- 0 -- Tied for first place
  There's still a two-way tie for first.
 
 [Bloc STAR: Round 1: Automatic Runoff Round: Hashed Ballots tiebreaker]
@@ -94,51 +94,51 @@
  Counter is now 2
  3 shuffles
  Permuted list of candidates:
-   Hank
-   Emily
    Fred
+   Emily
    Brian
-   Geraldine
+   Hank
    David
-   Chuck
    Amy
+   Geraldine
+   Chuck
  Choosing the earliest of these candidates from the permuted list:
    Amy
-   Hank
- Selected winner: Hank
+   Brian
+ Selected winner: Brian
 
 [Bloc STAR: Round 2: Scoring Round]
  The two highest-scoring candidates advance to the next round.
    Amy       -- 36 (average 3) -- Tied for first place
-   Brian     -- 36 (average 3) -- Tied for first place
    Chuck     -- 36 (average 3) -- Tied for first place
    David     -- 36 (average 3) -- Tied for first place
    Emily     -- 36 (average 3) -- Tied for first place
    Fred      -- 36 (average 3) -- Tied for first place
    Geraldine -- 36 (average 3) -- Tied for first place
+   Hank      -- 36 (average 3) -- Tied for first place
  There's a seven-way tie for first.
 
 [Bloc STAR: Round 2: Scoring Round: First tiebreaker]
  The two candidates preferred in the most head-to-head matchups advance.
    Amy           --  0 -- Tied for first place
-   Brian         --  0 -- Tied for first place
    Chuck         --  0 -- Tied for first place
    David         --  0 -- Tied for first place
    Emily         --  0 -- Tied for first place
    Fred          --  0 -- Tied for first place
    Geraldine     --  0 -- Tied for first place
+   Hank          --  0 -- Tied for first place
    No Preference -- 12
  There's still a seven-way tie for first.
 
 [Bloc STAR: Round 2: Scoring Round: Second tiebreaker]
  The two candidates with the most votes of score 5 advance.
    Amy       -- 0 -- Tied for first place
-   Brian     -- 0 -- Tied for first place
    Chuck     -- 0 -- Tied for first place
    David     -- 0 -- Tied for first place
    Emily     -- 0 -- Tied for first place
    Fred      -- 0 -- Tied for first place
    Geraldine -- 0 -- Tied for first place
+   Hank      -- 0 -- Tied for first place
  There's still a seven-way tie for first.
 
 [Bloc STAR: Round 2: Scoring Round: Hashed Ballots tiebreaker]
@@ -146,41 +146,41 @@
  Counter is now 3
  3 shuffles
  Permuted list of candidates:
-   Brian
-   Emily
-   Amy
    Fred
-   David
+   Emily
    Geraldine
+   David
    Chuck
+   Brian
+   Amy
    Hank
  Choosing the earliest two of these candidates from the permuted list:
    Amy
-   Brian
    Chuck
    David
    Emily
    Fred
    Geraldine
- Selected winners: Brian and Emily
+   Hank
+ Selected winners: Fred and Emily
 
 [Bloc STAR: Round 2: Automatic Runoff Round]
  The candidate preferred in the most head-to-head matchups wins.
-   Brian         --  0 -- Tied for first place
    Emily         --  0 -- Tied for first place
+   Fred          --  0 -- Tied for first place
    No Preference -- 12
  There's a two-way tie for first.
 
 [Bloc STAR: Round 2: Automatic Runoff Round: First tiebreaker]
  The highest-scoring candidate wins.
-   Brian -- 36 -- Tied for first place
    Emily -- 36 -- Tied for first place
+   Fred  -- 36 -- Tied for first place
  There's still a two-way tie for first.
 
 [Bloc STAR: Round 2: Automatic Runoff Round: Second tiebreaker]
  The candidate with the most votes of score 5 wins.
-   Brian -- 0 -- Tied for first place
    Emily -- 0 -- Tied for first place
+   Fred  -- 0 -- Tied for first place
  There's still a two-way tie for first.
 
 [Bloc STAR: Round 2: Automatic Runoff Round: Hashed Ballots tiebreaker]
@@ -188,48 +188,48 @@
  Counter is now 4
  3 shuffles
  Permuted list of candidates:
-   Emily
-   Chuck
-   Geraldine
-   Hank
-   Fred
-   Brian
-   Amy
    David
- Choosing the earliest of these candidates from the permuted list:
-   Brian
    Emily
+   Hank
+   Chuck
+   Fred
+   Geraldine
+   Amy
+   Brian
+ Choosing the earliest of these candidates from the permuted list:
+   Emily
+   Fred
  Selected winner: Emily
 
 [Bloc STAR: Round 3: Scoring Round]
  The two highest-scoring candidates advance to the next round.
    Amy       -- 36 (average 3) -- Tied for first place
-   Brian     -- 36 (average 3) -- Tied for first place
    Chuck     -- 36 (average 3) -- Tied for first place
    David     -- 36 (average 3) -- Tied for first place
    Fred      -- 36 (average 3) -- Tied for first place
    Geraldine -- 36 (average 3) -- Tied for first place
+   Hank      -- 36 (average 3) -- Tied for first place
  There's a six-way tie for first.
 
 [Bloc STAR: Round 3: Scoring Round: First tiebreaker]
  The two candidates preferred in the most head-to-head matchups advance.
    Amy           --  0 -- Tied for first place
-   Brian         --  0 -- Tied for first place
    Chuck         --  0 -- Tied for first place
    David         --  0 -- Tied for first place
    Fred          --  0 -- Tied for first place
    Geraldine     --  0 -- Tied for first place
+   Hank          --  0 -- Tied for first place
    No Preference -- 12
  There's still a six-way tie for first.
 
 [Bloc STAR: Round 3: Scoring Round: Second tiebreaker]
  The two candidates with the most votes of score 5 advance.
    Amy       -- 0 -- Tied for first place
-   Brian     -- 0 -- Tied for first place
    Chuck     -- 0 -- Tied for first place
    David     -- 0 -- Tied for first place
    Fred      -- 0 -- Tied for first place
    Geraldine -- 0 -- Tied for first place
+   Hank      -- 0 -- Tied for first place
  There's still a six-way tie for first.
 
 [Bloc STAR: Round 3: Scoring Round: Hashed Ballots tiebreaker]
@@ -237,40 +237,40 @@
  Counter is now 5
  3 shuffles
  Permuted list of candidates:
-   Brian
    Amy
-   Hank
-   Geraldine
-   David
-   Emily
-   Chuck
    Fred
+   Brian
+   Chuck
+   Geraldine
+   Emily
+   David
+   Hank
  Choosing the earliest two of these candidates from the permuted list:
    Amy
-   Brian
    Chuck
    David
    Fred
    Geraldine
- Selected winners: Brian and Amy
+   Hank
+ Selected winners: Amy and Fred
 
 [Bloc STAR: Round 3: Automatic Runoff Round]
  The candidate preferred in the most head-to-head matchups wins.
    Amy           --  0 -- Tied for first place
-   Brian         --  0 -- Tied for first place
+   Fred          --  0 -- Tied for first place
    No Preference -- 12
  There's a two-way tie for first.
 
 [Bloc STAR: Round 3: Automatic Runoff Round: First tiebreaker]
  The highest-scoring candidate wins.
-   Amy   -- 36 -- Tied for first place
-   Brian -- 36 -- Tied for first place
+   Amy  -- 36 -- Tied for first place
+   Fred -- 36 -- Tied for first place
  There's still a two-way tie for first.
 
 [Bloc STAR: Round 3: Automatic Runoff Round: Second tiebreaker]
  The candidate with the most votes of score 5 wins.
-   Amy   -- 0 -- Tied for first place
-   Brian -- 0 -- Tied for first place
+   Amy  -- 0 -- Tied for first place
+   Fred -- 0 -- Tied for first place
  There's still a two-way tie for first.
 
 [Bloc STAR: Round 3: Automatic Runoff Round: Hashed Ballots tiebreaker]
@@ -278,45 +278,45 @@
  Counter is now 6
  3 shuffles
  Permuted list of candidates:
-   Hank
    Chuck
+   Emily
+   Amy
    Geraldine
    Brian
-   Emily
    David
+   Hank
    Fred
-   Amy
  Choosing the earliest of these candidates from the permuted list:
    Amy
-   Brian
- Selected winner: Brian
+   Fred
+ Selected winner: Amy
 
 [Bloc STAR: Round 4: Scoring Round]
  The two highest-scoring candidates advance to the next round.
-   Amy       -- 36 (average 3) -- Tied for first place
    Chuck     -- 36 (average 3) -- Tied for first place
    David     -- 36 (average 3) -- Tied for first place
    Fred      -- 36 (average 3) -- Tied for first place
    Geraldine -- 36 (average 3) -- Tied for first place
+   Hank      -- 36 (average 3) -- Tied for first place
  There's a five-way tie for first.
 
 [Bloc STAR: Round 4: Scoring Round: First tiebreaker]
  The two candidates preferred in the most head-to-head matchups advance.
-   Amy           --  0 -- Tied for first place
    Chuck         --  0 -- Tied for first place
    David         --  0 -- Tied for first place
    Fred          --  0 -- Tied for first place
    Geraldine     --  0 -- Tied for first place
+   Hank          --  0 -- Tied for first place
    No Preference -- 12
  There's still a five-way tie for first.
 
 [Bloc STAR: Round 4: Scoring Round: Second tiebreaker]
  The two candidates with the most votes of score 5 advance.
-   Amy       -- 0 -- Tied for first place
    Chuck     -- 0 -- Tied for first place
    David     -- 0 -- Tied for first place
    Fred      -- 0 -- Tied for first place
    Geraldine -- 0 -- Tied for first place
+   Hank      -- 0 -- Tied for first place
  There's still a five-way tie for first.
 
 [Bloc STAR: Round 4: Scoring Round: Hashed Ballots tiebreaker]
@@ -324,38 +324,38 @@
  Counter is now 7
  3 shuffles
  Permuted list of candidates:
-   Hank
-   Chuck
+   David
    Geraldine
-   Amy
    Emily
    Fred
+   Chuck
+   Hank
    Brian
-   David
- Choosing the earliest two of these candidates from the permuted list:
    Amy
+ Choosing the earliest two of these candidates from the permuted list:
    Chuck
    David
    Fred
    Geraldine
- Selected winners: Chuck and Geraldine
+   Hank
+ Selected winners: David and Geraldine
 
 [Bloc STAR: Round 4: Automatic Runoff Round]
  The candidate preferred in the most head-to-head matchups wins.
-   Chuck         --  0 -- Tied for first place
+   David         --  0 -- Tied for first place
    Geraldine     --  0 -- Tied for first place
    No Preference -- 12
  There's a two-way tie for first.
 
 [Bloc STAR: Round 4: Automatic Runoff Round: First tiebreaker]
  The highest-scoring candidate wins.
-   Chuck     -- 36 -- Tied for first place
+   David     -- 36 -- Tied for first place
    Geraldine -- 36 -- Tied for first place
  There's still a two-way tie for first.
 
 [Bloc STAR: Round 4: Automatic Runoff Round: Second tiebreaker]
  The candidate with the most votes of score 5 wins.
-   Chuck     -- 0 -- Tied for first place
+   David     -- 0 -- Tied for first place
    Geraldine -- 0 -- Tied for first place
  There's still a two-way tie for first.
 
@@ -364,42 +364,42 @@
  Counter is now 8
  3 shuffles
  Permuted list of candidates:
+   Chuck
+   Fred
    Emily
+   Geraldine
    Hank
    David
-   Fred
-   Geraldine
    Brian
    Amy
-   Chuck
  Choosing the earliest of these candidates from the permuted list:
-   Chuck
+   David
    Geraldine
  Selected winner: Geraldine
 
 [Bloc STAR: Round 5: Scoring Round]
  The two highest-scoring candidates advance to the next round.
-   Amy   -- 36 (average 3) -- Tied for first place
    Chuck -- 36 (average 3) -- Tied for first place
    David -- 36 (average 3) -- Tied for first place
    Fred  -- 36 (average 3) -- Tied for first place
+   Hank  -- 36 (average 3) -- Tied for first place
  There's a four-way tie for first.
 
 [Bloc STAR: Round 5: Scoring Round: First tiebreaker]
  The two candidates preferred in the most head-to-head matchups advance.
-   Amy           --  0 -- Tied for first place
    Chuck         --  0 -- Tied for first place
    David         --  0 -- Tied for first place
    Fred          --  0 -- Tied for first place
+   Hank          --  0 -- Tied for first place
    No Preference -- 12
  There's still a four-way tie for first.
 
 [Bloc STAR: Round 5: Scoring Round: Second tiebreaker]
  The two candidates with the most votes of score 5 advance.
-   Amy   -- 0 -- Tied for first place
    Chuck -- 0 -- Tied for first place
    David -- 0 -- Tied for first place
    Fred  -- 0 -- Tied for first place
+   Hank  -- 0 -- Tied for first place
  There's still a four-way tie for first.
 
 [Bloc STAR: Round 5: Scoring Round: Hashed Ballots tiebreaker]
@@ -408,37 +408,37 @@
  3 shuffles
  Permuted list of candidates:
    Emily
-   Fred
-   David
    Hank
+   Amy
    Chuck
    Brian
-   Amy
+   David
+   Fred
    Geraldine
  Choosing the earliest two of these candidates from the permuted list:
-   Amy
    Chuck
    David
    Fred
- Selected winners: Fred and David
+   Hank
+ Selected winners: Hank and Chuck
 
 [Bloc STAR: Round 5: Automatic Runoff Round]
  The candidate preferred in the most head-to-head matchups wins.
-   David         --  0 -- Tied for first place
-   Fred          --  0 -- Tied for first place
+   Chuck         --  0 -- Tied for first place
+   Hank          --  0 -- Tied for first place
    No Preference -- 12
  There's a two-way tie for first.
 
 [Bloc STAR: Round 5: Automatic Runoff Round: First tiebreaker]
  The highest-scoring candidate wins.
-   David -- 36 -- Tied for first place
-   Fred  -- 36 -- Tied for first place
+   Chuck -- 36 -- Tied for first place
+   Hank  -- 36 -- Tied for first place
  There's still a two-way tie for first.
 
 [Bloc STAR: Round 5: Automatic Runoff Round: Second tiebreaker]
  The candidate with the most votes of score 5 wins.
-   David -- 0 -- Tied for first place
-   Fred  -- 0 -- Tied for first place
+   Chuck -- 0 -- Tied for first place
+   Hank  -- 0 -- Tied for first place
  There's still a two-way tie for first.
 
 [Bloc STAR: Round 5: Automatic Runoff Round: Hashed Ballots tiebreaker]
@@ -446,22 +446,22 @@
  Counter is now 10
  3 shuffles
  Permuted list of candidates:
-   Fred
-   Hank
-   Emily
-   Amy
-   Geraldine
    Chuck
+   David
    Brian
-   David
- Choosing the earliest of these candidates from the permuted list:
-   David
    Fred
- Selected winner: Fred
+   Amy
+   Emily
+   Hank
+   Geraldine
+ Choosing the earliest of these candidates from the permuted list:
+   Chuck
+   Hank
+ Selected winner: Chuck
 
 [Bloc STAR: Winners]
- Hank
- Emily
  Brian
+ Emily
+ Amy
  Geraldine
- Fred
+ Chuck

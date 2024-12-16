@@ -244,7 +244,9 @@ nicknames for these methods, respectively:
 `ballots` should be an iterable containing individual ballots.
 A ballot is a `dict` mapping the candidate to that ballot's
 score for that candidate.  The candidate can be any hashable
-Python value; the score must be an `int`.
+Python value; the score must be an `int`.  (Note that
+tiebreakers may add additional restrictions to the candidate
+and score values.)
 
 `maximum_score` specifies the maximum score allowed for
 any vote on any ballot.
@@ -261,9 +263,12 @@ or an instance of a tiebreaker class.  See the
 tiebreakers.
 
 `verbosity` specifies how much output you want.
-The current supported values are `0` (no output)
-and `1` (output); values higher than `1` are
-currently equivalent to `1`.
+In most contexts, the supported values are `0`
+(no output) and `1` (output); some contexts
+support higher verbosity values to mean
+"print more information", e.g.
+`hashed_ballots_tiebreaker` produces incremental
+output for verbosity levels `2` and `3`.
 
 `print` lets you specify your own printing function.
 By default `election` will use `builtins.print`;
@@ -355,20 +360,28 @@ in `candidates=None`.
 
 #### `hashed_ballots_tiebreaker`
 
-The preferred tiebreaker for **starvote** is
-`hashed_ballots_tiebreaker`.
+**starvote**'s preferred--and default--tiebreaker
+is `hashed_ballots_tiebreaker`.
 This is a class; you should instantiate it
 and pass in the instance as the `tiebreaker`
 argument when you run the election.
 
 `hashed_ballots_tiebreaker` is the preferred
-tiebreaker for **starvote** because it is
+tiebreaker for **starvote** because it's
 
 * impossible to usefully control externally,
 * impossible to predict, yet
 * completely deterministic.
 
-Here's how it works.  At initialization time,
+Note that the default serializer used by
+`hashed_ballots_tiebreaker` requires all candidates
+to be `str` objects, and all votes have to be `int`
+objects.  If you don't change any defaults, you must
+restrict yourself to these types (which you probably
+were already doing anyway).
+
+Here's `hashed_ballots_tiebreaker`
+it works.  At initialization time,
 this tiebreaker:
 
 * computes a list of all candidates, then
@@ -376,8 +389,8 @@ this tiebreaker:
 * sorts each ballot, then
 * sorts a list of all the sorted ballots, then
 * converts this sorted list of sorted ballots
-  into a binary string (using `marshal.dumps`
-  by default).
+  into a binary string (using a custom binary
+  serializer by default).
 
 Then, when it's asked to break a tie, it
 
@@ -1083,6 +1096,30 @@ or otherwise freely redistributable.
 
 
 ## Changelog
+
+**2.1.6** - *2024/12/13*
+
+* Bugfix: previously, `hashed_ballots_tiebreaker` used
+  `marshal.dumps` as its binary serializer, because I
+  assumed given identical objects it would always
+  produce an identical bytes string.  This is not true!
+  (And thanks to Petr Viktorin for pointing it out!)
+  We also apparently can't rely on `pickle.dumps`
+  to be deterministic, for similar reasons.
+
+  So, **starvote** now has its own bespoke--and
+  completely deterministic--simple binary serializer,
+  called `starvote_custom_serializer`.  It's tailor-made
+  for the needs of **starvote** and isn't useful for
+  anybody else.  But it does guarantee that
+  `hashed_ballots_tiebreaker` will now produce
+  identical results across all supported Python
+  versions, across all architectures, regardless of
+  optimization level.
+
+  (There's also a matching deserializer, naturally called
+  `starvote_custom_deserializer`.  You shouldn't need
+  to use it either.)
 
 **2.1.5** - *2024/11/22*
 

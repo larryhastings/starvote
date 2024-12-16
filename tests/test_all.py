@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import builtins
+import copy
 import fractions
 import functools
 import glob
@@ -147,6 +148,8 @@ tied_election = """
 
 
 class StarvoteTests(unittest.TestCase):
+
+    maxDiff = 2**32
 
     def test_import_star(self):
         # test that import * works
@@ -551,6 +554,75 @@ class StarvoteTests(unittest.TestCase):
         got = text_getvalue()
         self.assertEqual(got, expected_text)
 
+
+    def test_starvote_custom_serializer(self):
+        # also: test the reader and writer
+        w = starvote._writer()
+        w(b'a')
+        w(b'x')
+        w(b'c')
+        b = w.render()
+        self.assertEqual(b, b'axc')
+
+        r = starvote._reader(b)
+        self.assertEqual(r(), b'a')
+        self.assertTrue(r.read_marker(b'x'))
+        with self.assertRaises(ValueError):
+            r.read_marker(b'q')
+
+
+        for i in range(30):
+            b = starvote.starvote_custom_serializer(i)
+            self.assertEqual(b, b'\x01int\x02' + str(i).encode('ascii') + b'\x03')
+
+            i2 = starvote.starvote_custom_deserializer(b)
+            self.assertEqual(i, i2)
+
+        good_ballot = [ [ ('Abel', 1), ('Jacob', 2) ],  [ ('Abel', 2), ('Jacob', 4) ], [ ('Abel', 3), ('Jacob', 5) ], ]
+        for ballots, serialized_form in (
+                (
+                    good_ballot,
+                    b'\x01ballots\x1f3\x02Abel\x1f1\x1eJacob\x1f2\x1dAbel\x1f2\x1eJacob\x1f4\x1dAbel\x1f3\x1eJacob\x1f5\x03',
+                ),
+                (
+                    [ [ ('\x01el', 1), ('Jacob', 2) ],  [ ('\x0ebel', 2), ('Jacob', 4) ], [ ('\x05bel', 3), ('\x1fJacob', 5) ], ],
+                    b'\x01ballots\x1f3\x02\x1a\x01el\x1f1\x1eJacob\x1f2\x1d\x1a\x0ebel\x1f2\x1eJacob\x1f4\x1d\x1a\x05bel\x1f3\x1e\x1a\x1fJacob\x1f5\x03',
+                ),
+            ):
+            b = starvote.starvote_custom_serializer(ballots)
+            self.assertEqual(b, serialized_form)
+
+            ballots2 =  starvote.starvote_custom_deserializer(b)
+            self.assertEqual(ballots, ballots2)
+
+        # malform a serialized ballot to test error-handling code.
+        # we replace the record separator with a tab.
+        # note: the replacement character must be a control character for this to work.
+        b = b.replace(starvote._record_separator, b'\t')
+        with self.assertRaises(ValueError):
+            starvote.starvote_custom_deserializer(b)
+
+        with self.assertRaises(TypeError):
+            starvote.starvote_custom_serializer(3.14159)
+
+        with self.assertRaises(TypeError):
+            starvote.starvote_custom_serializer([1, 2, 3, 4, 5])
+
+        for index0, index1 in ( (0, 0), (-1, -1) ):
+            bad_ballot = copy.deepcopy(good_ballot)
+            for bad_tuple in (
+                3+2j,             # not a tuple
+                (b'Abel', 3, 55), # not a tuple of length 2
+                (b'Abel', 3),     # candidate not a str
+                (3.14159, 3),     # candidate not a str
+                ("Abel", 3.5),    # vote not an int
+                ("Abel", b'xyz'), # vote not an int
+                ):
+                bad_ballot[index0][index1] = bad_tuple
+                with self.assertRaises(TypeError):
+                    starvote.starvote_custom_serializer(bad_ballot)
+
+
     def test_hand_starvote_format_seed_syntax(self):
         def test_raises(s, exception=SyntaxError):
             with self.assertRaises(exception):
@@ -570,7 +642,6 @@ class StarvoteTests(unittest.TestCase):
         test_success('tiebreaker=predefined_permutation_tiebreaker(seed=234)')
         test_success('tiebreaker=predefined_permutation_tiebreaker(,,seed=234,,,)')
         test_success('tiebreaker=on_demand_random_tiebreaker(seed=4555)')
-
 
     def test_int_to_words(self):
 

@@ -26,7 +26,7 @@
 
 __doc__ = "An election tabulator for the STAR electoral system, and others"
 
-__version__ = "2.1.5"
+__version__ = "2.1.6"
 
 __all__ = [
     'Allocated_Score_Voting', # Method
@@ -92,7 +92,7 @@ import functools
 import enum
 import hashlib
 import itertools
-import marshal
+import io
 from math import floor, log10
 import os
 import pathlib
@@ -430,6 +430,220 @@ class predefined_permutation_tiebreaker(Tiebreaker):
         return result
 
 
+_start_of_heading         = b'\x01'
+_start_of_text            = b'\x02'
+_end_of_text              = b'\x03'
+_control_character_escape = b'\x1a'
+_group_separator          = b'\x1d'
+_record_separator         = b'\x1e'
+_unit_separator           = b'\x1f'
+
+_int_marker               =  'int'
+_serialized_int_marker    = b'int'
+
+_ballot_marker            =  'ballots'
+_serialized_ballot_marker = b'ballots'
+
+class _writer(list):
+
+    def __call__(self, o):
+        self.append(o)
+
+    def write(self, o):
+        if isinstance(o, bytes):
+            self.append(o)
+            return
+
+        if isinstance(o, int):
+            b = str(o).encode('ascii')
+            self.append(b)
+            return
+
+        assert isinstance(o, str)
+        for c in o:
+            c = c.encode('utf-8')
+            if c[0] < 32:
+                self.append(b'\x1a')
+            self.append(c)
+
+    def render(self):
+        return b''.join(self)
+
+
+def starvote_custom_serializer(o):
+    """
+    starvote's custom binary serializer for objects.
+    Only used by the "hashed ballot" tiebreaker.
+
+    Only knows how to serialize two types of objects:
+        * an int, or
+        * a sorted list of sorted ballot lists.
+
+    (A "sorted ballot list" is a ballot dict, converted
+    to a list via list(ballot_dict.items()), and sorted.)
+
+    Returns a binary string containing the serialized form of o.
+    """
+
+    buffer = _writer()
+    write = buffer.write
+
+    write(_start_of_heading)
+
+    if isinstance(o, int):
+        i = o
+
+        write(_serialized_int_marker)
+        write(_start_of_text)
+        write(i)
+
+    else:
+        ballots = o
+
+        if not isinstance(ballots, list):
+            raise TypeError("ballots must be a list")
+
+        write(_serialized_ballot_marker)
+        write(_unit_separator)
+        write(int(len(ballots)))
+        write(_start_of_text)
+
+        for ballot_number, ballot in enumerate(ballots):
+            if ballot_number:
+                write(_group_separator)
+
+            if not isinstance(ballot, list):
+                raise TypeError(f"each ballot in ballots must be a list, ballots[{ballot_number}] is type {type(ballot)}")
+
+            for entry_number, t in enumerate(ballot):
+                if not (isinstance(t, tuple) and (len(t) == 2)):
+                    raise TypeError(f"each vote in each ballot in ballots must be a tuple of length 2, ballots[{ballot_number}][{entry_number}] is type {type(t)}")
+                candidate, vote = t
+                if not isinstance(candidate, str):
+                    raise TypeError(f"candidate must be str, but {candidate!r} is {type(candidate)}")
+                if not isinstance(vote, int):
+                    raise TypeError(f"vote must be int, but {vote!r} is {type(vote)}")
+
+                if entry_number:
+                    write(_record_separator)
+
+                write(candidate)
+                write(_unit_separator)
+
+                write(vote)
+
+    write(_end_of_text)
+
+    return buffer.render()
+
+
+class _reader(io.BytesIO):
+
+    def __init__(self, b):
+        super().__init__(b)
+        self.waiting = None
+
+    def __next__(self):
+        """
+        Returns one byte from the stream.
+        """
+        if self.waiting:
+            c = self.waiting
+            self.waiting = None
+            return c
+        x = self.read1(1)
+        return x
+
+    def __call__(self):
+        return self.__next__()
+
+    def read_str(self):
+        buffer = []
+        append = buffer.append
+        while True:
+            c = self()
+            if c < b' ':
+                if c == _control_character_escape:
+                    c = self()
+                else:
+                    self.waiting = c
+                    break
+            append(c)
+        s = b''.join(buffer).decode('utf-8')
+        return s
+
+    def read_int(self):
+        s = self.read_str()
+        return int(s)
+
+    def read_marker(self, c):
+        "Reads a byte from self, which must be c."
+        got = self()
+        if got != c:
+            raise ValueError(f"expected {c!r}, got {got!r}")
+        return True
+
+
+def starvote_custom_deserializer(b):
+    """
+    A deserializer for starvote_custom_serializer.
+    Only used by starvote's test suite.
+
+    Only knows how to deserialize the two types of objects
+    supported by starvote_custom_serializer.
+    """
+
+    r = _reader(b)
+
+    r.read_marker(_start_of_heading)
+
+    s = r.read_str()
+
+    if s == _int_marker:
+        r.read_marker(_start_of_text)
+        i = r.read_int()
+        r.read_marker(_end_of_text)
+        return i
+
+    assert s == _ballot_marker
+
+    o = ballots = []
+
+    r.read_marker(_unit_separator)
+    expected_ballots = r.read_int()
+
+    i = 0
+    ballot = None
+
+    while True:
+        marker = r()
+
+        if marker in (_end_of_text, _group_separator):
+            assert ballot
+            ballots.append(ballot)
+            i += 1
+
+            if marker == _end_of_text:
+                assert i == expected_ballots
+                break
+
+            ballot = []
+        elif marker == _start_of_text:
+            assert i == 0
+            ballot = []
+        elif marker != _record_separator:
+            raise ValueError(f"expected start of text, end of text, group separator, or record separator, got {marker!r}")
+
+        candidate = r.read_str()
+        r.read_marker(_unit_separator)
+
+        vote = r.read_int()
+
+        ballot.append((candidate, vote))
+
+    return ballots
+
+
 @_add_tiebreaker
 class hashed_ballots_tiebreaker(Tiebreaker):
     """
@@ -444,8 +658,8 @@ class hashed_ballots_tiebreaker(Tiebreaker):
         * sorts each ballot, then
         * sorts a list of all the sorted ballots, then
         * converts this sorted list of sorted ballots
-          into a binary string (using "marshal.dumps"
-          by default), then
+          into a binary string (using a custom binary
+          serializer by default), then
         * hashes a serialized monotonically increasing counter
           (1 by default, incremented after every tiebreaker)
           followed by that binary string, using a
@@ -475,7 +689,7 @@ class hashed_ballots_tiebreaker(Tiebreaker):
     """
     def __init__(self, *,
             counter=1, hash='sha3_512', Random=random.Random,
-            serializer=marshal.dumps, shuffles=3,
+            serializer=starvote_custom_serializer, shuffles=3,
             ):
         self.counter = counter
         self.hash = hash
@@ -530,8 +744,7 @@ class hashed_ballots_tiebreaker(Tiebreaker):
         c = self.serializer(self.counter)
 
         digester = hashlib.new(self.hash)
-        for o in (c, self.serialized_ballots):
-            b = self.serializer(o)
+        for b in (c, self.serialized_ballots):
             digester.update(b)
         seed = digester.digest()
 
