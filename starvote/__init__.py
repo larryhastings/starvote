@@ -500,12 +500,8 @@ def starvote_custom_serializer(o):
     else:
         ballots = o
 
-        assert isinstance(ballots, list)
-        assert isinstance(ballots[0], list)
-        assert isinstance(ballots[0][0], tuple)
-        assert len(ballots[0][0]) == 2
-        assert isinstance(ballots[0][0][0], str)
-        assert isinstance(ballots[0][0][1], int)
+        if not isinstance(ballots, list):
+            raise TypeError("ballots must be a list")
 
         write(_serialized_ballot_marker)
         write(_unit_separator)
@@ -516,7 +512,18 @@ def starvote_custom_serializer(o):
             if ballot_number:
                 write(_group_separator)
 
-            for entry_number, (candidate, vote) in enumerate(ballot):
+            if not isinstance(ballot, list):
+                raise TypeError(f"each ballot in ballots must be a list, ballots[{ballot_number}] is type {type(ballot)}")
+
+            for entry_number, t in enumerate(ballot):
+                if not (isinstance(t, tuple) and (len(t) == 2)):
+                    raise TypeError(f"each vote in each ballot in ballots must be a tuple of length 2, ballots[{ballot_number}][{entry_number}] is type {type(t)}")
+                candidate, vote = t
+                if not isinstance(candidate, str):
+                    raise TypeError(f"candidate must be str, but {candidate!r} is {type(candidate)}")
+                if not isinstance(vote, int):
+                    raise TypeError(f"vote must be int, but {vote!r} is {type(vote)}")
+
                 if entry_number:
                     write(_record_separator)
 

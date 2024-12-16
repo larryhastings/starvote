@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import builtins
+import copy
 import fractions
 import functools
 import glob
@@ -577,9 +578,10 @@ class StarvoteTests(unittest.TestCase):
             i2 = starvote.starvote_custom_deserializer(b)
             self.assertEqual(i, i2)
 
+        good_ballot = [ [ ('Abel', 1), ('Jacob', 2) ],  [ ('Abel', 2), ('Jacob', 4) ], [ ('Abel', 3), ('Jacob', 5) ], ]
         for ballots, serialized_form in (
                 (
-                    [ [ ('Abel', 1), ('Jacob', 2) ],  [ ('Abel', 2), ('Jacob', 4) ], [ ('Abel', 3), ('Jacob', 5) ], ],
+                    good_ballot,
                     b'\x01ballots\x1f3\x02Abel\x1f1\x1eJacob\x1f2\x1dAbel\x1f2\x1eJacob\x1f4\x1dAbel\x1f3\x1eJacob\x1f5\x03',
                 ),
                 (
@@ -599,6 +601,26 @@ class StarvoteTests(unittest.TestCase):
         b = b.replace(starvote._record_separator, b'\t')
         with self.assertRaises(ValueError):
             starvote.starvote_custom_deserializer(b)
+
+        with self.assertRaises(TypeError):
+            starvote.starvote_custom_serializer(3.14159)
+
+        with self.assertRaises(TypeError):
+            starvote.starvote_custom_serializer([1, 2, 3, 4, 5])
+
+        for index0, index1 in ( (0, 0), (-1, -1) ):
+            bad_ballot = copy.deepcopy(good_ballot)
+            for bad_tuple in (
+                3+2j,             # not a tuple
+                (b'Abel', 3, 55), # not a tuple of length 2
+                (b'Abel', 3),     # candidate not a str
+                (3.14159, 3),     # candidate not a str
+                ("Abel", 3.5),    # vote not an int
+                ("Abel", b'xyz'), # vote not an int
+                ):
+                bad_ballot[index0][index1] = bad_tuple
+                with self.assertRaises(TypeError):
+                    starvote.starvote_custom_serializer(bad_ballot)
 
 
     def test_hand_starvote_format_seed_syntax(self):
@@ -620,7 +642,6 @@ class StarvoteTests(unittest.TestCase):
         test_success('tiebreaker=predefined_permutation_tiebreaker(seed=234)')
         test_success('tiebreaker=predefined_permutation_tiebreaker(,,seed=234,,,)')
         test_success('tiebreaker=on_demand_random_tiebreaker(seed=4555)')
-
 
     def test_int_to_words(self):
 
